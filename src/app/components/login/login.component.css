@@ -1,0 +1,49 @@
+.container{
+  min-height:100vh;
+  
+}
+mat-card{
+  position:relative;
+  max-width:100px;
+  }
+ 
+  mat-form-field{
+    min-width:10px;
+    text-align:left;
+    position: relative;
+    font-size:16px;
+    padding :40px 10px 10px 10px;
+    /* margin:500px 0px 10px 10px; */
+    float:left;
+    overflow: hidden;
+  } 
+    h4{
+      min-width:-10px;
+      text-align: center;
+    /* margin:10px -50px 0px 160px; */
+    font-weight: normal;
+    overflow: hidden;
+    
+  }
+  h5{
+    text-align: center;
+    margin:-30px -10px 10px 15px;
+    font-weight: lighter;
+    overflow: hidden;
+  }
+  .pswd{
+    margin: -30px 0px 0px 0px;
+  }
+  .btn{
+    /* margin:220px -140px 10px -120px; */
+    min-width:-2000px;
+    overflow: hidden;
+    position: relative;
+  }
+  .row-height {
+    height: 100%
+}
+.place{
+  min-width:-10px;
+  overflow:hidden;
+}

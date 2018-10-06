@@ -1,0 +1,59 @@
+
+<!-- 
+<div class="container"
+     fxLayout="column"
+     fxLayoutAlign="center"
+     fxLayoutGap="0px"
+     fxLayoutGap.xs="0">
+  <div class="item-1" fxFlex="80" style="border:1px solid black"></div>
+  <div class="item-2" fxLayout.xs="column" fxFlex="20" style="border:1px solid red">
+
+      <div class="item-1" fxFlex="33"></div>
+      <div class="item-2" fxFlex>
+        
+          <mat-card> 
+            <h4>Signin</h4><br>
+            <h5>to continue to login</h5>
+
+              <mat-form-field> 
+                <input matInput placeholder="Enter your email" [formControl]="email" required>
+                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error></mat-form-field>
+                 <mat-form-field class="pswd">                  
+                      <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+                      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                    </mat-form-field><br>
+                    <button class="btn" mat-button>Signin</button>
+                                     
+
+              </mat-card>
+
+      </div>
+
+      <div class="item-3" fxFlex="33%" fxFlexOrder="3"></div>
+  </div>
+  <div class="item-3" fxFlex="0 1 80px" fxFlexOrder="3"></div>
+</div> -->
+
+<div fxLayout="row" fxLayoutAlign="center center" class="row-height" >
+    <mat-card fxFlex="34%">
+        <mat-card-title><h4>Signin</h4></mat-card-title><br>
+        <h5>to continue to login</h5>
+
+
+        <mat-card-content fxLayout="column">
+            <mat-form-field> 
+                <input class="place" matInput placeholder="Enter your email"  [formControl]="email" required>
+                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error></mat-form-field>
+
+                <mat-form-field class="pswd">                  
+                    <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                  </mat-form-field><br>
+
+            
+           
+        </mat-card-content>
+
+        <button mat-raised-button color="accent">Signin</button>
+    </mat-card>
+</div>
