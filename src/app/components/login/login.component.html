@@ -1,59 +1,96 @@
 
-<!-- 
-<div class="container"
-     fxLayout="column"
-     fxLayoutAlign="center"
-     fxLayoutGap="0px"
-     fxLayoutGap.xs="0">
-  <div class="item-1" fxFlex="80" style="border:1px solid black"></div>
-  <div class="item-2" fxLayout.xs="column" fxFlex="20" style="border:1px solid red">
+<!-- <div fxLayout='column' fxLayoutAlign="center center" fxLayout.xs="column" class="container" >
+    
+    
+    
+        <div fxFlex="80" class="class1">
+    
+            <mat-card fxFlex.md="100%" fxFlex.xs="100%" fxFlex.sm="100%" class="class2">
+    
+                <div class="class3">fundoo</div>
+                <div class="class4">Sign in </div>
+                <div class="class5">Continue to login </div>
+                <mat-form-field class="email">
+    
+                    <input matInput placeholder="Email or phone" [formControl]="email" required>
+                    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+                <div>
+    
+                <div class="class6">Please continue to login </div>
+    
+                </div>
+                <a mat-button routerLink="/signup" style="margin-right:50px;margin-bottom: -10px;color:#4285f4">Create account</a>
+                <button mat-raised-button style="margin-left:73px;margin-bottom:10px;color:white;background-color: #4285f4">Next</button>
+    
+    
+            </mat-card>
+        </div>
+    
+    </div> -->
 
-      <div class="item-1" fxFlex="33"></div>
-      <div class="item-2" fxFlex>
-        
-          <mat-card> 
-            <h4>Signin</h4><br>
-            <h5>to continue to login</h5>
+    <div fxLayout='row' fxLayoutAlign="center center"  class="container" >
+    
+    
+        <!-- <div fxFlex="50" class="class1"> -->
 
-              <mat-form-field> 
-                <input matInput placeholder="Enter your email" [formControl]="email" required>
-                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error></mat-form-field>
-                 <mat-form-field class="pswd">                  
-                      <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
-                      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-                    </mat-form-field><br>
-                    <button class="btn" mat-button>Signin</button>
-                                     
+            <mat-card fxFlex="30"  fxFlex.xs="100"   >
 
-              </mat-card>
+    <my-slide-panel [activePane]="isLeftVisible ? 'right' : 'left'">
+        <div leftPane>
+            <div class="class2">
+     <!-- <mat-card-content fxLayout="column"> -->
+                <div class="class3" align="center">fundooNotes</div><br>
+                <div class="class4" align="center">Sign in </div><br>
 
-      </div>
-
-      <div class="item-3" fxFlex="33%" fxFlexOrder="3"></div>
-  </div>
-  <div class="item-3" fxFlex="0 1 80px" fxFlexOrder="3"></div>
-</div> -->
-
-<div fxLayout="row" fxLayoutAlign="center center" class="row-height" >
-    <mat-card fxFlex="34%">
-        <mat-card-title><h4>Signin</h4></mat-card-title><br>
-        <h5>to continue to login</h5>
-
-
-        <mat-card-content fxLayout="column">
-            <mat-form-field> 
-                <input class="place" matInput placeholder="Enter your email"  [formControl]="email" required>
-                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error></mat-form-field>
-
-                <mat-form-field class="pswd">                  
-                    <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
-                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-                  </mat-form-field><br>
-
-            
+                <div class="class5" align="center">Continue to login </div><br>
+               
+                <mat-form-field  class="email">
+    
+                    <input matInput placeholder="Email or phone" [formControl]="email" required>
+                    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field><br>
+                <div>
+                    <!-- </mat-card-content> -->
+                <div class="class6">Please continue to login </div><br><br>
+    
+                </div>
+                <a mat-button routerLink="/signup" style="margin-right:50px;margin-bottom: -10px;color:#4285f4">Create account</a>
+                <button (click)="isLeftVisible = !isLeftVisible" mat-raised-button style="margin-left:73px;margin-bottom:10px;color:white;background-color: #4285f4;margin-left:60px">Next</button>
+                <!-- <button (click)="isLeftVisible = !isLeftVisible">Toggle panes</button> -->
+    
+    
+            </div>
+        </div>
+        <div  rightPane>
+          
+    
+                <div class="class3"  align="center">fundoo</div><br>
+                <!-- <div class="class4">Sign in </div> -->
+                <div class="class4"  align="center">Welcome </div><br>
+                <mat-form-field>
+                    <input style="margin-top:30px;width:300px" matInput placeholder="Enter password" type="password" [type]="hide ? 'password' : 'text'">
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </mat-form-field>
+                <div>
+    
+               
+                </div>
+                <a mat-button style="margin-right:50px;margin-bottom: -10px;color:#4285f4 "> forgot password?</a>
+                <button (click)="isLeftVisible == isLeftVisible" mat-raised-button style="margin-top:30px;margin-left:73px;margin-bottom:10px;color:white;background-color: #4285f4;margin-right:-30px">Next</button>
+                <!-- <button (click)="isLeftVisible = !isLeftVisible">Toggle panes</button> -->
+    
+    
            
-        </mat-card-content>
-
-        <button mat-raised-button color="accent">Signin</button>
+        </div>
+      </my-slide-panel>
     </mat-card>
+    <!-- </div> -->
+    
 </div>
+
+     
+      
+
+
+

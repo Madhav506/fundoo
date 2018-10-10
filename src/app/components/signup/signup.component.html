@@ -1,3 +1,57 @@
-<p>
-  signup works!
-</p>
+<div flexLayout="row" fxLayoutAlign="center">
+    <mat-card fxFlex.md="100" fxFlex.lg="60" fxFlex.xs="100" fxFlex.sm="100" class="class2">
+
+        <div class="class3">fundooNotes</div>
+        <div class="class4">Sign up </div>
+
+        <div id="id1" >
+            <mat-form-field>
+                <input matInput placeholder="Firstname" class="form-control"[(ngModel)]="model.Firstname" #Firstname="ngModel" Firstname="Firstname" required>
+            <mat-hint *ngIf="Firstname.invalid && (Firstname.dirty || Firstname.touched)">Name is required</mat-hint>
+            </mat-form-field>&nbsp;
+
+            <mat-form-field>
+                <input matInput placeholder="Lastname" [(ngModel)]="model.Lastname" #Lastname="ngModel" required>
+                <mat-hint *ngIf="Lastname.invalid && (Lastname.dirty || Lastname.touched)">Name is required</mat-hint>
+
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field id="id2" hintLabel="You can use letters,numbers and periods">
+
+                <input matInput placeholder="Email" name="Email" [(ngModel)]="model.Email" #Email="ngModel" required>
+            </mat-form-field>&nbsp;
+        </div><br>
+        <div>
+            <mat-form-field hintLabel="Use 8 or more characters" style="font-weight:normal">
+                <input matInput placeholder="Password" type="password" [type]="hide ? 'password' : 'text'" [(ngModel)]="model.password" #password="ngModel"
+                    required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Confirm password" type="password" [type]="hide ? 'password' : 'text'">
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </mat-form-field><br>
+
+        </div>
+        <div flexLayout="row" fxFlexLayout="center" fxLayoutGap="-190px" class="cards">
+            <div fxFlex.lg="50" *ngFor="let data of card">
+                <mat-card mat-button (click)=" displayCard(data)" [ngClass]="data.choose? 'choose': 'notchosen'" style="height:70px;width:100px">
+                    <mat-card-title style="font-size:20px;width:30px;padding-top:-50px;margin-bottom:2px;margin-top:-10px"> {{data.name}}</mat-card-title>
+                    <mat-card-content style="font-size:12px">{{data.description}}</mat-card-content>
+                </mat-card>
+            </div>
+
+
+        </div>
+
+
+
+        <div><button routerLink="/login" id="create" mat-button>Sign in instead</button>
+
+
+            <button id="signup" (click)="sendData()" mat-raised-button>SignUp</button></div>
+
+    </mat-card>
+
+    <!-- </div> -->
+</div>
