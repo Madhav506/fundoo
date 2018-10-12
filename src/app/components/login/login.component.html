@@ -1,33 +1,4 @@
 
-<!-- <div fxLayout='column' fxLayoutAlign="center center" fxLayout.xs="column" class="container" >
-    
-    
-    
-        <div fxFlex="80" class="class1">
-    
-            <mat-card fxFlex.md="100%" fxFlex.xs="100%" fxFlex.sm="100%" class="class2">
-    
-                <div class="class3">fundoo</div>
-                <div class="class4">Sign in </div>
-                <div class="class5">Continue to login </div>
-                <mat-form-field class="email">
-    
-                    <input matInput placeholder="Email or phone" [formControl]="email" required>
-                    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-                </mat-form-field>
-                <div>
-    
-                <div class="class6">Please continue to login </div>
-    
-                </div>
-                <a mat-button routerLink="/signup" style="margin-right:50px;margin-bottom: -10px;color:#4285f4">Create account</a>
-                <button mat-raised-button style="margin-left:73px;margin-bottom:10px;color:white;background-color: #4285f4">Next</button>
-    
-    
-            </mat-card>
-        </div>
-    
-    </div> -->
 
     <div fxLayout='row' fxLayoutAlign="center center"  class="container" >
     
@@ -35,10 +6,11 @@
         <!-- <div fxFlex="50" class="class1"> -->
 
             <mat-card fxFlex="30"  fxFlex.xs="100"   >
+              
 
     <my-slide-panel [activePane]="isLeftVisible ? 'right' : 'left'">
-        <div leftPane>
-            <div class="class2">
+           <div leftPane>
+                <form>  <div class="class2">
      <!-- <mat-card-content fxLayout="column"> -->
                 <div class="class3" align="center">fundooNotes</div><br>
                 <div class="class4" align="center">Sign in </div><br>
@@ -47,43 +19,50 @@
                
                 <mat-form-field  class="email">
     
-                    <input matInput placeholder="Email or phone" [formControl]="email" required>
-                    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-                </mat-form-field><br>
+                    <input matInput placeholder="Email" [formControl]="email" [(ngModel)]="model.email"required>
+
+                    <mat-error *ngIf="email.invalid">{{errorMessage()}}</mat-error>
+                    
+                </mat-form-field><br><br>
                 <div>
                     <!-- </mat-card-content> -->
                 <div class="class6">Please continue to login </div><br><br>
     
                 </div>
                 <a mat-button routerLink="/signup" style="margin-right:50px;margin-bottom: -10px;color:#4285f4">Create account</a>
-                <button (click)="isLeftVisible = !isLeftVisible" mat-raised-button style="margin-left:73px;margin-bottom:10px;color:white;background-color: #4285f4;margin-left:60px">Next</button>
+                <button (click)="next()" mat-raised-button style="margin-left:73px;margin-bottom:10px;color:white;background-color: #4285f4;margin-left:60px">Next
+                </button>
+               
                 <!-- <button (click)="isLeftVisible = !isLeftVisible">Toggle panes</button> -->
     
     
-            </div>
+            </div></form>
         </div>
         <div  rightPane>
           
     
-                <div class="class3"  align="center">fundoo</div><br>
+             <form>   <div class="class3"  align="center">fundoo</div><br>
                 <!-- <div class="class4">Sign in </div> -->
                 <div class="class4"  align="center">Welcome </div><br>
-                <mat-form-field>
-                    <input style="margin-top:30px;width:300px" matInput placeholder="Enter password" type="password" [type]="hide ? 'password' : 'text'">
+                <mat-form-field class="password">
+                    <input style="margin-top:30px;width:300px" matInput placeholder="Enter password" [formControl]="password"  [(ngModel)]="model.password" type="password"  [type]="hide ? 'password' : 'text'" required>
                     <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-error *ngIf="password.invalid">{{errorpassword()}}</mat-error>
+
+                    <!-- <mat-error *ngIf="password.invalid && (password.dirty || password.touched)">password is required</mat-error> -->
                 </mat-form-field>
                 <div>
     
                
                 </div>
-                <a mat-button style="margin-right:50px;margin-bottom: -10px;color:#4285f4 "> forgot password?</a>
-                <button (click)="isLeftVisible == isLeftVisible" mat-raised-button style="margin-top:30px;margin-left:73px;margin-bottom:10px;color:white;background-color: #4285f4;margin-right:-30px">Next</button>
-                <!-- <button (click)="isLeftVisible = !isLeftVisible">Toggle panes</button> -->
+                <a mat-button routerLink="/forgotpassword" style="margin-right:50px;margin-bottom: -10px;color:#4285f4 "> forgot password?</a>
+                <button (click)="signin()" mat-raised-button style="margin-top:30px;margin-left:73px;margin-bottom:10px;color:white;background-color: #4285f4;margin-right:-30px">Signin</button>
     
     
            
-        </div>
+             </form>  </div>
       </my-slide-panel>
+      <!-- </form> -->
     </mat-card>
     <!-- </div> -->
     

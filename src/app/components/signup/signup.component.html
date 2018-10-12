@@ -1,57 +1,68 @@
-<div flexLayout="row" fxLayoutAlign="center">
+<div flexLayout="row" fxLayoutAlign="center center">
     <mat-card fxFlex.md="100" fxFlex.lg="60" fxFlex.xs="100" fxFlex.sm="100" class="class2">
+        <form>
+            <div class="class3">fundooNotes</div>
+            <div class="class4">Sign up </div>
 
-        <div class="class3">fundooNotes</div>
-        <div class="class4">Sign up </div>
+            <div id="id1">
+                <mat-form-field>
+                    <input matInput placeholder="Firstname" class="form-control" [formControl]="firstname"  [(ngModel)]="detailsObject.Firstname"  
+                        required>
 
-        <div id="id1" >
-            <mat-form-field>
-                <input matInput placeholder="Firstname" class="form-control"[(ngModel)]="model.Firstname" #Firstname="ngModel" Firstname="Firstname" required>
-            <mat-hint *ngIf="Firstname.invalid && (Firstname.dirty || Firstname.touched)">Name is required</mat-hint>
-            </mat-form-field>&nbsp;
+                    <mat-error *ngIf="firstname.invalid">{{ errorFirstname()}}</mat-error>
+                </mat-form-field>&nbsp;
 
-            <mat-form-field>
-                <input matInput placeholder="Lastname" [(ngModel)]="model.Lastname" #Lastname="ngModel" required>
-                <mat-hint *ngIf="Lastname.invalid && (Lastname.dirty || Lastname.touched)">Name is required</mat-hint>
+                <mat-form-field>
+                    <input matInput placeholder="Lastname" [formControl]="lastname"  [(ngModel)]="detailsObject.Lastname"   required>
+                    <mat-error *ngIf="lastname.invalid">{{ errorLastname()}}</mat-error>
 
-            </mat-form-field>
-        </div>
-        <div>
-            <mat-form-field id="id2" hintLabel="You can use letters,numbers and periods">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field hintLabel="You can use letters,numbers and periods" id="id2">
 
-                <input matInput placeholder="Email" name="Email" [(ngModel)]="model.Email" #Email="ngModel" required>
-            </mat-form-field>&nbsp;
-        </div><br>
-        <div>
-            <mat-form-field hintLabel="Use 8 or more characters" style="font-weight:normal">
-                <input matInput placeholder="Password" type="password" [type]="hide ? 'password' : 'text'" [(ngModel)]="model.password" #password="ngModel"
-                    required>
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder="Confirm password" type="password" [type]="hide ? 'password' : 'text'">
-                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </mat-form-field><br>
+                    <input matInput placeholder="Email" [formControl]="email" [(ngModel)]="detailsObject.Email"  required>
+                    <mat-error *ngIf="email.invalid">{{ erroremail()}}</mat-error>
 
-        </div>
-        <div flexLayout="row" fxFlexLayout="center" fxLayoutGap="-190px" class="cards">
-            <div fxFlex.lg="50" *ngFor="let data of card">
-                <mat-card mat-button (click)=" displayCard(data)" [ngClass]="data.choose? 'choose': 'notchosen'" style="height:70px;width:100px">
-                    <mat-card-title style="font-size:20px;width:30px;padding-top:-50px;margin-bottom:2px;margin-top:-10px"> {{data.name}}</mat-card-title>
-                    <mat-card-content style="font-size:12px">{{data.description}}</mat-card-content>
-                </mat-card>
+                </mat-form-field>&nbsp;
+            </div>
+            <div>
+                <mat-form-field style="font-weight:normal">
+                    <input matInput placeholder="Password" [formControl]="password" type="password" [type]="hide ? 'password' : 'text'" [(ngModel)]="detailsObject.password"  
+                        required>
+                        <mat-error *ngIf="password.invalid">{{ errorpassword()}}</mat-error>
+
+
+                </mat-form-field>&nbsp;
+                <mat-form-field>
+                    <input matInput placeholder="Confirm password" [formControl]="cpassword" type="password" [type]="hide ? 'password' : 'text'" [(ngModel)]="detailsObject.cpassword">
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-error *ngIf="cpassword.invalid">{{ errorCpassword()}}</mat-error>
+
+                </mat-form-field>
+
+            </div>
+            <div flexLayout="row wrap" fxFlexLayout="center" fxLayoutGap="-151px" class="cards">
+                <!-- *ngFor  is the Angular "repeater" directive -->
+                <div fxFlex.lg="50" *ngFor="let data of card">
+
+                    <mat-card mat-button (click)="  changeCardColor(data)" [ngClass]="data.check? 'check': 'uncheck'" style="height:70px;width:100px">
+                        <mat-card-title style="font-size:20px;width:30px;padding-top:-50px;margin-bottom:2px;margin-top:-10px"> {{data.name}}</mat-card-title>
+                        <mat-card-content style="font-size:12px">{{data.description}}</mat-card-content>
+                    </mat-card>
+                </div>
+
+
             </div>
 
 
-        </div>
+
+            <div><button routerLink="/login" id="create" mat-button>Sign in instead</button>
 
 
-
-        <div><button routerLink="/login" id="create" mat-button>Sign in instead</button>
-
-
-            <button id="signup" (click)="sendData()" mat-raised-button>SignUp</button></div>
-
+                <button id="signup" (click)="sendData()" mat-raised-button>SignUp</button></div>
+        
+        </form>
     </mat-card>
-
     <!-- </div> -->
 </div>

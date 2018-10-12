@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 import { AppComponent } from './app.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -20,6 +22,11 @@ import {MatButtonModule} from '@angular/material/button';
 import { HttpClientModule }    from '@angular/common/http';
 import { SlidePanelComponent } from './components/slide-panel/slide-panel.component';
 import { FormsModule } from '@angular/forms'; 
+import {MatSnackBarModule} from '@angular/material';
+import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
+import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
+
+
 
 
 @NgModule({
@@ -27,7 +34,10 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     SignupComponent,
     LoginComponent,
-    SlidePanelComponent
+    SlidePanelComponent,
+    ForgotpasswordComponent,
+    ResetpasswordComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -45,6 +55,8 @@ import { FormsModule } from '@angular/forms';
     MatButtonModule,
     HttpClientModule,
     FormsModule,
+    MatSnackBarModule,
+    // FormBuilder, FormGroup, Validators
     
     
     

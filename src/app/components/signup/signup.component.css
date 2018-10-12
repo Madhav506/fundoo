@@ -46,9 +46,9 @@
   .cards{
     margin-top:20px;
   }
-  .choose{
+  .check{
     background-color: green;
   }
-  .notchosen{
+  .uncheck{
     background-color: rgb(84, 221, 214);
   }

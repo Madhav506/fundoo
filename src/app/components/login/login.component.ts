@@ -1,7 +1,8 @@
 
-
+import{HttpService} from '../../services/http.service';
 import {Component} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
+import {MatSnackBar} from '@angular/material';
 
 /** @title Form field with error messages */
 @Component({
@@ -10,11 +11,72 @@ import {FormControl, Validators} from '@angular/forms';
   styleUrls:['./login.component.css']
 })
 export class LoginComponent  {
-  email = new FormControl('', [Validators.required, Validators.email]);
+  hide=true;
+  
 
-  getErrorMessage() {
-    return this.email.hasError('required') ? 'Enter a valid email' :
+constructor(public httpService: HttpService,public snackBar: MatSnackBar) { }
+  /**OnInit is a lifecycle hook that is called after Angular has initialized all data-bound properties of a directive. */
+ ngOnInit() {}
+
+model:any={
+  "email":"",
+  "password":""
+
+};
+
+email = new FormControl('', [Validators.required, Validators.email]);
+errorMessage() {
+    return this.email.hasError('required') ? 'email is required' :
         this.email.hasError('email') ? 'Not a valid email' :
-            '';
+            'Not a valid email';
   }
+  password=new FormControl('', [Validators.required,Validators.pattern('[a-zA-Z0-9@!@#$%]*')]);
+
+  errorpassword() {
+    return this.password.hasError('required') ? 'password is required' :
+        this.password.hasError('password') ? 'Not a valid password' :
+            '';
+   }
+ isLeftVisible=false;
+ next(){
+   if(!this.email.invalid)
+   {
+   this.isLeftVisible = !this.isLeftVisible;
+   }
+   else{
+console.log("invalid details");
+   }
+
+ }
+signin(){
+      console.log(this.model.email);
+      console.log(this.model.password);
+
+      this.httpService.addDataService("user/login",this.model).subscribe(
+        data => {
+  
+        console.log("login successfull");
+        this.snackBar.open("login successfull", "login", {
+                  duration:10000,
+                });
+        
+      }),
+      error => {/**if error exists then displays the error message using snackbar */
+              console.log("Error", error);
+              this.snackBar.open("enter valid details ","login unsuccessfull" , {
+                        duration: 10000,
+                      });
+
+                          
+            
+            }
+        
+
+
+
+
+ 
+
 }
+}
+
