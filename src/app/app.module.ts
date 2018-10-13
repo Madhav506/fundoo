@@ -22,9 +22,13 @@ import {MatButtonModule} from '@angular/material/button';
 import { HttpClientModule }    from '@angular/common/http';
 import { SlidePanelComponent } from './components/slide-panel/slide-panel.component';
 import { FormsModule } from '@angular/forms'; 
-import {MatSnackBarModule} from '@angular/material';
+import {MatSnackBarModule, MatToolbarModule, MatSidenavModule, MatListModule} from '@angular/material';
 import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
 import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
+
+import { LayoutModule } from '@angular/cdk/layout';
+import { HomeComponent } from './components/home/home.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 
 
@@ -36,7 +40,9 @@ import { ResetpasswordComponent } from './components/resetpassword/resetpassword
     LoginComponent,
     SlidePanelComponent,
     ForgotpasswordComponent,
-    ResetpasswordComponent
+    ResetpasswordComponent,
+    HomeComponent,
+    ToolbarComponent,
     
   ],
   imports: [
@@ -56,12 +62,16 @@ import { ResetpasswordComponent } from './components/resetpassword/resetpassword
     HttpClientModule,
     FormsModule,
     MatSnackBarModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
     // FormBuilder, FormGroup, Validators
     
     
     
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent]//2
 })
 export class AppModule { }

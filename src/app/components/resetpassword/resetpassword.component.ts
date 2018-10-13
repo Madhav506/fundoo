@@ -16,7 +16,7 @@ export class ResetpasswordComponent implements OnInit {
     "password":""
   } ;
   hide=true;
-
+  // The route path and parameters are available through an injected router service called the ActivatedRoute. 
   constructor(public service:HttpService,public route:ActivatedRoute ,public snackBar: MatSnackBar)  { }
   // public token=this.route.snapshot.params.id;
 
@@ -30,15 +30,10 @@ set(){
     "newPassword":this.model.password
   }
   
-  // if(this.model.password.length==0){
-
-  //   this.snackBar.open("Must provide some password","FAILED",{
-  //     duration:10000,
-  //   });
-  //   return;
  
-  //  // console.log("please enter the password");
-  // }
+
+
+
   this.service.postpassword("user/reset-password",body,this.token).subscribe(Response=>{
     console.log("successful",Response);
     this.snackBar.open("Success"," password",{
@@ -56,7 +51,7 @@ set(){
   });
 
       if(error.status==404)
-      this.snackBar.open("failed","failll",{
+      this.snackBar.open("failed","fail",{
         duration:10000,
 
 
