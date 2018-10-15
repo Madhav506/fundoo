@@ -9,12 +9,15 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./toolbar.component.css']
 })
 export class ToolbarComponent {
+ 
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
     );
     
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver) {
+
+  }
   
   }

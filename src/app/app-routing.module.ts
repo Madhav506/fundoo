@@ -8,6 +8,10 @@ import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassw
 import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
 import { HomeComponent } from './components/home/home.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { NotesComponent } from './components/notes/notes.component';
+import { RemindersComponent } from './components/reminders/reminders.component';
+import { ArchiveComponent } from './components/archive/archive.component';
+import { TrashComponent } from './components/trash/trash.component';
 
 
 
@@ -21,7 +25,16 @@ const appRoutes:Routes=[
   {path:'signup', component: SignupComponent},
   {path:'forgotpassword', component: ForgotpasswordComponent},
   {path:'resetpassword/:id',component:ResetpasswordComponent},
-  {path:'home',component:HomeComponent},
+  {path:'home',component:HomeComponent,children:[
+    {
+      path:'notes',component:NotesComponent},
+      {path:'reminders',component:RemindersComponent},
+      {path:'archive',component:ArchiveComponent},
+      {path:'trash',component:TrashComponent},
+
+
+
+  ]},
   {path:'',redirectTo:'/login',pathMatch:'full'},
   
 ]; 

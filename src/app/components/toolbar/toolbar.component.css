@@ -3,7 +3,9 @@
 }
 
 .sidenav {
-  width: 200px;
+  width: 300px;
+  margin-top:70px;
+  /* margin-left:0px */
   /* background-color:pink */
 }
 
@@ -11,14 +13,50 @@
   position: sticky;
   top: 0;
 }
-.mat-drawer.mat-drawer-side {
-  top:0;
-  height:100%;
- 
-  margin-top:65px;
- 
-}
+
 .mat-toolbar.mat-primary {
   background:#fb0 ;
   color: #fff;
 }
+.mat-drawer:not(.mat-drawer-side) {
+  box-shadow: none;
+}
+.search{
+background-color: white;
+
+}
+
+
+.search input{
+  border:none;
+  font-size:15px;
+  height:40px;
+  outline: none;
+  background-color:white;
+  min-width:50px;
+  width:700px;
+  
+
+}
+/* 
+.search input:hover{
+  background-color: white;
+} */
+.notes{
+  margin-left: 20px;
+}
+.reminders{
+  margin-left: 20px;
+}
+.archive{
+  margin-left: 20px;
+}
+.trash{
+  margin-left: 20px;
+}
+.mat-select-panel {
+  margin-top: 45px;
+}
+/* mat-nav-list{
+  background-color: gainsboro
+} */

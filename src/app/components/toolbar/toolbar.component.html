@@ -1,73 +1,62 @@
-<!-- <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav
-    #drawer
-    class="sidenav"
-    fixedInViewport="true"
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="!(isHandset$ | async)">
-    <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        >
-        *ngIf="isHandset$ | async"
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>fundoo Notes</span>
-    </mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      
-    </mat-toolbar>
-  </mat-sidenav-content>
-</mat-sidenav-container> -->
+<mat-toolbar style="border:solid" fxLayout="row" color="primary">
+  <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+    <mat-icon fxFlex="25" style="color:black" aria-label="Side nav toggle icon">menu</mat-icon>
+  </button>
+  <div fxFlex="25" class="title"><span style="color:black;font-family:BURW Chancery L, cursive"><b>fundoo</b>&nbsp;Notes</span></div>
 
+  <form fxFlex="center" class="search">
+    <button mat-icon-button type="submit"><mat-icon style="color:black">search</mat-icon></button>
+    <input type="text" placeholder="Search">
+  </form>
+
+
+  <div fxFlex="column"></div>
+  <button mat-icon-button> <mat-icon fxFlex="40px" style="color:black">refresh</mat-icon></button>
+  <mat-icon fxFlex="40px" style="color:black">view_stream</mat-icon>
+  <mat-icon fxFlex="40px" style="color:black">notifications_none</mat-icon>
+
+  <!-- <button mat-icon-button [matMenuTriggerFor]="appMenu" > -->
+  <!-- <mat-icon fxFlex="40px" style="color:black"  >account_circle</mat-icon>            </button> -->
+  <button mat-mini-fab [matMenuTriggerFor]="appMenu" style="background-color:white;color:black">M</button>
+
+  <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
+    <!-- <ng-template matMenuContent let-name="name"> -->
+    <button mat-menu-item routerLink="/signup">Add account</button>
+    <button mat-menu-item routerLink="/login">Log out </button>
+    <!-- </ng-template> -->
+  </mat-menu>
+
+
+
+
+</mat-toolbar>
 <mat-sidenav-container class="sidenav-container">
 
 
-    <mat-sidenav-content>
 
-        <mat-toolbar color="primary">
-            <!-- <mat-toolbar color="primary"> -->
-                <button
-                  type="button"
-                  aria-label="Toggle sidenav"
-                  mat-icon-button
-                  (click)="drawer.toggle()"
-                  >
-                 
-                  <mat-icon style="color:black" aria-label="Side nav toggle icon">menu</mat-icon>
-                </button>
-              
-                <span style="color:black;font-family:BURW Chancery L, cursive"><b>fundoo</b>&nbsp;Notes</span>
-              <!-- </mat-toolbar> -->
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+    <mat-nav-list>
 
-           <mat-sidenav 
-            #drawer
-            class="sidenav"
-            fixedInViewport="true"
-            [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-            [mode]="(isHandset$ | async) ? 'over' : 'side'"
-            [opened]="!(isHandset$ | async)">
-            <div class="sidebar">
-              <mat-nav-list>
-                <a mat-list-item href="#">Notes</a>
-                <a mat-list-item href="#">Reminders</a>
-              </mat-nav-list>
-            </div>
-            </mat-sidenav>
-         
-        </mat-toolbar>
-      </mat-sidenav-content>
+      <a mat-list-item routerLink="/home/notes"><img src="../../../assets/images/notes.svg"><span class="notes">Notes</span></a>
+      <a mat-list-item routerLink="/home/reminders"><img src="../../../assets/images/reminders.svg"><span class="reminders">Reminders</span></a>
+      <!-- <hr > -->
+      <a mat-list-item routerLink="/home/archive"><mat-icon>archive</mat-icon><span class="archive">Archive</span></a>
 
+      <span><a mat-list-item routerLink="/home/trash"><mat-icon>delete</mat-icon><span class="notes">Trash</span></a></span>
+      <!-- <hr> -->
+      <a mat-list-item routerLink=" /"><mat-icon >edit</mat-icon><span class="notes">Edit</span></a>
+      <a mat-list-item routerLink=" /"><mat-icon >settings</mat-icon><span class="notes">Settings</span></a>
+      <a mat-list-item routerLink=" /"><mat-icon >help</mat-icon><span class="notes">Help</span></a>
+      <a mat-list-item routerLink=" /"><mat-icon >feedback</mat-icon><span class="notes">Send feedback</span></a>
+      <a mat-list-item routerLink=" /"><mat-icon >get_app</mat-icon><span class="notes">App downloads</span></a>
+      <a mat-list-item routerLink=" /"><mat-icon >keyboard</mat-icon><span class="notes">keyboard</span></a>
+
+      <a mat-list-item href="#"></a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
 
 </mat-sidenav-container>

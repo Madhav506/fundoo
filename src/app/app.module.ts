@@ -29,6 +29,12 @@ import { ResetpasswordComponent } from './components/resetpassword/resetpassword
 import { LayoutModule } from '@angular/cdk/layout';
 import { HomeComponent } from './components/home/home.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { NotesComponent } from './components/notes/notes.component';
+import { RemindersComponent } from './components/reminders/reminders.component';
+import { ArchiveComponent } from './components/archive/archive.component';
+import { TrashComponent } from './components/trash/trash.component';
+
 
 
 
@@ -43,6 +49,10 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     ResetpasswordComponent,
     HomeComponent,
     ToolbarComponent,
+    NotesComponent,
+    RemindersComponent,
+    ArchiveComponent,
+    TrashComponent,
     
   ],
   imports: [
@@ -66,6 +76,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
+    MatMenuModule
     // FormBuilder, FormGroup, Validators
     
     
