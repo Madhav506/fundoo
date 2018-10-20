@@ -11,7 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import { ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule,FormsModule} from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -21,7 +21,11 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { HttpClientModule }    from '@angular/common/http';
 import { SlidePanelComponent } from './components/slide-panel/slide-panel.component';
-import { FormsModule } from '@angular/forms'; 
+// import { FormsModule } from '@angular/forms'; 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {MatExpansionModule} from '@angular/material/expansion';
+
+
 import {MatSnackBarModule, MatToolbarModule, MatSidenavModule, MatListModule} from '@angular/material';
 import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
 import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
@@ -34,6 +38,7 @@ import { NotesComponent } from './components/notes/notes.component';
 import { RemindersComponent } from './components/reminders/reminders.component';
 import { ArchiveComponent } from './components/archive/archive.component';
 import { TrashComponent } from './components/trash/trash.component';
+
 
 
 
@@ -53,8 +58,9 @@ import { TrashComponent } from './components/trash/trash.component';
     RemindersComponent,
     ArchiveComponent,
     TrashComponent,
-    
+   
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -76,7 +82,9 @@ import { TrashComponent } from './components/trash/trash.component';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    MatMenuModule
+    MatMenuModule,
+    MatExpansionModule
+    
     // FormBuilder, FormGroup, Validators
     
     

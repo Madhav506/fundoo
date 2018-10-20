@@ -1,19 +1,19 @@
-<mat-toolbar style="border:solid" fxLayout="row" color="primary">
+<div class="row-height">
+  <mat-toolbar  fxLayout="row" color="primary">
   <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
-    <mat-icon fxFlex="25" style="color:black" aria-label="Side nav toggle icon">menu</mat-icon>
+    <mat-icon fxFlex="25" aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
-  <div fxFlex="25" class="title"><span style="color:black;font-family:BURW Chancery L, cursive"><b>fundoo</b>&nbsp;Notes</span></div>
+  <div  class="title"><span fxFlex="10" style="font-family:BURW Chancery L, cursive"><b>fundoo</b>&nbsp;Notes</span></div>
 
-  <form fxFlex="center" class="search">
-    <button mat-icon-button type="submit"><mat-icon style="color:black">search</mat-icon></button>
-    <input type="text" placeholder="Search">
+  <form  fxFlex class="search">
+    <button  mat-icon-button type="submit"><mat-icon >search</mat-icon></button>
+    <input fxFlex type="text" placeholder="Search">
   </form>
 
-
-  <div fxFlex="column"></div>
-  <button mat-icon-button> <mat-icon fxFlex="40px" style="color:black">refresh</mat-icon></button>
-  <mat-icon fxFlex="40px" style="color:black">view_stream</mat-icon>
-  <mat-icon fxFlex="40px" style="color:black">notifications_none</mat-icon>
+  
+  <button mat-icon-button> <mat-icon fxFlex="40px" >refresh</mat-icon></button>
+  <mat-icon fxFlex="40px" >view_stream</mat-icon>
+  <mat-icon fxFlex="40px" >notifications_none</mat-icon>
 
   <!-- <button mat-icon-button [matMenuTriggerFor]="appMenu" > -->
   <!-- <mat-icon fxFlex="40px" style="color:black"  >account_circle</mat-icon>            </button> -->
@@ -60,3 +60,4 @@
   </mat-sidenav-content>
 
 </mat-sidenav-container>
+</div>

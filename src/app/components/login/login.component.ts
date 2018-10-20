@@ -3,6 +3,8 @@ import{HttpService} from '../../services/http.service';
 import {Component} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material';
+import { Router } from '@angular/router'; 
+
 
 /** @title Form field with error messages */
 @Component({
@@ -14,7 +16,7 @@ export class LoginComponent  {
   hide=true;
   
 
-constructor(public httpService: HttpService,public snackBar: MatSnackBar) { }
+constructor(public httpService: HttpService,public snackBar: MatSnackBar,public router:Router) { }
   /**OnInit is a lifecycle hook that is called after Angular has initialized all data-bound properties of a directive. */
  ngOnInit() {}
 
@@ -58,7 +60,10 @@ signin(){
         console.log("login successfull");
         this.snackBar.open("login successfull", "login", {
                   duration:10000,
+                
                 });
+                this.router.navigate(['/home']);
+
         
       }),
       error => {/**if error exists then displays the error message using snackbar */
