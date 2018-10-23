@@ -1,0 +1,18 @@
+
+   <mat-icon [matMenuTriggerFor]="remindMenu"  class="innerIcon" mat-icon-button aria-label="false" style="user-select:none" matTooltip="remind me" (click)="addReminder()">
+      touch_app
+    </mat-icon>
+    <mat-menu #remindMenu="matMenu" [overlapTrigger]="false">
+        <mat-content >Reminder:</mat-content>
+        <button mat-menu-item >pick Date</button>
+        <button mat-menu-item >Later Today</button>
+        <button mat-menu-item >Tomorrow</button>
+        <button mat-menu-item >Next Week</button>
+        <button mat-menu-item >Home</button>
+        <button mat-menu-item >work</button>
+
+
+
+      </mat-menu>
+    
+    

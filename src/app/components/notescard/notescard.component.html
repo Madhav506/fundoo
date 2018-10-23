@@ -1,0 +1,27 @@
+ 
+ <div fxFlex  fxLayout="row wrap" fxLayoutWrap fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="20px" style="height:auto;width:20px;">  
+  <mat-card class="example-card" >
+    <mat-card-header>
+      <mat-card-title>{{data.question}}</mat-card-title>
+      <!-- <mat-card-subtitle>subtitle</mat-card-subtitle> -->
+    </mat-card-header>
+    <mat-card-content class="content" >
+      {{data}}
+
+    </mat-card-content>
+    <mat-card-actions  >
+    <div   fxLayoutAlign="space-between"> 
+         
+      
+        <app-remindicon class="icons"></app-remindicon>
+        <app-collaboratoricon class="icons"></app-collaboratoricon>
+        <app-coloricon class="icons"></app-coloricon>
+        <app-imageicon class="icons"></app-imageicon>
+        <app-archiveicon class="icons"></app-archiveicon>
+        <app-moreicon class="icons"></app-moreicon>
+       
+    </div>
+  </mat-card-actions>
+
+  </mat-card>
+</div>

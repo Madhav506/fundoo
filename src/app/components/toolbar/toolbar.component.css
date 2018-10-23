@@ -1,5 +1,7 @@
 .sidenav-container {
   height: 90%;
+  /* background-color: gainsboro; */
+
 
 }
 .row-height{
@@ -9,6 +11,8 @@
 .sidenav {
   width: 300px;
   margin-top:70px;
+  /* background-color: gainsboro; */
+
   /* margin-left:0px */
   /* background-color:pink */
 }
@@ -69,3 +73,8 @@ overflow: hidden;
 /* mat-nav-list{
   background-color: gainsboro
 } */
+.contentstyle{
+  font-size:18px;
+  font-family:cursive;
+  text-align: center
+}

@@ -14,17 +14,23 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent  {
   hide=true;
-  
-
+ 
 constructor(public httpService: HttpService,public snackBar: MatSnackBar,public router:Router) { }
   /**OnInit is a lifecycle hook that is called after Angular has initialized all data-bound properties of a directive. */
- ngOnInit() {}
+ ngOnInit() {
+  var token;
+  if (localStorage.getItem('token')) {
+this.router.navigate(['/home']);    }
+
+ }
 
 model:any={
   "email":"",
-  "password":""
+  "password":"",
+ 
 
 };
+
 
 email = new FormControl('', [Validators.required, Validators.email]);
 errorMessage() {
@@ -51,13 +57,22 @@ console.log("invalid details");
 
  }
 signin(){
+  var first=this.model.email;
       console.log(this.model.email);
       console.log(this.model.password);
+     
 
       this.httpService.addDataService("user/login",this.model).subscribe(
         data => {
-  
+          console.log(data)
+          console.log(data['id']);
+          localStorage.setItem('token',data['id']);
         console.log("login successfull");
+        localStorage.setItem('first',first);
+        localStorage.setItem('firstName',data['firstName']);
+        localStorage.setItem('lastName',data['lastName']);
+        localStorage.setItem('id',data['id']);
+
         this.snackBar.open("login successfull", "login", {
                   duration:10000,
                 

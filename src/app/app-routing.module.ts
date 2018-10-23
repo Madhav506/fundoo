@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import{RouterModule,Routes} from '@angular/router';
-
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
@@ -12,29 +11,22 @@ import { NotesComponent } from './components/notes/notes.component';
 import { RemindersComponent } from './components/reminders/reminders.component';
 import { ArchiveComponent } from './components/archive/archive.component';
 import { TrashComponent } from './components/trash/trash.component';
-
-
-
-
-
-
+import {AuthguardGuard  as AuthGuard } from '../../src/app/auth/auth.guard';
 
 
 const appRoutes:Routes=[
   {path:'login', component: LoginComponent},
   {path:'signup', component: SignupComponent},
-  {path:'forgotpassword', component: ForgotpasswordComponent},
-  {path:'resetpassword/:id',component:ResetpasswordComponent},
-  {path:'home',component:HomeComponent,children:[
-    {
-      path:'notes',component:NotesComponent},
+  {path:'forgotpassword', component: ForgotpasswordComponent,canActivate: [AuthGuard]},
+  {path:'resetpassword/:id',component:ResetpasswordComponent,canActivate: [AuthGuard]},
+  {path:'home',component:HomeComponent,canActivate: [AuthGuard],children:[
+    {path:'',redirectTo:'notes',pathMatch:'full'},
+      {path:'notes',component:NotesComponent},
       {path:'reminders',component:RemindersComponent},
       {path:'archive',component:ArchiveComponent},
-      {path:'trash',component:TrashComponent},
-
-
-
+      {path:'trash',component:TrashComponent}
   ]},
+  // { path: '**', redirectTo: '' },
   {path:'',redirectTo:'/login',pathMatch:'full'},
   
 ]; 

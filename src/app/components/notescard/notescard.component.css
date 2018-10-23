@@ -1,0 +1,20 @@
+.example-card{
+    margin: 10px;
+    height:auto;
+    width:200px;
+  
+}
+mat-card-content{
+    width:200px;
+    word-wrap: break-word;
+}
+.icons{
+    opacity:0.6;
+    margin-top:15px;
+  }
+.icons:hover{
+   
+    opacity:1;
+    
+  }
+  

@@ -11,28 +11,22 @@
   </form>
 
   
-  <button mat-icon-button> <mat-icon fxFlex="40px" >refresh</mat-icon></button>
-  <mat-icon fxFlex="40px" >view_stream</mat-icon>
-  <mat-icon fxFlex="40px" >notifications_none</mat-icon>
+  <button mat-icon-button> <mat-icon matTooltip="Refresh" fxFlex="40px" >refresh</mat-icon></button>
+  <mat-icon fxFlex="40px" matTooltip="View" >view_stream</mat-icon>
+  <mat-icon fxFlex="40px" matTooltip="Notifications" >notifications_none</mat-icon>
 
-  <!-- <button mat-icon-button [matMenuTriggerFor]="appMenu" > -->
-  <!-- <mat-icon fxFlex="40px" style="color:black"  >account_circle</mat-icon>            </button> -->
-  <button mat-mini-fab [matMenuTriggerFor]="appMenu" style="background-color:white;color:black">M</button>
+  <button matTooltip="fundoo Account" mat-mini-fab [matMenuTriggerFor]="appMenu" style="background-color:white;color:black;text-transform:uppercase">{{firstCharacter}}</button>
 
   <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
-    <!-- <ng-template matMenuContent let-name="name"> -->
-    <button mat-menu-item routerLink="/signup">Add account</button>
-    <button mat-menu-item routerLink="/login">Log out </button>
-    <!-- </ng-template> -->
+      <mat-content class="contentstyle" >{{firstName | titlecase}} {{lastName | titlecase}} </mat-content>
+      <mat-content class="contentstyle">{{raw_data}}</mat-content>
+    <div fxFlex="row wrap"  class="add">
+      <button mat-menu-item routerLink="/signup">Add account</button>
+   <button mat-menu-item (click)="logout()">Log out </button></div>
   </mat-menu>
-
-
-
 
 </mat-toolbar>
 <mat-sidenav-container class="sidenav-container">
-
-
 
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
@@ -45,12 +39,12 @@
 
       <span><a mat-list-item routerLink="/home/trash"><mat-icon>delete</mat-icon><span class="notes">Trash</span></a></span>
       <!-- <hr> -->
-      <a mat-list-item routerLink=" /"><mat-icon >edit</mat-icon><span class="notes">Edit</span></a>
+      <!-- <a mat-list-item routerLink=" /"><mat-icon  >edit</mat-icon><span class="notes">Edit</span></a>
       <a mat-list-item routerLink=" /"><mat-icon >settings</mat-icon><span class="notes">Settings</span></a>
       <a mat-list-item routerLink=" /"><mat-icon >help</mat-icon><span class="notes">Help</span></a>
       <a mat-list-item routerLink=" /"><mat-icon >feedback</mat-icon><span class="notes">Send feedback</span></a>
       <a mat-list-item routerLink=" /"><mat-icon >get_app</mat-icon><span class="notes">App downloads</span></a>
-      <a mat-list-item routerLink=" /"><mat-icon >keyboard</mat-icon><span class="notes">keyboard</span></a>
+      <a mat-list-item routerLink=" /"><mat-icon >keyboard</mat-icon><span class="notes">keyboard</span></a> -->
 
       <a mat-list-item href="#"></a>
     </mat-nav-list>

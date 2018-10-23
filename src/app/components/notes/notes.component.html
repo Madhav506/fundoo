@@ -1,13 +1,45 @@
 <div fxLayout="row" fxLayoutAlign="center center" class="row-height">
-    <mat-card fxFlex="55" class="card1">
+    <mat-card fxFlex="55" class="card" *ngIf="choose1" >
      
-      <span class="content" fxLayoutGap="space-between"> 
-      <span  fxFlex="60"  tabindex="0" contenteditable="true" aria-multiline="true" role="textbox" >Take a note</span>
-      <div ></div>
-        <mat-icon fxFlex="25" class="icon1" mat-icon-button>newlist</mat-icon>
-        <mat-icon fxFlex class="icon1" mat-icon-button>image</mat-icon>
-        <mat-icon fxFlex="5" class="icon1" mat-icon-button>edit</mat-icon>
-      </span>
+     
+      <div><span><input fxFlex="30" (click)="openNote()" class="input" placeholder="Take a note.."></span></div>
+      
+      <div class="cardicon" fxLayoutGap="space-between" fxLayoutAlign="end"> 
+        <mat-icon fxFlex="10" class="icon1" matTooltip=" New Note" aria-disabled="false" style="user-select:none" mat-icon-button>format_list_bulleted</mat-icon>
+        <mat-icon fxFlex="10" matTooltip="New note with image" aria-disabled="false"  style="user-select:none"  class="icon2" mat-icon-button>image</mat-icon>
+        <mat-icon fxFlex="5" matTooltip="Drawing not available" aria-disabled="true"  style="user-select:none"  class="icon3" mat-icon-button>brush</mat-icon>
+      </div>
 
     </mat-card>
+
+<mat-card fxFlex="55" class="hiddenCard" *ngIf="choose2">
+
+    <div fxLayout="row" class="hiddenDiv">
+       
+          <div class="inputNote" id="title" fxFlex="95" contenteditable="true" style="font-weight:bold" placeholder="Title" ></div> 
+         <div> <img class="pinIcon" src="../../../assets/images/pin.svg" alt="">   </div>        
+           </div>
+
+      <div class="inputNote" id="description" contenteditable="true" placeholder="Take a note" autofocus>
+      </div>
+      <div fxLayoutAlign="space-between" >
+     <div  fxFlex="70" class="icons" fxLayoutAlign="space-between"> 
+       <app-remindicon></app-remindicon>
+      <app-collaboratoricon></app-collaboratoricon>
+      <app-coloricon></app-coloricon>
+      <app-imageicon></app-imageicon>
+      <app-archiveicon></app-archiveicon>
+      <app-moreicon></app-moreicon>
+     
+    </div>
+      <div    ><button  mat-icon-button (click)="closeNote()" matTooltip="close" >CLOSE</button></div>
+      <!-- <div    ><button  mat-icon-button (click)="click()" matTooltip="close" >Click</button></div> -->
+ 
+    </div>
+</mat-card>
+
+
+</div><br>
+<div  *ngFor="let section of notes">
+<app-notescard [data]="section"></app-notescard>
 </div>

@@ -53,12 +53,9 @@ export class HttpService {
     };
 
 
-
     return this.http.post(url, this.getFormUrlEncoded(input), httpAuthOptions1);
 
   }
-
-
   getFormUrlEncoded(toConvert) {
     const formBody = [];
     for (const property in toConvert) {
@@ -68,5 +65,34 @@ export class HttpService {
     }
     return formBody.join('&');
   }
+//post api for logout
+
+postLogout(url,token){
+  console.log("token to logout",token);
+  url = this.url + url;
+  var option = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': token
+    })
+  
+  };
+  // post should send 3 parameters. Url, body and then headers.
+  return this.http.post(url,{}, option);
+
+}
+getCardData(url,token){
+  console.log("token while getnotes list",token);
+  url = this.url + url;
+  var option1 = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': token
+    })
+  
+  };
+  return this.http.get(url,option1);
+}
+
 }
 
