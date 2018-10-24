@@ -32,14 +32,9 @@
       <app-moreicon></app-moreicon>
      
     </div>
-      <div    ><button  mat-icon-button (click)="closeNote()" matTooltip="close" >CLOSE</button></div>
+      <div><button  mat-icon-button (click)="close()"  matTooltip="close" >CLOSE</button></div>
       <!-- <div    ><button  mat-icon-button (click)="click()" matTooltip="close" >Click</button></div> -->
  
     </div>
 </mat-card>
-
-
-</div><br>
-<div  *ngFor="let section of notes">
-<app-notescard [data]="section"></app-notescard>
 </div>

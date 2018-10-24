@@ -74,7 +74,22 @@ overflow: hidden;
   background-color: gainsboro
 } */
 .contentstyle{
-  font-size:18px;
+  font-size:17px;
   font-family:cursive;
   text-align: center
+}
+.add{
+  width:250px;
+  margin-top:10px;
+ 
+}
+.addaccount{
+  background-color: white;
+  color:rgb(15, 11, 11);
+  /* width:60px; */
+  margin-left:20px;
+}
+.logout{
+  background-color: white;
+  color:rgb(2, 2, 2)
 }

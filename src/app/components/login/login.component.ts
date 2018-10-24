@@ -18,11 +18,11 @@ export class LoginComponent  {
 constructor(public httpService: HttpService,public snackBar: MatSnackBar,public router:Router) { }
   /**OnInit is a lifecycle hook that is called after Angular has initialized all data-bound properties of a directive. */
  ngOnInit() {
-  var token;
-  if (localStorage.getItem('token')) {
-this.router.navigate(['/home']);    }
+//   var token;
+//   if (localStorage.getItem('token')) {
+// this.router.navigate(['/home']);    }
 
- }
+}
 
 model:any={
   "email":"",

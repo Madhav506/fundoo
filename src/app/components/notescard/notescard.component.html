@@ -1,24 +1,24 @@
  
- <div fxFlex  fxLayout="row wrap" fxLayoutWrap fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="20px" style="height:auto;width:20px;">  
-  <mat-card class="example-card" >
+ <div fxLayoutAlign="start start" fxFlex  fxLayout="row wrap" fxLayoutWrap fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="20px" style="height:auto;width:20px;">  
+  <mat-card class="example-card" *ngFor="let data of myData" >
     <mat-card-header>
-      <mat-card-title>{{data.question}}</mat-card-title>
-      <!-- <mat-card-subtitle>subtitle</mat-card-subtitle> -->
+      <mat-card-title>
+        <div contenteditable="false" dir="ltr" aria-multiline="true" [innerHTML]="data.title" role="textbox">{{data.title}}</div></mat-card-title>
     </mat-card-header>
-    <mat-card-content class="content" >
-      {{data}}
+    <mat-card-content class="content"  >
+   <div contenteditable="false" aria-multiline="true" role="textbox" [innerHTML]="data.description">   {{data.description}} </div>
 
     </mat-card-content>
     <mat-card-actions  >
-    <div   fxLayoutAlign="space-between"> 
+    <div class="icons" fxLayoutAlign="space-between"> 
          
       
-        <app-remindicon class="icons"></app-remindicon>
-        <app-collaboratoricon class="icons"></app-collaboratoricon>
-        <app-coloricon class="icons"></app-coloricon>
-        <app-imageicon class="icons"></app-imageicon>
-        <app-archiveicon class="icons"></app-archiveicon>
-        <app-moreicon class="icons"></app-moreicon>
+        <app-remindicon ></app-remindicon>
+        <app-collaboratoricon ></app-collaboratoricon>
+        <app-coloricon></app-coloricon>
+        <app-imageicon ></app-imageicon>
+        <app-archiveicon ></app-archiveicon>
+        <app-moreicon ></app-moreicon>
        
     </div>
   </mat-card-actions>

@@ -69,9 +69,10 @@ div[contenteditable=true]:empty::before {
   }
 .icons{
   width:400px;
-  opacity:0.6;
+  opacity:1;
   margin-top:10px;
 }
+
 .cardicon{
   opacity: 0.6;
 }

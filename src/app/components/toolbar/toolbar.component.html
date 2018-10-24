@@ -18,11 +18,15 @@
   <button matTooltip="fundoo Account" mat-mini-fab [matMenuTriggerFor]="appMenu" style="background-color:white;color:black;text-transform:uppercase">{{firstCharacter}}</button>
 
   <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
-      <mat-content class="contentstyle" >{{firstName | titlecase}} {{lastName | titlecase}} </mat-content>
-      <mat-content class="contentstyle">{{raw_data}}</mat-content>
-    <div fxFlex="row wrap"  class="add">
-      <button mat-menu-item routerLink="/signup">Add account</button>
-   <button mat-menu-item (click)="logout()">Log out </button></div>
+    <div fxLayoutAlign="row wrap"  >
+        <div fxFlex=20>    <button matTooltip="fundoo Account" mat-mini-fab style="background-color:#fb0;float:right;color:white;text-transform:uppercase">{{firstCharacter}}</button></div>
+       <mat-content fxFlex class="contentstyle" style="margin-top:5px;float:left" >{{firstName | titlecase}} {{lastName | titlecase}} </mat-content>
+
+    </div><br>
+      <mat-content class="contentstyle">{{raw_data}}</mat-content><hr>
+    <div fxLayoutAlign="row wrap"  class="add" fxLayoutGap=85px>
+    <button fxFlex class="addaccount" routerLink="/signup">Add account</button>
+   <button fxFlex class="logout" (click)="logout()">Log out </button></div>
   </mat-menu>
 
 </mat-toolbar>
