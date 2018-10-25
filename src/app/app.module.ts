@@ -43,10 +43,8 @@ import { UndoiconComponent } from './components/undoicon/undoicon.component';
 import { RedoiconComponent } from './components/redoicon/redoicon.component';
 import { MoreiconComponent } from './components/moreicon/moreicon.component';
 import { NotescardComponent } from './components/notescard/notescard.component';
-
-
-
-
+import { NotesParentComponent } from './components/notes-parent/notes-parent.component';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 
 
@@ -73,6 +71,8 @@ import { NotescardComponent } from './components/notescard/notescard.component';
     RedoiconComponent,
     MoreiconComponent,
     NotescardComponent,
+    NotesParentComponent,
+    DialogComponent,
    
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

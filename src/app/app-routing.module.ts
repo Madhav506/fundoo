@@ -12,16 +12,17 @@ import { RemindersComponent } from './components/reminders/reminders.component';
 import { ArchiveComponent } from './components/archive/archive.component';
 import { TrashComponent } from './components/trash/trash.component';
 import {AuthguardGuard  as AuthGuard } from '../../src/app/auth/auth.guard';
+import { NotesParentComponent } from './components/notes-parent/notes-parent.component';
 
 
 const appRoutes:Routes=[
   {path:'login', component: LoginComponent},
   {path:'signup', component: SignupComponent},
-  {path:'forgotpassword', component: ForgotpasswordComponent,canActivate: [AuthGuard]},
-  {path:'resetpassword/:id',component:ResetpasswordComponent,canActivate: [AuthGuard]},
+  {path:'forgotpassword', component: ForgotpasswordComponent},
+  {path:'resetpassword/:id',component:ResetpasswordComponent},
   {path:'home',component:HomeComponent,canActivate: [AuthGuard],children:[
     {path:'',redirectTo:'notes',pathMatch:'full'},
-      {path:'notes',component:NotesComponent},
+      {path:'notes',component:NotesParentComponent},
       {path:'reminders',component:RemindersComponent},
       {path:'archive',component:ArchiveComponent},
       {path:'trash',component:TrashComponent}

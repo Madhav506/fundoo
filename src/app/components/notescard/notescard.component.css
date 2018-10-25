@@ -1,4 +1,4 @@
-.example-card{
+.matcard{
     margin: 10px;
     height:auto;
     width:200px;
@@ -8,6 +8,7 @@ mat-card-title{
     word-wrap: break-word;
     font-family: cursive;
     font-weight: bolder;
+    font-size:20px;
     width:200px;
 }
 mat-card-content{
@@ -23,4 +24,6 @@ mat-card-content{
     opacity:1;
     
   }
-  
+  .main{
+      padding:85px;
+  }

@@ -84,7 +84,7 @@ signin(){
       error => {/**if error exists then displays the error message using snackbar */
               console.log("Error", error);
               this.snackBar.open("enter valid details ","login unsuccessfull" , {
-                        duration: 10000,
+                        duration: 1000,
                       });
 
                           

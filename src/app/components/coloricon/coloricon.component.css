@@ -4,3 +4,70 @@
 .innerIcon:hover{
     opacity:1;
 }
+/* <div fxLayoutGap="space-between">  <div> <button mat-mini-fab style="height:35px;width:35px"></button>
+<button mat-mini-fab style="height:35px;width:35px"></button>
+<button mat-mini-fab style="height:35px;width:35px"></button>
+<button mat-mini-fab style="height:35px;width:35px"></button></div>
+<div> <button mat-mini-fab style="height:35px;width:35px"></button>
+<button mat-mini-fab style="height:35px;width:35px"></button>
+<button mat-mini-fab style="height:35px;width:35px"></button>
+<button mat-mini-fab style="height:35px;width:35px"></button></div>
+<div> <button mat-mini-fab style="height:35px;width:35px"></button>
+  <button mat-mini-fab style="height:35px;width:35px" ></button>
+  <button mat-mini-fab style="height:35px;width:35px" ></button>
+  <button mat-mini-fab style="height:35px;width:35px" ></button></div></div> */
+  .zero{
+    background-color:white;
+    color:black;
+    height:35px;
+    width:35px;
+  }
+  .first{
+      background-color: rgb(242, 139, 130);
+    height:35px;
+    width:35px;
+  }
+  .second{
+    background-color: red;
+  height:35px;
+  width:35px;
+} .third{
+    background-color:yellow;
+  height:35px;
+  width:35px;
+} .fourth{
+    background-color: rgb(242, 139, 130);
+  height:35px;
+  width:35px;
+}.fifth{
+    background-color: rgb(242, 139, 130);
+  height:35px;
+  width:35px;
+} .sixth{
+    background-color: rgb(242, 139, 130);
+  height:35px;
+  width:35px;
+} .seventh{
+    background-color: rgb(242, 139, 130);
+  height:35px;
+  width:35px;
+} .eigth{
+    background-color: rgb(242, 139, 130);
+  height:35px;
+  width:35px;
+} .ninth{
+    background-color: rgb(242, 139, 130);
+  height:35px;
+  width:35px;
+} 
+ .tenth{
+    background-color: rgb(242, 139, 130);
+  height:35px;
+  width:35px;
+} 
+.eleven{
+    background-color: rgb(242, 139, 130);
+    height:35px;
+    width:35px;
+
+}

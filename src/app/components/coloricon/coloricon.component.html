@@ -1,5 +1,19 @@
 
-  <mat-icon  class="innerIcon" mat-icon-button aria-label="false" style="user-select:none" matTooltip="change color"  (click)="addColor()">
+  <mat-icon  class="innerIcon" [matMenuTriggerFor]="moreMenu" mat-icon-button aria-label="false" style="user-select:none" matTooltip="change color">
       color_lens
     </mat-icon>
-   
+   <mat-menu fxFlex="column wrap"  #moreMenu="matMenu"  [overlapTrigger]="false" class="example-button-row">
+     <div >  <div> 
+        <button mat-mini-fab class="zero" (click)="changeColor('#ffffff')">ok</button> 
+        <button mat-mini-fab class="first" (click)="changeColor('#90ee90')"></button>
+        <button mat-mini-fab class="second" (click)="changeColor('#f66ef6')"></button>
+        <button mat-mini-fab class="third" (click)="changeColor('#f08080')"></button></div>
+       <div> <button mat-mini-fab class="tenth" (click)="changeColor('#05f6f6')"></button>
+        <button mat-mini-fab class="fourth" (click)="changeColor('#ffb6c1')"></button>
+        <button mat-mini-fab class="fifth" (click)="changeColor('#ffffff')"></button>
+        <button mat-mini-fab class="sixth" (click)="changeColor('#ffff66')"></button></div>
+        <div> <button mat-mini-fab class="eleven" (click)="changeColor('#add8e6')"></button>
+          <button mat-mini-fab class="seventh" (click)="changeColor('#e6a9a9')"></button>
+          <button mat-mini-fab class="eigth" (click)="changeColor('#ffff81')"></button>
+          <button mat-mini-fab class="ninth" (click)="changeColor('#a9a9d6')"></button></div></div>
+   <mat-menu>

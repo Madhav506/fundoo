@@ -1,4 +1,4 @@
 
 <app-notes (eventClicked)="getAllNotes($event)" ></app-notes><br>
-<app-notescard [myData]=arrayData></app-notescard>
+<app-notescard [myData]=arrayNewData (noteEvent)="getAllNotes($event)" (colorevent)="getAllNotes($event)"></app-notescard>
  
