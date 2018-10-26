@@ -1,10 +1,5 @@
 
-<mat-icon  class="innerIcon" [matMenuTriggerFor]="moreMenu" aria-label="false" style="user-select:none" mat-icon-button  matTooltip="more" >
+<mat-icon  class="innerIcon" (click)="archiveNotes()" aria-label="false" style="user-select:none" mat-icon-button  matTooltip="Archive" >
     archive
   </mat-icon>
-  <mat-menu #moreMenu="matMenu"  [overlapTrigger]="false">
-
-      <button mat-menu-item (click)="archiveNotes()">Archive</button>
-    </mat-menu>
-  
-  
+ 

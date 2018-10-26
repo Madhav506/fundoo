@@ -1,0 +1,79 @@
+
+  
+  .input {
+    width: 80%;
+    margin-top:-5px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    margin-left: 10px;
+    padding-top: 10px;
+    font-family: cursive;
+    
+  }
+  .card{
+  height:45px;
+  /* width: 600px; */
+  left: 0;
+  right: 0;
+  margin: auto;
+  padding: 2px;
+  margin-top:25px;
+  
+  }
+  .icon1{
+    margin-top:-19px;
+    font-weight: lighter;
+  
+  }
+  .icon2{
+    margin-top:-19px;
+    font-weight: lighter;
+  
+  }
+  .icon3{
+    margin-top:-19px;
+    font-weight: lighter;
+  
+  }
+  .inputNote{
+    /* width:545px; */
+    border:none;
+    outline: none;
+    margin-top:0px;
+    font-size: 16px;
+    font-family: cursive;
+    margin-bottom: 15px;
+    
+  }
+  .hiddenCard{
+  /* width: 580px; */
+  height:auto;
+  position: relative;
+  left: 0;
+  right: 0;
+  margin:auto;
+  margin-top:25px;
+  /* margin-bottom:5px; */
+  }
+  .pinIcon {
+    opacity: 0.6;
+  }
+  
+  div[contenteditable=true]:empty::before {
+    content: attr(placeholder);
+    opacity: 0.6;
+    }
+  .icons{
+    width:400px;
+    opacity:1;
+    margin-top:10px;
+  }
+  
+  .cardicon{
+    opacity: 0.6;
+  }
+  .md-dialog-container {
+    /* background-color: #000; */
+   padding:0px;
+}

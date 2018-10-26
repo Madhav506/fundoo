@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutAlign="center center" class="row-height">
+<div  fxLayout="row" fxLayoutAlign="center center" class="row-height">
     <mat-card fxFlex="55" class="card" *ngIf="choose1" >
      
      
@@ -12,9 +12,9 @@
 
     </mat-card>
 
-<mat-card fxFlex="55" class="hiddenCard" *ngIf="choose2">
+<mat-card fxFlex="55" class="hiddenCard" [ngStyle]="{'background-color':colorMyevent}" *ngIf="choose2">
 
-    <div fxLayout="row" class="hiddenDiv">
+    <div fxLayout="row" class="hiddenDiv" >
        
           <div class="inputNote" id="title" fxFlex="95" contenteditable="true" style="font-weight:bold" placeholder="Title" ></div> 
          <div> <img class="pinIcon" src="../../../assets/images/pin.svg" alt="">   </div>        
@@ -26,7 +26,7 @@
      <div  fxFlex="70" class="icons" fxLayoutAlign="space-between"> 
        <app-remindicon></app-remindicon>
       <app-collaboratoricon></app-collaboratoricon>
-      <app-coloricon></app-coloricon>
+      <app-coloricon  (responseNew)="change($event)" ></app-coloricon>
       <app-imageicon></app-imageicon>
       <app-archiveicon></app-archiveicon>
       <app-moreicon></app-moreicon>

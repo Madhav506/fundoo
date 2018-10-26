@@ -3,7 +3,6 @@
     <div fxLayout='row' fxLayoutAlign="center center"  class="container" >
     
     
-        <!-- <div fxFlex="50" class="class1"> -->
 
             <mat-card fxFlex="30"  fxFlex.xs="100"   >
               
@@ -11,7 +10,6 @@
     <my-slide-panel [activePane]="isLeftVisible ? 'right' : 'left'">
            <div leftPane>
                 <form>  <div class="class2">
-     <!-- <mat-card-content fxLayout="column"> -->
                 <div class="class3" align="center">fundooNotes</div><br>
                 <div class="class4" align="center">Sign in </div><br>
 
@@ -25,7 +23,6 @@
                     
                 </mat-form-field><br><br>
                 <div>
-                    <!-- </mat-card-content> -->
                 <div class="class6">Please continue to login </div><br><br>
     
                 </div>
@@ -33,7 +30,6 @@
                 <button (click)="next()" mat-raised-button style="margin-left:73px;margin-bottom:10px;color:white;background-color: #4285f4;margin-left:60px">Next
                 </button>
                
-                <!-- <button (click)="isLeftVisible = !isLeftVisible">Toggle panes</button> -->
     
     
             </div></form>
@@ -42,14 +38,12 @@
           
     
              <form>   <div class="class3"  align="center">fundoo</div><br>
-                <!-- <div class="class4">Sign in </div> -->
                 <div class="class4"  align="center">Welcome </div><br>
                 <mat-form-field class="password">
                     <input style="margin-top:30px;width:300px" matInput placeholder="Enter password" [formControl]="password"  [(ngModel)]="model.password" type="password"  [type]="hide ? 'password' : 'text'" required>
                     <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     <mat-error *ngIf="password.invalid">{{errorpassword()}}</mat-error>
 
-                    <!-- <mat-error *ngIf="password.invalid && (password.dirty || password.touched)">password is required</mat-error> -->
                 </mat-form-field>
                 <div>
     

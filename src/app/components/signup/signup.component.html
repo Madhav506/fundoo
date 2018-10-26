@@ -1,4 +1,4 @@
-<div flexLayout="row wrap" fxLayoutAlign="center center">
+<div flexLayout="row" fxLayoutAlign="center ">
     <mat-card fxFlex.md="100" fxFlex.lg="60" fxFlex.xs="100" fxFlex.sm="100" class="class2">
         <form>
             <div class="class3">fundooNotes</div>
@@ -10,7 +10,7 @@
                         required>
 
                     <mat-error *ngIf="firstname.invalid">{{ errorFirstname()}}</mat-error>
-                </mat-form-field>&nbsp;
+                </mat-form-field>
 
                 <mat-form-field>
                     <input matInput placeholder="Lastname" [formControl]="lastname"  [(ngModel)]="detailsObject.Lastname"   required>
@@ -24,7 +24,7 @@
                     <input matInput placeholder="Email" [formControl]="email" [(ngModel)]="detailsObject.Email"  required>
                     <mat-error *ngIf="email.invalid">{{ erroremail()}}</mat-error>
 
-                </mat-form-field>&nbsp;
+                </mat-form-field>
             </div>
             <div>
                 <mat-form-field style="font-weight:normal">
@@ -33,7 +33,7 @@
                         <mat-error *ngIf="password.invalid">{{ errorpassword()}}</mat-error>
 
 
-                </mat-form-field>&nbsp;
+                </mat-form-field>
                 <mat-form-field>
                     <input matInput placeholder="Confirm password" [formControl]="cpassword" type="password" [type]="hide ? 'password' : 'text'" [(ngModel)]="detailsObject.cpassword">
                     <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -43,7 +43,6 @@
 
             </div>
             <div flexLayout="row wrap" fxFlexLayout="center" fxLayoutGap="-151px" class="cards">
-                <!-- *ngFor  is the Angular "repeater" directive -->
                 <div fxFlex.lg="50" *ngFor="let data of card">
 
                     <mat-card mat-button (click)="  changeCardColor(data)" [ngClass]="data.check? 'check': 'uncheck'" style="height:70px;width:100px">

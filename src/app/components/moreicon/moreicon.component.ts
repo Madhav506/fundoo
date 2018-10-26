@@ -1,5 +1,6 @@
 import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
 import{HttpService} from '../../services/http.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-moreicon',
@@ -19,13 +20,12 @@ export class MoreiconComponent implements OnInit {
   }
   token=localStorage.getItem('token')
 
-
-  deleteNotes(arrayOfNotesid){
+  deleteNotes(arrayOfNotes){
     
     console.log(this.arrayOfNotes);
     var model={
       "isDeleted":true,
-      "noteIdList":[this.arrayOfNotes.id]
+      "noteIdList":[this.arrayOfNotes]
     }
     this.service.postDelete("notes/trashNotes",model,this.token).subscribe(data=>{
       console.log("delete note",data);
@@ -36,6 +36,13 @@ export class MoreiconComponent implements OnInit {
       console.log("Error", error);
     
     }
+  }
+  labelNotes(){
+    // data:{
+    //   name:"Madhu",
+      
+      
+    // }
   }
 
 }

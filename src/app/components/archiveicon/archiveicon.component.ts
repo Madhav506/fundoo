@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input, Output,EventEmitter } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { HttpService } from '../../services/http.service';
 })
 export class ArchiveiconComponent implements OnInit {
   @Input() archiveNotesArray;
-
+@Output() archiveEvent=new EventEmitter
   constructor(public service:HttpService) { }
 
   ngOnInit() {
@@ -16,23 +16,22 @@ export class ArchiveiconComponent implements OnInit {
   }
   token=localStorage.getItem('token')
 
-
-  // archiveNotes(){
+  archiveNotes(){
     
-  //   console.log(this.archiveNotesArray);
-  //   var model={
-  //     "isArchived":true,
-  //     "noteIdList":[this.archiveNotesArray.id]
-  //   }
-  //   this.service.postArchive("notes/archiveNotes",model,this.token).subscribe(data=>{
-  //     console.log("archive note",data);
-  //     // this.moreEvent.emit();
+    console.log(this.archiveNotesArray);
+    var model={
+      "isArchived":true,
+      "noteIdList":[this.archiveNotesArray]
+    }
+    this.service.postDelete("notes/archiveNotes",model,this.token).subscribe(data=>{
+      console.log("archive note",data);
+      this.archiveEvent.emit();
 
-  //   }),
-  //   error => {
-  //     console.log("Error", error);
+    }),
+    error => {
+      console.log("Error", error);
     
-  //   }
-  // }
+    }
+  }
 
 }

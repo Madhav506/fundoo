@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent  {
   hide=true;
- 
+              
 constructor(public httpService: HttpService,public snackBar: MatSnackBar,public router:Router) { }
   /**OnInit is a lifecycle hook that is called after Angular has initialized all data-bound properties of a directive. */
  ngOnInit() {
@@ -67,24 +67,23 @@ signin(){
           console.log(data)
           console.log(data['id']);
           localStorage.setItem('token',data['id']);
-        console.log("login successfull");
+        // console.log("login successfull");
         localStorage.setItem('first',first);
         localStorage.setItem('firstName',data['firstName']);
         localStorage.setItem('lastName',data['lastName']);
         localStorage.setItem('id',data['id']);
-
+        this.router.navigate(['/home']);
         this.snackBar.open("login successfull", "login", {
                   duration:10000,
                 
                 });
-                this.router.navigate(['/home']);
-
+                
         
       }),
       error => {/**if error exists then displays the error message using snackbar */
               console.log("Error", error);
               this.snackBar.open("enter valid details ","login unsuccessfull" , {
-                        duration: 1000,
+                        duration: 10000,
                       });
 
                           

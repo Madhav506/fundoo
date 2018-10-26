@@ -9,7 +9,7 @@ import{HttpService} from '../../services/http.service';
 })
 export class NotesComponent implements OnInit {
   @Output() eventClicked = new EventEmitter<Event>();
-
+colorMyevent= '#ffffff';
 interval: any;
   choose1=true;
   choose2=false;
@@ -32,6 +32,12 @@ openNote(){
   this.choose2=true;
 
 }
+change(event){
+  if(event){
+  this.colorMyevent=event;
+  console.log(this.colorMyevent);
+}
+}
 
 
 close(){
@@ -43,20 +49,24 @@ close(){
   console.log(this.description);
   console.log(this.pinned);
   this.clicked=!this.clicked;
+  
 
   var body={
   "title":this.title,
   "description":this.description,
   "labelIdList":"",
   "checklist":"",
-  "isPined":this.pinned
+  "isPined":this.pinned,
+  "color":""
 
   }
+  body.color=this.colorMyevent;   
+  this.colorMyevent="#ffffff";
+
   this.service.postpassword("notes/addnotes",body,this.token).subscribe(data=>{
-    console.log("successful",data);
+    console.log("succefffdvkjdxssful",data);
     this.eventClicked.emit();
-    // this.getAllNotes();
-    // this.loadCardsDynamically();
+    
   },
   error=>{
     console.log("failed",error)

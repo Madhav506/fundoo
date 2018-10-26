@@ -4,70 +4,80 @@
 .innerIcon:hover{
     opacity:1;
 }
-/* <div fxLayoutGap="space-between">  <div> <button mat-mini-fab style="height:35px;width:35px"></button>
-<button mat-mini-fab style="height:35px;width:35px"></button>
-<button mat-mini-fab style="height:35px;width:35px"></button>
-<button mat-mini-fab style="height:35px;width:35px"></button></div>
-<div> <button mat-mini-fab style="height:35px;width:35px"></button>
-<button mat-mini-fab style="height:35px;width:35px"></button>
-<button mat-mini-fab style="height:35px;width:35px"></button>
-<button mat-mini-fab style="height:35px;width:35px"></button></div>
-<div> <button mat-mini-fab style="height:35px;width:35px"></button>
-  <button mat-mini-fab style="height:35px;width:35px" ></button>
-  <button mat-mini-fab style="height:35px;width:35px" ></button>
-  <button mat-mini-fab style="height:35px;width:35px" ></button></div></div> */
+.sample{
+height:auto;
+overflow: hidden;
+}
   .zero{
     background-color:white;
     color:black;
-    height:35px;
-    width:35px;
+    height:25px;
+    width:25px;
+    margin-bottom: 5px;
   }
   .first{
-      background-color: rgb(242, 139, 130);
-    height:35px;
-    width:35px;
-  }
-  .second{
-    background-color: red;
-  height:35px;
-  width:35px;
+      background-color: #ffff00;
+    height:25px;
+    width:25px;
+ margin-bottom: 5px;
+    }
+    .second{
+    background-color: #90ee90;
+  height:25px;
+  width:25px;
+  margin-bottom: 5px;
 } .third{
-    background-color:yellow;
-  height:35px;
-  width:35px;
+    background-color:#f66ef6;
+  height:25px;
+  width:25px;
+  margin-bottom: 5px;
 } .fourth{
-    background-color: rgb(242, 139, 130);
-  height:35px;
-  width:35px;
+    background-color: #f08080;
+  height:25px;
+  width:25px;
+  margin-bottom: 5px;
+
 }.fifth{
-    background-color: rgb(242, 139, 130);
-  height:35px;
-  width:35px;
+    background-color: #05f6f6;
+  height:25px;
+  width:25px;
+  margin-bottom: 5px;
+
 } .sixth{
-    background-color: rgb(242, 139, 130);
-  height:35px;
-  width:35px;
+    background-color:#ffb6c1;
+  height:25px;
+  width:25px;
+  margin-bottom: 5px;
+
 } .seventh{
-    background-color: rgb(242, 139, 130);
-  height:35px;
-  width:35px;
+    background-color: #fffff1;
+  height:25px;
+  width:25px;
 } .eigth{
-    background-color: rgb(242, 139, 130);
-  height:35px;
-  width:35px;
+    background-color:#ffff66;
+  height:25px;
+  width:25px;
+  margin-bottom: 5px;
+
 } .ninth{
-    background-color: rgb(242, 139, 130);
-  height:35px;
-  width:35px;
+    background-color: #add8e6;
+  height:25px;
+  width:25px;
+  margin-bottom: 5px;
+
 } 
  .tenth{
-    background-color: rgb(242, 139, 130);
-  height:35px;
-  width:35px;
+    background-color: #ffffcc ;
+  height:25px;
+  width:25px;
+  margin-bottom: 5px;
+
 } 
 .eleven{
-    background-color: rgb(242, 139, 130);
-    height:35px;
-    width:35px;
+    background-color:#a9a9d6;
+    height:25px;
+    width:25px;
+    margin-bottom: 5px;
+
 
 }

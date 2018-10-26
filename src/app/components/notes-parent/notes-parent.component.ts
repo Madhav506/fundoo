@@ -33,7 +33,7 @@ export class NotesParentComponent implements OnInit {
 
         for(var i=0;i<data['data'].data.length-1;i++){
 
-          if(data['data'].data[i].isDeleted == false)
+          if(data['data'].data[i].isDeleted == false && data['data'].data[i].isArchived == false )
           {
           this.arrayNewData.push(data['data'].data[i]);
            }

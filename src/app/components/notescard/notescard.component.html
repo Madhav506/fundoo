@@ -1,6 +1,7 @@
  
  <div fxLayoutAlign="start start" fxFlex class="main"  fxLayout="row wrap" fxLayoutWrap  fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="10px" >  
-  <mat-card  class="matcard" *ngFor="let data of myData" [ngStyle]="{'background-color':data.color}" >
+  <mat-card   class="matcard" *ngFor="let data of myData" [ngStyle]="{'background-color':data.color}" >
+ <div  (click)="openDialog(data)">  
     <mat-card-header>
       <mat-card-title>
         <div contenteditable="false" dir="ltr" aria-multiline="true" [innerHTML]="data.title" role="textbox">{{data.title}}</div></mat-card-title>
@@ -8,6 +9,7 @@
     <mat-card-content class="content"  >
    <div contenteditable="false" aria-multiline="true" role="textbox" [innerHTML]="data.description">   {{data.description}} </div>
     </mat-card-content>
+    </div>
     <mat-card-actions  >
     <div class="icons" fxLayoutAlign="space-between"> 
          
@@ -16,8 +18,8 @@
         <app-collaboratoricon ></app-collaboratoricon>
         <app-coloricon [myNewColor]="data.id" (response)="color($event)"></app-coloricon>
         <app-imageicon ></app-imageicon>
-        <app-archiveicon [archiveNotesArray]="data" ></app-archiveicon>
-        <app-moreicon (moreEvent)="gotMessage($event)"  [arrayOfNotes]="data"></app-moreicon>
+        <app-archiveicon [archiveNotesArray]="data.id" (archiveEvent)=myArchive($event)></app-archiveicon>
+        <app-moreicon (moreEvent)="gotMessage($event)"  [arrayOfNotes]="data.id"></app-moreicon>
        
     </div>
   </mat-card-actions>
