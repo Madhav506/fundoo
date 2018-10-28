@@ -96,7 +96,7 @@ getCardData(url,token){
 }
 
 postDelete(url,body,token){
-  console.log("deleting notes service")
+  console.log(" service")
     url=this.url+url;
     var option2 = {
       headers: new HttpHeaders({
@@ -108,19 +108,11 @@ postDelete(url,body,token){
     return this.http.post(url,body,option2);
 
   }
-  // postArchive(url,body,token){
-  //   console.log("archive notes service")
-  //     url=this.url+url;
-  //     var option3 = {
-  //       headers: new HttpHeaders({
-  //         'Content-Type': 'application/json',
-  //         'Authorization': token
-  //       })
-      
-  //     };
-  //     return this.http.post(url,body,option3);
-  
-  //   }
+  deleteData(url){
+    url=this.url+url;
+    return this.http.delete(url);
+
+  }
   
 }
 

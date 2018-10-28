@@ -9,7 +9,7 @@ import { HttpService } from '../../services/http.service';
 export class ArchiveComponent implements OnInit {
 
   constructor(public service:HttpService) { }
-
+  /**OnInit is a lifecycle hook that is called after Angular has initialized all data-bound properties of a directive. */
   ngOnInit() {
     console.log("archive");
     this.getAllNotes();
@@ -30,5 +30,6 @@ export class ArchiveComponent implements OnInit {
   
       
 }
+
 
 }

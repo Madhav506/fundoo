@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {MatDialogModule} from '@angular/material';
+
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -45,6 +47,9 @@ import { MoreiconComponent } from './components/moreicon/moreicon.component';
 import { NotescardComponent } from './components/notescard/notescard.component';
 import { NotesParentComponent } from './components/notes-parent/notes-parent.component';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { AddlabelComponent } from './components/addlabel/addlabel.component';
+import { AuthguardService } from './services/authguard.service';
+import { AuthguardGuard } from './auth/auth.guard';
 
 
 
@@ -73,6 +78,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
     NotescardComponent,
     NotesParentComponent,
     DialogComponent,
+    AddlabelComponent,
    
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -99,14 +105,16 @@ import { DialogComponent } from './components/dialog/dialog.component';
     MatListModule,
     MatMenuModule,
     MatExpansionModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule
     
     // FormBuilder, FormGroup, Validators
     
     
     
   ],
-  providers: [HttpService],
+  entryComponents:[DialogComponent,AddlabelComponent],
+  providers: [HttpService,AuthguardService,AuthguardGuard],
   bootstrap: [AppComponent]//2
 })
 export class AppModule { }

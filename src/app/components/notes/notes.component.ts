@@ -1,5 +1,6 @@
 import { Component, EventEmitter,OnInit,Output } from '@angular/core';
 import{HttpService} from '../../services/http.service';
+import {MatSnackBar} from '@angular/material';
 
 
 @Component({
@@ -8,6 +9,7 @@ import{HttpService} from '../../services/http.service';
   styleUrls: ['./notes.component.css']
 })
 export class NotesComponent implements OnInit {
+
   @Output() eventClicked = new EventEmitter<Event>();
 colorMyevent= '#ffffff';
 interval: any;
@@ -16,12 +18,10 @@ interval: any;
   public note;
   public title;
   public description;
-  public pinned=false;
-  public clicked=false;
   notes;
  token=localStorage.getItem('token');
 
-  constructor(public service:HttpService) { }
+  constructor(public service:HttpService,public snackBar:MatSnackBar) { }
   ngOnInit() {
 // this.getAllNotes();
 // this.loadCardsDynamically();
@@ -35,9 +35,10 @@ openNote(){
 change(event){
   if(event){
   this.colorMyevent=event;
-  console.log(this.colorMyevent);
 }
 }
+
+
 
 
 close(){
@@ -45,10 +46,6 @@ close(){
   this.choose2=false;
   this.title=document.getElementById('title').innerHTML;
   this.description=document.getElementById('description').innerHTML;
-  console.log(this.title);
-  console.log(this.description);
-  console.log(this.pinned);
-  this.clicked=!this.clicked;
   
 
   var body={
@@ -56,7 +53,7 @@ close(){
   "description":this.description,
   "labelIdList":"",
   "checklist":"",
-  "isPined":this.pinned,
+  "isPined":"",
   "color":""
 
   }
@@ -64,13 +61,17 @@ close(){
   this.colorMyevent="#ffffff";
 
   this.service.postpassword("notes/addnotes",body,this.token).subscribe(data=>{
-    console.log("succefffdvkjdxssful",data);
+    this.snackBar.open("note created  successfully", "Notes", {
+      duration:10000,
+    
+    });
+    
     this.eventClicked.emit();
     
   },
   error=>{
     console.log("failed",error)
-    console.log(error);
+
   }
   
 

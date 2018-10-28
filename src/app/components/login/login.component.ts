@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 
 /** @title Form field with error messages */
 @Component({
-  selector: 'app-login',
+  selector: 'app-login',           
   templateUrl: './login.component.html',
   styleUrls:['./login.component.css']
 })
@@ -71,7 +71,7 @@ signin(){
         localStorage.setItem('first',first);
         localStorage.setItem('firstName',data['firstName']);
         localStorage.setItem('lastName',data['lastName']);
-        localStorage.setItem('id',data['id']);
+        localStorage.setItem('userId',data['userId']);
         this.router.navigate(['/home']);
         this.snackBar.open("login successfull", "login", {
                   duration:10000,

@@ -1,5 +1,6 @@
 import { Component, OnInit,Input, Output,EventEmitter } from '@angular/core';
 import { HttpService } from '../../services/http.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-archiveicon',
@@ -8,8 +9,8 @@ import { HttpService } from '../../services/http.service';
 })
 export class ArchiveiconComponent implements OnInit {
   @Input() archiveNotesArray;
-@Output() archiveEvent=new EventEmitter
-  constructor(public service:HttpService) { }
+@Output() archiveEvent=new EventEmitter<any>()
+  constructor(public service:HttpService,public snackBar:MatSnackBar) { }
 
   ngOnInit() {
 
@@ -25,6 +26,10 @@ export class ArchiveiconComponent implements OnInit {
     }
     this.service.postDelete("notes/archiveNotes",model,this.token).subscribe(data=>{
       console.log("archive note",data);
+      this.snackBar.open("note archived successfully,please check in archive", "archive", {
+        duration:10000,
+      
+      });
       this.archiveEvent.emit();
 
     }),

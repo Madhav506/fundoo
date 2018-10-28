@@ -25,7 +25,7 @@ export class NotescardComponent implements OnInit {
 
    }
    color($event){
-    this.colorevent.emit();
+    this.colorevent.emit(); 
 
   }
   myArchive($event){

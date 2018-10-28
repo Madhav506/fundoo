@@ -1,5 +1,6 @@
 import { Component,Output, Input,OnInit,EventEmitter } from '@angular/core';
 import{HttpService} from '../../services/http.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-coloricon',
@@ -12,7 +13,7 @@ export class ColoriconComponent implements OnInit {
   @Output() responseNew=new EventEmitter<string>()
 
 newColor=1;
-  constructor(public service:HttpService) { }
+  constructor(public service:HttpService,public snackBar:MatSnackBar) { }
 token=localStorage.getItem("token");
 
   ngOnInit() {
@@ -26,8 +27,10 @@ token=localStorage.getItem("token");
     }
     this.service.postDelete("notes/changesColorNotes",content,this.token).subscribe(data=>{
       console.log("color is",this.myNewColor);
-      console.log("color is",data);
-
+      this.snackBar.open("colour changed  successfully", "colorchange", {
+        duration:10000,
+      
+      });
       this.response.emit();
 
     }),

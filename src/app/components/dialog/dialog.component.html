@@ -14,9 +14,9 @@
        <div  fxFlex="70" class="icons" fxLayoutAlign="space-between"> 
          <app-remindicon></app-remindicon>
         <app-collaboratoricon></app-collaboratoricon>
-        <app-coloricon ></app-coloricon>
+        <app-coloricon [myNewColor]="data.id" (updateEvent)="color($event)" ></app-coloricon>
         <app-imageicon></app-imageicon>
-        <app-archiveicon></app-archiveicon>
+        <app-archiveicon [archiveNotesArray]="data.id"  (archiveEvent)="archive($event)"></app-archiveicon>
         <app-moreicon></app-moreicon>
        
       </div>

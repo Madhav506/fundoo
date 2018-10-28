@@ -5,6 +5,9 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import {MatSnackBar} from '@angular/material';
+import { DialogComponent } from '../dialog/dialog.component';
+import { MatDialog, MAT_DIALOG_DATA} from '@angular/material';
+import { AddlabelComponent } from '../addlabel/addlabel.component';
 
 
 
@@ -26,7 +29,7 @@ raw_data;
       map(result => result.matches)
     );
     
-  constructor(private breakpointObserver: BreakpointObserver,public snackBar: MatSnackBar,private router:Router,public http:HttpService ) {
+  constructor(private breakpointObserver: BreakpointObserver,public dialog: MatDialog,public snackBar: MatSnackBar,private router:Router,public http:HttpService ) {
 
   }
 
@@ -52,22 +55,25 @@ raw_data;
         this.router.navigate(['/login']);
     
       }
-
     );
     error => {/**if error exists then displays the error message using snackbar */
       console.log("Error", error);
       this.snackBar.open("error","logout unsuccessfull" , {
                 duration: 10000,
               });
-
-                  
-    
     }
-
-
-
-
-   
+  }
+  openDialogLabel(): void {
+    
+    const dialogRef = this.dialog.open(AddlabelComponent,{
+      width: '250px',
+      height:'auto',
+      data: "",
+      panelClass:'myapp-no-padding-dialog'
+    });
+    dialogRef.afterClosed().subscribe(data => {
+      console.log('The dialog was closed');
+    });
   }
 
   

@@ -1,3 +1,23 @@
-<p>
-  addlabel works!
-</p>
+<div><div mat-dialog-title class="label">Edit Labels </div>
+<div fxLaoutGap="space-between" fxlayoutAlign="row"  mat-dialog-content >
+    <div class="done"><mat-icon fxFlex=10 mat-icon-button>done</mat-icon></div>
+<input    fxFlex=70 class="inputNote"  [(ngModel)]="label"  placeholder="Create new Label" >
+
+<div class="clear"><mat-icon fxFlex=10 mat-icon-button>clear</mat-icon></div>
+
+</div>
+
+<mat-divider></mat-divider>
+
+<div fxLayout="row" fxLayoutAlign="space-between center"  *ngFor="let label of ArrayOfLabel">
+<div  fxLayout="row" fxLayoutAlign="space-between center" class="delete">
+<mat-icon (click)="deleteLabel(label.id)" fxFlex=10 mat-icon-button>delete</mat-icon>
+</div>
+<div>{{label.label}}</div> 
+
+<div  fxLayout="row" fxLayoutAlign="space-between center" class="edit">
+        <mat-icon (click)="editLabel(label.id)" fxFlex=10 mat-icon-button>edit</mat-icon>
+        </div>
+</div>
+<div class="btn" mat-button (click)="close()" >Done</div>
+</div>

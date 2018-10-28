@@ -39,7 +39,7 @@
       <a mat-list-item routerLink="/home/notes"><img src="../../../assets/images/notes.svg"><span class="notes">Notes</span></a>
       <a mat-list-item routerLink="/home/reminders"><img src="../../../assets/images/reminders.svg"><span class="reminders">Reminders</span></a>
  <mat-divider></mat-divider>
-     <a mat-list-item routerLink=" /"><mat-icon>edit</mat-icon><span class="notes">Edit Labels</span></a> 
+     <a mat-list-item (click)="openDialogLabel()"><mat-icon>edit</mat-icon><span class="notes">Edit Labels</span></a> 
  <mat-divider></mat-divider>
       <a mat-list-item routerLink="/home/archive"><mat-icon>archive</mat-icon><span class="archive">Archive</span></a>
 
