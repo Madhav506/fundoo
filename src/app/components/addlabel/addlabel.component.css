@@ -34,3 +34,7 @@
        float:right;
        padding-right:10px;
    }
+   .label{
+       outline: none;
+       border:none
+   }

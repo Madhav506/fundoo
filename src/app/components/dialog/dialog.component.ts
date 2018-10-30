@@ -47,7 +47,7 @@ update(){
 
   var id=this.data['id'];
   this.title=document.getElementById('title').innerHTML;
-this.title=this.title.nativeElement.innerHTML
+// this.title=this.title.nativeElement.innerHTML
   this.note=document.getElementById('note').innerHTML;
   var model={
     "noteId":[id],

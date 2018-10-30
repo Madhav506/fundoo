@@ -50,6 +50,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { AddlabelComponent } from './components/addlabel/addlabel.component';
 import { AuthguardService } from './services/authguard.service';
 import { AuthguardGuard } from './auth/auth.guard';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 
@@ -106,7 +107,8 @@ import { AuthguardGuard } from './auth/auth.guard';
     MatMenuModule,
     MatExpansionModule,
     MatTooltipModule,
-    MatDialogModule
+    MatDialogModule,
+    MatChipsModule
     
     // FormBuilder, FormGroup, Validators
     

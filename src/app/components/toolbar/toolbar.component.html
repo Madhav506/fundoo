@@ -39,19 +39,21 @@
       <a mat-list-item routerLink="/home/notes"><img src="../../../assets/images/notes.svg"><span class="notes">Notes</span></a>
       <a mat-list-item routerLink="/home/reminders"><img src="../../../assets/images/reminders.svg"><span class="reminders">Reminders</span></a>
  <mat-divider></mat-divider>
+<div *ngFor="let item of ArrayOfLabel ">
+
+ <div> <mat-icon>label_outline</mat-icon>
+{{item.label}}
+<mat-divider></mat-divider>
+</div>
+
+</div>
+
      <a mat-list-item (click)="openDialogLabel()"><mat-icon>edit</mat-icon><span class="notes">Edit Labels</span></a> 
  <mat-divider></mat-divider>
       <a mat-list-item routerLink="/home/archive"><mat-icon>archive</mat-icon><span class="archive">Archive</span></a>
 
       <span><a mat-list-item routerLink="/home/trash"><mat-icon>delete</mat-icon><span class="notes">Trash</span></a></span>
-      <!-- <hr> -->
-      <!-- <a mat-list-item routerLink=" /"><mat-icon  >edit</mat-icon><span class="notes">Edit</span></a>
-      <a mat-list-item routerLink=" /"><mat-icon >settings</mat-icon><span class="notes">Settings</span></a>
-      <a mat-list-item routerLink=" /"><mat-icon >help</mat-icon><span class="notes">Help</span></a>
-      <a mat-list-item routerLink=" /"><mat-icon >feedback</mat-icon><span class="notes">Send feedback</span></a>
-      <a mat-list-item routerLink=" /"><mat-icon >get_app</mat-icon><span class="notes">App downloads</span></a>
-      <a mat-list-item routerLink=" /"><mat-icon >keyboard</mat-icon><span class="notes">keyboard</span></a> -->
-
+     
       <a mat-list-item href="#"></a>
     </mat-nav-list>
   </mat-sidenav>

@@ -1,7 +1,8 @@
- 
- <div fxLayoutAlign="start start" fxFlex class="main"  fxLayout="row wrap" fxLayoutWrap  fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="10px" >  
+<!-- <div> -->
+                    
+ <div  fxLayoutAlign="start start"  fxFlex class="main"  fxLayout="row wrap" fxLayoutWrap  fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="20px" >  
 <!-- NgFor is a built-in template directive that makes it easy to iterate over something like an array or an object and create a template for each item.  -->
-  <mat-card   class="matcard" *ngFor="let data of myData" [ngStyle]="{'background-color':data.color}" >
+  <mat-card   class="matcard" *ngFor="let data of myData " [ngStyle]="{'background-color':data.color}" >
  <div  (click)="openDialog(data)">  
     <mat-card-header>
       <mat-card-title>
@@ -11,7 +12,17 @@
    <div contenteditable="false" aria-multiline="true" role="textbox" [innerHTML]="data.description">   {{data.description}} </div>
     </mat-card-content>
     </div>
+    
+    <div *ngFor="let item of data.noteLabels">
+      <mat-chip-list selected>
+        <mat-chip>
+          {{item.label}}
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+    
     <mat-card-actions  >
+    
     <div class="icons" fxLayoutAlign="space-between"> 
          
       
@@ -27,3 +38,4 @@
 
   </mat-card>
 </div>
+<!-- </div> -->

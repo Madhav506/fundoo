@@ -1,13 +1,23 @@
 
-<mat-icon  class="innerIcon" [matMenuTriggerFor]="moreMenu" aria-label="false" style="user-select:none" mat-icon-button  matTooltip="more" >
-      more_vert
-    </mat-icon>
-    <mat-menu #moreMenu="matMenu"  [overlapTrigger]="false">
-
-        <button mat-menu-item (click)="deleteNotes(arrayOfNotes)"  >Delete Notes</button>
-
-        <button mat-menu-item >Add Label</button>
-        <button mat-menu-item routerLink>Show checkboxes</button>
-      </mat-menu>
+   
+    <mat-icon class="icon2" mat-icon-button style="margin-bottom:30px;user-select: none;" [matMenuTriggerFor]="menu"  matTooltip="More">more_vert</mat-icon>&nbsp;
+<mat-menu  style="padding-top:30px;"class="menu" #menu="matMenu" [overlapTrigger]="false">
+    
+    <button mat-menu-item (click)="deleteNotes(arrayofnotes)"><span>Delete Note</span></button>
+    <button mat-menu-item (click)="getLabel()" [matMenuTriggerFor]="addlabel"><span>Add label</span></button>
     
     
+    
+    <mat-menu [overlapTrigger]="false" (click)="$event.stopPropagation();"  #addlabel="matMenu"><div class="title">Label note</div>
+        <br><div fxLayout="row" (click)="$event.stopPropagation();"><mat-icon fxFlex="30">search</mat-icon>
+            
+    
+            <input  class="inputTitle" contenteditable="true" placeholder="Enter label name">
+        </div>
+        <br><div *ngFor="let label of ArrayOfLabel">
+        <mat-checkbox (click)="$event.stopPropagation();" (click)="getCheckList(label.id)" class="example-margin">{{label.label}}</mat-checkbox>
+    </div>
+</mat-menu>
+    <button mat-menu-item><span>Add drawing</span></button>
+</mat-menu>
+

@@ -15,6 +15,8 @@ colorMyevent= '#ffffff';
 interval: any;
   choose1=true;
   choose2=false;
+  choose3=true;
+  
   public note;
   public title;
   public description;
@@ -44,6 +46,8 @@ change(event){
 close(){
   this.choose1=true;
   this.choose2=false;
+  this.choose3=true;
+  
   this.title=document.getElementById('title').innerHTML;
   this.description=document.getElementById('description').innerHTML;
   
