@@ -19,10 +19,10 @@ export class AddlabelComponent implements OnInit {
   eventTwo = new EventEmitter();
 
   changeText:boolean;
-  editClick;
-  editId;
-  editDoneIcon;
-  editable;
+  clickEdit;
+  idEdit;
+  iconEdit;
+  canEdit;
   editLabel
   constructor(public service:HttpService,
     public dialogRef: MatDialogRef<AddlabelComponent>,
@@ -38,7 +38,6 @@ export class AddlabelComponent implements OnInit {
   }
 public  label;
 ArrayOfLabel=[];
-clickEdit=false;
 public newLabel;
 
 close(){
@@ -85,6 +84,15 @@ error=>{
   console.log(error,"error");
 }
 }
+edit(label){
+  this.clickEdit=true;
+  this.iconEdit=false;
+  this.canEdit=true;
+  this.idEdit=label.id;
+  this.editLabel=label.label;
+ 
+}
+
 deleteLabel(labelid){
   console.log(labelid);
   this.service.deleteData("noteLabels/"+labelid+"/deleteNoteLabel").subscribe(result=>{
@@ -95,12 +103,12 @@ deleteLabel(labelid){
     console.log(error,"error");
   }
 }
+
 editlabel(label){
-  console.log("idlabel",label);
-  // this.label.id=labelid;
-  this.editDoneIcon = true;
-  this.editClick=false;
-  this.editable=false;
+  // console.log("idlabel",label);
+  this.iconEdit = true;
+  this.clickEdit=false;
+  this.canEdit=false;
   this.newLabel=this.editDiv.nativeElement.innerHTML
   console.log(this.newLabel,"label");
   
@@ -118,15 +126,7 @@ editlabel(label){
     console.log(error,"error");
   }
 }
-edit(label){
-  this.editClick=true;
-  this.editId=label.id;
-  this.editLabel=label.label;
-  this.editDoneIcon=false;
-  this.editable=true;
-  console.log(this.editClick)
- 
-}
+
 
 
 }

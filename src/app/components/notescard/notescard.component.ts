@@ -13,7 +13,8 @@ export class NotescardComponent implements OnInit {
   @Output() colorevent = new EventEmitter<any>();
   @Output() archive = new EventEmitter<any>();
 @Output() updateEvent=new EventEmitter<any>();
-
+token=localStorage.getItem('token')
+public element;
    @Input() myData
   constructor(public service:HttpService,public dialog: MatDialog) {
     
@@ -54,9 +55,22 @@ export class NotescardComponent implements OnInit {
   
   }
 
+  removeAssignments(labelid,noteid){
+    console.log(labelid);
+    console.log(noteid);
+    
+    this.service.postDelete("notes/"+noteid+"/addLabelToNotes/"+labelid+"/remove",{},this.token).subscribe(response=>{
+          console.log("removing labels",response);
+          this.updateEvent.emit();
+
+  });
+  error=>{
+    console.log("error");
+    
+  }
 
 }
-
+}
 
 
 

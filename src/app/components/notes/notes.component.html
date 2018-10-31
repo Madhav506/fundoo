@@ -22,10 +22,15 @@
 
       <div *ngIf="choose3" class="inputNote" id="description" contenteditable="true" placeholder="Take a note" autofocus>
       </div>
+      <mat-divider> </mat-divider>
       <div fxLayoutAlign="space-between">
           <mat-icon *ngIf="!choose3" >add</mat-icon><div fxFlex=92 *ngIf="!choose3" class="inputNote" id="description" contenteditable="true" placeholder="list Item" autofocus>
         </div>
       </div>
+      <mat-divider></mat-divider>
+
+      <!-- <div (createEvent)="create($event)"></div> -->
+
       <div fxLayoutAlign="space-between" >
      <div  fxFlex="70" class="icons" fxLayoutAlign="space-between"> 
        <app-remindicon></app-remindicon>

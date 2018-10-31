@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input ,Output, EventEmitter} from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
@@ -10,7 +10,6 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { AddlabelComponent } from '../addlabel/addlabel.component';
 
 
-
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
@@ -18,6 +17,8 @@ import { AddlabelComponent } from '../addlabel/addlabel.component';
 })
 @Input()
 export class ToolbarComponent implements OnInit {
+  @Output() eventClicked = new EventEmitter<Event>();
+
   name = '';
   firstCharacter = '';
   token;
@@ -46,7 +47,7 @@ export class ToolbarComponent implements OnInit {
     // console.log(this.firstCharacter);
     this.token = localStorage.getItem('token');
     console.log(this.token);
-    // this.getLabel();
+    this.getLabel();
   }
   logout() {
     this.http.postLogout("user/logout", this.token).subscribe(
@@ -66,22 +67,22 @@ export class ToolbarComponent implements OnInit {
     }
   }
 
-  // getLabel() {
-  //   this.service.getCardData("noteLabels/getNoteLabelList", this.token).subscribe(result => {
-  //     console.log(result['data'].details);
-  //     this.ArrayOfLabel = [];
-  //     for (var index = 0; index < result['data'].details.length; index++) {
-  //       if (result['data'].details[index].isDeleted == false) {
-  //         this.ArrayOfLabel.push(result['data'].details[index]);
-  //       }
-  //     }
-  //     console.log(this.ArrayOfLabel);
+  getLabel() {
+    this.service.getCardData("noteLabels/getNoteLabelList", this.token).subscribe(result => {
+      console.log(result['data'].details);
+      this.ArrayOfLabel = [];
+      for (var index = 0; index < result['data'].details.length; index++) {
+        if (result['data'].details[index].isDeleted == false) {
+          this.ArrayOfLabel.push(result['data'].details[index]);
+        }
+      }
+      console.log(this.ArrayOfLabel);
 
-  //   }),
-  //     error => {
-  //       console.log(error, "error");
-  //     }
-  // }
+    }),
+      error => {
+        console.log(error, "error");
+      }
+  }
   
   openDialogLabel(): void {
 

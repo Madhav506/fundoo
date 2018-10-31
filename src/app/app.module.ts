@@ -51,6 +51,7 @@ import { AddlabelComponent } from './components/addlabel/addlabel.component';
 import { AuthguardService } from './services/authguard.service';
 import { AuthguardGuard } from './auth/auth.guard';
 import {MatChipsModule} from '@angular/material/chips';
+import { SearchPipe } from './search.pipe';
 
 
 
@@ -80,6 +81,7 @@ import {MatChipsModule} from '@angular/material/chips';
     NotesParentComponent,
     DialogComponent,
     AddlabelComponent,
+    SearchPipe,
    
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

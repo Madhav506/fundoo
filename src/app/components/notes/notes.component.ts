@@ -1,4 +1,4 @@
-import { Component, EventEmitter,OnInit,Output } from '@angular/core';
+import { Component, EventEmitter,OnInit,Output,Input} from '@angular/core';
 import{HttpService} from '../../services/http.service';
 import {MatSnackBar} from '@angular/material';
 
@@ -9,7 +9,6 @@ import {MatSnackBar} from '@angular/material';
   styleUrls: ['./notes.component.css']
 })
 export class NotesComponent implements OnInit {
-
   @Output() eventClicked = new EventEmitter<Event>();
 colorMyevent= '#ffffff';
 interval: any;
@@ -39,8 +38,6 @@ change(event){
   this.colorMyevent=event;
 }
 }
-
-
 
 
 close(){

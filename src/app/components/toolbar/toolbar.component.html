@@ -41,9 +41,12 @@
  <mat-divider></mat-divider>
 <div *ngFor="let item of ArrayOfLabel ">
 
- <div> <mat-icon>label_outline</mat-icon>
-{{item.label}}
-<mat-divider></mat-divider>
+ <div fxLayoutAlign="space-between-around" fxLayoutGap="10px">
+  <mat-icon style="padding-bottom:15px;padding-left:20px">label_outline</mat-icon>
+  <div style="padding-left:9px"> {{item.label}}
+      
+  </div>
+  <mat-divider></mat-divider>
 </div>
 
 </div>

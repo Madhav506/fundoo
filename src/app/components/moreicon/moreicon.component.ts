@@ -13,18 +13,20 @@ import {MatSnackBar} from '@angular/material';
 export class MoreiconComponent implements OnInit {
 @Input() arrayOfNotes;
 @Output() moreEvent = new EventEmitter<any>();
+// @Output() createEvent = new EventEmitter<any>();
+
 public ArrayOfLabel=[];
 public checklist=[];
 public check=true;
+noteArray
+isChecked;
   constructor(public service:HttpService,public dialog: MatDialog,public snackBar:MatSnackBar) { }
 
   ngOnInit() {
-    
-   
-  
+      
   }
   token=localStorage.getItem('token')
-
+temp;
   deleteNotes(arrayOfNotes){
     
     console.log(this.arrayOfNotes);
@@ -47,8 +49,10 @@ public check=true;
     }
   }
   getLabel(){
+    
     this.service.getCardData("noteLabels/getNoteLabelList",this.token).subscribe(result=>{
       console.log(result['data'].details);
+      
       this.ArrayOfLabel=[];
       for(var index=0;index<result['data'].details.length;index++){
         if(result['data'].details[index].isDeleted==false){
@@ -58,24 +62,29 @@ public check=true;
   console.log(this.ArrayOfLabel);
   console.log("emitting");
   
+
   }),
   error=>{
     console.log(error,"error");
   }
   }
-  getCheckList(labelid){
+
+  addLabelList(labelid){
     console.log(labelid);
     console.log("noteid",this.arrayOfNotes);
-    if(this.check==true)
-    this.service.postDelete("notes/"+this.arrayOfNotes+"/addLabelToNotes/"+labelid+"/add",{},this.token).subscribe(response=>{
+        this.service.postDelete("notes/"+this.arrayOfNotes+"/addLabelToNotes/"+labelid+"/add",{},this.token).subscribe(response=>{
       console.log("adding label to note",response);
       this.moreEvent.emit();
     }),
     error=>{
       console.log("error",error);
     }
-  
+    
     
 }
+
+
+
+
 }
  
