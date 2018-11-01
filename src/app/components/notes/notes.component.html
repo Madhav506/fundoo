@@ -22,14 +22,26 @@
 
       <div *ngIf="choose3" class="inputNote" id="description" contenteditable="true" placeholder="Take a note" autofocus>
       </div>
-      <mat-divider> </mat-divider>
+      <!-- <mat-divider> </mat-divider> -->
       <div fxLayoutAlign="space-between">
           <mat-icon *ngIf="!choose3" >add</mat-icon><div fxFlex=92 *ngIf="!choose3" class="inputNote" id="description" contenteditable="true" placeholder="list Item" autofocus>
         </div>
       </div>
-      <mat-divider></mat-divider>
+      <!-- <mat-divider></mat-divider> -->
 
       <!-- <div (createEvent)="create($event)"></div> -->
+      <div fxLayout="row wrap"  fxlayoutAlign="start start" fxLayoutGap="8px" >
+          <div   *ngFor="let label of array2 ">
+            <mat-chip-list    selected>
+              <mat-chip style="margin-top:15px"   >
+                {{label}}
+              <mat-icon  matChipRemove (click)="removeAssignments(label.id)">cancel</mat-icon>
+      
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+          </div>
+          
 
       <div fxLayoutAlign="space-between" >
      <div  fxFlex="70" class="icons" fxLayoutAlign="space-between"> 
@@ -38,8 +50,24 @@
       <app-coloricon  (responseNew)="change($event)" ></app-coloricon>
       <app-imageicon></app-imageicon>
       <app-archiveicon></app-archiveicon>
-      <app-moreicon></app-moreicon>
-     
+      <!-- <app-moreicon></app-moreicon> -->
+      <mat-icon mat-icon-button style="margin-bottom:-10px;user-select: none;" [matMenuTriggerFor]="menu"  matTooltip="More">more_vert</mat-icon>&nbsp;
+<mat-menu  style="padding-top:30px;"class="menu" #menu="matMenu" [overlapTrigger]="false">
+    
+      <button mat-menu-item  (click)="getLabel()" [matMenuTriggerFor]="addlabel">
+        <span>Add label</span></button>
+        <mat-menu [overlapTrigger]="false" (click)="$event.stopPropagation();"  #addlabel="matMenu"><div class="title">Label note</div>
+          <br><div fxLayout="row" (click)="$event.stopPropagation();">
+              <mat-icon fxFlex="30" (click)="searchState()">search</mat-icon>
+              <input  class="inputTitle" [(ngModel)]="search" placeholder="Enter label name">
+          </div>
+          <br><div *ngFor="let label of ArrayOfLabel | searchData:search">
+            
+          <mat-checkbox (click)="$event.stopPropagation();"  (click)="clickFunc(label)" class="example-margin">{{label.label}}</mat-checkbox>
+      </div>
+  </mat-menu>
+        </mat-menu>
+
     </div>
       <div><button  mat-icon-button (click)="close()"  matTooltip="close" >CLOSE</button></div>
  

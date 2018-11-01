@@ -18,13 +18,17 @@ export interface DialogData {
 // @ViewChild('title') title: ElementRef;
 export class DialogComponent implements OnInit {
   @Output() archiveEvent = new EventEmitter<any>();
+  @Output() updateEvent = new EventEmitter<any>();
 
+  // @ViewChild('noteLabels') noteLabels: ElementRef;
+  // @ViewChild("noteLabels") noteLabels: ElementRef;
   constructor(public service:HttpService,
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,public snackBar:MatSnackBar) {}
     public title;
     public note;
     public id;
+    public newLabel;
 
   ngOnInit() {
   }
@@ -44,16 +48,18 @@ close() {
 update(){
   console.log(this.data['id'])
   console.log(this.data['title'])
+console.log(this.data['noteLabels']);
 
   var id=this.data['id'];
   this.title=document.getElementById('title').innerHTML;
-// this.title=this.title.nativeElement.innerHTML
   this.note=document.getElementById('note').innerHTML;
+ 
   var model={
     "noteId":[id],
     "title":this.title,
     "description":this.note,
-    "color":""
+    "color":"",
+    "noteLabels":""
     
   }
   this.service.postpassword("notes/updateNotes",model,this.token).subscribe(data=>{
@@ -66,6 +72,21 @@ update(){
   error=>{
     console.log(error);
   }
+}
+removeAssignments(labelid,noteid){
+  console.log(labelid);
+  console.log(noteid);
+  
+  this.service.postDelete("notes/"+noteid+"/addLabelToNotes/"+labelid+"/remove",{},this.token).subscribe(response=>{
+        console.log("removing labels",response);
+        this.updateEvent.emit();
+
+});
+error=>{
+  console.log("error");
+  
+}
+
 }
 
 

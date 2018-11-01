@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { AddlabelComponent } from '../addlabel/addlabel.component';
+import { DataService } from '../../services/data.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { AddlabelComponent } from '../addlabel/addlabel.component';
 @Input()
 export class ToolbarComponent implements OnInit {
   @Output() eventClicked = new EventEmitter<Event>();
-
+  searchInput;
   name = '';
   firstCharacter = '';
   token;
@@ -33,7 +34,7 @@ export class ToolbarComponent implements OnInit {
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver,public service:HttpService, public dialog: MatDialog, public snackBar: MatSnackBar, private router: Router, public http: HttpService) {
+  constructor(private breakpointObserver: BreakpointObserver,public dataService:DataService,public service:HttpService, public dialog: MatDialog, public snackBar: MatSnackBar, private router: Router, public http: HttpService) {
 
   }
 
@@ -59,7 +60,7 @@ export class ToolbarComponent implements OnInit {
 
       }
     );
-    error => {/**if error exists then displays the error message using snackbar */
+    error => {
       console.log("Error", error);
       this.snackBar.open("error", "logout unsuccessfull", {
         duration: 10000,
@@ -101,6 +102,12 @@ export class ToolbarComponent implements OnInit {
 
       console.log('The dialog was closed');
     });
+  }
+  clickSearch(){
+    this.router.navigate(['home/search']);
+  }
+  passmessage(){
+    this.dataService.changeMessage(this.searchInput);
   }
 
 }

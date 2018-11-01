@@ -52,7 +52,9 @@ import { AuthguardService } from './services/authguard.service';
 import { AuthguardGuard } from './auth/auth.guard';
 import {MatChipsModule} from '@angular/material/chips';
 import { SearchPipe } from './search.pipe';
-
+import { SearchComponent } from './components/search/search.component';
+import{DataService} from './services/data.service';
+import { LabelsComponent } from './components/labels/labels.component';
 
 
 @NgModule({
@@ -82,6 +84,8 @@ import { SearchPipe } from './search.pipe';
     DialogComponent,
     AddlabelComponent,
     SearchPipe,
+    SearchComponent,
+    LabelsComponent,
    
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -118,7 +122,7 @@ import { SearchPipe } from './search.pipe';
     
   ],
   entryComponents:[DialogComponent,AddlabelComponent],
-  providers: [HttpService,AuthguardService,AuthguardGuard],
+  providers: [HttpService,DataService,AuthguardService,AuthguardGuard],
   bootstrap: [AppComponent]//2
 })
 export class AppModule { }

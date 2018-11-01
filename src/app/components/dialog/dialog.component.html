@@ -10,6 +10,20 @@
   
         <div class="inputNote" id="note"  [innerHTML]="data.description" contenteditable="true" placeholder="Take a note" autofocus>
       {{data.description}}  </div>
+
+      <!-- <div [innerHTML]="data.noteLabels" contenteditable="true" #noteLabels></div> -->
+      <!-- <div>{{data.noteLabels}}</div> -->
+      <div fxLayout="row wrap"  fxlayoutAlign="start start" fxLayoutGap="8px" >
+      <div   *ngFor="let item of data.noteLabels">
+        <mat-chip-list #noteLabels   selected>
+          <mat-chip  >
+            {{item.label}}
+          <mat-icon  matChipRemove  (click)="removeAssignments(item.id,data.id)">cancel</mat-icon>
+  
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+</div>
         <div fxLayoutAlign="space-between" >
        <div  fxFlex="70" class="icons" fxLayoutAlign="space-between"> 
          <app-remindicon></app-remindicon>
@@ -17,7 +31,7 @@
         <app-coloricon [myNewColor]="data.id" (updateEvent)="color($event)" ></app-coloricon>
         <app-imageicon></app-imageicon>
         <app-archiveicon [archiveNotesArray]="data.id"  (archiveEvent)="archive($event)"></app-archiveicon>
-        <app-moreicon></app-moreicon>
+        <app-moreicon (updateEvent)="color($event)"></app-moreicon>
        
       </div>
         <div><button  mat-icon-button (click)="onClick()" (click)="close()"  matTooltip="close" >CLOSE</button></div>

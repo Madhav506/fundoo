@@ -11,6 +11,7 @@
 .sidenav {
   width: 300px;
   margin-top:70px;
+  overflow-y: scroll
   /* background-color: gainsboro; */
 
   /* margin-left:0px */

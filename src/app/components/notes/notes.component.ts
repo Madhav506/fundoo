@@ -10,11 +10,14 @@ import {MatSnackBar} from '@angular/material';
 })
 export class NotesComponent implements OnInit {
   @Output() eventClicked = new EventEmitter<Event>();
+  ArrayOfLabel;
 colorMyevent= '#ffffff';
 interval: any;
   choose1=true;
   choose2=false;
   choose3=true;
+  array1=[];
+  array2=[];
   
   public note;
   public title;
@@ -41,10 +44,11 @@ change(event){
 
 
 close(){
+ 
   this.choose1=true;
   this.choose2=false;
   this.choose3=true;
-  
+  this.array2=[];
   this.title=document.getElementById('title').innerHTML;
   this.description=document.getElementById('description').innerHTML;
   
@@ -52,7 +56,7 @@ close(){
   var body={
   "title":this.title,
   "description":this.description,
-  "labelIdList":"",
+  "labelIdList":JSON.stringify(this.array1),
   "checklist":"",
   "isPined":"",
   "color":""
@@ -66,7 +70,8 @@ close(){
       duration:10000,
     
     });
-    
+    this.array1=[];
+    this.array2=[];
     this.eventClicked.emit();
     
   },
@@ -84,5 +89,40 @@ close(){
   //     console.log("successfull",dataNew);
   //   })
   // }
+  getLabel(){
+    
+    this.service.getCardData("noteLabels/getNoteLabelList",this.token).subscribe(result=>{
+      console.log(result['data'].details);
+      
+      this.ArrayOfLabel=[];
+      for(var index=0;index<result['data'].details.length;index++){
+        if(result['data'].details[index].isDeleted==false){
+        this.ArrayOfLabel.push(result['data'].details[index]);
+      }
+    }
+  console.log(this.ArrayOfLabel);
+  console.log("emitting");
+  
+
+  }),
+  error=>{
+    console.log(error,"error");
+  }
+  }
+
+  clickFunc(temp){
+if (!this.array2.some((data) => data == temp.label))
+{
+  this.array1.push(temp.id);
+this.array2.push(temp.label);
+}
+else{
+
+const index = this.array2.indexOf(temp.label, 0);
+if (index > -1) {
+  this.array2.splice(index, 1);
+}
+  }
  
 }
+}      

@@ -13,6 +13,8 @@ import { ArchiveComponent } from './components/archive/archive.component';
 import { TrashComponent } from './components/trash/trash.component';
 import {AuthguardGuard  as AuthGuard } from '../../src/app/auth/auth.guard';
 import { NotesParentComponent } from './components/notes-parent/notes-parent.component';
+import { SearchComponent } from './components/search/search.component';
+import { LabelsComponent } from './components/labels/labels.component';
 
 
 const appRoutes:Routes=[
@@ -25,7 +27,11 @@ const appRoutes:Routes=[
       {path:'notes',component:NotesParentComponent},
       {path:'reminders',component:RemindersComponent},
       {path:'archive',component:ArchiveComponent},
-      {path:'trash',component:TrashComponent}
+      {path:'trash',component:TrashComponent},
+      {path:'labels/:id',component:LabelsComponent},
+
+      {path:'search',component:SearchComponent}
+
   ]},
   // { path: '**', redirectTo: '' },
   {path:'',redirectTo:'/login',pathMatch:'full'},

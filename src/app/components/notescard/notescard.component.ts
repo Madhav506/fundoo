@@ -13,9 +13,12 @@ export class NotescardComponent implements OnInit {
   @Output() colorevent = new EventEmitter<any>();
   @Output() archive = new EventEmitter<any>();
 @Output() updateEvent=new EventEmitter<any>();
+
 token=localStorage.getItem('token')
 public element;
    @Input() myData
+   @Input() searchInput;
+
   constructor(public service:HttpService,public dialog: MatDialog) {
     
    }
@@ -34,8 +37,10 @@ public element;
 
   }
   openDialog(dialogData): void {
-    
     console.log(dialogData.id);
+    console.log(dialogData);
+    console.log(dialogData.noteLabels);
+
     const dialogRef = this.dialog.open(DialogComponent,{
       width: '450px',
       height:'auto',

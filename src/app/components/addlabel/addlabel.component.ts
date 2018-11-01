@@ -97,6 +97,7 @@ deleteLabel(labelid){
   console.log(labelid);
   this.service.deleteData("noteLabels/"+labelid+"/deleteNoteLabel").subscribe(result=>{
     console.log("delete note label");
+    alert("would you like to delete?");
     this.getLabel();
   }),
   error=>{
