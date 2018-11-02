@@ -14,11 +14,11 @@
       <!-- <div [innerHTML]="data.noteLabels" contenteditable="true" #noteLabels></div> -->
       <!-- <div>{{data.noteLabels}}</div> -->
       <div fxLayout="row wrap"  fxlayoutAlign="start start" fxLayoutGap="8px" >
-      <div   *ngFor="let item of data.noteLabels">
+      <div   *ngFor="let item of array1">
         <mat-chip-list #noteLabels   selected>
-          <mat-chip  >
+          <mat-chip *ngIf="item.isDeleted==false" >
             {{item.label}}
-          <mat-icon  matChipRemove  (click)="removeAssignments(item.id,data.id)">cancel</mat-icon>
+          <mat-icon  matChipRemove  (click)="removeAssignments(item,data.id)">cancel</mat-icon>
   
           </mat-chip>
         </mat-chip-list>
@@ -31,7 +31,7 @@
         <app-coloricon [myNewColor]="data.id" (updateEvent)="color($event)" ></app-coloricon>
         <app-imageicon></app-imageicon>
         <app-archiveicon [archiveNotesArray]="data.id"  (archiveEvent)="archive($event)"></app-archiveicon>
-        <app-moreicon (updateEvent)="color($event)"></app-moreicon>
+        <app-moreicon [arrayOfNotes]='data.id' (moreEvent)="more($event)" (updateEvent)="color($event)"></app-moreicon>
        
       </div>
         <div><button  mat-icon-button (click)="onClick()" (click)="close()"  matTooltip="close" >CLOSE</button></div>

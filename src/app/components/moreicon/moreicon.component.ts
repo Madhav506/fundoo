@@ -18,6 +18,8 @@ export class MoreiconComponent implements OnInit {
 public ArrayOfLabel=[];
 public checklist=[];
 public check=true;
+public  array1=[];
+public  array2=[];
 noteArray
 isChecked;
   constructor(public service:HttpService,public dialog: MatDialog,public snackBar:MatSnackBar) { }
@@ -69,22 +71,83 @@ temp;
   }
   }
 
-  addLabelList(labelid){
-    console.log(labelid);
+  // addLabelList(label){
+    
+  //   console.log(label.id);
+  //   console.log("noteid",this.arrayOfNotes);
+  //   if (!this.array1.some((data) => data == label))
+  //   {
+  //     this.array1=label;
+  //     console.log(this.array1);
+      
+   
+  //       this.service.postDelete("notes/"+this.arrayOfNotes+"/addLabelToNotes/"+label.id+"/add",{},this.token).subscribe(response=>{
+  //     console.log("adding label to note",response);
+      
+  //     this.moreEvent.emit();
+      
+  //   })
+  // }
+  // else{
+  //   console.log("repeated");
+    
+
+  // }
+  //   error=>{
+  //     console.log("error",error);
+  //     const index = this.array2.indexOf(label, 0);
+  // if (index > -1) {
+  //   this.array1.splice(index, 1);
+  // }
+  //   }
+  // }   
+  
+  addLabelList(label){
+    
+    console.log(label.id);
     console.log("noteid",this.arrayOfNotes);
-        this.service.postDelete("notes/"+this.arrayOfNotes+"/addLabelToNotes/"+labelid+"/add",{},this.token).subscribe(response=>{
+        this.service.postDelete("notes/"+this.arrayOfNotes+"/addLabelToNotes/"+label.id+"/add",{},this.token).subscribe(response=>{
       console.log("adding label to note",response);
-      this.moreEvent.emit();
-    }),
+      
+      this.moreEvent.emit(label);
+      
+    })
     error=>{
       console.log("error",error);
     }
+  }   
+
+
+  clickFunc(label){
+    console.log(label);
+    
+  console.log(label.id,"yess");
+  console.log(label.label,"yesswww");
+
+  
+  if (!this.array2.some((data) => data == label.label))
+  {
+    this.array1.push(label.id);
+  this.array2.push(label.label);
+  this.addLabelList(label)
+  }
+  else{
+  
+  const index = this.array2.indexOf(label.label, 0);
+  if (index > -1) {
+    this.array2.splice(index, 1);
+  }
+    }
+   
+  }
+
+
+
+
     
     
 }
 
 
 
-
-}
  

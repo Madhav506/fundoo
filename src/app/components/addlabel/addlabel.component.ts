@@ -1,6 +1,8 @@
 import { Component,Inject,EventEmitter,Output, OnInit,ViewChild,ElementRef } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import{HttpService} from '../../services/http.service'
+import { DataService } from '../../services/data.service';
+
 export interface DialogData {
   "title":String,
     "description":String,
@@ -15,16 +17,19 @@ export interface DialogData {
 
 export class AddlabelComponent implements OnInit {
   
-  // @Output() eventTwo: EventEmitter<any> = new EventEmitter<any>();
-  eventTwo = new EventEmitter();
+  @Output() eventNew=new EventEmitter<string>();
+
+  @Output() eventTwo = new EventEmitter();
 
   changeText:boolean;
   clickEdit;
   idEdit;
   iconEdit;
   canEdit;
-  editLabel
-  constructor(public service:HttpService,
+  editLabel;
+  messageDisplay;
+  message;
+  constructor(public service:HttpService,public dataService:DataService,
     public dialogRef: MatDialogRef<AddlabelComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { 
       this.changeText = false;
@@ -39,7 +44,9 @@ export class AddlabelComponent implements OnInit {
 public  label;
 ArrayOfLabel=[];
 public newLabel;
-
+clear(){
+  this.label = ' ';
+}
 close(){
   this.dialogRef.close();
   this.addLabel();
@@ -52,14 +59,32 @@ id=localStorage.getItem('userId')
 token=localStorage.getItem('token')
 
 addLabel(){
+  var label = this.label;
+  console.log(this.ArrayOfLabel);
+for(var j =0; j<this.ArrayOfLabel.length; j++)
+{
+      if(this.ArrayOfLabel[j].label == label)
+      {
+       this.message="label already exists"
+        return false;
+      }
+}
+
   var model={
     "label":this.label,
     "isDeleted":false,
     // "id":labelid,
     "userId":this.id
   }
+  // if(this.label==undefined){
+  //   this.messageDisplay="No empty values alllowed"
+  // }
   this.service.postDelete("noteLabels",model,this.token).subscribe(result=>{
     console.log("adding label")
+    this.clear();
+
+    this.getLabel();
+   
     console.log(result); 
   }), 
    error=>{
@@ -97,8 +122,11 @@ deleteLabel(labelid){
   console.log(labelid);
   this.service.deleteData("noteLabels/"+labelid+"/deleteNoteLabel").subscribe(result=>{
     console.log("delete note label");
-    alert("would you like to delete?");
+    this.dataService.change(true);
+  
+    this.eventTwo.emit();
     this.getLabel();
+   
   }),
   error=>{
     console.log(error,"error");
@@ -121,7 +149,10 @@ editlabel(label){
   }
   this.service.postDelete("noteLabels/"+label.id+"/updateNoteLabel",body,this.token).subscribe(result=>{
     console.log("update note label",result);
+    this.dataService.change(true);
+
     this.getLabel();
+  
   }),
   error=>{
     console.log(error,"error");

@@ -84,22 +84,23 @@ export class ToolbarComponent implements OnInit {
         console.log(error, "error");
       }
   }
-  
+  clear(){
+    this.searchInput='';
+  }
   openDialogLabel(): void {
 
     const dialogRef = this.dialog.open(AddlabelComponent, {
-      width: '250px',
+      width: '300px',
       height: 'auto',
       data: "",
       panelClass: 'myapp-no-padding-dialog'
     });
-    // const sub = dialogRef.componentInstance.eventTwo.subscribe((data) => {
-    //   console.log("sub", data);
-    //   this.labelItem = data;
-    // });
+    const sub = dialogRef.componentInstance.eventTwo.subscribe((data) => {
+      console.log("sub", data);
+    });
     dialogRef.afterClosed().subscribe(data => {
+      this.getLabel();
       console.log(data);
-
       console.log('The dialog was closed');
     });
   }
@@ -108,6 +109,8 @@ export class ToolbarComponent implements OnInit {
   }
   passmessage(){
     this.dataService.changeMessage(this.searchInput);
+    
   }
+ 
 
 }

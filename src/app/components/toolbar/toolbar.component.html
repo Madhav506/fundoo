@@ -9,6 +9,8 @@
   <form  fxFlex class="search">
     <button  mat-icon-button  type="submit"><mat-icon >search</mat-icon></button>
     <input fxFlex type="text" name="search" [(ngModel)]="searchInput" (click)="clickSearch()" (keydown)="passmessage()"  placeholder="Search" >
+    <button  mat-icon-button (click)="clear()" type="submit"><mat-icon >clear</mat-icon></button>
+
   </form>
 
   
@@ -41,11 +43,11 @@
       <a mat-list-item  class="back" routerLink="/home/reminders"><img src="../../../assets/images/reminders.svg"><span class="reminders">Reminders</span></a>
 
       <mat-divider></mat-divider>
- <div style="margin-top:15px;margin-bottom:15px">LABELS</div>
+ <div   style="margin-top:15px;margin-bottom:15px">LABELS</div>
 <div *ngFor="let item of ArrayOfLabel ">
 
- <div fxLayoutAlign="space-between-around" fxLayoutGap="10px">
-  <mat-icon style="padding-bottom:15px;padding-left:20px">label_outline</mat-icon>
+ <div class="back"fxLayoutAlign="space-between-around" fxLayoutGap="10px">
+  <mat-icon style="padding-bottom:20px;padding-left:20px"  >label_outline</mat-icon>
   <a routerLink="/home/labels/{{item.label}}"  style="padding-left:9px"> {{item.label}}
       
   </a>
@@ -56,9 +58,9 @@
 
      <a style="margin-top:-15px" mat-list-item (click)="openDialogLabel()"><mat-icon>edit</mat-icon><span class="notes">Edit Labels</span></a> 
  <mat-divider></mat-divider>
-      <a mat-list-item routerLink="/home/archive"><mat-icon>archive</mat-icon><span class="archive">Archive</span></a>
+      <a mat-list-item  class="back"  routerLink="/home/archive"><mat-icon>archive</mat-icon><span class="archive">Archive</span></a>
 
-      <span><a mat-list-item routerLink="/home/trash"><mat-icon>delete</mat-icon><span class="notes">Trash</span></a></span>
+      <span><a mat-list-item class="back"  routerLink="/home/trash"><mat-icon>delete</mat-icon><span class="notes">Trash</span></a></span>
      
       <a mat-list-item href="#"></a>
     </mat-nav-list>

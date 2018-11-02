@@ -111,6 +111,8 @@ close(){
   }
 
   clickFunc(temp){
+    console.log(temp);
+    
 if (!this.array2.some((data) => data == temp.label))
 {
   this.array1.push(temp.id);

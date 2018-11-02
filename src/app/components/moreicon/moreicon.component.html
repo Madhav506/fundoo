@@ -10,11 +10,11 @@
     
     <mat-menu [overlapTrigger]="false" (click)="$event.stopPropagation();"  #addlabel="matMenu"><div class="title">Label note</div>
         <br><div fxLayout="row" (click)="$event.stopPropagation();">
-            <mat-icon fxFlex="30" (click)="searchState()">search</mat-icon>
+            <mat-icon fxFlex="30" (click)="searchState()" >search</mat-icon>
             <input  class="inputTitle" [(ngModel)]="search" placeholder="Enter label name">
         </div>
         <br><div *ngFor="let label of ArrayOfLabel | searchData:search">
-        <mat-checkbox (click)="$event.stopPropagation();"  (click)="addLabelList(label.id)" class="example-margin">{{label.label}}</mat-checkbox>
+        <mat-checkbox (click)="$event.stopPropagation();"  (click)="clickFunc(label)" class="example-margin">{{label.label}}</mat-checkbox>
     </div>
 </mat-menu>
     <button mat-menu-item><span>Add drawing</span></button>

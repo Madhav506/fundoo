@@ -19,7 +19,7 @@
       <div fxLayout="row wrap" fxlayoutAlign="start start" fxLayoutGap="8px">
         <div *ngFor="let item of data.noteLabels">
           <mat-chip-list selected>
-            <mat-chip style="margin-top:15px">
+            <mat-chip style="margin-top:15px" *ngIf="item.isDeleted==false">
               {{item.label}}
               <mat-icon matChipRemove (click)="removeAssignments(item.id,data.id)">cancel</mat-icon>
 
@@ -38,7 +38,7 @@
         <app-coloricon [myNewColor]="data.id" (response)="color($event)"></app-coloricon>
         <app-imageicon></app-imageicon>
         <app-archiveicon [archiveNotesArray]="data.id" (archiveEvent)=myArchive($event)></app-archiveicon>
-        <app-moreicon (moreEvent)="gotMessage($event)" [arrayOfNotes]="data.id"></app-moreicon>
+        <app-moreicon (eventTwo)="gotMessage($event)" (updateEvent)="gotMessage($event)"(moreEvent)="gotMessage($event)" [arrayOfNotes]="data.id"></app-moreicon>
 
         <!-- </div> -->
       </mat-card-actions>
