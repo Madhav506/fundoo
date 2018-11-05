@@ -55,6 +55,7 @@ import { SearchPipe } from './search.pipe';
 import { SearchComponent } from './components/search/search.component';
 import{DataService} from './services/data.service';
 import { LabelsComponent } from './components/labels/labels.component';
+import { DeletedialogComponent } from './components/deletedialog/deletedialog.component';
 
 
 @NgModule({
@@ -86,6 +87,7 @@ import { LabelsComponent } from './components/labels/labels.component';
     SearchPipe,
     SearchComponent,
     LabelsComponent,
+    DeletedialogComponent,
    
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -121,7 +123,7 @@ import { LabelsComponent } from './components/labels/labels.component';
     
     
   ],
-  entryComponents:[DialogComponent,AddlabelComponent],
+  entryComponents:[DialogComponent,AddlabelComponent,DeletedialogComponent],
   providers: [HttpService,DataService,AuthguardService,AuthguardGuard],
   bootstrap: [AppComponent]//2
 })

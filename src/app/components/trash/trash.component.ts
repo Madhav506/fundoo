@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,EventEmitter,Output, OnInit } from '@angular/core';
 import{HttpService} from '../../services/http.service';
 
 @Component({
@@ -8,12 +8,18 @@ import{HttpService} from '../../services/http.service';
 })
 export class TrashComponent implements OnInit {
 
+
   constructor(public service:HttpService) { }
 myData=[]
-// token;
+
+name='trash';
+
+
 token=localStorage.getItem('token')
   ngOnInit() {
-   
+    this.getNotes();
+  }
+  getNotes(){
     this.service.getCardData("notes/getNotesList",this.token).subscribe(data=>{
       this.myData=data['data'].data.reverse();
           this.myData = []
@@ -29,5 +35,10 @@ token=localStorage.getItem('token')
      
      }
   }
+
+  notedelete(event){
+    this.getNotes();
+}
+  
 
 }

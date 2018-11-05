@@ -97,3 +97,7 @@ overflow: hidden;
 .back:hover{
   background-color:lightyellow;
 }
+.image{
+display: none
+
+}

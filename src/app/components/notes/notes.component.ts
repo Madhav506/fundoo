@@ -18,11 +18,12 @@ interval: any;
   choose3=true;
   array1=[];
   array2=[];
-  
   public note;
   public title;
   public description;
   notes;
+  data;
+  dataarray=[];
  token=localStorage.getItem('token');
 
   constructor(public service:HttpService,public snackBar:MatSnackBar) { }
@@ -126,5 +127,40 @@ if (index > -1) {
 }
   }
  
+}
+public i=0;
+enter(){
+  this.i++;
+  if(this.data!=null){
+    var obj={
+      "index":this.i,
+      "data":this.data
+    }
+    this.dataarray.push(obj);
+    this.data=null
+    
+  }
+}
+ondelete(deletedObj){
+  for(var i=0;i<this.dataarray.length;i++){
+    if(deletedObj.index==this.dataarray[i].index){
+      this.dataarray.splice(i,1);
+      break;
+    }
+  }
+  console.log(this.dataarray);
+  
+}
+
+editing(event,edited){
+  if(event.code=="Enter"){
+    for(var i=0;i<this.dataarray.length;i++){
+      if(edited.index==this.dataarray[i].index){
+        this.dataarray[i].data==edited.data
+      }
+    }
+    console.log(this.dataarray);
+    
+  }
 }
 }      

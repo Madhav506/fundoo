@@ -38,7 +38,7 @@
         <app-coloricon [myNewColor]="data.id" (response)="color($event)"></app-coloricon>
         <app-imageicon></app-imageicon>
         <app-archiveicon [archiveNotesArray]="data.id" (archiveEvent)=myArchive($event)></app-archiveicon>
-        <app-moreicon (eventTwo)="gotMessage($event)" (updateEvent)="gotMessage($event)"(moreEvent)="gotMessage($event)" [arrayOfNotes]="data.id"></app-moreicon>
+        <app-moreicon  [name]="name" (delEvent)="delete($event)" (eventTwo)="gotMessage($event)" (updateEvent)="gotMessage($event)"(moreEvent)="gotMessage($event)" [arrayOfNotes]="data.id"></app-moreicon>
 
         <!-- </div> -->
       </mat-card-actions>

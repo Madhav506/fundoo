@@ -27,6 +27,9 @@ export class ToolbarComponent implements OnInit {
   lastName;
   labelItem = [];
   ArrayOfLabel=[];
+values;
+url:string;
+result;
 
   raw_data;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -37,6 +40,7 @@ export class ToolbarComponent implements OnInit {
   constructor(private breakpointObserver: BreakpointObserver,public dataService:DataService,public service:HttpService, public dialog: MatDialog, public snackBar: MatSnackBar, private router: Router, public http: HttpService) {
 
   }
+  
 
   ngOnInit() {
     this.raw_data = localStorage.getItem('first');
@@ -111,6 +115,25 @@ export class ToolbarComponent implements OnInit {
     this.dataService.changeMessage(this.searchInput);
     
   }
+  
+  headingChange(heading){
+    this.values=heading;
+    console.log(this.values);
+    
+  }
+  onFileUpload(event){
+    const file = event.target.files;
+    console.log( file);
+    const uploadData = new FormData();
+    uploadData.append('myFile', file, file.name);
+    
+     this.service.postDelete("user/uploadProfileImage",uploadData,this.token).subscribe(image=>{
+console.log(image);
+
+     })
+      
+  
+    }
  
 
 }

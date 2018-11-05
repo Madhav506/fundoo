@@ -4,6 +4,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { DialogComponent } from '../dialog/dialog.component';
 import { AddlabelComponent } from '../addlabel/addlabel.component';
 import {MatSnackBar} from '@angular/material';
+import { DeletedialogComponent } from '../deletedialog/deletedialog.component';
 
 @Component({
   selector: 'app-moreicon',
@@ -12,16 +13,20 @@ import {MatSnackBar} from '@angular/material';
 })
 export class MoreiconComponent implements OnInit {
 @Input() arrayOfNotes;
+@Output() delEvent = new EventEmitter<any>();
 @Output() moreEvent = new EventEmitter<any>();
-// @Output() createEvent = new EventEmitter<any>();
+@Input() name;
 
 public ArrayOfLabel=[];
-public checklist=[];
+public checklist=[];Forever
 public check=true;
 public  array1=[];
 public  array2=[];
-noteArray
+
+noteArray;
 isChecked;
+model;
+event:boolean;
   constructor(public service:HttpService,public dialog: MatDialog,public snackBar:MatSnackBar) { }
 
   ngOnInit() {
@@ -122,7 +127,7 @@ temp;
     console.log(label);
     
   console.log(label.id,"yess");
-  console.log(label.label,"yesswww");
+  console.log(label.label,"yesw");
 
   
   if (!this.array2.some((data) => data == label.label))
@@ -139,6 +144,28 @@ temp;
   }
     }
    
+  }
+  deleteforever(){
+    const dialogRef=this.dialog.open(DeletedialogComponent,{
+      width:'500px',
+      panelClass:'myapp-no-paddding-dialog',
+      data:{name:'trash'}
+    });
+    dialogRef.afterClosed().subscribe(data => {
+      if(data){
+        this.model={
+          "isDeleted":true,
+          "noteIdList":[this.arrayOfNotes]
+        }
+        this.service.postDelete('notes/deleteForeverNotes',this.model,this.token).subscribe(data=>{
+          this.delEvent.emit();
+          this.snackBar.open("note deleted  permanently", "trash", {
+            duration:10000,
+          });
+        })
+
+      }
+    });
   }
 
 

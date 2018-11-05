@@ -3,9 +3,15 @@
     <mat-icon class="icon2" mat-icon-button style="margin-bottom:30px;user-select: none;" [matMenuTriggerFor]="menu"  matTooltip="More">more_vert</mat-icon>&nbsp;
 <mat-menu  style="padding-top:30px;"class="menu" #menu="matMenu" [overlapTrigger]="false">
     
-    <button mat-menu-item (click)="deleteNotes(arrayofnotes)">
+        <button *ngIf = "name == 'trash' " mat-menu-item (click)="deleteforever()">
+                <span>Delete Forever</span></button>
+                <button *ngIf = "name == 'trash' " mat-menu-item (click)="restore()">
+                        <span>Restore</span></button>
+
+    <button *ngIf="name != 'trash'" mat-menu-item (click)="deleteNotes(arrayofnotes)">
         <span>Delete Note</span></button>
-    <button mat-menu-item  (click)="getLabel()" [matMenuTriggerFor]="addlabel">
+
+    <button *ngIf="name != 'trash'" mat-menu-item  (click)="getLabel()" [matMenuTriggerFor]="addlabel">
         <span>Add label</span></button>
     
     <mat-menu [overlapTrigger]="false" (click)="$event.stopPropagation();"  #addlabel="matMenu"><div class="title">Label note</div>
@@ -17,6 +23,6 @@
         <mat-checkbox (click)="$event.stopPropagation();"  (click)="clickFunc(label)" class="example-margin">{{label.label}}</mat-checkbox>
     </div>
 </mat-menu>
-    <button mat-menu-item><span>Add drawing</span></button>
+    <button *ngIf="name != 'trash'"  mat-menu-item><span>Add drawing</span></button>
 </mat-menu>
 

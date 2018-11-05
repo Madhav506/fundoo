@@ -22,14 +22,25 @@
 
       <div *ngIf="choose3" class="inputNote" id="description" contenteditable="true" placeholder="Take a note" autofocus>
       </div>
-      <!-- <mat-divider> </mat-divider> -->
-      <div fxLayoutAlign="space-between">
+      <!-- <div fxLayoutAlign="space-between">
           <mat-icon *ngIf="!choose3" >add</mat-icon><div fxFlex=92 *ngIf="!choose3" class="inputNote" id="description" contenteditable="true" placeholder="list Item" autofocus>
+        </div> -->
+        <div *ngIf="!choose3">
+            <div *ngFor="let data of dataarray" fxLayout="row">
+            <mat-checkbox fxFlex="5%"></mat-checkbox>
+            <input  fxFlex="90" *ngIf="!expression3" class="inputNote1"  [(ngModel)]=data.data (keydown)="editing($event.data)">
+   <mat-icon fxFlex="4%" (click)=ondelete(data) matTooltip="delete">clear</mat-icon>
         </div>
-      </div>
-      <!-- <mat-divider></mat-divider> -->
+    
+    <div fxLayout="row">
+        <mat-icon fxFlex="5%">add</mat-icon>
+        <input [(ngModel)]=data fxFlex="95%" class="inputNote" placeholder="list item" (keydown.enter)="enter()">
+    </div>
+    
+    </div>
 
-      <!-- <div (createEvent)="create($event)"></div> -->
+      <!-- </div> -->
+
       <div fxLayout="row wrap"  fxlayoutAlign="start start" fxLayoutGap="8px" >
           <div   *ngFor="let label of array2 ">
             <mat-chip-list    selected>

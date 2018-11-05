@@ -65,7 +65,7 @@ for(var j =0; j<this.ArrayOfLabel.length; j++)
 {
       if(this.ArrayOfLabel[j].label == label)
       {
-       this.message="label already exists"
+       this.message="label  already exists"
         return false;
       }
 }

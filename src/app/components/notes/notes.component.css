@@ -76,3 +76,7 @@ div[contenteditable=true]:empty::before {
 .cardicon{
   opacity: 0.6;
 }
+.inputNote1{
+  border:none;
+  outline: none;
+}

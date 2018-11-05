@@ -15,11 +15,13 @@ export class NotescardComponent implements OnInit {
   @Output() archive = new EventEmitter<any>();
 @Output() updateEvent=new EventEmitter<any>();
 @Output() newEvent=new EventEmitter<any>();
+@Output() deleted=new EventEmitter<any>();
 
 token=localStorage.getItem('token')
 public element;
    @Input() myData
    @Input() searchInput;
+   @Input() name;
 
   constructor(public service:HttpService,public dialog: MatDialog,public dataService:DataService) {
     // this.dataService.cMsg.subscribe()
@@ -34,8 +36,9 @@ public element;
    public data;
 
    gotMessage($event){
+    
      this.noteEvent.emit();
-
+     
    }
    color($event){
     this.colorevent.emit(); 
@@ -45,6 +48,11 @@ public element;
     this.archive.emit();
 
   }
+
+  delete(event){
+    this.deleted.emit(); 
+  }
+  
   openDialog(dialogData): void {
     console.log(dialogData.id);
     console.log(dialogData);
@@ -89,6 +97,7 @@ public element;
   }
 
 }
+
 }
 
 
