@@ -1,43 +1,38 @@
-
 <div [ngStyle]="{'background-color':data.color}">
-  <div fxFlex="85" class="hiddenCard" >
-      
-      <div fxLayout="row" class="hiddenDiv" >
-         
-            <div class="inputNote" id="title"  fxFlex="95" [innerHTML]="data.title" contenteditable="true" style="font-weight:bold" placeholder="Title" >{{data.title}}</div> 
-           <div> <img class="pinIcon" src="../../../assets/images/pin.svg" alt="">   </div>        
-             </div>
-  
-        <div class="inputNote" id="note"  [innerHTML]="data.description" contenteditable="true" placeholder="Take a note" autofocus>
-      {{data.description}}  </div>
-
-      <!-- <div [innerHTML]="data.noteLabels" contenteditable="true" #noteLabels></div> -->
-      <!-- <div>{{data.noteLabels}}</div> -->
-      <div fxLayout="row wrap"  fxlayoutAlign="start start" fxLayoutGap="8px" >
-      <div   *ngFor="let item of array1">
-        <mat-chip-list #noteLabels   selected>
-          <mat-chip *ngIf="item.isDeleted==false" >
+  <div fxFlex="85" class="hiddenCard">
+    <div fxLayout="row" class="hiddenDiv">
+      <div class="inputNote" id="title" fxFlex="95" [innerHTML]="data.title" 
+      contenteditable="true" style="font-weight:bold" placeholder="Title">{{data.title}}
+      </div>
+      <div> <img class="pinIcon" src="../../../assets/images/pin.svg" alt=""> </div>
+    </div>
+    <div class="inputNote" id="note" [innerHTML]="data.description" contenteditable="true"
+     placeholder="Take a note" autofocus>
+      {{data.description}} </div>
+    <div fxLayout="row wrap" fxlayoutAlign="start start" fxLayoutGap="8px">
+      <div *ngFor="let item of array1">
+        <mat-chip-list #noteLabels selected>
+          <mat-chip *ngIf="item.isDeleted==false">
             {{item.label}}
-          <mat-icon  matChipRemove  (click)="removeAssignments(item,data.id)">cancel</mat-icon>
-  
+            <mat-icon matChipRemove (click)="removeAssignments(item,data.id)">cancel</mat-icon>
           </mat-chip>
         </mat-chip-list>
       </div>
-</div>
-        <div fxLayoutAlign="space-between" >
-       <div  fxFlex="70" class="icons" fxLayoutAlign="space-between"> 
-         <app-remindicon></app-remindicon>
-        <app-collaboratoricon></app-collaboratoricon>
-        <app-coloricon [myNewColor]="data.id" (updateEvent)="color($event)" ></app-coloricon>
-        <app-imageicon></app-imageicon>
-        <app-archiveicon [archiveNotesArray]="data.id"  (archiveEvent)="archive($event)"></app-archiveicon>
-        <app-moreicon [arrayOfNotes]='data.id' (moreEvent)="more($event)" (updateEvent)="color($event)"></app-moreicon>
-       
-      </div>
-        <div><button  mat-icon-button (click)="onClick()" (click)="close()"  matTooltip="close" >CLOSE</button></div>
-   
-      </div>
     </div>
+    <div fxLayoutAlign="space-between">
+      <div fxFlex="70" class="icons" fxLayoutAlign="space-between">
+        <app-remindicon></app-remindicon>
+        <app-collaboratoricon></app-collaboratoricon>
+        <app-coloricon [myNewColor]="data.id" (updateEvent)="color($event)"></app-coloricon>
+        <app-imageicon></app-imageicon>
+        <app-archiveicon [archiveNotesArray]="data.id" (archiveEvent)="archive($event)">
+
+        </app-archiveicon>
+        <app-moreicon [arrayOfNotes]='data.id' (moreEvent)="more($event)" 
+        (updateEvent)="color($event)"></app-moreicon>
+      </div>
+      <div><button mat-icon-button (click)="onClick()" (click)="close()" 
+        matTooltip="close">CLOSE</button></div>
+    </div>
+  </div>
 </div>
-  
-  

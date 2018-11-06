@@ -6,9 +6,13 @@ export class DataService {
 
   private messageSource = new Subject<string>();
   currentMessage = this.messageSource.asObservable();
+  
   private msg = new Subject<boolean>();
   cMsg = this.msg.asObservable();
-  private modals: any[] = [];
+
+  private message = new Subject<boolean>();
+  currentmsg = this.message.asObservable();
+  
   
   constructor() { }
 
@@ -18,16 +22,10 @@ export class DataService {
   change(message: boolean) {
     this.msg.next(message)
   }
+  changeAppearance(message:boolean){
 
-//   open(id: string) {
-//     // open modal specified by id
-//     let modal: any = this.modals.filter(x => x.id === id)[0];
-//     modal.open();
-// }
+    this.message.next(message);
+  }
 
-// close(id: string) {
-//     // close modal specified by id
-//     let modal: any = this.modals.filter(x => x.id === id)[0];
-//     modal.close();
-// }
+
 }

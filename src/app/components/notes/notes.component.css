@@ -1,8 +1,6 @@
 .row-height{
-  /* height:25%; */
   margin-top:10px;
 }
-
 .input {
   width: 80%;
   margin-top:-5px;
@@ -16,7 +14,6 @@
 }
 .card{
 height:45px;
-/* width: 600px; */
 left: 0;
 right: 0;
 margin: auto;
@@ -40,7 +37,6 @@ margin-top:25px;
 
 }
 .inputNote{
-  /* width:545px; */
   border:none;
   outline: none;
   margin-top:0px;
@@ -50,14 +46,12 @@ margin-top:25px;
   
 }
 .hiddenCard{
-/* width: 580px; */
 height:auto;
 position: relative;
 left: 0;
 right: 0;
 margin:auto;
 margin-top:25px;
-/* margin-bottom:5px; */
 }
 .pinIcon {
   opacity: 0.6;

@@ -113,6 +113,17 @@ postDelete(url,body,token){
     return this.http.delete(url);
 
   }
+  addImage(nexturl,body,token){
+    console.log(token);
+    var http={
+      headers:new HttpHeaders({
+       
+       'Authorization':token
+      })
+    };
+    return this.http.post(this.url+"/"+nexturl,body,http)
+  }
+  
   
 }
 

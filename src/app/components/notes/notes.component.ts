@@ -148,7 +148,6 @@ ondelete(deletedObj){
       break;
     }
   }
-  console.log(this.dataarray);
   
 }
 
@@ -158,9 +157,7 @@ editing(event,edited){
       if(edited.index==this.dataarray[i].index){
         this.dataarray[i].data==edited.data
       }
-    }
-    console.log(this.dataarray);
-    
+    }    
   }
 }
 }      

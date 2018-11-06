@@ -16,13 +16,14 @@ export class NotescardComponent implements OnInit {
 @Output() updateEvent=new EventEmitter<any>();
 @Output() newEvent=new EventEmitter<any>();
 @Output() deleted=new EventEmitter<any>();
+@Output() unarchive=new EventEmitter<any>();
 
 token=localStorage.getItem('token')
 public element;
    @Input() myData
    @Input() searchInput;
    @Input() name;
-
+condition=true;
   constructor(public service:HttpService,public dialog: MatDialog,public dataService:DataService) {
     // this.dataService.cMsg.subscribe()
     this.dataService.cMsg.subscribe(message=>{
@@ -31,6 +32,9 @@ public element;
         this.updateEvent.emit();
 
       }
+    }),
+    this.dataService.currentmsg.subscribe(response=>{
+      this.condition=response;
     })
    }
    public data;
@@ -48,6 +52,12 @@ public element;
     this.archive.emit();
 
   }
+  unarchived($event){
+    
+    this.unarchive.emit()
+
+  }
+ 
 
   delete(event){
     this.deleted.emit(); 
@@ -82,6 +92,7 @@ public element;
   
   }
 
+  
   removeAssignments(labelid,noteid){
     console.log(labelid);
     console.log(noteid);

@@ -30,6 +30,7 @@ export class NotesParentComponent implements OnInit {
            }
 
           }
+
       }),
       error => {
         console.log("Error", error);

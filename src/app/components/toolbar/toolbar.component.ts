@@ -27,9 +27,13 @@ export class ToolbarComponent implements OnInit {
   lastName;
   labelItem = [];
   ArrayOfLabel=[];
+  file1=[];
 values;
+ProfilePath;
+value=0;
 url:string;
 result;
+// image= localStorage.getItem('imageUrl')
 
   raw_data;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -121,18 +125,44 @@ result;
     console.log(this.values);
     
   }
-  onFileUpload(event){
-    const file = event.target.files;
-    console.log( file);
-    const uploadData = new FormData();
-    uploadData.append('myFile', file, file.name);
-    
-     this.service.postDelete("user/uploadProfileImage",uploadData,this.token).subscribe(image=>{
-console.log(image);
 
-     })
-      
+  selectedFile = null;
+  public image2=localStorage.getItem('imageUrl');
+ img="http://34.213.106.173/"+this.image2;
+ onFileUpload(event){
+this.selectedFile=event.path[0].files[0];
+const uploadData = new FormData();
+uploadData.append('file', this.selectedFile, this.selectedFile.name);
+ this.service.addImage('user/uploadProfileImage',uploadData,this.token).subscribe(res=>{
+   console.log(res);
+   
+   console.log("url: ", res['status'].imageUrl )
+   this.img="http://34.213.106.173/"+res['status'].imageUrl;
+   
+   
+  // this.ProfilePath.push(res['status'])
+  //  console.log(this.ProfilePath);
+ },error=>{
+   console.log(error);
+   
+ })
+
+ }
+ image={};
+ 
+
+
   
+
+    listView(){
+this.value=1;
+this.dataService.changeAppearance(false);
+    }
+
+    gridView(){
+this.value=0;
+this.dataService.changeAppearance(true);
+
     }
  
 

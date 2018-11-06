@@ -1,8 +1,10 @@
-<div  fxLayout="row" fxLayoutAlign="center center" class="row-height">
-    <mat-card fxFlex="55" class="card" *ngIf="choose1" >
+<div  style="width:800px" fxLayout="row" fxLayoutAlign="center center" class="row-height">
+    <mat-card fxFlex="65" class="card" *ngIf="choose1" >
      
      
-      <div><span><input fxFlex="30" (click)="openNote()" class="input" placeholder="Take a note.."></span></div>
+      <div>
+        <span><input fxFlex="30" (click)="openNote()" class="input" placeholder="Take a note..">
+        </span></div>
       
       <div class="cardicon" fxLayoutGap="space-between" fxLayoutAlign="end"> 
         <mat-icon fxFlex="10" class="icon1" matTooltip=" New Note" aria-disabled="false" (click)= "choose3=!choose3" (click)= "choose2 = true" (click)= "choose1 = false" style="user-select:none" mat-icon-button>format_list_bulleted</mat-icon>
@@ -31,12 +33,14 @@
             <input  fxFlex="90" *ngIf="!expression3" class="inputNote1"  [(ngModel)]=data.data (keydown)="editing($event.data)">
    <mat-icon fxFlex="4%" (click)=ondelete(data) matTooltip="delete">clear</mat-icon>
         </div>
-    
+        <mat-divider></mat-divider>
+
     <div fxLayout="row">
         <mat-icon fxFlex="5%">add</mat-icon>
         <input [(ngModel)]=data fxFlex="95%" class="inputNote" placeholder="list item" (keydown.enter)="enter()">
     </div>
-    
+    <mat-divider></mat-divider>
+
     </div>
 
       <!-- </div> -->

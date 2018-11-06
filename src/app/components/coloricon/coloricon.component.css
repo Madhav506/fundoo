@@ -1,83 +1,83 @@
 .innerIcon{
-    opacity:0.5;
+opacity:0.5;
 }
 .innerIcon:hover{
-    opacity:1;
+opacity:1;
 }
 .sample{
 height:auto;
 overflow: hidden;
 }
-  .zero{
-    background-color:white;
-    color:black;
-    height:25px;
-    width:25px;
-    margin-bottom: 5px;
-  }
-  .first{
-      background-color: #ffff00;
-    height:25px;
-    width:25px;
- margin-bottom: 5px;
-    }
-    .second{
-    background-color: #90ee90;
-  height:25px;
-  width:25px;
-  margin-bottom: 5px;
+.zero{
+background-color:white;
+color:black;
+height:25px;
+width:25px;
+margin-bottom: 5px;
+}
+.first{
+background-color: #ffff00;
+height:25px;
+width:25px;
+margin-bottom: 5px;
+}
+.second{
+background-color: #90ee90;
+height:25px;
+width:25px;
+margin-bottom: 5px;
 } .third{
-    background-color:#f66ef6;
-  height:25px;
-  width:25px;
-  margin-bottom: 5px;
+background-color:#f66ef6;
+height:25px;
+width:25px;
+margin-bottom: 5px;
 } .fourth{
-    background-color: #f08080;
-  height:25px;
-  width:25px;
-  margin-bottom: 5px;
+background-color: #f08080;
+height:25px;
+width:25px;
+margin-bottom: 5px;
 
 }.fifth{
-    background-color: #05f6f6;
-  height:25px;
-  width:25px;
-  margin-bottom: 5px;
+background-color: #05f6f6;
+height:25px;
+width:25px;
+margin-bottom: 5px;
 
 } .sixth{
-    background-color:#ffb6c1;
-  height:25px;
-  width:25px;
-  margin-bottom: 5px;
+background-color:#ffb6c1;
+height:25px;
+width:25px;
+margin-bottom: 5px;
 
 } .seventh{
-    background-color: #fffff1;
-  height:25px;
-  width:25px;
+background-color: #fffff1;
+height:25px;
+width:25px;
 } .eigth{
-    background-color:#ffff66;
-  height:25px;
-  width:25px;
-  margin-bottom: 5px;
+background-color:#ffff66;
+height:25px;
+width:25px;
+margin-bottom: 5px;
 
 } .ninth{
-    background-color: #add8e6;
-  height:25px;
-  width:25px;
-  margin-bottom: 5px;
+background-color: #add8e6;
+height:25px;
+width:25px;
+margin-bottom: 5px;
 
 } 
- .tenth{
-    background-color: #ffffcc ;
-  height:25px;
-  width:25px;
-  margin-bottom: 5px;
+.tenth{
+background-color: #ffffcc ;
+height:25px;
+width:25px;
+margin-bottom: 5px;
 
 } 
 .eleven{
-    background-color:#a9a9d6;
-    height:25px;
-    width:25px;
-    margin-bottom: 5px;
+background-color:#a9a9d6;
+height:25px;
+width:25px;
+margin-bottom: 5px;
 
 
 }
