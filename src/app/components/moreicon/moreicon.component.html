@@ -1,6 +1,6 @@
 <mat-icon class="icon2" mat-icon-button style="margin-bottom:30px;user-select: none;" 
 [matMenuTriggerFor]="menu" matTooltip="More">more_vert</mat-icon>&nbsp;
-<mat-menu style="padding-top:30px;" class="menu" #menu="matMenu" [overlapTrigger]="false">
+<mat-menu  class="menu" #menu="matMenu" [overlapTrigger]="false">
     <button *ngIf="name == 'trash' " mat-menu-item (click)="deleteforever()">
         <span>Delete Forever</span></button>
     <button *ngIf="name == 'trash' " mat-menu-item (click)="restore()">

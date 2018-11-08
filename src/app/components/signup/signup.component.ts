@@ -63,12 +63,12 @@ export class SignupComponent implements OnInit {
                 for (var i = 0; i < data.data.length; i++) {
                     this.card.push(data.data[i]);
                 }
-                console.log(this.card);
+                // console.log(this.card);
             })
 
     }
     changeCardColor(card) {
-        console.log(card.name);
+        // console.log(card.name);
         this.service = card.name;
         card.check = true;
         for (var i = 0; i < this.card.length; i++) {
@@ -84,9 +84,9 @@ export class SignupComponent implements OnInit {
 
 
     sendData() {
-        console.log(this.detailsObject.Firstname);
-        console.log(this.detailsObject.Lastname);
-        console.log(this.detailsObject.Email);
+        // console.log(this.detailsObject.Firstname);
+        // console.log(this.detailsObject.Lastname);
+        // console.log(this.detailsObject.Email);
       
 
             if (this.detailsObject.cpassword != this.detailsObject.password) {
@@ -109,7 +109,7 @@ export class SignupComponent implements OnInit {
                     })
                     .subscribe(
                         (data) => {
-                            console.log(" successful ", data);
+                            // console.log(" successful ", data);
                             this.display.open("Registered successfull", "continue", {
                                 duration: 10000,
                             });
@@ -117,7 +117,7 @@ export class SignupComponent implements OnInit {
 
                         },
                         error => {
-                            console.log("Error", error);
+                            // console.log("Error", error);
                             this.display.open("Registration unsuccessfull", "register", {
                                 duration: 10000,
                             });
@@ -133,7 +133,7 @@ export class SignupComponent implements OnInit {
         this.httpService.getAddService("user")
             .subscribe(
                 (data) => {
-                    console.log("data in server is", data);
+                    // console.log("data in server is", data);
 
                 },
                 error => {

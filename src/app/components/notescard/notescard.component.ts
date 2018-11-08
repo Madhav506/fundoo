@@ -3,6 +3,7 @@ import { HttpService } from '../../services/http.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DialogComponent } from '../dialog/dialog.component';
 import { DataService } from '../../services/data.service';
+import { LoggerService } from '../../core/services/logger/logger.service';
 
 @Component({
   selector: 'app-notescard',
@@ -26,7 +27,8 @@ export class NotescardComponent implements OnInit {
   condition = true;
   constructor(public service: HttpService, public dialog: MatDialog, public dataService: DataService) {
     this.dataService.cMsg.subscribe(message => {
-      console.log(message);
+      LoggerService.log('message'+message);
+
       if (message) {
         this.updateEvent.emit();
 

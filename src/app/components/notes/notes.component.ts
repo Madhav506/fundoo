@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { MatSnackBar } from '@angular/material';
+import { LoggerService } from '../../core/services/logger/logger.service';
 
 
 @Component({
@@ -67,6 +68,7 @@ export class NotesComponent implements OnInit {
     this.colorMyevent = "#ffffff";
 
     this.service.postpassword("notes/addnotes", body, this.token).subscribe(data => {
+      LoggerService.log('data',data);
       this.snackBar.open("note created  successfully", "Notes", {
         duration: 10000,
 

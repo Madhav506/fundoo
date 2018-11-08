@@ -47,6 +47,7 @@ mat-card-content{
 .mat-chip.mat-standard-chip .mat-chip-remove {
     color: rgba(0,0,0,.87);
     opacity: 0;
+    margin-top:5px
 }
 .mat-chip.mat-standard-chip .mat-chip-remove:hover {
     color: rgba(0,0,0,.87);

@@ -9,12 +9,13 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { AddlabelComponent } from '../addlabel/addlabel.component';
 import { DataService } from '../../services/data.service';
+import { LoggerService } from '../../core/services/logger/logger.service';
 
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.css']
+  styleUrls: ['./toolbar.component.css'],
 })
 @Input()
 export class ToolbarComponent implements OnInit {
@@ -134,8 +135,13 @@ export class ToolbarComponent implements OnInit {
     const uploadImage= new FormData();
     uploadImage.append('file', this.imageFile, this.imageFile.name);
     this.service.addImage('user/uploadProfileImage', uploadImage, this.token).subscribe(response => {
-      // console.log("image url path is", response['status'].imageUrl)
+
+      LoggerService.log("image url path is" +response['status'].imageUrl)
+
       this.img = "http://34.213.106.173/" + response['status'].imageUrl;
+      
+      localStorage.setItem('imageUrl', response['status'].imageUrl);
+
 
     }, error => {
       console.log(error);

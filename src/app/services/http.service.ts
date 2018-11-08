@@ -1,20 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-
-// const httpOptions = {
-//   headers: new HttpHeaders({
-//     'Content-Type': 'application/json',
-//     'Authorization': 'my-auth-token'
-//   })
-// };
-
+import{environment} from '../../environments/environment'
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
   
-  url = 'http://34.213.106.173/api/'
+  url=environment.baseUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -22,7 +14,7 @@ export class HttpService {
   // getDataService  to get data from service api
 
   getDataService(url) {
-    url = this.url + url
+    url =  + url
     return this.http.get(url);
   }
 
