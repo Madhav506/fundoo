@@ -16,6 +16,7 @@ export class ArchiveComponent implements OnInit {
   token = localStorage.getItem('token');
 
   getAllNotes() {
+    
     this.service.getCardData("notes/getArchiveNotesList", this.token).subscribe(data => {
       // console.log(data);
       this.arrayData = data['data'].data.reverse();

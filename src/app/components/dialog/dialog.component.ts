@@ -18,6 +18,7 @@ export interface DialogData {
 export class DialogComponent implements OnInit {
   @Output() archiveEvent = new EventEmitter<any>();
   @Output() updateEvent = new EventEmitter<any>();
+  archiveNotesArray={'isArchived': false}
 
   eventOne = new EventEmitter<boolean>();
 

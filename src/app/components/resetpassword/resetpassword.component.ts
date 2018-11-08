@@ -35,14 +35,13 @@ set(){
 
 
   this.service.postpassword("user/reset-password",body,this.token).subscribe(Response=>{
-    console.log("successful",Response);
+    // console.log("successful",Response);
     this.snackBar.open("Success"," password",{
       duration:10000,
     });
 
   },
   error=>{
-    console.log("failed",error)
     console.log(error);
     this.snackBar.open("failed","fail",{
       duration:10000,
@@ -58,7 +57,7 @@ set(){
     });
 
   })
-  console.log('the id is  ',this.token);
+  // console.log('the id is  ',this.token);
   
 }
 }

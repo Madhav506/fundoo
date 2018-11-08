@@ -1,4 +1,4 @@
-import { Component, OnInit, Input ,Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
@@ -26,14 +26,14 @@ export class ToolbarComponent implements OnInit {
   firstName;
   lastName;
   labelItem = [];
-  ArrayOfLabel=[];
-  file1=[];
-values;
-ProfilePath;
-value=0;
-url:string;
-result;
-// image= localStorage.getItem('imageUrl')
+  ArrayOfLabel = [];
+  file1 = [];
+  values;
+  value = 0;
+  url: string;
+  result;
+  
+  // image= localStorage.getItem('imageUrl')
 
   raw_data;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -41,27 +41,27 @@ result;
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver,public dataService:DataService,public service:HttpService, public dialog: MatDialog, public snackBar: MatSnackBar, private router: Router, public http: HttpService) {
+  constructor(private cdRef: ChangeDetectorRef,private breakpointObserver: BreakpointObserver, public dataService: DataService, public service: HttpService, public dialog: MatDialog, public snackBar: MatSnackBar, private router: Router, public http: HttpService) {
 
   }
-  
+
 
   ngOnInit() {
     this.raw_data = localStorage.getItem('first');
     this.firstName = localStorage.getItem('firstName');
     this.lastName = localStorage.getItem('lastName');
-    console.log(this.raw_data);
+    // console.log(this.raw_data);
     var user = this.raw_data.split("");
     this.firstCharacter = user[0];
     // console.log(this.firstCharacter);
     this.token = localStorage.getItem('token');
-    console.log(this.token);
+    // console.log(this.token);
     this.getLabel();
   }
   logout() {
     this.http.postLogout("user/logout", this.token).subscribe(
       data => {
-        console.log(data);
+        // console.log(data);
         localStorage.clear();
 
         this.router.navigate(['/login']);
@@ -78,22 +78,22 @@ result;
 
   getLabel() {
     this.service.getCardData("noteLabels/getNoteLabelList", this.token).subscribe(result => {
-      console.log(result['data'].details);
+      // console.log(result['data'].details);
       this.ArrayOfLabel = [];
       for (var index = 0; index < result['data'].details.length; index++) {
         if (result['data'].details[index].isDeleted == false) {
           this.ArrayOfLabel.push(result['data'].details[index]);
         }
       }
-      console.log(this.ArrayOfLabel);
+      // console.log(this.ArrayOfLabel);
 
     }),
       error => {
         console.log(error, "error");
       }
   }
-  clear(){
-    this.searchInput='';
+  clear() {
+    this.searchInput = '';
   }
   openDialogLabel(): void {
 
@@ -104,66 +104,57 @@ result;
       panelClass: 'myapp-no-padding-dialog'
     });
     const sub = dialogRef.componentInstance.eventTwo.subscribe((data) => {
-      console.log("sub", data);
+      // console.log("sub", data);
     });
     dialogRef.afterClosed().subscribe(data => {
       this.getLabel();
-      console.log(data);
-      console.log('The dialog was closed');
+      // console.log(data);
+      // console.log('The dialog was closed');
     });
   }
-  clickSearch(){
+  clickSearch() {
     this.router.navigate(['home/search']);
   }
-  passmessage(){
+  passmessage() {
     this.dataService.changeMessage(this.searchInput);
-    
-  }
-  
-  headingChange(heading){
-    this.values=heading;
-    console.log(this.values);
-    
+
   }
 
-  selectedFile = null;
-  public image2=localStorage.getItem('imageUrl');
- img="http://34.213.106.173/"+this.image2;
- onFileUpload(event){
-this.selectedFile=event.path[0].files[0];
-const uploadData = new FormData();
-uploadData.append('file', this.selectedFile, this.selectedFile.name);
- this.service.addImage('user/uploadProfileImage',uploadData,this.token).subscribe(res=>{
-   console.log(res);
-   
-   console.log("url: ", res['status'].imageUrl )
-   this.img="http://34.213.106.173/"+res['status'].imageUrl;
-   
-   
-  // this.ProfilePath.push(res['status'])
-  //  console.log(this.ProfilePath);
- },error=>{
-   console.log(error);
-   
- })
+  headingChange(heading) {
+    this.values = heading;
 
- }
- image={};
- 
+  }
+  imageFile = null;
 
+  public imageNew = localStorage.getItem('imageUrl');
+  img = "http://34.213.106.173/" + this.imageNew;
 
-  
+  onFileUpload(event) {
+    this.imageFile = event.path[0].files[0];
+    const uploadImage= new FormData();
+    uploadImage.append('file', this.imageFile, this.imageFile.name);
+    this.service.addImage('user/uploadProfileImage', uploadImage, this.token).subscribe(response => {
+      // console.log("image url path is", response['status'].imageUrl)
+      this.img = "http://34.213.106.173/" + response['status'].imageUrl;
 
-    listView(){
-this.value=1;
-this.dataService.changeAppearance(false);
-    }
+    }, error => {
+      console.log(error);
 
-    gridView(){
-this.value=0;
-this.dataService.changeAppearance(true);
+    })
 
-    }
- 
+  }
+  public image = {};
+
+  listView() {
+    this.value = 1;
+    this.dataService.changeAppearance(false);
+  }
+
+  gridView() {
+    this.value = 0;
+    this.dataService.changeAppearance(true);
+
+  }
+
 
 }

@@ -25,7 +25,8 @@
         <app-collaboratoricon></app-collaboratoricon>
         <app-coloricon [myNewColor]="data.id" (updateEvent)="color($event)"></app-coloricon>
         <app-imageicon></app-imageicon>
-        <app-archiveicon [archiveNotesArray]="data.id" (archiveEvent)="archive($event)">
+        <app-archiveicon [archiveNotesArray]='archiveNotesArray' 
+        [archiveNotesArray]="data.id" (archiveEvent)="archive($event)">
 
         </app-archiveicon>
         <app-moreicon [arrayOfNotes]='data.id' (moreEvent)="more($event)" 

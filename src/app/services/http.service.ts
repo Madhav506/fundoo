@@ -41,8 +41,8 @@ export class HttpService {
   }
 
   postpassword(url, input, token) {
-    console.log(token);
-    console.log(input);
+    // console.log(token);
+    // console.log(input);
 
     url = this.url + url;
     var httpAuthOptions1 = {
@@ -69,7 +69,7 @@ export class HttpService {
 //post api for logout
 
 postLogout(url,token){
-  console.log("token to logout",token);
+  // console.log("token to logout",token);
   url = this.url + url;
   var option = {
     headers: new HttpHeaders({
@@ -83,7 +83,7 @@ postLogout(url,token){
 
 }
 getCardData(url,token){
-  console.log("token while getnotes list",token);
+  // console.log("token while getnotes list",token);
   url = this.url + url;
   var option1 = {
     headers: new HttpHeaders({
@@ -96,7 +96,7 @@ getCardData(url,token){
 }
 
 postDelete(url,body,token){
-  console.log(" service")
+  // console.log(" service")
     url=this.url+url;
     var option2 = {
       headers: new HttpHeaders({
@@ -113,15 +113,15 @@ postDelete(url,body,token){
     return this.http.delete(url);
 
   }
-  addImage(nexturl,body,token){
-    console.log(token);
+  addImage(url,body,token){
+    // console.log(token);
     var http={
       headers:new HttpHeaders({
        
        'Authorization':token
       })
     };
-    return this.http.post(this.url+"/"+nexturl,body,http)
+    return this.http.post(this.url+"/"+url,body,http)
   }
   
   

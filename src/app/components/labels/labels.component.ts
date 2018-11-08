@@ -32,7 +32,8 @@ export class LabelsComponent implements OnInit {
       this.arrayNewData = [];
       for (var i = 0; i < data['data'].data.length - 1; i++) {
         if (data['data'].data[i].isDeleted == false && data['data'].data[i].isArchived == false) {
-          for (let noteLabelIndex = 0; noteLabelIndex < data['data'].data[i].noteLabels.length; noteLabelIndex++) {
+          for (let noteLabelIndex = 0; noteLabelIndex < data['data'].data[i].noteLabels.length;
+           noteLabelIndex++) {
             if (data['data'].data[i].noteLabels[noteLabelIndex].label == this.labelName) {
               this.arrayNewData.push(data['data'].data[i]);
             }

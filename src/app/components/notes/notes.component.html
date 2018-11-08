@@ -1,91 +1,102 @@
 <div  style="width:800px" fxLayout="row" fxLayoutAlign="center center" class="row-height">
-    <mat-card fxFlex="65" class="card" *ngIf="choose1" >
-     
-     
-      <div>
-        <span><input fxFlex="30" (click)="openNote()" class="input" placeholder="Take a note..">
-        </span></div>
-      
-      <div class="cardicon" fxLayoutGap="space-between" fxLayoutAlign="end"> 
-        <mat-icon fxFlex="10" class="icon1" matTooltip=" New Note" aria-disabled="false" (click)= "choose3=!choose3" (click)= "choose2 = true" (click)= "choose1 = false" style="user-select:none" mat-icon-button>format_list_bulleted</mat-icon>
-        <mat-icon fxFlex="10" matTooltip="New note with image" aria-disabled="false"  style="user-select:none"  class="icon2" mat-icon-button>image</mat-icon>
-        <mat-icon fxFlex="5" matTooltip="Drawing not available" aria-disabled="true"  style="user-select:none"  class="icon3" mat-icon-button>brush</mat-icon>
-      </div>
+<mat-card fxFlex="65" class="card" *ngIf="choose1" >
 
-    </mat-card>
 
-<mat-card fxFlex="55" class="hiddenCard" [ngStyle]="{'background-color':colorMyevent}" *ngIf="choose2">
+<div>
+<span><input fxFlex="30" (click)="openNote()" class="input" placeholder="Take a note..">
+</span></div>
 
-    <div fxLayout="row" class="hiddenDiv" >
-       
-          <div class="inputNote" id="title" fxFlex="95" contenteditable="true" style="font-weight:bold" placeholder="Title" ></div> 
-         <div> <img class="pinIcon" src="../../../assets/images/pin.svg" alt="">   </div>        
-           </div>
+<div class="cardicon" fxLayoutGap="space-between" fxLayoutAlign="end"> 
+<mat-icon fxFlex="10" class="icon1" matTooltip=" New Note" aria-disabled="false" 
+(click)= "choose3=!choose3" (click)= "choose2 = true" (click)= "choose1 = false" 
+mat-icon-button>format_list_bulleted</mat-icon>
+<mat-icon fxFlex="10" matTooltip="New note with image" aria-disabled="false"  
+class="icon2" mat-icon-button>image</mat-icon>
+<mat-icon fxFlex="5" matTooltip="Drawing not available" aria-disabled="true"  
+class="icon3" mat-icon-button>brush</mat-icon>
+</div>
 
-      <div *ngIf="choose3" class="inputNote" id="description" contenteditable="true" placeholder="Take a note" autofocus>
-      </div>
-      <!-- <div fxLayoutAlign="space-between">
-          <mat-icon *ngIf="!choose3" >add</mat-icon><div fxFlex=92 *ngIf="!choose3" class="inputNote" id="description" contenteditable="true" placeholder="list Item" autofocus>
-        </div> -->
-        <div *ngIf="!choose3">
-            <div *ngFor="let data of dataarray" fxLayout="row">
-            <mat-checkbox fxFlex="5%"></mat-checkbox>
-            <input  fxFlex="90" *ngIf="!expression3" class="inputNote1"  [(ngModel)]=data.data (keydown)="editing($event.data)">
-   <mat-icon fxFlex="4%" (click)=ondelete(data) matTooltip="delete">clear</mat-icon>
-        </div>
-        <mat-divider></mat-divider>
+</mat-card>
 
-    <div fxLayout="row">
-        <mat-icon fxFlex="5%">add</mat-icon>
-        <input [(ngModel)]=data fxFlex="95%" class="inputNote" placeholder="list item" (keydown.enter)="enter()">
-    </div>
-    <mat-divider></mat-divider>
+<mat-card fxFlex="55" class="hiddenCard" [ngStyle]="{'background-color':colorMyevent}" 
+*ngIf="choose2">
 
-    </div>
+<div fxLayout="row" class="hiddenDiv" >
 
-      <!-- </div> -->
+<div class="inputNote" id="title" fxFlex="95" contenteditable="true" 
+style="font-weight:bold" placeholder="Title" ></div> 
+<div> <img class="pinIcon" src="../../../assets/images/pin.svg" alt="">  
+</div>        
+</div>
 
-      <div fxLayout="row wrap"  fxlayoutAlign="start start" fxLayoutGap="8px" >
-          <div   *ngFor="let label of array2 ">
-            <mat-chip-list    selected>
-              <mat-chip style="margin-top:15px"   >
-                {{label}}
-              <mat-icon  matChipRemove (click)="removeAssignments(label.id)">cancel</mat-icon>
-      
-              </mat-chip>
-            </mat-chip-list>
-          </div>
-          </div>
-          
+<div *ngIf="choose3" class="inputNote" id="description" contenteditable="true" 
+placeholder="Take a note" autofocus>
+</div>
 
-      <div fxLayoutAlign="space-between" >
-     <div  fxFlex="70" class="icons" fxLayoutAlign="space-between"> 
-       <app-remindicon></app-remindicon>
-      <app-collaboratoricon></app-collaboratoricon>
-      <app-coloricon  (responseNew)="change($event)" ></app-coloricon>
-      <app-imageicon></app-imageicon>
-      <app-archiveicon></app-archiveicon>
-      <!-- <app-moreicon></app-moreicon> -->
-      <mat-icon mat-icon-button style="margin-bottom:-10px;user-select: none;" [matMenuTriggerFor]="menu"  matTooltip="More">more_vert</mat-icon>&nbsp;
+<div *ngIf="!choose3">
+<div *ngFor="let data of dataarray" fxLayout="row">
+<mat-checkbox fxFlex="5%"></mat-checkbox>
+<input  fxFlex="90" *ngIf="!expression3" class="inputNote1"  
+[(ngModel)]=data.data (keydown)="editing($event.data)">
+<mat-icon fxFlex="4%" (click)=ondelete(data) matTooltip="delete">clear</mat-icon>
+</div>
+<mat-divider></mat-divider>
+
+<div fxLayout="row">
+<mat-icon fxFlex="5%">add</mat-icon>
+<input [(ngModel)]=data fxFlex="95%" class="inputNote" placeholder="list item" 
+(keydown.enter)="enter()">
+</div>
+<mat-divider></mat-divider>
+
+</div>
+
+<!-- </div> -->
+
+<div fxLayout="row wrap"  fxlayoutAlign="start start" fxLayoutGap="8px" >
+<div   *ngFor="let label of array2 ">
+<mat-chip-list    selected>
+<mat-chip style="margin-top:15px"   >
+{{label}}
+<mat-icon  matChipRemove (click)="removeAssignments(label.id)">cancel</mat-icon>
+
+</mat-chip>
+</mat-chip-list>
+</div>
+</div>
+
+
+<div fxLayoutAlign="space-between" >
+<div  fxFlex="70" class="icons" fxLayoutAlign="space-between"> 
+<app-remindicon></app-remindicon>
+<app-collaboratoricon></app-collaboratoricon>
+<app-coloricon  (responseNew)="change($event)" ></app-coloricon>
+<app-imageicon></app-imageicon>
+<app-archiveicon [archiveNotesArray]='archiveNotesArray'></app-archiveicon>
+<!-- <app-moreicon></app-moreicon> -->
+<mat-icon mat-icon-button style="margin-bottom:-10px;user-select: none;"
+[matMenuTriggerFor]="menu"  matTooltip="More">more_vert</mat-icon>&nbsp;
 <mat-menu  style="padding-top:30px;"class="menu" #menu="matMenu" [overlapTrigger]="false">
-    
-      <button mat-menu-item  (click)="getLabel()" [matMenuTriggerFor]="addlabel">
-        <span>Add label</span></button>
-        <mat-menu [overlapTrigger]="false" (click)="$event.stopPropagation();"  #addlabel="matMenu"><div class="title">Label note</div>
-          <br><div fxLayout="row" (click)="$event.stopPropagation();">
-              <mat-icon fxFlex="30" (click)="searchState()">search</mat-icon>
-              <input  class="inputTitle" [(ngModel)]="search" placeholder="Enter label name">
-          </div>
-          <br><div *ngFor="let label of ArrayOfLabel | searchData:search">
-            
-          <mat-checkbox (click)="$event.stopPropagation();"  (click)="clickFunc(label)" class="example-margin">{{label.label}}</mat-checkbox>
-      </div>
-  </mat-menu>
-        </mat-menu>
 
-    </div>
-      <div><button  mat-icon-button (click)="close()"  matTooltip="close" >CLOSE</button></div>
- 
-    </div>
+<button mat-menu-item  (click)="getLabel()" [matMenuTriggerFor]="addlabel">
+<span>Add label</span></button>
+<mat-menu [overlapTrigger]="false" (click)="$event.stopPropagation();"  
+#addlabel="matMenu"><div class="title">Label note</div>
+<br><div fxLayout="row" (click)="$event.stopPropagation();">
+<mat-icon fxFlex="30" (click)="searchState()">search</mat-icon>
+<input  class="inputTitle" [(ngModel)]="search" placeholder="Enter label name">
+</div>
+<br><div *ngFor="let label of ArrayOfLabel | searchData:search">
+
+<mat-checkbox (click)="$event.stopPropagation();"  (click)="clickFunc(label)" 
+class="example-margin">{{label.label}}</mat-checkbox>
+</div>
+</mat-menu>
+</mat-menu>
+
+</div>
+<div><button  mat-icon-button (click)="close()"  matTooltip="close" >CLOSE</button></div>
+
+</div>
 </mat-card>
 </div>

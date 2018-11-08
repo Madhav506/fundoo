@@ -1,6 +1,5 @@
 .sidenav-container {
   height: 90%;
-  /* background-color: gainsboro; */
 
 
 }
@@ -12,12 +11,8 @@
   width: 300px;
   margin-top:70px;
   overflow-y: scroll
-  /* background-color: gainsboro; */
-
-  /* margin-left:0px */
-  /* background-color:pink */
+ 
 }
-
 .mat-toolbar.mat-primary {
   position: sticky;
   background:#fb0 ;
@@ -25,10 +20,6 @@
 
   top: 0;
 }
-
-/* .mat-drawer:not(.mat-drawer-side) {
-  box-shadow: none;
-} */
 .search{
 background-color:#fb0;
 overflow: hidden;
@@ -71,9 +62,7 @@ overflow: hidden;
 .mat-select-panel {
   margin-top: 45px;
 }
-/* mat-nav-list{
-  background-color: gainsboro
-} */
+
 .contentstyle{
   font-size:17px;
   font-family:cursive;
@@ -87,7 +76,6 @@ overflow: hidden;
 .addaccount{
   background-color: white;
   color:rgb(15, 11, 11);
-  /* width:60px; */
   margin-left:20px;
 }
 .logout{

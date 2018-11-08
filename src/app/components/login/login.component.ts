@@ -59,7 +59,7 @@ export class LoginComponent {
         localStorage.setItem('firstName', data['firstName']);
         localStorage.setItem('lastName', data['lastName']);
         localStorage.setItem('userId', data['userId']);
-        localStorage.setItem('imageUrl',data['imageUrl'])
+        localStorage.setItem('imageUrl',data['imageUrl']);
         this.router.navigate(['/home']);
         this.snackBar.open("login successfull", "login", {
           duration: 10000,
