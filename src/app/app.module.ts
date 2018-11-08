@@ -7,7 +7,7 @@ import { DataService } from './services/data.service';
 import { AuthguardService } from './services/authguard.service';
 
 import { AuthguardGuard } from './auth/auth.guard';
-import { SearchPipe } from './search.pipe';
+import { SearchPipe } from './pipes/search/search.pipe';
 
 import { AppRoutingModule } from './app-routing.module';
 
