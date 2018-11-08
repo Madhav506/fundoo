@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { HttpService } from '../../services/http.service'
+import { HttpService } from '../../core/services/http/http.service'
 import { MatSnackBar } from '@angular/material';
-import { DataService } from '../../services/data.service';
+import { DataService } from '../../core/services/data/data.service';
 
 export interface DialogData {
   "title": String,

@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { HttpService } from '../../services/http.service';
+import { HttpService } from '../../core/services/http/http.service'
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DialogComponent } from '../dialog/dialog.component';
-import { DataService } from '../../services/data.service';
+import { DataService } from '../../core/services/data/data.service';
 import { LoggerService } from '../../core/services/logger/logger.service';
 
 @Component({

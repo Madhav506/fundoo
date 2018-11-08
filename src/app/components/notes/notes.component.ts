@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
-import { HttpService } from '../../services/http.service';
+import { HttpService } from '../../core/services/http/http.service'
 import { MatSnackBar } from '@angular/material';
 import { LoggerService } from '../../core/services/logger/logger.service';
 

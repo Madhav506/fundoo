@@ -1,5 +1,5 @@
 import { Component,EventEmitter,Output, OnInit } from '@angular/core';
-import{HttpService} from '../../services/http.service';
+import { HttpService } from '../../core/services/http/http.service'
 
 @Component({
   selector: 'app-trash',
@@ -13,8 +13,6 @@ export class TrashComponent implements OnInit {
 myData=[]
 
 name='trash';
-
-
 token=localStorage.getItem('token')
   ngOnInit() {
     this.getNotes();

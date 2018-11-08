@@ -1,5 +1,5 @@
 import { Component, Output, Input, OnInit, EventEmitter } from '@angular/core';
-import { HttpService } from '../../services/http.service';
+import { HttpService } from '../../core/services/http/http.service';
 import { MatSnackBar } from '@angular/material';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component, Inject, EventEmitter, Output, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { HttpService } from '../../services/http.service'
-import { DataService } from '../../services/data.service';
+import { HttpService } from '../../core/services/http/http.service'
+import { DataService } from '../../core/services/data/data.service';
 
 export interface DialogData {
   "title": String,

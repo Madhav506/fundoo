@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
-import { HttpService } from '../../services/http.service';
+import { HttpService } from '../../core/services/http/http.service'
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -8,7 +8,7 @@ import { MatSnackBar } from '@angular/material';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { AddlabelComponent } from '../addlabel/addlabel.component';
-import { DataService } from '../../services/data.service';
+import { DataService } from '../../core/services/data/data.service';
 import { LoggerService } from '../../core/services/logger/logger.service';
 
 

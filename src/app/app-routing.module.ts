@@ -11,7 +11,7 @@ import { NotesComponent } from './components/notes/notes.component';
 import { RemindersComponent } from './components/reminders/reminders.component';
 import { ArchiveComponent } from './components/archive/archive.component';
 import { TrashComponent } from './components/trash/trash.component';
-import {AuthguardGuard  as AuthGuard } from '../../src/app/auth/auth.guard';
+import {AuthguardGuard  as AuthGuard } from './core/services/auth/authGuard/auth.guard';
 import { NotesParentComponent } from './components/notes-parent/notes-parent.component';
 import { SearchComponent } from './components/search/search.component';
 import { LabelsComponent } from './components/labels/labels.component';

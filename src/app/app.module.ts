@@ -1,13 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { HttpService } from './services/http.service';
+import { HttpService } from './core/services/http/http.service';
 import { LoggerService } from './core/services/logger/logger.service';
-import { DataService } from './services/data.service';
-import { AuthguardService } from './services/authguard.service';
+import { DataService } from './core/services/data/data.service';
+import { AuthguardGuard } from '../app/core/services/auth/authGuard/auth.guard';
 
-import { AuthguardGuard } from './auth/auth.guard';
-import { SearchPipe } from './pipes/search/search.pipe';
+// import { AuthguardGuard } from './auth/auth.guard';
+import { SearchPipe } from './core/pipes/search/search.pipe';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -135,7 +135,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 
   ],
   entryComponents: [DialogComponent, AddlabelComponent, DeletedialogComponent],
-  providers: [HttpService, DataService, AuthguardService, LoggerService, AuthguardGuard],
+  providers: [HttpService,AuthguardGuard, DataService, LoggerService],
   bootstrap: [AppComponent]//2
 })
 export class AppModule { }
