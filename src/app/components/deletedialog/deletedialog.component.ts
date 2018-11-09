@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export interface DialogData {
   name: "trash";
 }
+
 @Component({
   selector: 'app-deletedialog',
   templateUrl: './deletedialog.component.html',
@@ -20,4 +21,5 @@ export class DeletedialogComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+  
 }

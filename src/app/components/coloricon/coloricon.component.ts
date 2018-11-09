@@ -18,6 +18,23 @@ export class ColoriconComponent implements OnInit {
 
   ngOnInit() {
   }
+  colorsObject = [
+
+  [{ 'color': '#ccff90', 'tipname': 'Green' },
+  { 'color': '#cbf0f8', 'tipname': 'Blue' },
+  { 'color': '#a7ffeb', 'tipname': 'Teal' },
+  { 'color': '#aecbfa', 'tipname': 'Dark blue' }],
+
+  [{ 'color': '#d7aefb', 'tipname': 'Purple' },
+  { 'color': '#e6c9a8', 'tipname': 'Brown' },
+  { 'color': '#fdcfe8', 'tipname': 'Pink' },
+  { 'color': '#e8eaed', 'tipname': 'Gray' }],
+
+  [{ 'color': '#ffffff', 'tipname': 'White' },
+  { 'color': '#f28b82', 'tipname': 'Red' },
+  { 'color': '#fbbc04', 'tipname': 'Orange' },
+  { 'color': '#fff475', 'tipname': 'Yellow' }],]
+
   changeColor(paint) {
     this.responseNew.emit(paint);
 

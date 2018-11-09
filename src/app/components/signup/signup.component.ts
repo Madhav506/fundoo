@@ -133,7 +133,7 @@ export class SignupComponent implements OnInit {
         this.httpService.getAddService("user")
             .subscribe(
                 (data) => {
-                    // console.log("data in server is", data);
+                    console.log("data in server is", data);
 
                 },
                 error => {

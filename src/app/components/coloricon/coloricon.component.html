@@ -1,22 +1,18 @@
-<mat-icon class="innerIcon" [matMenuTriggerFor]="moreMenu" mat-icon-button aria-label="false" style="user-select:none" matTooltip="change color">
-  color_lens
-</mat-icon>
-<mat-menu #moreMenu="matMenu" [overlapTrigger]="false">
-  <div class="sample" fxLayoutWrap>
-    <div fxLayout="row" fxLayout.lt-md="row" fxLayoutGap="10px">
-      <button mat-mini-fab class="zero" (click)="changeColor('')"></button>
-      <button mat-mini-fab class="first" (click)="changeColor('#ffff00')"></button>
-      <button mat-mini-fab class="second" (click)="changeColor('#90ee90')"></button>
-      <button mat-mini-fab class="third" (click)="changeColor('#f66ef6')"></button></div>
-    <div fxLayout="row" fxLayout.lt-md="row" fxLayoutGap="10px">
-      <button mat-mini-fab class="tenth" (click)="changeColor('#ffcocb')"></button>
-      <button mat-mini-fab class="fourth" (click)="changeColor('#f08080')"></button>
-      <button mat-mini-fab class="fifth" (click)="changeColor('#05f6f6')"></button>
-      <button mat-mini-fab class="sixth" (click)="changeColor('#ffb6c1')"></button></div>
-    <div fxLayout="row" fxLayout.lt-md="row" fxLayoutGap="10px">
-      <button mat-mini-fab class="eleven" (click)="changeColor('#a9a9d6')"></button>
-      <button mat-mini-fab class="seventh" (click)="changeColor('#fffff1')"></button>
-      <button mat-mini-fab class="eigth" (click)="changeColor('#ffff66')"></button>
-      <button mat-mini-fab class="ninth" (click)="changeColor('#add8e6')"></button></div>
-  </div>
-  <mat-menu>
+
+    <mat-icon class="innerIcon" [matMenuTriggerFor]="moreMenu" mat-icon-button aria-label="false" matTooltip="change color">
+        color_lens
+      </mat-icon>
+      <mat-menu #moreMenu="matMenu" [overlapTrigger]="false">
+          <div class="colors" fxLayoutWrap>
+             
+                  <div fxLayoutGap=10px fxLayout=row  class="top" *ngFor='let colors of colorsObject'>
+                          <div *ngFor='let color of colors'>
+                              <button class="colorNew" [ngStyle]="{'background-color': color.color }" 
+                                  (click)='changeColor(color.color)' matTooltip="{{color.tipname}}"
+                                      mat-mini-fab></button>
+                          </div>
+                  </div>
+             
+            
+          </div>
+        </mat-menu>

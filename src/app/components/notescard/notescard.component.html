@@ -1,11 +1,13 @@
-<div>
+<div >
   <div fxFlex=5>
 </div>
   <div fxLayoutAlign="start start"  class="main" fxLayout="row wrap" fxLayoutWrap fxLayout.xs="column" fxLayout.sm="100"
     fxLayoutGap="20px">
     <!-- <div > -->
     <!-- NgFor is a built-in template directive that makes it easy to iterate over something like an array or an object and create a template for each item.  -->
-    <mat-card [ngClass]="{'viewGrid':condition,'viewList':!condition}" class="matcard" *ngFor="let data of myData | searchData:searchInput" [ngStyle]="{'background-color':data.color}">
+    <mat-card [ngClass]="{'viewGrid':condition,'viewList':!condition}"
+     class="matcard" *ngFor="let data of myData | searchData:searchInput"
+      [ngStyle]="{'background-color':data.color}">
       <div (click)="openDialog(data)">
         <mat-card-header>
           <mat-card-title>
@@ -30,12 +32,26 @@
         </div>
       </div>
 
+
+      <div fxLayout="row wrap" fxlayoutAlign="start start" fxLayoutGap="5px">
+          <div *ngFor="let item of data.reminder">
+            <mat-chip-list selected>
+              <mat-chip >
+                {{item}}
+                <mat-icon matChipRemove (click)="removeAssignments(item.id,data.id)">cancel</mat-icon>
+
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+        </div>
+  
+
       <mat-card-actions class="icons" fxLayoutAlign="space-between">
 
         <!-- <div >  -->
 
 
-        <app-remindicon></app-remindicon>
+        <app-remindicon [reminders]="data"></app-remindicon>
         <app-collaboratoricon></app-collaboratoricon>
         <app-coloricon [myNewColor]="data.id" (response)="color($event)"></app-coloricon>
         <app-imageicon></app-imageicon>
@@ -43,7 +59,7 @@
         (archiveEvent)=myArchive($event)></app-archiveicon>
         <app-moreicon  [name]="name" (delEvent)="delete($event)" 
         (eventTwo)="gotMessage($event)" (updateEvent)="gotMessage($event)"
-        (moreEvent)="gotMessage($event)" [arrayOfNotes]="data.id"></app-moreicon>
+        (moreEvent)="gotMessage($event)" [arrayOfNotes]="data.id" [arrayOfMynotes]="data"></app-moreicon>
 
         <!-- </div> -->
       </mat-card-actions>

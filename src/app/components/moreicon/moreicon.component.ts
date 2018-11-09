@@ -13,6 +13,7 @@ import { DeletedialogComponent } from '../deletedialog/deletedialog.component';
 })
 export class MoreiconComponent implements OnInit {
   @Input() arrayOfNotes;
+  @Input() arrayOfMynotes;
   @Output() delEvent = new EventEmitter<any>();
   @Output() moreEvent = new EventEmitter<any>();
   @Input() name;
@@ -90,7 +91,15 @@ export class MoreiconComponent implements OnInit {
       console.log("error", error);
     }
   }
+  selectCheck(labelOption){
+    if (this.arrayOfMynotes.noteLabels.some((data) => data.label == labelOption.label)) {
+    return true;
+    }
+    else {
 
+     return false;
+  }
+  }
 
   clickFunc(label) {
     console.log(label);
@@ -135,19 +144,25 @@ export class MoreiconComponent implements OnInit {
       }
     });
   }
-  // restore(){
-  //   this.model={
-  //     "isDeleted":false,
-  //     "noteIdList":[this.arrayOfNotes]
-  //   }
-  //   this.service.postDelete('notes/deleteForeverNotes',this.model,this.token).subscribe(data=>{
-  //     // this.delEvent.emit();
-  //     this.snackBar.open("note restored", "notes", {
-  //       duration:10000,
-  //     });
-  //   })
+  restore(arrayOfNotes) {
+    var model = {
+      "isDeleted": false,
+      "noteIdList": [this.arrayOfNotes]
+    }
+    this.service.postDelete("notes/trashNotes", model, this.token).subscribe(data => {
+      this.snackBar.open("note restored  successfully,please check in notes", "notes", {
+        duration: 10000,
 
-  // }
+      });
+      this.delEvent.emit();
+
+    }),
+      error => {
+        console.log("Error", error);
+
+      }
+  }
+  
 
 }
 

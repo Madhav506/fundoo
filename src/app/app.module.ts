@@ -1,16 +1,12 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HttpService } from './core/services/http/http.service';
 import { LoggerService } from './core/services/logger/logger.service';
 import { DataService } from './core/services/data/data.service';
 import { AuthguardGuard } from '../app/core/services/auth/authGuard/auth.guard';
 
-// import { AuthguardGuard } from './auth/auth.guard';
 import { SearchPipe } from './core/pipes/search/search.pipe';
 
 import { AppRoutingModule } from './app-routing.module';
-
 import {
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
@@ -32,7 +28,10 @@ import {
   MatSidenavModule,
   MatListModule,
   MatMenuModule,
-  MatChipsModule
+  MatChipsModule,
+  MatNativeDateModule,
+   
+
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -52,8 +51,6 @@ import { ImageiconComponent } from './components/imageicon/imageicon.component';
 import { CollaboratoriconComponent } from './components/collaboratoricon/collaboratoricon.component';
 import { ColoriconComponent } from './components/coloricon/coloricon.component';
 import { ArchiveiconComponent } from './components/archiveicon/archiveicon.component';
-import { UndoiconComponent } from './components/undoicon/undoicon.component';
-import { RedoiconComponent } from './components/redoicon/redoicon.component';
 import { MoreiconComponent } from './components/moreicon/moreicon.component';
 import { NotescardComponent } from './components/notescard/notescard.component';
 import { NotesParentComponent } from './components/notes-parent/notes-parent.component';
@@ -68,8 +65,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
-
-
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import {MomentDateAdapter} from '@angular/material-moment-adapter';
 
 
 @NgModule({
@@ -91,8 +89,6 @@ import { LayoutModule } from '@angular/cdk/layout';
     CollaboratoriconComponent,
     ColoriconComponent,
     ArchiveiconComponent,
-    UndoiconComponent,
-    RedoiconComponent,
     MoreiconComponent,
     NotescardComponent,
     NotesParentComponent,
@@ -131,7 +127,10 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatExpansionModule,
     MatTooltipModule,
     MatDialogModule,
-    MatChipsModule
+    MatChipsModule,
+    MatNativeDateModule,
+    // MomentDateAdapter,
+    
 
   ],
   entryComponents: [DialogComponent, AddlabelComponent, DeletedialogComponent],

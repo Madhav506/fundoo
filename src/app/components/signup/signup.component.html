@@ -1,5 +1,5 @@
 <div flexLayout="row" fxLayoutAlign="center ">
-<mat-card fxFlex.md="100" fxFlex.lg="60" fxFlex.xs="100" fxFlex.sm="100" class="class2">
+<mat-card fxLayoutAlign="start start"  fxFlex.md="100" fxFlex.lg="34" fxFlex.xs="100" fxFlex.sm="100" class="class2">
 <form>
 <div class="class3">fundooNotes</div>
 <div class="class4">Sign up </div>
@@ -47,12 +47,13 @@ type="password" [type]="hide ? 'password' : 'text'" [(ngModel)]="detailsObject.c
 </mat-form-field>
 
 </div>
-<div flexLayout="row wrap" fxFlexLayout="center" fxLayoutGap="-151px" class="cards">
+<div flexLayout="row wrap" fxFlexLayout="center" fxLayoutGap="5px" class="cards">
 <div fxFlex.lg="50" *ngFor="let data of card">
 
 <mat-card mat-button (click)="  changeCardColor(data)" 
 [ngClass]="data.check? 'check': 'uncheck'" style="height:70px;width:100px">
-<mat-card-title style="font-size:20px;width:30px;padding-top:-50px;margin-bottom:2px;margin-top:-10px"> {{data.name}}</mat-card-title>
+<mat-card-title style="font-size:20px;width:30px;padding-top:-50px;margin-bottom:2px;margin-top:-10px"> 
+    {{data.name}}</mat-card-title>
 <mat-card-content style="font-size:12px">{{data.description}}
 </mat-card-content>
 </mat-card>

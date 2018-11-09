@@ -3,11 +3,12 @@
 <mat-menu  class="menu" #menu="matMenu" [overlapTrigger]="false">
     <button *ngIf="name == 'trash' " mat-menu-item (click)="deleteforever()">
         <span>Delete Forever</span></button>
-    <button *ngIf="name == 'trash' " mat-menu-item (click)="restore()">
+    <button *ngIf="name == 'trash' " mat-menu-item (click)="restore(arrayOfNotes)">
         <span>Restore</span></button>
     <button *ngIf="name != 'trash'" mat-menu-item (click)="deleteNotes(arrayofnotes)">
         <span>Delete Note</span></button>
-    <button *ngIf="name != 'trash'" mat-menu-item (click)="getLabel()" [matMenuTriggerFor]="addlabel">
+    <button *ngIf="name != 'trash'" mat-menu-item (click)="getLabel()"
+     [matMenuTriggerFor]="addlabel">
         <span>Add label</span></button>
     <mat-menu [overlapTrigger]="false" (click)="$event.stopPropagation();" #addlabel="matMenu">
         <div class="title">Label note</div>
@@ -16,7 +17,7 @@
             <input class="inputTitle" [(ngModel)]="search" placeholder="Enter label name">
         </div>
         <br><div *ngFor="let label of ArrayOfLabel | searchData:search">
-            <mat-checkbox (click)="$event.stopPropagation();" (click)="clickFunc(label)"
+            <mat-checkbox (click)="$event.stopPropagation();" (click)="clickFunc(label)" [checked]="selectCheck(label)"
              class="example-margin">{{label.label}}</mat-checkbox>
         </div>
     </mat-menu>

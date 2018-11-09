@@ -126,7 +126,7 @@ export class NotesComponent implements OnInit {
     }
 
   }
-  public i = 0;
+  public i= 0;
   enter() {
     this.i++;
     if (this.data != null) {
@@ -139,9 +139,9 @@ export class NotesComponent implements OnInit {
 
     }
   }
-  ondelete(deletedObj) {
+  remove(removed) {
     for (var i = 0; i < this.dataarray.length; i++) {
-      if (deletedObj.index == this.dataarray[i].index) {
+      if (removed.index == this.dataarray[i].index) {
         this.dataarray.splice(i, 1);
         break;
       }
@@ -149,11 +149,11 @@ export class NotesComponent implements OnInit {
 
   }
 
-  editing(event, edited) {
+  edit(event, editable) {
     if (event.code == "Enter") {
       for (var i = 0; i < this.dataarray.length; i++) {
-        if (edited.index == this.dataarray[i].index) {
-          this.dataarray[i].data == edited.data
+        if (editable.index == this.dataarray[i].index) {
+          this.dataarray[i].data == editable.data
         }
       }
     }

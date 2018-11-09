@@ -1,6 +1,6 @@
  .matcard{
     margin: 10px;
-    height:auto;
+    /* height:auto; */
      width:180px; 
     border-radius: 10px 10px 10px 10px;
   
@@ -54,12 +54,14 @@ mat-card-content{
     opacity: 0.54;
 }
 .mat-standard-chip.mat-chip-with-trailing-icon {
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     padding-right: 0px;
     padding-left: 10px;
     margin-bottom: -2px;
-    background-color: white;
+    margin-top:15px;
+    background-color: whitesmoke;
+    
    
   color:black;
   cursor: pointer;

@@ -14,7 +14,7 @@ export class HttpService {
   // getDataService  to get data from service api
 
   getDataService(url) {
-    url =  + url
+    url =  this.url+ url;
     return this.http.get(url);
   }
 

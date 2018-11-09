@@ -125,6 +125,7 @@ export class ToolbarComponent implements OnInit {
     this.values = heading;
 
   }
+  
   imageFile = null;
 
   public imageNew = localStorage.getItem('imageUrl');

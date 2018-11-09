@@ -5,27 +5,31 @@
     <mat-icon fxFlex="25" aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
   <div  class="title"><span fxFlex="10" style="font-family:BURW Chancery L, cursive">fundoo Notes
-  </span></div>
-
+  </span>
+</div>
+                    <!--------------------- Search Globally-------------- -->
   <form  fxFlex class="search">
     <button  mat-icon-button  type="submit"><mat-icon >search</mat-icon></button>
-    <input fxFlex type="text" name="search" [(ngModel)]="searchInput" (click)="clickSearch()" 
+    <input fxFlex type="text"  name="search" [(ngModel)]="searchInput" (click)="clickSearch()" 
     (keydown)="passmessage()"  placeholder="Search" >
     <button  mat-icon-button (click)="clear()" type="submit"><mat-icon >clear</mat-icon></button>
-
   </form>
+                       <!---------------------refresh------------------------->
 
-  
   <button mat-icon-button> <mat-icon matTooltip="Refresh" fxFlex="40px" >refresh</mat-icon>
   </button>
-  <mat-icon fxFlex="40px" *ngIf="value==0" (click)="listView()" matTooltip="View" >
-    apps</mat-icon>
-  <mat-icon fxFlex="40px" *ngIf="value==1" (click)="gridView()" matTooltip="View" >
-    view_stream</mat-icon>
+                      <!---------------------View-List or Grid------------- -->
 
+  <mat-icon fx.show="true" fxShow.xs="false" fxFlex="40px" *ngIf="value==0" (click)="listView()" matTooltip="View" >
+    apps</mat-icon>
+  <mat-icon fx.show="true" fxShow.xs="false" fxFlex="40px" *ngIf="value==1" (click)="gridView()" matTooltip="View" >
+    view_stream</mat-icon>
+                     <!---------------------notifications------------------------->
   <mat-icon fxFlex="40px" matTooltip="Notifications" >notifications_none</mat-icon>
 
-  <button (click) = "$event.stopPropagation()"  matTooltip="fundoo Account" mat-mini-fab 
+                     <!---------------------profile Image-------------------------> 
+
+  <button  (click) = "$event.stopPropagation()"  matTooltip="fundoo Account" mat-mini-fab 
   [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}" 
    [matMenuTriggerFor]="appMenu" 
    style="background-color:white;color:black;text-transform:uppercase"></button>
@@ -55,6 +59,7 @@ mat-mini-fab style="background-color:#fb0;float:right;color:white;text-transform
 <button fxFlex class="logout" (click)="logout()">Log out </button></div>
 </mat-menu>
 </mat-toolbar>
+          <!----------------------sidenavigation container----------------------------------->
 <mat-sidenav-container class="sidenav-container">
 
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true" 
@@ -65,11 +70,15 @@ mat-mini-fab style="background-color:#fb0;float:right;color:white;text-transform
       <a mat-list-item (click)="headingChange(fundooNotes)" class="back" 
       routerLink="/home/notes"><img src="../../../assets/images/notes.svg">
       <span class="notes">Notes</span></a>
+              <!----------------------reminders----------------------------------->
+
       <a     mat-list-item class="back" (click)="headingChange('reminders')" 
       routerLink="/home/reminders">
       <img src="../../../assets/images/reminders.svg"><span  class="reminders">Reminders</span></a>
 
       <mat-divider></mat-divider>
+                <!----------------------label----------------------------------->
+
  <div   style="margin-top:15px;margin-bottom:15px">LABELS</div>
 <div *ngFor="let item of ArrayOfLabel">
 

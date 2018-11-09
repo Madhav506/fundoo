@@ -4,3 +4,44 @@
 .innerIcon:hover{
     opacity:1;
 }
+.menu{
+    width:700px;
+    height:auto;
+    overflow: hidden;
+}
+.mat-menu-content{
+    font-size:10px;
+
+}
+.matFont{
+    font-size:5px;
+}
+.innerMenu{
+    width:500px
+}
+.pick{
+    margin-top:-25px;
+    margin-left:15px
+}
+.menuNew{
+    margin-top:10px;
+    margin-left:10px
+}
+.time{
+    margin-top:-65px;
+}
+.dropDown{
+    margin-right:-70px;
+}
+.menuRem{
+
+    margin-left:18px;
+}
+/* .submenu{
+    width:700px;
+    height:auto;
+    overflow: hidden;
+} */
+.morning{
+    margin-left:20px;
+}

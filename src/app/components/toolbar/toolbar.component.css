@@ -21,7 +21,7 @@
   top: 0;
 }
 .search{
-background-color:#fb0;
+/* background-color:#fb0; */
 overflow: hidden;
 
 
@@ -33,7 +33,7 @@ overflow: hidden;
   font-size:15px;
   height:40px;
   outline: none;
-  background-color:#fb0;
+  /* background-color:#fb0; */
   min-width:100px;
   /* width:700%; */
   overflow: hidden;

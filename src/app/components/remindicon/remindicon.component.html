@@ -1,18 +1,49 @@
-
-   <mat-icon [matMenuTriggerFor]="remindMenu"  class="innerIcon" mat-icon-button aria-label="false" style="user-select:none" matTooltip="remind me" (click)="addReminder()">
+   <mat-icon [matMenuTriggerFor]="remindMenu" class="innerIcon" mat-icon-button aria-label="false" 
+    matTooltip="remind me" >
       touch_app
     </mat-icon>
-    <mat-menu #remindMenu="matMenu" [overlapTrigger]="false">
-        <mat-content >Reminder:</mat-content>
-        <button mat-menu-item >pick Date</button>
-        <button mat-menu-item >Later Today</button>
-        <button mat-menu-item >Tomorrow</button>
-        <button mat-menu-item >Next Week</button>
-        <button mat-menu-item >Home</button>
-        <button mat-menu-item >work</button>
+    <mat-menu class="matFont" #remindMenu="matMenu" 
+      [overlapTrigger]="false">
+        <mat-content class="menuRem">Reminder:</mat-content>
+        <button fxLayoutAlign="space-between" (click)=" todayReminder()" class="menu" mat-menu-item >Later Today<span>8.00 PM</span></button>
+        <button fxLayoutAlign="space-between" (click)="tomorrowReminder()" class="menu" mat-menu-item >Tomorrow<span>8.00 AM</span></button>
+        <button fxLayoutAlign="space-between"  (click)="weekReminder()"  class="menu" mat-menu-item >Next Week<span>Mon,8.00 AM</span></button>
+        <button fxLayoutAlign="space-between"  class="menu" mat-menu-item >Home<span>Kopar</span></button>
+        <button fxLayoutAlign="space-between"  class="menu" mat-menu-item >work<span>Govandi</span></button>
+        <button class="menu" (click)="$event.stopPropagation();"   mat-menu-item>
+ <div class='innerMenu'>
+      <div [matMenuTriggerFor]="dateMenu">  <mat-icon  >access_time</mat-icon>
+        <mat-content >Pick date & time</mat-content></div>
+ <mat-menu #dateMenu="matMenu"  [overlapTrigger]="false">
+    <div > <mat-icon class="menuNew">keyboard_backspace</mat-icon>
+        <span class="pick">Pick date & time</span></div>
+            <mat-form-field >
+              <input (click)="$event.stopPropagation();"  class="pick" matInput [matDatepicker]="dp" [formControl]="date">
+              <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+              <mat-datepicker #dp></mat-datepicker>
+            </mat-form-field>
+            
+          <div>  <mat-form-field >
+                <input (click)="$event.stopPropagation();"  class="pick" matInput
+                 [formControl]="time"> </mat-form-field>
+    <mat-icon (click)="$event.stopPropagation();"  [matMenuTriggerFor]="timeMenu">arrow_drop_down</mat-icon></div>
+             
+              <mat-menu #timeMenu="matMenu"  (click)="$event.stopPropagation();" 
+              [overlapTrigger]="false" class="morning"  >Morning
+           
+                  <button class="menu" mat-menu-item >Afternoon</button>
+                  <button class="menu" mat-menu-item >Evening</button>
+                  <button class="menu" mat-menu-item >Custom</button>
+             </mat-menu>
+          
 
 
-
+            </mat-menu>
+</div>
+          </button>
+    
+          <button class="menu" mat-menu-item ><mat-icon >location_on</mat-icon>
+            Pick place</button>
       </mat-menu>
     
     

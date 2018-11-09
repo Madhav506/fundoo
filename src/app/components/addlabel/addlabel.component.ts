@@ -1,7 +1,8 @@
 import { Component, Inject, EventEmitter, Output, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { HttpService } from '../../core/services/http/http.service'
 import { DataService } from '../../core/services/data/data.service';
+import { DeletedialogComponent } from '../deletedialog/deletedialog.component';
 
 export interface DialogData {
   "title": String,
@@ -26,7 +27,7 @@ export class AddlabelComponent implements OnInit {
   editLabel;
   messageDisplay;
   message;
-  constructor(public service: HttpService, public dataService: DataService,
+  constructor(public service: HttpService, public dataService: DataService, public dialog: MatDialog,
     public dialogRef: MatDialogRef<AddlabelComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.changeText = false;
@@ -108,14 +109,24 @@ export class AddlabelComponent implements OnInit {
   }
 
   deleteLabel(labelid) {
-    console.log(labelid);
-    this.service.deleteData("noteLabels/" + labelid + "/deleteNoteLabel").subscribe(result => {
-      // console.log("delete note label");
-      this.dataService.change(true);
-
-      this.eventTwo.emit();
-      this.getLabel();
-
+    const dialogRef = this.dialog.open(DeletedialogComponent, {
+      width: '500px',
+      panelClass: 'myapp-no-paddding-dialog',
+      data: { name: 'label' }
+    });
+    dialogRef.afterClosed().subscribe(data => {
+    // console.log(labelid);
+    if (data) {
+      this.service.deleteData("noteLabels/" + labelid + "/deleteNoteLabel").subscribe(result => {
+        // console.log("delete note label");
+        
+        this.dataService.change(true);
+  
+        this.eventTwo.emit();
+        this.getLabel();
+      });
+    }
+   
     }),
       error => {
         console.log(error, "error");
