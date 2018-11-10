@@ -1,0 +1,11 @@
+<image-cropper
+    [imageChangedEvent]="data"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="4 / 4"
+    [resizeToWidth]="128"
+    format="png"
+    (imageCropped)="imageCropped($event)"
+ 
+></image-cropper>
+<button  mat-raised-button class="upload" (click)=imageUpload()> set as profile photo </button>
+<button  mat-raised-button class="cancel" (click)=cancel()> cancel </button>

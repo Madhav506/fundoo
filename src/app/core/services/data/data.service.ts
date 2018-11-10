@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class DataService {
@@ -13,6 +13,8 @@ export class DataService {
   private message = new Subject<boolean>();
   currentmsg = this.message.asObservable();
   
+  private Image = new BehaviorSubject(false);
+  currentImage = this.Image.asObservable();
   
   constructor() { }
 
@@ -25,6 +27,9 @@ export class DataService {
   changeAppearance(message:boolean){
 
     this.message.next(message);
+  }
+  changeImage(message:boolean){
+    this.Image.next(message);
   }
 
 

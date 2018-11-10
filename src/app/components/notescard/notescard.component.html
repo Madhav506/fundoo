@@ -1,22 +1,36 @@
-<div >
-  <div fxFlex=5>
-</div>
-  <div fxLayoutAlign="start start"  class="main" fxLayout="row wrap" fxLayoutWrap fxLayout.xs="column" fxLayout.sm="100"
-    fxLayoutGap="20px">
-    <!-- <div > -->
-    <!-- NgFor is a built-in template directive that makes it easy to iterate over something like an array or an object and create a template for each item.  -->
-    <mat-card [ngClass]="{'viewGrid':condition,'viewList':!condition}"
+<div fxlayout="row">
+    <div fxFlex.xs=0 fx.show="true" fxShow.xs="false" fxShow.sm="false"  
+    class="shrink" fxFlex></div>
+ 
+    <div fx.show="true" fxShow.sm="false"  fxShow.md="false" 
+    fxShow.xs="false"  class="grow"  fxFlex="10">
+     </div> 
+  <div  fxLayoutAlign="start start"  class="main" fxLayout="row wrap"
+   fxLayoutWrap fxLayout.xs="column"
+   fxLayout.sm="100"
+    >
+    <!-- NgFor is a built-in template directive that makes it easy to iterate over something
+       like an array or an object and create a template for each item.  -->
+    <mat-card 
+    ngStyle.sm="width:91%"
+    ngStyle.xs="width:91%"
+    ngstyle.gt-sm="width:100%"
+    ngStyle.md="width:100%" 
+    [ngClass]="{'viewGrid':condition,'viewList':!condition}"
      class="matcard" *ngFor="let data of myData | searchData:searchInput"
       [ngStyle]="{'background-color':data.color}">
-      <div (click)="openDialog(data)">
+      <div (click)="openDialog(data)"
+      >
         <mat-card-header>
           <mat-card-title>
-            <div contenteditable="false" dir="ltr" aria-multiline="true" style="font-size:19px" [innerHTML]="data.title" role="textbox">{{data.title
+            <div contenteditable="false" dir="ltr" aria-multiline="true" style="font-size:19px"
+             [innerHTML]="data.title" role="textbox">{{data.title
               }} </div>
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="content">
-          <div contenteditable="false" aria-multiline="true" role="textbox" [innerHTML]="data.description"> {{data.description}}
+          <div contenteditable="false" aria-multiline="true" role="textbox" 
+          [innerHTML]="data.description"> {{data.description}}
             </div>
         </mat-card-content>
       </div>
@@ -36,9 +50,9 @@
       <div fxLayout="row wrap" fxlayoutAlign="start start" fxLayoutGap="5px">
           <div *ngFor="let item of data.reminder">
             <mat-chip-list selected>
-              <mat-chip >
-                {{item}}
-                <mat-icon matChipRemove (click)="removeAssignments(item.id,data.id)">cancel</mat-icon>
+              <mat-chip>
+                {{item|date:"medium"}}
+                <mat-icon matChipRemove (click)="removeReminders(data.id)">cancel</mat-icon>
 
               </mat-chip>
             </mat-chip-list>
@@ -51,7 +65,7 @@
         <!-- <div >  -->
 
 
-        <app-remindicon [reminders]="data"></app-remindicon>
+        <app-remindicon [noteId]="data" (remindEvent)="remind($event)"></app-remindicon>
         <app-collaboratoricon></app-collaboratoricon>
         <app-coloricon [myNewColor]="data.id" (response)="color($event)"></app-coloricon>
         <app-imageicon></app-imageicon>
@@ -66,8 +80,13 @@
 
     </mat-card>
   </div>
-  <div fxFlex=5>
-  </div>
+  <div fx.show="true" fxShow.sm="false"  fxShow.md="false"  
+  fxShow.xs="false"  class="grow"  fxFlex="11">
+   </div> 
+   <div fxFlex.xs=0 fx.show="true" fxShow.md="false" fxShow.xs="false" fxShow.sm="false"  
+   class="shrink" fxFlex></div>
+
+
   </div>
   <!-- </div> -->
    

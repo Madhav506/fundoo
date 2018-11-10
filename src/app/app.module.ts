@@ -68,6 +68,8 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import {MomentDateAdapter} from '@angular/material-moment-adapter';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { ImagecropComponent } from './components/imagecrop/imagecrop.component';
 
 
 @NgModule({
@@ -98,6 +100,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SearchComponent,
     LabelsComponent,
     DeletedialogComponent,
+    ImagecropComponent,
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -129,11 +132,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatDialogModule,
     MatChipsModule,
     MatNativeDateModule,
+    ImageCropperModule
     // MomentDateAdapter,
     
 
   ],
-  entryComponents: [DialogComponent, AddlabelComponent, DeletedialogComponent],
+  entryComponents: [DialogComponent, AddlabelComponent, DeletedialogComponent,ImagecropComponent,ToolbarComponent,],
   providers: [HttpService,AuthguardGuard, DataService, LoggerService],
   bootstrap: [AppComponent]//2
 })

@@ -21,7 +21,7 @@
   top: 0;
 }
 .search{
-/* background-color:#fb0; */
+background-color:#fb0;
 overflow: hidden;
 
 
@@ -33,7 +33,7 @@ overflow: hidden;
   font-size:15px;
   height:40px;
   outline: none;
-  /* background-color:#fb0; */
+  background-color:#fb0;
   min-width:100px;
   /* width:700%; */
   overflow: hidden;
@@ -43,10 +43,10 @@ overflow: hidden;
   background-color:white
 
 }
-/* 
+
 .search input:hover{
   background-color: white;
-} */
+}
 .notes{
   margin-left: 20px;
 }
@@ -87,5 +87,21 @@ overflow: hidden;
 }
 .image{
 display: none;
+
+}
+.change{
+  font-size:10px;
+  color:white;
+  padding-top:40px;
+  
+}
+.imageSelect{
+  background-color:#fb0;
+  
+  color:white;
+  text-transform:uppercase;
+  height:75px;
+  margin-left:10px;
+  width:80px;
 
 }

@@ -19,6 +19,19 @@
         </mat-chip-list>
       </div>
     </div>
+
+    <div fxLayout="row wrap" fxlayoutAlign="start start" fxLayoutGap="5px">
+        <div *ngFor="let item of array2">
+          <mat-chip-list selected>
+            <mat-chip>
+              {{item|date:"medium"}}
+              <mat-icon matChipRemove (click)="removeReminders(item,data.id)">cancel</mat-icon>
+
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+      </div>
+      
     <div fxLayoutAlign="space-between">
       <div fxFlex="70" class="icons" fxLayoutAlign="space-between">
         <app-remindicon></app-remindicon>
@@ -29,7 +42,7 @@
         [archiveNotesArray]="data.id" (archiveEvent)="archive($event)">
 
         </app-archiveicon>
-        <app-moreicon [arrayOfNotes]='data.id' (moreEvent)="more($event)" 
+        <app-moreicon [arrayOfNotes]='data.id' [arrayOfMynotes]="data" (moreEvent)="more($event)" 
         (updateEvent)="color($event)"></app-moreicon>
       </div>
       <div><button mat-icon-button (click)="onClick()" (click)="close()" 

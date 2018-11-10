@@ -77,6 +77,7 @@ export class MoreiconComponent implements OnInit {
       }
   }
   addLabelList(label) {
+console.log('yesss');
 
     console.log(label.id);
     console.log("noteid", this.arrayOfNotes);

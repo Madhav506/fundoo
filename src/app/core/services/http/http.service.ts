@@ -7,6 +7,7 @@ import{environment} from '../../../../environments/environment'
 export class HttpService {
   
   url=environment.baseUrl;
+  // profileUrlNew=environment.profileUrl;
 
   constructor(private http: HttpClient) { }
 

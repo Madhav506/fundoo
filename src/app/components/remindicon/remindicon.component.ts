@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
@@ -27,86 +27,86 @@ export const MY_FORMATS = {
   templateUrl: './remindicon.component.html',
   styleUrls: ['./remindicon.component.css'],
   providers: [
-    // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
-    // application's root module. We provide it at the component level here, due to limitations of
-    // our example generation script.
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
 
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
   ],
 })
 export class RemindiconComponent implements OnInit {
-  @Input() reminders;
-
+  @Input() noteId;
+@Output() remindEvent=new EventEmitter<any>()
   constructor(public snackBar:MatSnackBar,public service:HttpService) { }
 
   ngOnInit() {
-    this.getReminder();
+    // this. getReminderNotes() ;
   }
 
   date = new FormControl(moment());
   time = new FormControl('8.00 PM');
   token=localStorage.getItem('token');
-  today(){
-    var todayNew;
-    todayNew=new Date();
-    LoggerService.log('today',todayNew)
-  }
-  getReminder() {
+
+  getReminderNotes() {
     this.service.getCardData('/notes/getReminderNotesList', this.token)
       .subscribe(data => {
-        console.log(data)
+        LoggerService.log('get reminder',data);
       })
     error => {
-      console.log(error)
-    }
+      LoggerService.log('error',error);
+        }
   }
-  body={};
-  todayReminder() {
-    let currentDate = new Date()
-    this.body =
+  model={};
+  
+  todaysReminder() {
+    var currentDate = new Date();
+    this.model =
       {
-        'noteIdList': [this.reminders.id],
-        'reminder': new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 0, 8, 0, 0)
+        'noteIdList': [this.noteId.id],
+        'reminder': new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 0, 20, 0, 0)
       }
-    this.service.postDelete('/notes/addUpdateReminderNotes', this.body, this.token)
+    this.service.postDelete('/notes/addUpdateReminderNotes', this.model, this.token)
       .subscribe(data => {
-        LoggerService.log('data',data);
+        LoggerService.log('todays reminder',data);
+        this.remindEvent.emit();
       },
         error => {
           LoggerService.log('error',error);
         })
   }
-  tomorrowReminder() {
-    let currentDate = new Date()
-    this.body =
+
+  tomorrowsReminder() {
+    var currentDate = new Date();
+    // var tomorrow;
+    this.model =
       {
-        'noteIdList': [this.reminders.id],
+        'noteIdList': [this.noteId.id],
         'reminder': new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1, 8, 0, 0)
       }
-    this.service.postDelete('/notes/addUpdateReminderNotes', this.body, this.token)
+    this.service.postDelete('/notes/addUpdateReminderNotes', this.model, this.token)
       .subscribe(data => {
-        LoggerService.log('data',data);
+        LoggerService.log('tomorrows reminder',data);
+        this.remindEvent.emit();
       },
         error => {
           LoggerService.log('error',error);
         })
   }
-  weekReminder() {
-    let currentDate = new Date()
-    this.body =
+  weeklyReminder() {
+    var currentDate = new Date();
+    this.model =
       {
-        'noteIdList': [this.reminders.id],
+        'noteIdList': [this.noteId.id],
         'reminder': new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 7, 8, 0, 0)
       }
-    this.service.postDelete('/notes/addUpdateReminderNotes', this.body, this.token)
+    this.service.postDelete('/notes/addUpdateReminderNotes', this.model, this.token)
       .subscribe(data => {
-        LoggerService.log('data',data);
+        LoggerService.log('Weekly  reminder',data);
+        this.remindEvent.emit();
       },
         error => {
           LoggerService.log('error',error);
         })
   }
+  
 
 }
 

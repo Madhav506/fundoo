@@ -5,9 +5,9 @@
     <mat-menu class="matFont" #remindMenu="matMenu" 
       [overlapTrigger]="false">
         <mat-content class="menuRem">Reminder:</mat-content>
-        <button fxLayoutAlign="space-between" (click)=" todayReminder()" class="menu" mat-menu-item >Later Today<span>8.00 PM</span></button>
-        <button fxLayoutAlign="space-between" (click)="tomorrowReminder()" class="menu" mat-menu-item >Tomorrow<span>8.00 AM</span></button>
-        <button fxLayoutAlign="space-between"  (click)="weekReminder()"  class="menu" mat-menu-item >Next Week<span>Mon,8.00 AM</span></button>
+        <button fxLayoutAlign="space-between" (click)=" todaysReminder()" class="menu" mat-menu-item >Later Today<span>8.00 PM</span></button>
+        <button fxLayoutAlign="space-between" (click)="tomorrowsReminder()" class="menu" mat-menu-item >Tomorrow<span>8.00 AM</span></button>
+        <button fxLayoutAlign="space-between"  (click)="weeklyReminder()"  class="menu" mat-menu-item >Next Week<span>Mon,8.00 AM</span></button>
         <button fxLayoutAlign="space-between"  class="menu" mat-menu-item >Home<span>Kopar</span></button>
         <button fxLayoutAlign="space-between"  class="menu" mat-menu-item >work<span>Govandi</span></button>
         <button class="menu" (click)="$event.stopPropagation();"   mat-menu-item>

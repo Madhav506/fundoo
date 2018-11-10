@@ -18,6 +18,7 @@ export class NotescardComponent implements OnInit {
   @Output() newEvent = new EventEmitter<any>();
   @Output() deleted = new EventEmitter<any>();
   @Output() unarchive = new EventEmitter<any>();
+  @Output() reminderEvent = new EventEmitter<any>();
 
   token = localStorage.getItem('token')
   public element;
@@ -57,6 +58,10 @@ export class NotescardComponent implements OnInit {
 
     this.unarchive.emit()
 
+  }
+  remind(event){    
+this.reminderEvent.emit();
+    
   }
 
 
@@ -99,6 +104,26 @@ export class NotescardComponent implements OnInit {
     this.service.postDelete("notes/" + noteid + "/addLabelToNotes/" + labelid + "/remove", {}, this.token)
       .subscribe(response => {
         // console.log("removing labels",response);
+        this.updateEvent.emit();
+
+      });
+    error => {
+      console.log("error");
+
+    }
+
+  }
+  model={};
+
+  removeReminders(noteid) {
+    LoggerService.log(noteid)
+  this.model={
+
+'noteIdList': [noteid],
+  }
+    this.service.postDelete("notes/removeReminderNotes", this.model, this.token)
+      .subscribe(data => {
+        LoggerService.log('reminder data removed',data);
         this.updateEvent.emit();
 
       });

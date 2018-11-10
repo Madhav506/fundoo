@@ -21,9 +21,9 @@
                       <!---------------------View-List or Grid------------- -->
 
   <mat-icon fx.show="true" fxShow.xs="false" fxFlex="40px" *ngIf="value==0" (click)="listView()" matTooltip="View" >
-    apps</mat-icon>
+      view_stream </mat-icon>
   <mat-icon fx.show="true" fxShow.xs="false" fxFlex="40px" *ngIf="value==1" (click)="gridView()" matTooltip="View" >
-    view_stream</mat-icon>
+      view_module </mat-icon>
                      <!---------------------notifications------------------------->
   <mat-icon fxFlex="40px" matTooltip="Notifications" >notifications_none</mat-icon>
 
@@ -32,22 +32,25 @@
   <button  (click) = "$event.stopPropagation()"  matTooltip="fundoo Account" mat-mini-fab 
   [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}" 
    [matMenuTriggerFor]="appMenu" 
-   style="background-color:white;color:black;text-transform:uppercase"></button>
+   style="background-color:white;color:black;text-transform:uppercase">
+  </button>
 
   <mat-menu  #appMenu="matMenu" [overlapTrigger]="false">
 
-    <div fxLayoutAlign="row wrap"  >
-        <div fxFlex=20>  
+    <div fxLayoutAlign="row wrap">
+ <div fxFlex=20>  
 <button  (click) = "$event.stopPropagation()"
 [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
 (click)="imageSelectFile.click()" matTooltip="fundoo Account"
-mat-mini-fab style="background-color:#fb0;float:right;color:white;text-transform:uppercase">
+mat-mini-fab class="imageSelect" >
+<div mat-raised-button class="change">change</div>
 </button>
 
 <input (click) = "$event.stopPropagation()" class="image" type="file" 
 (change)="onFileUpload($event)" #imageSelectFile>
 
 </div>
+
 
 <mat-content fxFlex class="contentstyle" style="margin-top:5px;float:left" >
 {{firstName | titlecase}} {{lastName | titlecase}} </mat-content>

@@ -10,6 +10,8 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { AddlabelComponent } from '../addlabel/addlabel.component';
 import { DataService } from '../../core/services/data/data.service';
 import { LoggerService } from '../../core/services/logger/logger.service';
+import { ImagecropComponent } from '../imagecrop/imagecrop.component';
+import { environment } from '../../../environments/environment';
 
 
 @Component({
@@ -33,7 +35,9 @@ export class ToolbarComponent implements OnInit {
   value = 0;
   url: string;
   result;
-  
+  public profile;
+
+
   // image= localStorage.getItem('imageUrl')
 
   raw_data;
@@ -41,8 +45,12 @@ export class ToolbarComponent implements OnInit {
     .pipe(
       map(result => result.matches)
     );
+  imageChangedEvent: any;
+  croppedImage: string;
+  image2: string;
+  imageProfile: string;
 
-  constructor(private cdRef: ChangeDetectorRef,private breakpointObserver: BreakpointObserver, public dataService: DataService, public service: HttpService, public dialog: MatDialog, public snackBar: MatSnackBar, private router: Router, public http: HttpService) {
+  constructor(private cdRef: ChangeDetectorRef, private breakpointObserver: BreakpointObserver, public dataService: DataService, public service: HttpService, public dialog: MatDialog, public snackBar: MatSnackBar, private router: Router, public http: HttpService) {
 
   }
 
@@ -125,30 +133,33 @@ export class ToolbarComponent implements OnInit {
     this.values = heading;
 
   }
-  
-  imageFile = null;
 
+  imageFile = null;
   public imageNew = localStorage.getItem('imageUrl');
   img = "http://34.213.106.173/" + this.imageNew;
 
   onFileUpload(event) {
     this.imageFile = event.path[0].files[0];
-    const uploadImage= new FormData();
+    const uploadImage = new FormData();
     uploadImage.append('file', this.imageFile, this.imageFile.name);
-    this.service.addImage('user/uploadProfileImage', uploadImage, this.token).subscribe(response => {
+    this.openDialogImageCrop(event);
 
-      LoggerService.log("image url path is" +response['status'].imageUrl)
+  }
+  openDialogImageCrop(data) {
+    const dialogRef1 = this.dialog.open(ImagecropComponent, {
+      width: '400px',
 
-      this.img = "http://34.213.106.173/" + response['status'].imageUrl;
-      
-      localStorage.setItem('imageUrl', response['status'].imageUrl);
+      data: data
 
+    });
 
-    }, error => {
-      console.log(error);
-
-    })
-
+    dialogRef1.afterClosed().subscribe(result => {
+      this.dataService.currentImage.subscribe(imageResponse => this.profile = imageResponse)
+      if (this.profile == true) {
+        this.imageProfile = localStorage.getItem('imageUrl');
+        this.img = environment.profileUrl + this.imageProfile;
+      }
+    });
   }
   public image = {};
 

@@ -1,8 +1,9 @@
-import { Component, OnInit, Inject, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { HttpService } from '../../core/services/http/http.service'
 import { MatSnackBar } from '@angular/material';
 import { DataService } from '../../core/services/data/data.service';
+import { LoggerService } from '../../core/services/logger/logger.service';
 
 export interface DialogData {
   "title": String,
@@ -19,8 +20,8 @@ export class DialogComponent implements OnInit {
   @Output() archiveEvent = new EventEmitter<any>();
   @Output() updateEvent = new EventEmitter<any>();
   archiveNotesArray={'isArchived': false}
-
   eventOne = new EventEmitter<boolean>();
+  model: { 'noteIdList': any[]; };
 
   constructor(public service: HttpService, public dataService: DataService,
     public dialogRef: MatDialogRef<DialogComponent>,
@@ -38,6 +39,7 @@ export class DialogComponent implements OnInit {
   ngOnInit() {
     // console.log(this.data['noteLabels']);
     this.array1 = this.data['noteLabels'];
+    this.array2=this.data['reminder'];
 
   }
 
@@ -100,6 +102,28 @@ export class DialogComponent implements OnInit {
     });
     error => {
       console.log("error");
+
+    }
+
+  }
+  removeReminders(item,noteid) {
+    LoggerService.log(noteid)
+  this.model={
+
+'noteIdList': [noteid],
+  }
+    this.service.postDelete("notes/removeReminderNotes", this.model, this.token)
+      .subscribe(data => {
+        LoggerService.log('reminder data removed',data);
+        this.eventOne.emit(true);
+        const index=this.array2.indexOf(item,0);
+        if(index>-1){
+          this.array2.splice(index,1);
+        }
+
+      });
+    error => {
+      LoggerService.log("error");
 
     }
 
