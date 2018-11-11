@@ -23,3 +23,4 @@ describe('NotesComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

@@ -19,13 +19,11 @@
     [ngClass]="{'viewGrid':condition,'viewList':!condition}"
      class="matcard" *ngFor="let data of myData | searchData:searchInput"
       [ngStyle]="{'background-color':data.color}">
-      <div (click)="openDialog(data)"
-      >
+      <div (click)="openDialog(data)">
         <mat-card-header>
           <mat-card-title>
             <div contenteditable="false" dir="ltr" aria-multiline="true" style="font-size:19px"
-             [innerHTML]="data.title" role="textbox">{{data.title
-              }} </div>
+             [innerHTML]="data.title" role="textbox">{{data.title }} </div>
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="content">
@@ -34,6 +32,28 @@
             </div>
         </mat-card-content>
       </div>
+      
+         <div class="note" *ngFor="let checklist of data.noteCheckLists" fxLayout="row" > 
+            <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted" 
+            (click)=checkBox(checklist,data.id)></mat-checkbox>
+            <input *ngIf="!checklist.isDeleted && checklist.status=='open' " 
+            [(ngModel)]=checklist.itemName fxFlex="90%" class="note"
+              (click)="openDialog(data)" [ngStyle]="{'background-color':data.color}">
+           </div>
+          
+            <div class="note" *ngFor="let checklist of data.noteCheckLists" fxLayout="row">
+            <mat-checkbox fxFlex="10%" checked=true *ngIf="checklist.status=='close'&& !checklist.isDeleted"
+             (click)=checkBox(checklist,data.id)></mat-checkbox>
+            <del *ngIf="!checklist.isDeleted && checklist.status=='close'"
+             (click)="openDialog(data)">{{checklist.itemName}}</del>
+          </div> 
+
+          <!-- <mat-card-content class="note" *ngFor="let checklist of data.noteCheckLists" fxLayout="row">
+              <mat-checkbox fxFlex="10%" ></mat-checkbox>
+              <div>{{checklist.itemName}}</div>
+          </mat-card-content> -->
+
+      
       <div fxLayout="row wrap" fxlayoutAlign="start start" fxLayoutGap="5px">
         <div *ngFor="let item of data.noteLabels">
           <mat-chip-list selected>

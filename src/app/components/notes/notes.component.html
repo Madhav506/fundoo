@@ -3,14 +3,14 @@
      <div fxFlex.xs=0   class="grow"  fxFlex="10">
      </div> 
 
-      <div  fxLayout="row" style="border:solid" style="width:800px" fxLayoutAlign="center center" class="row-height">
+      <div  fxLayout="row" style="border:solid" style="width:800px"
+       fxLayoutAlign="center center" class="row-height">
     <mat-card
       fxFlex="54"
    fxFlex.md="100%"
    fxFlex.sm="100%"
    fxFlex.xs="100%"
-        
-      class="card" *ngIf="choose1">
+          class="card" *ngIf="choose1">
 
 
         <div>
@@ -18,12 +18,16 @@
             </span></div>
 
         <div class="cardicon" fxLayoutGap="space-between" fxLayoutAlign="end">
-            <mat-icon fxFlex="13" fxLayoutAlign="end"  class="icon1" matTooltip=" New Note" aria-disabled="false" 
-            (click)="choose3=!choose3" (click)="choose2 = true"
-                (click)="choose1 = false" mat-icon-button>format_list_bulleted</mat-icon>
-            <mat-icon fxFlex="13" fxLayoutAlign="end"  matTooltip="New note with image" aria-disabled="false" 
+            <mat-icon fxFlex="13" fxLayoutAlign="end"  class="icon1" matTooltip=" New Note" 
+            aria-disabled="false" 
+            (click)="choose3=false" (click)="choose2 = true"
+                (click)=" choose1 = false" mat-icon-button>check_box</mat-icon>
+
+            <mat-icon fxFlex="13" fxLayoutAlign="end"  matTooltip="New note with image" 
+            aria-disabled="false" 
             class="icon2" mat-icon-button>image</mat-icon>
-            <mat-icon fxFlex="13" fxLayoutAlign="end"   matTooltip="Drawing not available" aria-disabled="true" 
+            <mat-icon fxFlex="13" fxLayoutAlign="end"   matTooltip="Drawing not available"
+             aria-disabled="true" 
             class="icon3" mat-icon-button>brush</mat-icon>
         </div>
 
@@ -49,23 +53,31 @@
             </div>
         </div>
 
-        <div *ngIf="choose3" class="inputNote" id="description" contenteditable="true" 
+        <div *ngIf="choose3==true" class="inputNote" id="description" contenteditable="true" 
         placeholder="Take a note" autofocus>
         </div>
 
-        <div *ngIf="!choose3">
+        <div *ngIf="choose3==false" >
             <div *ngFor="let data of dataarray" fxLayout="row">
-                <mat-checkbox fxFlex="5%"></mat-checkbox>
-                <input fxFlex="90" *ngIf="!expression3" class="inputNote1" [(ngModel)]=data.data
-                 (keydown)="edit($event.data)">
+
+                <mat-checkbox fxFlex="5%"       [(ngModel)]=data.isChecked (click)="isChecked=!isChecked">
+
+                </mat-checkbox>
+                <input fxFlex="90" [ngStyle]="{'background-color':colorMyevent}" *ngIf="!expression3" class="inputNote1" [(ngModel)]=data.data
+                 >
                 <mat-icon fxFlex="4%" (click)=remove(data) matTooltip="delete">clear</mat-icon>
             </div>
             <mat-divider></mat-divider>
 
             <div fxLayout="row">
-                <mat-icon fxFlex="5%">add</mat-icon>
-                <input [(ngModel)]=data fxFlex="95%" class="inputNote" placeholder="list item"
-                 (keydown.enter)="enter()">
+                <mat-icon fxFlex="5%" *ngIf="!adding">add</mat-icon>
+                <mat-checkbox fxFlex="5%" *ngIf="adding" [(ngModel)]=addCheck 
+                (click)="isChecked=!isChecked"></mat-checkbox>   
+
+                 <input [(ngModel)]=data fxFlex="95%"  class="inputNote" placeholder="List Item" 
+                 (keydown.enter)="enter($event)"
+                 [ngStyle]="{'background-color':colorMyevent}"    (keydown.backspace)="remove()"/>
+
             </div>
             <mat-divider></mat-divider>
 

@@ -5,7 +5,10 @@
     border-radius: 10px 10px 10px 10px;
   
 } 
-
+.note{
+    outline:none;
+    border:none;
+}
 
 mat-card-title{
     word-wrap: break-word;

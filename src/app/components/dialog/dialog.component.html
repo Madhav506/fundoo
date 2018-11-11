@@ -9,6 +9,37 @@
     <div class="inputNote" id="note" [innerHTML]="data.description" contenteditable="true"
      placeholder="Take a note" autofocus>
       {{data.description}} </div>
+
+
+
+
+
+      <div class="note" *ngFor="let check of tempArray" fxLayout="row">
+    
+          <mat-checkbox fxFlex="10%" *ngIf="check.status=='open'&& !check.isDeleted" (click)=checkBox(check)></mat-checkbox>
+          <input [(ngModel)]=check.itemName fxFlex="80%" class="note" (keydown)=editing(check,$event)
+          [ngStyle]="{'background-color':data.color}" *ngIf="!check.isDeleted && check.status=='open' ">
+          <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check) *ngIf="!check.isDeleted && check.status=='open'">clear</mat-icon>
+        </div>
+      
+          <hr *ngIf="checklist">
+          <div fxLayout="row" *ngIf="checklist">
+            <mat-icon fxFlex="5%" *ngIf="!adding">add</mat-icon>
+            <mat-checkbox *ngIf="adding" [(ngModel)]=addCheck  color="primary"></mat-checkbox>
+            <input   fxFlex="95%" class="note" placeholder="List Item" [ngStyle]="{'background-color':data.color}" [(ngModel)]=newList (keydown)=addList($event)/>
+          </div>
+          <span *ngIf="checklist"></span>
+         
+          <div class="note" *ngFor="let check of tempArray" fxLayout="row">
+            <mat-checkbox fxFlex="10%" checked=true *ngIf="check.status=='close'&& !check.isDeleted" (click)=checkBox(check)></mat-checkbox>
+            <input [(ngModel)]=check.itemName class="note" style="text-decoration: line-through;" fxFlex="80%" *ngIf="check.status=='close' && !check.isDeleted"
+            [ngStyle]="{'background-color':data.color}"  (keydown)=editing(check,$event)>
+            <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check) *ngIf="!check.isDeleted && check.status=='close'">clear</mat-icon>
+      </div>
+
+
+
+
     <div fxLayout="row wrap" fxlayoutAlign="start start" fxLayoutGap="8px">
       <div *ngFor="let item of array1">
         <mat-chip-list #noteLabels selected>
@@ -34,7 +65,7 @@
       
     <div fxLayoutAlign="space-between">
       <div fxFlex="70" class="icons" fxLayoutAlign="space-between">
-        <app-remindicon></app-remindicon>
+        <app-remindicon ></app-remindicon>
         <app-collaboratoricon></app-collaboratoricon>
         <app-coloricon [myNewColor]="data.id" (updateEvent)="color($event)"></app-coloricon>
         <app-imageicon></app-imageicon>

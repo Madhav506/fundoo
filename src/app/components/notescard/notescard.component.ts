@@ -25,6 +25,9 @@ export class NotescardComponent implements OnInit {
   @Input() myData
   @Input() searchInput;
   @Input() name;
+  public checkArray=[];
+  public isChecked=false;
+ public view;
   condition = true;
   constructor(public service: HttpService, public dialog: MatDialog, public dataService: DataService) {
     this.dataService.cMsg.subscribe(message => {
@@ -38,6 +41,10 @@ export class NotescardComponent implements OnInit {
       this.dataService.currentmsg.subscribe(response => {
         this.condition = response;
       })
+  }
+
+  ngOnInit() {
+
   }
   public data;
 
@@ -90,11 +97,39 @@ this.reminderEvent.emit();
     });
   }
 
+  checkBox(checkList,note) {
+console.log(note);
 
-
-  ngOnInit() {
-
+    if (checkList.status == "open") {
+      checkList.status = "close"
+    }
+    else {
+      checkList.status = "open"
+    }
+    console.log(checkList);
+    this.modifiedCheckList = checkList;
+    this.updatelist(note);
   }
+   
+updatelist(id){
+  var checklistData = {
+    "itemName": this.modifiedCheckList.itemName,
+    "status": this.modifiedCheckList.status
+  }
+  console.log(checklistData);
+  
+  var url = "notes/" + id + "/checklist/" + this.modifiedCheckList.id + "/update";
+ var  checkNew=JSON.stringify(checklistData);
+
+  this.service.postDelete(url,checkNew,this.token).subscribe(response => {
+    console.log(response);
+    this.colorevent.emit();
+
+  })
+}
+
+
+
 
 
   removeAssignments(labelid, noteid) {
@@ -118,7 +153,6 @@ this.reminderEvent.emit();
   removeReminders(noteid) {
     LoggerService.log(noteid)
   this.model={
-
 'noteIdList': [noteid],
   }
     this.service.postDelete("notes/removeReminderNotes", this.model, this.token)
@@ -133,6 +167,7 @@ this.reminderEvent.emit();
     }
 
   }
+  public modifiedCheckList;
 
 }
 

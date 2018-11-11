@@ -35,6 +35,10 @@ margin-top:-19px;
 font-weight: lighter;
 
 }
+.note{
+    outline:none;
+    border:none;
+}
 .inputNote{
 border:none;
 outline: none;

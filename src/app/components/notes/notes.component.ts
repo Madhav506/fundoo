@@ -12,6 +12,7 @@ import { LoggerService } from '../../core/services/logger/logger.service';
 export class NotesComponent implements OnInit {
   @Output() eventClicked = new EventEmitter<Event>();
   ArrayOfLabel;
+  public body:any={}
   archiveNotesArray = { 'isArchived': false }
   colorMyevent = '#ffffff';
   interval: any;
@@ -24,14 +25,21 @@ export class NotesComponent implements OnInit {
   public title;
   public description;
   notes;
-  data;
+  public addCheck=false;
+  public status="open";
   dataarray = [];
   token = localStorage.getItem('token');
+  public check=false;
+  public isChecked=false;
+  dataArrayApi=[];
+  public isPinned = false;
+    public isArchived=false;
+  adding: boolean;
+  
 
   constructor(public service: HttpService, public snackBar: MatSnackBar) { }
   ngOnInit() {
-    // this.getAllNotes();
-    // this.loadCardsDynamically();
+    
   }
 
   openNote() {
@@ -50,12 +58,19 @@ export class NotesComponent implements OnInit {
 
     this.choose1 = true;
     this.choose2 = false;
-    this.choose3 = true;
+    
     this.array2 = [];
     this.title = document.getElementById('title').innerHTML;
+
+    console.log(this.title);
+    
+console.log(this.choose3);
+
+    if(this.choose3==true){
+   
     this.description = document.getElementById('description').innerHTML;
 
-    var body = {
+    this.body = {
       "title": this.title,
       "description": this.description,
       "labelIdList": JSON.stringify(this.array1),
@@ -64,29 +79,65 @@ export class NotesComponent implements OnInit {
       "color": ""
 
     }
-    body.color = this.colorMyevent;
+    LoggerService.log('body of normal note',this.body);
+    this.body.color = this.colorMyevent;
     this.colorMyevent = "#ffffff";
+  }
+  
+  else{
 
-    this.service.postpassword("notes/addnotes", body, this.token).subscribe(data => {
-      LoggerService.log('data',data);
-      this.snackBar.open("note created  successfully", "Notes", {
-        duration: 10000,
-
-      });
-      this.array1 = [];
-      this.array2 = [];
-      this.eventClicked.emit();
-
-    },
-      error => {
-        console.log("failed", error)
-
+    console.log("else part........");
+    for(var i=0;i<this.dataarray.length;i++){
+         if(this.dataarray[i].isChecked==true){
+          this.status="close"
+         }
+         var apiObj={
+           "itemName":this.dataarray[i].data,
+           "status":this.status
+         }
+         this.dataArrayApi.push(apiObj)
+         this.status="open"
+       }
+       console.log("dataArrayapi",this.dataArrayApi);
+       
+             this.body={
+               "title": this.title,
+               "checklist":JSON.stringify(this.dataArrayApi),
+               "isPined": this.isPinned,
+               "color": "",
+               "isArchived": this.isArchived,
+               "labelIdList": JSON.stringify(this.array1),
+              }
+              console.log(this.body);
+              this.body.color = this.colorMyevent;
+    this.colorMyevent = "#ffffff";
+              
       }
+         
+        this.service.postpassword("notes/addnotes", this.body, this.token).subscribe(data => {
+            LoggerService.log('data',data);
+            this.choose3 = true;
+            this.snackBar.open("note created  successfully", "Notes", {
+              duration: 10000,
+      
+            });
+            this.dataArrayApi=[];
+            this.array1 = [];
+            this.array2 = [];
+            this.dataarray=[];
+            this.adding=false
+            this.eventClicked.emit();
+      
+          }
+      
+          ),error=>{
+            console.log('error',error);
+            
+          }
+       
+  }
 
 
-
-    )
-  };
 
   getLabel() {
 
@@ -126,19 +177,42 @@ export class NotesComponent implements OnInit {
     }
 
   }
+
+
+
+
+
+  //  public checkList=[];
   public i= 0;
-  enter() {
+   public data;
+
+  enter(event) {
+    if (this.data != "") {
+             this.adding = true;
+           }
+           else {
+             this.adding = false;
+         }
     this.i++;
-    if (this.data != null) {
+    this.isChecked=this.addCheck;
+    if (this.data != null  ) {
+      // console.log(event,"keydown");
       var obj = {
         "index": this.i,
-        "data": this.data
+        "data": this.data,
+        "isChecked":this.isChecked
       }
       this.dataarray.push(obj);
-      this.data = null
+      LoggerService.log('dataArray',this.dataarray)
+      this.data = null;
+          this.adding=false;
+          this.isChecked=false;
+            this.addCheck = false;
 
     }
   }
+
+  
   remove(removed) {
     for (var i = 0; i < this.dataarray.length; i++) {
       if (removed.index == this.dataarray[i].index) {
@@ -148,14 +222,15 @@ export class NotesComponent implements OnInit {
     }
 
   }
-
-  edit(event, editable) {
-    if (event.code == "Enter") {
-      for (var i = 0; i < this.dataarray.length; i++) {
-        if (editable.index == this.dataarray[i].index) {
-          this.dataarray[i].data == editable.data
-        }
-      }
-    }
-  }
+  
+     
+  // edit(event, editable) {
+  //   if (event.code == "Enter") {
+  //     for (var i = 0; i < this.dataarray.length; i++) {
+  //       if (editable.index == this.dataarray[i].index) {
+  //         this.dataarray[i].data == editable.data
+  //       }
+  //     }
+  //   }
+  // }
 }      
