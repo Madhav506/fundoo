@@ -7,7 +7,7 @@ import { LoggerService } from '../../core/services/logger/logger.service';
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
-  styleUrls: ['./notes.component.css']
+  styleUrls: ['./notes.component.scss']
 })
 export class NotesComponent implements OnInit {
   @Output() eventClicked = new EventEmitter<Event>();
@@ -85,8 +85,6 @@ console.log(this.choose3);
   }
   
   else{
-
-    console.log("else part........");
     for(var i=0;i<this.dataarray.length;i++){
          if(this.dataarray[i].isChecked==true){
           this.status="close"
@@ -178,10 +176,6 @@ console.log(this.choose3);
 
   }
 
-
-
-
-
   //  public checkList=[];
   public i= 0;
    public data;
@@ -224,13 +218,5 @@ console.log(this.choose3);
   }
   
      
-  // edit(event, editable) {
-  //   if (event.code == "Enter") {
-  //     for (var i = 0; i < this.dataarray.length; i++) {
-  //       if (editable.index == this.dataarray[i].index) {
-  //         this.dataarray[i].data == editable.data
-  //       }
-  //     }
-  //   }
-  // }
+  
 }      

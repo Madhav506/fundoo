@@ -9,7 +9,7 @@ import { DeletedialogComponent } from '../deletedialog/deletedialog.component';
 @Component({
   selector: 'app-moreicon',
   templateUrl: './moreicon.component.html',
-  styleUrls: ['./moreicon.component.css']
+  styleUrls: ['./moreicon.component.scss']
 })
 export class MoreiconComponent implements OnInit {
   @Input() arrayOfNotes;

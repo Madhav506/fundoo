@@ -10,6 +10,7 @@ import { HttpService } from '../../core/services/http/http.service';
 
 const moment = moment_1|| _moment;
 
+
 export const MY_FORMATS = {
   parse: {
     dateInput: 'LL',
@@ -21,39 +22,56 @@ export const MY_FORMATS = {
     monthYearA11yLabel: 'MMMM YYYY',
   },
 };
+export interface List{
+  value:string;
+  newValue:string;
+}
 
 @Component({
   selector: 'app-remindicon',
   templateUrl: './remindicon.component.html',
-  styleUrls: ['./remindicon.component.css'],
+  styleUrls: ['./remindicon.component.scss'],
   providers: [
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
 
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
   ],
 })
+
 export class RemindiconComponent implements OnInit {
-  @Input() noteId;
+@Input() noteId;
 @Output() remindEvent=new EventEmitter<any>()
   constructor(public snackBar:MatSnackBar,public service:HttpService) { }
 
   ngOnInit() {
     // this. getReminderNotes() ;
   }
-
+public flag:boolean=false;
   date = new FormControl(moment());
-  time = new FormControl('8.00 PM');
+  // time = new FormControl('8.00 PM');
   token=localStorage.getItem('token');
+  public  morningTime;
+  selectedItem: string;
 
-  getReminderNotes() {
-    this.service.getCardData('/notes/getReminderNotesList', this.token)
-      .subscribe(data => {
-        LoggerService.log('get reminder',data);
-      })
-    error => {
-      LoggerService.log('error',error);
-        }
-  }
+  lists: List[] = [
+    {value: 'Morning ', newValue: ' Morning  8:00 AM'},
+    {value: 'Afternoon ', newValue: 'Afternoon 1:00 PM'},
+    {value: 'Evening  ', newValue: ' Evening  6:00 PM'},
+    {value: 'Night  ', newValue: 'Night   8:00 PM'},
+  ];
+  
+
+
+ 
+  // getReminderNotes() {
+  //   this.service.getCardData('/notes/getReminderNotesList', this.token)
+  //     .subscribe(data => {
+  //       LoggerService.log('get reminder',data);
+  //     })
+  //   error => {
+  //     LoggerService.log('error',error);
+  //       }
+  // }
   model={};
   
   todaysReminder() {
@@ -106,7 +124,9 @@ export class RemindiconComponent implements OnInit {
           LoggerService.log('error',error);
         })
   }
-  
+  morning(){
+    this.morningTime='8.00AM'
+  }
 
 }
 

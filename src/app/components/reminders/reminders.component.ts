@@ -1,15 +1,35 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
+import { HttpService } from '../../core/services/http/http.service';
+import { LoggerService } from '../../core/services/logger/logger.service';
 
 @Component({
   selector: 'app-reminders',
   templateUrl: './reminders.component.html',
-  styleUrls: ['./reminders.component.css']
+  styleUrls: ['./reminders.component.scss']
 })
 export class RemindersComponent implements OnInit {
+  arrayData1= [];
+  arrayData=[];
 
-  constructor() { }
-
+  constructor(public snackBar:MatSnackBar,public service:HttpService) { }
   ngOnInit() {
+    this.getReminderNotes();
   }
+  token=localStorage.getItem('token')
+  getReminderNotes() {
+    this.service.getCardData('/notes/getReminderNotesList', this.token)
+      .subscribe(data => {
+        LoggerService.log('get reminder',data);
+        // this.arrayData=data['data']['data'];
+        this.arrayData = data['data']['data'].reverse();
 
+      })
+    error => {
+      LoggerService.log('error',error);
+        }
+  }
+  reminders(event) {
+    this.getReminderNotes();
+  }
 }

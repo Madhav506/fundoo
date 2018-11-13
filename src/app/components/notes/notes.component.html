@@ -60,10 +60,11 @@
         <div *ngIf="choose3==false" >
             <div *ngFor="let data of dataarray" fxLayout="row">
 
-                <mat-checkbox fxFlex="5%"       [(ngModel)]=data.isChecked (click)="isChecked=!isChecked">
+                <mat-checkbox fxFlex="5%"  [(ngModel)]=data.isChecked (click)="isChecked=!isChecked">
 
                 </mat-checkbox>
-                <input fxFlex="90" [ngStyle]="{'background-color':colorMyevent}" *ngIf="!expression3" class="inputNote1" [(ngModel)]=data.data
+          <input fxFlex="90" [ngStyle]="{'background-color':colorMyevent}" *ngIf="!choose3"
+                 class="inputNote1" [(ngModel)]=data.data
                  >
                 <mat-icon fxFlex="4%" (click)=remove(data) matTooltip="delete">clear</mat-icon>
             </div>
@@ -71,9 +72,10 @@
 
             <div fxLayout="row">
                 <mat-icon fxFlex="5%" *ngIf="!adding">add</mat-icon>
+
                 <mat-checkbox fxFlex="5%" *ngIf="adding" [(ngModel)]=addCheck 
                 (click)="isChecked=!isChecked"></mat-checkbox>   
-
+                
                  <input [(ngModel)]=data fxFlex="95%"  class="inputNote" placeholder="List Item" 
                  (keydown.enter)="enter($event)"
                  [ngStyle]="{'background-color':colorMyevent}"    (keydown.backspace)="remove()"/>
@@ -132,7 +134,7 @@
                 </mat-menu>
 
             <!-- </div> -->
-            <div><button mat-icon-button (click)="close()" class="close" matTooltip="close">
+            <div><button mat-icon-button (click)="close();choose3=true" class="close" matTooltip="close">
                 CLOSE</button></div>
 
         </div>

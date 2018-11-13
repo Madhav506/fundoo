@@ -19,21 +19,27 @@
     [ngClass]="{'viewGrid':condition,'viewList':!condition}"
      class="matcard" *ngFor="let data of myData | searchData:searchInput"
       [ngStyle]="{'background-color':data.color}">
-      <div (click)="openDialog(data)">
+      <div >
         <mat-card-header>
           <mat-card-title>
+
+              <div fxLayout="row"  class="hiddenDiv">
             <div contenteditable="false" dir="ltr" aria-multiline="true" style="font-size:19px"
              [innerHTML]="data.title" role="textbox">{{data.title }} </div>
-          </mat-card-title>
+            
+              </div>
+              <app-pin (eventEmit)="newPinMessage($event)" [noteId]="data"></app-pin>
+
+          </mat-card-title>        
         </mat-card-header>
-        <mat-card-content class="content">
+      <div (click)="openDialog(data)">  <mat-card-content  class="content">
           <div contenteditable="false" aria-multiline="true" role="textbox" 
           [innerHTML]="data.description"> {{data.description}}
             </div>
-        </mat-card-content>
+        </mat-card-content></div>
       </div>
       
-         <div class="note" *ngFor="let checklist of data.noteCheckLists" fxLayout="row" > 
+         <div  class="note" *ngFor="let checklist of data.noteCheckLists" fxLayout="row" > 
             <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted" 
             (click)=checkBox(checklist,data.id)></mat-checkbox>
             <input *ngIf="!checklist.isDeleted && checklist.status=='open' " 
@@ -42,17 +48,12 @@
            </div>
           
             <div class="note" *ngFor="let checklist of data.noteCheckLists" fxLayout="row">
-            <mat-checkbox fxFlex="10%" checked=true *ngIf="checklist.status=='close'&& !checklist.isDeleted"
+            <mat-checkbox fxFlex="10%" checked=true *ngIf="checklist.status=='close'&& 
+            !checklist.isDeleted"
              (click)=checkBox(checklist,data.id)></mat-checkbox>
-            <del *ngIf="!checklist.isDeleted && checklist.status=='close'"
+            <del class="note1" *ngIf="!checklist.isDeleted && checklist.status=='close'"
              (click)="openDialog(data)">{{checklist.itemName}}</del>
           </div> 
-
-          <!-- <mat-card-content class="note" *ngFor="let checklist of data.noteCheckLists" fxLayout="row">
-              <mat-checkbox fxFlex="10%" ></mat-checkbox>
-              <div>{{checklist.itemName}}</div>
-          </mat-card-content> -->
-
       
       <div fxLayout="row wrap" fxlayoutAlign="start start" fxLayoutGap="5px">
         <div *ngFor="let item of data.noteLabels">
@@ -68,10 +69,11 @@
 
 
       <div fxLayout="row wrap" fxlayoutAlign="start start" fxLayoutGap="5px">
-          <div *ngFor="let item of data.reminder">
+        <div *ngFor="let item of data.reminder">
             <mat-chip-list selected>
               <mat-chip>
-                {{item|date:"medium"}}
+                  <mat-icon class="access">access_time</mat-icon> 
+                  {{item|date:"medium"}}
                 <mat-icon matChipRemove (click)="removeReminders(data.id)">cancel</mat-icon>
 
               </mat-chip>
@@ -101,7 +103,7 @@
     </mat-card>
   </div>
   <div fx.show="true" fxShow.sm="false"  fxShow.md="false"  
-  fxShow.xs="false"  class="grow"  fxFlex="11">
+  fxShow.xs="false"  class="grow"  fxFlex="10">
    </div> 
    <div fxFlex.xs=0 fx.show="true" fxShow.md="false" fxShow.xs="false" fxShow.sm="false"  
    class="shrink" fxFlex></div>

@@ -23,7 +23,7 @@ import { LoggerService } from '../../core/services/logger/logger.service';
 @Component({
   selector: 'app-imagecrop',
   templateUrl: './imagecrop.component.html',
-  styleUrls: ['./imagecrop.component.css']
+  styleUrls: ['./imagecrop.component.scss']
 })
 export class ImagecropComponent implements OnInit {
   ImageFileCropped: any;

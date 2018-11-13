@@ -8,7 +8,7 @@ import { LoggerService } from '../../core/services/logger/logger.service';
 @Component({
   selector: 'app-notescard',
   templateUrl: './notescard.component.html',
-  styleUrls: ['./notescard.component.css']
+  styleUrls: ['./notescard.component.scss']
 })
 export class NotescardComponent implements OnInit {
   @Output() noteEvent = new EventEmitter<any>();
@@ -19,6 +19,7 @@ export class NotescardComponent implements OnInit {
   @Output() deleted = new EventEmitter<any>();
   @Output() unarchive = new EventEmitter<any>();
   @Output() reminderEvent = new EventEmitter<any>();
+  @Output() pinEvent = new EventEmitter<any>();
 
   token = localStorage.getItem('token')
   public element;
@@ -29,6 +30,7 @@ export class NotescardComponent implements OnInit {
   public isChecked=false;
  public view;
   condition = true;
+  message: Event;
   constructor(public service: HttpService, public dialog: MatDialog, public dataService: DataService) {
     this.dataService.cMsg.subscribe(message => {
       LoggerService.log('message'+message);
@@ -49,6 +51,7 @@ export class NotescardComponent implements OnInit {
   public data;
 
   gotMessage($event) {
+console.log('helooo');
 
     this.noteEvent.emit();
 
@@ -69,6 +72,12 @@ export class NotescardComponent implements OnInit {
   remind(event){    
 this.reminderEvent.emit();
     
+  }
+  newPinMessage($event){
+    console.log('yesss1');
+    
+    this.pinEvent.emit();
+
   }
 
 
@@ -92,14 +101,13 @@ this.reminderEvent.emit();
     });
     // console.log(dialogRef,"dialogggg")
     dialogRef.afterClosed().subscribe(data => {
-      console.log('The dialog was closed');
+      LoggerService.log('The dialog was closed');
       this.updateEvent.emit();
     });
   }
 
   checkBox(checkList,note) {
-console.log(note);
-
+    LoggerService.log(note);
     if (checkList.status == "open") {
       checkList.status = "close"
     }
@@ -116,20 +124,24 @@ updatelist(id){
     "itemName": this.modifiedCheckList.itemName,
     "status": this.modifiedCheckList.status
   }
-  console.log(checklistData);
+  LoggerService.log('checklist',checklistData);
   
   var url = "notes/" + id + "/checklist/" + this.modifiedCheckList.id + "/update";
  var  checkNew=JSON.stringify(checklistData);
 
   this.service.postDelete(url,checkNew,this.token).subscribe(response => {
-    console.log(response);
+    LoggerService.log('response',response);
     this.colorevent.emit();
 
   })
 }
 
 
-
+newMessage(event){  
+  if(event){
+    this.message=event;
+  }
+}
 
 
   removeAssignments(labelid, noteid) {

@@ -5,7 +5,7 @@ import { HttpService } from '../../core/services/http/http.service'
 @Component({
   selector: 'app-labels',
   templateUrl: './labels.component.html',
-  styleUrls: ['./labels.component.css']
+  styleUrls: ['./labels.component.scss']
 })
 export class LabelsComponent implements OnInit {
   public labelName;

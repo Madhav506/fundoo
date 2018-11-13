@@ -17,7 +17,7 @@ import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.css'],
+  styleUrls: ['./toolbar.component.scss'],
 })
 @Input()
 export class ToolbarComponent implements OnInit {
@@ -56,6 +56,8 @@ export class ToolbarComponent implements OnInit {
 
 
   ngOnInit() {
+    this.values='fundoo Notes'
+
     this.raw_data = localStorage.getItem('first');
     this.firstName = localStorage.getItem('firstName');
     this.lastName = localStorage.getItem('lastName');
@@ -131,9 +133,15 @@ export class ToolbarComponent implements OnInit {
 
   headingChange(heading) {
     this.values = heading;
-
   }
-
+heading(item){
+  console.log(item);
+  console.log(item.label);
+  
+  
+  this.values=item.label
+  
+}
   imageFile = null;
   public imageNew = localStorage.getItem('imageUrl');
   img = "http://34.213.106.173/" + this.imageNew;

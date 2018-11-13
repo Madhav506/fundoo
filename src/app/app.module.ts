@@ -30,6 +30,7 @@ import {
   MatMenuModule,
   MatChipsModule,
   MatNativeDateModule,
+  MatSelectModule
    
 
 } from '@angular/material';
@@ -70,6 +71,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { ImagecropComponent } from './components/imagecrop/imagecrop.component';
+import { PinComponent } from './components/pin/pin.component';
 
 
 @NgModule({
@@ -101,6 +103,7 @@ import { ImagecropComponent } from './components/imagecrop/imagecrop.component';
     LabelsComponent,
     DeletedialogComponent,
     ImagecropComponent,
+    PinComponent,
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -132,7 +135,8 @@ import { ImagecropComponent } from './components/imagecrop/imagecrop.component';
     MatDialogModule,
     MatChipsModule,
     MatNativeDateModule,
-    ImageCropperModule
+    ImageCropperModule,
+    MatSelectModule
     // MomentDateAdapter,
     
 

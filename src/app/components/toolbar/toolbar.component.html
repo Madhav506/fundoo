@@ -4,15 +4,19 @@
   <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
     <mat-icon fxFlex="25" aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
-  <div  class="title"><span fxFlex="10" style="font-family:BURW Chancery L, cursive">fundoo Notes
+  <div  class="title"><span fxFlex="10" style="font-family:BURW Chancery L, cursive">{{values}}
   </span>
 </div>
                     <!--------------------- Search Globally-------------- -->
-  <form  fxFlex class="search">
+  <form  fxFlex=80 
+  fx.show=true
+  fxShow.xs=false
+  fxShow.sm=false
+  class="search">
     <button  mat-icon-button  type="submit"><mat-icon >search</mat-icon></button>
     <input fxFlex type="text"  name="search" [(ngModel)]="searchInput" (click)="clickSearch()" 
     (keydown)="passmessage()"  placeholder="Search" >
-    <button  mat-icon-button (click)="clear()" type="submit"><mat-icon >clear</mat-icon></button>
+    <!-- <button  mat-icon-button (click)="clear()" type="submit"><mat-icon >clear</mat-icon></button> -->
   </form>
                        <!---------------------refresh------------------------->
 
@@ -70,24 +74,26 @@ mat-mini-fab class="imageSelect" >
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
     <mat-nav-list>
 
-      <a mat-list-item (click)="headingChange(fundooNotes)" class="back" 
+      <a mat-list-item (click)="headingChange('fundooNotes')" class="back" 
       routerLink="/home/notes"><img src="../../../assets/images/notes.svg">
       <span class="notes">Notes</span></a>
               <!----------------------reminders----------------------------------->
 
-      <a     mat-list-item class="back" (click)="headingChange('reminders')" 
+      <a   mat-list-item (click)="headingChange('Reminders')"  class="back" 
       routerLink="/home/reminders">
-      <img src="../../../assets/images/reminders.svg"><span  class="reminders">Reminders</span></a>
+      <img src="../../../assets/images/reminders.svg">
+      <span class="Reminders">Reminders</span></a>
 
       <mat-divider></mat-divider>
                 <!----------------------label----------------------------------->
 
- <div   style="margin-top:15px;margin-bottom:15px">LABELS</div>
+ <div  (click)="headingChange('Labels')"  style="margin-top:15px;margin-bottom:15px">LABELS</div>
 <div *ngFor="let item of ArrayOfLabel">
 
  <div class="back"fxLayoutAlign="space-between-around" fxLayoutGap="10px">
   <mat-icon style="padding-bottom:20px;padding-left:20px"  >label_outline</mat-icon>
-  <a routerLink="/home/labels/{{item.label}}"     style="padding-left:9px"> {{item.label}}
+  <a routerLink="/home/labels/{{item.label}}"  (click)="heading(item)"   
+   style="padding-left:9px"> {{item.label}}
       
   </a>
   <mat-divider></mat-divider>
@@ -98,10 +104,12 @@ mat-mini-fab class="imageSelect" >
      <a style="margin-top:-15px" mat-list-item (click)="openDialogLabel()"><mat-icon>
        edit</mat-icon><span class="notes">Edit Labels</span></a> 
  <mat-divider></mat-divider>
-      <a mat-list-item  class="back"  routerLink="/home/archive"><mat-icon>
+      <a mat-list-item  class="back" (click)="headingChange('Archive')" 
+       routerLink="/home/archive"><mat-icon>
         archive</mat-icon><span class="archive">Archive</span></a>
 
-      <span><a mat-list-item class="back"  routerLink="/home/trash"><mat-icon>
+      <span><a mat-list-item class="back" (click)="headingChange('Trash')" 
+        routerLink="/home/trash"><mat-icon>
         delete</mat-icon><span class="notes">Trash</span></a></span>
      
       <a mat-list-item href="#"></a>

@@ -1,7 +1,17 @@
 
 <app-notes (eventClicked)="getAllNotes($event)" ></app-notes><br>
-<app-notescard [myData]="arrayNewData"  (noteEvent)="getAllNotes($event)"  
+    
+<h3 class="pin">Pinned</h3>
+<app-notescard [myData]="arrayPinData" (pinEvent)="notes($event)"(noteEvent)="getAllNotes($event)"  
+(colorevent)="getAllNotes($event)" (archive)="getAllNotes($event)" 
+ (updateEvent)="getAllNotes($event)"
+ (reminderEvent)="getAllNotes($event)"
+></app-notescard>
+
+<h3 class="pin" >others</h3>
+
+<app-notescard [myData]="arrayNewData"  (pinEvent)="notes($event)" 
+ (noteEvent)="getAllNotes($event)" 
 (colorevent)="getAllNotes($event)" (archive)="getAllNotes($event)" 
  (updateEvent)="getAllNotes($event)"
  (reminderEvent)="getAllNotes($event)"></app-notescard>
- 

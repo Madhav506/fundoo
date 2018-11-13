@@ -14,7 +14,7 @@ export interface DialogData {
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.css']
+  styleUrls: ['./dialog.component.scss']
 })
 export class DialogComponent implements OnInit {
   @Output() archiveEvent = new EventEmitter<any>();
@@ -22,6 +22,7 @@ export class DialogComponent implements OnInit {
   archiveNotesArray={'isArchived': false}
   eventOne = new EventEmitter<boolean>();
   model: { 'noteIdList': any[]; };
+  message: any;
 
   constructor(public service: HttpService, public dataService: DataService,
     public dialogRef: MatDialogRef<DialogComponent>,
@@ -32,24 +33,31 @@ export class DialogComponent implements OnInit {
   public note;
   public id;
   public array1 = [];
-  public array2 = [];
+  public array2 = [];addcheck
   public temp;
   public newLabel;
-  public tempArray=[];
+  public checkArray=[];
   public newList;
   public newData:any={}
   public modifiedCheckList;
   public checklist=false;
-  public bgcolor=this.data.color;
+  @Input() noteId;
   ngOnInit() {
     // console.log(this.data['noteLabels']);
     this.array1 = this.data['noteLabels'];
     this.array2=this.data['reminder'];
+    
     if (this.data['noteCheckLists'].length>0){
             this.checklist=true;
           }
-          this.tempArray=this.data['noteCheckLists']
+          this.checkArray=this.data['noteCheckLists']
 
+  }
+  newMessage(event){
+    
+    if(event){
+      this.message=event;
+    }
   }
 
   onClick(): void {
@@ -111,12 +119,9 @@ export class DialogComponent implements OnInit {
     
       }
       error => {
-        console.log(error);
+        LoggerService.log(error);
       }
   }
-
-
-
 
   editing(editedList,event){
       
@@ -152,13 +157,14 @@ export class DialogComponent implements OnInit {
 
     this.service.postDelete(url,null,this.token).subscribe((response)=>{
       console.log(response);
-      for(var i=0;i<this.tempArray.length;i++){
-        if(this.tempArray[i].id==this.removedList.id){
-          this.tempArray.splice(i,1)
+      for(var i=0;i<this.checkArray.length;i++){
+        if(this.checkArray[i].id==this.removedList.id){
+          this.checkArray.splice(i,1)
         }
       }
     })
   }
+
   public adding=false;
   public addCheck=false;
   public status="open"
@@ -189,75 +195,12 @@ export class DialogComponent implements OnInit {
       this.newList=null;
       this.addCheck=false;
       this.adding=false;
-      console.log(response['data'].details);
-      
-      this.tempArray.push(response['data'].details)
-
-      console.log(this.tempArray)
+      this.checkArray.push(response['data'].details);
+      LoggerService.log('checkArray',this.checkArray)
 
     })
   }
   }
-
-  emit(event){
-
-    this.bgcolor=event
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   removeAssignments(label, noteid) {
     // console.log(label);

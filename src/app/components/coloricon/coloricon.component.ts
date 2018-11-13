@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material';
 @Component({
   selector: 'app-coloricon',
   templateUrl: './coloricon.component.html',
-  styleUrls: ['./coloricon.component.css']
+  styleUrls: ['./coloricon.component.scss']
 })
 export class ColoriconComponent implements OnInit {
   @Input() myNewColor

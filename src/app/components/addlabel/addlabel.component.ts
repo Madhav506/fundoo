@@ -13,7 +13,7 @@ export interface DialogData {
 @Component({
   selector: 'app-addlabel',
   templateUrl: './addlabel.component.html',
-  styleUrls: ['./addlabel.component.css']
+  styleUrls: ['./addlabel.component.scss']
 })
 
 export class AddlabelComponent implements OnInit {

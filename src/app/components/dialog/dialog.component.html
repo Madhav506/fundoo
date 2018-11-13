@@ -4,37 +4,40 @@
       <div class="inputNote" id="title" fxFlex="95" [innerHTML]="data.title" 
       contenteditable="true" placeholder="Title">{{data.title}}
       </div>
-      <div> <img class="pinIcon" src="../../../assets/images/pin.svg" alt=""> </div>
+      <div> <app-pin (eventEmit)=newMessage($event) [noteId]="data"></app-pin> </div>
     </div>
-    <div class="inputNote" id="note" [innerHTML]="data.description" contenteditable="true"
+    <div *ngIf="!checklist" class="inputNote" id="note" [innerHTML]="data.description" contenteditable="true"
      placeholder="Take a note" autofocus>
       {{data.description}} </div>
 
 
-
-
-
-      <div class="note" *ngFor="let check of tempArray" fxLayout="row">
+      <div class="note" *ngFor="let check of checkArray" fxLayout="row">
     
-          <mat-checkbox fxFlex="10%" *ngIf="check.status=='open'&& !check.isDeleted" (click)=checkBox(check)></mat-checkbox>
+          <mat-checkbox fxFlex="10%" *ngIf="check.status=='open'&& !check.isDeleted" 
+          (click)=checkBox(check)></mat-checkbox>
           <input [(ngModel)]=check.itemName fxFlex="80%" class="note" (keydown)=editing(check,$event)
-          [ngStyle]="{'background-color':data.color}" *ngIf="!check.isDeleted && check.status=='open' ">
-          <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check) *ngIf="!check.isDeleted && check.status=='open'">clear</mat-icon>
+          [ngStyle]="{'background-color':data.color}" *ngIf="!check.isDeleted && check.status=='open'">
+          <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check) 
+          *ngIf="!check.isDeleted && check.status=='open'">clear</mat-icon>
         </div>
       
-          <hr *ngIf="checklist">
+          <mat-divider *ngIf="checklist"></mat-divider>
           <div fxLayout="row" *ngIf="checklist">
             <mat-icon fxFlex="5%" *ngIf="!adding">add</mat-icon>
             <mat-checkbox *ngIf="adding" [(ngModel)]=addCheck  color="primary"></mat-checkbox>
-            <input   fxFlex="95%" class="note" placeholder="List Item" [ngStyle]="{'background-color':data.color}" [(ngModel)]=newList (keydown)=addList($event)/>
+            <input   fxFlex="95%" class="note" placeholder="List Item" 
+            [ngStyle]="{'background-color':data.color}" [(ngModel)]=newList (keydown)=addList($event)/>
           </div>
-          <span *ngIf="checklist"></span>
+          <mat-divider *ngIf="checklist"></mat-divider>
          
-          <div class="note" *ngFor="let check of tempArray" fxLayout="row">
-            <mat-checkbox fxFlex="10%" checked=true *ngIf="check.status=='close'&& !check.isDeleted" (click)=checkBox(check)></mat-checkbox>
-            <input [(ngModel)]=check.itemName class="note" style="text-decoration: line-through;" fxFlex="80%" *ngIf="check.status=='close' && !check.isDeleted"
+          <div class="note" *ngFor="let check of checkArray" fxLayout="row">
+            <mat-checkbox fxFlex="10%" checked=true *ngIf="check.status=='close'&& !check.isDeleted"
+             (click)=checkBox(check)></mat-checkbox>
+            <input [(ngModel)]=check.itemName class="note" style="text-decoration: line-through;"
+             fxFlex="80%" *ngIf="check.status=='close' && !check.isDeleted"
             [ngStyle]="{'background-color':data.color}"  (keydown)=editing(check,$event)>
-            <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check) *ngIf="!check.isDeleted && check.status=='close'">clear</mat-icon>
+            <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check)
+             *ngIf="!check.isDeleted && check.status=='close'">clear</mat-icon>
       </div>
 
 
@@ -65,7 +68,8 @@
       
     <div fxLayoutAlign="space-between">
       <div fxFlex="70" class="icons" fxLayoutAlign="space-between">
-        <app-remindicon ></app-remindicon>
+        <app-remindicon [noteId]="data"  ></app-remindicon>
+        <!-- [noteId]="data" (remindEvent)="remind($event)" -->
         <app-collaboratoricon></app-collaboratoricon>
         <app-coloricon [myNewColor]="data.id" (updateEvent)="color($event)"></app-coloricon>
         <app-imageicon></app-imageicon>
