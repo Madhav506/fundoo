@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { HttpService } from '../../core/services/http/http.service';
 import { LoggerService } from '../../core/services/logger/logger.service';
@@ -11,6 +11,7 @@ import { LoggerService } from '../../core/services/logger/logger.service';
 export class RemindersComponent implements OnInit {
   arrayData1= [];
   arrayData=[];
+@Output() notesEvent=new EventEmitter<any>();
 
   constructor(public snackBar:MatSnackBar,public service:HttpService) { }
   ngOnInit() {
@@ -23,7 +24,7 @@ export class RemindersComponent implements OnInit {
         LoggerService.log('get reminder',data);
         // this.arrayData=data['data']['data'];
         this.arrayData = data['data']['data'].reverse();
-
+        // this.notesEvent.emit();
       })
     error => {
       LoggerService.log('error',error);
@@ -32,4 +33,7 @@ export class RemindersComponent implements OnInit {
   reminders(event) {
     this.getReminderNotes();
   }
+  // new($event){
+  //   this.notesEvent.emit();
+  // }
 }

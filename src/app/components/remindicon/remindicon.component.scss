@@ -1,27 +1,18 @@
-.alarm{
-    margin-top:10px;
-}
-.icon2{
-    opacity: 0.5;
-}
-.icon2:hover{
-opacity: 1;
-}
-.menu{
-padding-top:50px;
-padding-top:30px;
-}
-.latertoday{
-    margin-left:90px;
-    font-weight: lighter;
-}
-.place{
-    margin-left:30px;
-    margin-bottom:50px;
 
 
+.icons{
+    opacity:0.75;
+
 }
-.place1{
-    margin-left:10px;
-    margin-bottom: 30px;
+.remind{
+    overflow: hidden
+}
+.mat-menu-panel {
+    min-width: 112px;
+    max-width: 280px;
+    overflow: none;
+    -webkit-overflow-scrolling: touch;
+    max-height: calc(100vh - 48px);
+    border-radius: 2px;
+    outline: 0;
 }

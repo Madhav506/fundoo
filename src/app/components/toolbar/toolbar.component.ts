@@ -4,15 +4,13 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
 import { DialogComponent } from '../dialog/dialog.component';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { AddlabelComponent } from '../addlabel/addlabel.component';
 import { DataService } from '../../core/services/data/data.service';
 import { LoggerService } from '../../core/services/logger/logger.service';
 import { ImagecropComponent } from '../imagecrop/imagecrop.component';
 import { environment } from '../../../environments/environment';
-
 
 @Component({
   selector: 'app-toolbar',
@@ -135,10 +133,6 @@ export class ToolbarComponent implements OnInit {
     this.values = heading;
   }
 heading(item){
-  console.log(item);
-  console.log(item.label);
-  
-  
   this.values=item.label
   
 }

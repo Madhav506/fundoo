@@ -1,41 +1,19 @@
 import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {MomentDateAdapter} from '@angular/material-moment-adapter';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import * as _moment from 'moment'; 
-import * as moment_1 from 'moment';
+// import {MomentDateAdapter} from '@angular/material-moment-adapter';
+// import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+// import * as _moment from 'moment'; 
+// import * as moment_1 from 'moment';
 import { MatSnackBar } from '@angular/material';
 import { LoggerService } from '../../core/services/logger/logger.service';
 import { HttpService } from '../../core/services/http/http.service';
+import { MatDatepickerModule } from "@angular/material";
 
-const moment = moment_1|| _moment;
-
-
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'LL',
-  },
-  display: {
-    dateInput: 'LL',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY',
-  },
-};
-export interface List{
-  value:string;
-  newValue:string;
-}
 
 @Component({
   selector: 'app-remindicon',
   templateUrl: './remindicon.component.html',
   styleUrls: ['./remindicon.component.scss'],
-  providers: [
-    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
-
-    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
-  ],
 })
 
 export class RemindiconComponent implements OnInit {
@@ -44,89 +22,128 @@ export class RemindiconComponent implements OnInit {
   constructor(public snackBar:MatSnackBar,public service:HttpService) { }
 
   ngOnInit() {
-    // this. getReminderNotes() ;
   }
 public flag:boolean=false;
-  date = new FormControl(moment());
-  // time = new FormControl('8.00 PM');
   token=localStorage.getItem('token');
-  public  morningTime;
-  selectedItem: string;
-
-  lists: List[] = [
-    {value: 'Morning ', newValue: ' Morning  8:00 AM'},
-    {value: 'Afternoon ', newValue: 'Afternoon 1:00 PM'},
-    {value: 'Evening  ', newValue: ' Evening  6:00 PM'},
-    {value: 'Night  ', newValue: 'Night   8:00 PM'},
-  ];
   
 
-
- 
-  // getReminderNotes() {
-  //   this.service.getCardData('/notes/getReminderNotesList', this.token)
-  //     .subscribe(data => {
-  //       LoggerService.log('get reminder',data);
-  //     })
-  //   error => {
-  //     LoggerService.log('error',error);
-  //       }
-  // }
-  model={};
-  
-  todaysReminder() {
-    var currentDate = new Date();
-    this.model =
-      {
-        'noteIdList': [this.noteId.id],
-        'reminder': new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 0, 20, 0, 0)
-      }
-    this.service.postDelete('/notes/addUpdateReminderNotes', this.model, this.token)
-      .subscribe(data => {
-        LoggerService.log('todays reminder',data);
-        this.remindEvent.emit();
-      },
-        error => {
-          LoggerService.log('error',error);
-        })
+  modelReminder={
+    "date": new FormControl(new Date()),
+    "time":""
   }
+  model = {};
+  public currentDate = new Date();
+  reminders: any[] = [
+    { value: 'morning', viewDay:'Morning', viewTime:'08:00 AM'},
+    { value: 'afternoon', viewDay:'Afternoon', viewTime:'01:00 PM' },
+    { value: 'evening', viewDay:'Evening', viewTime:'06:00 PM' },
+    { value: 'night', viewDay:'Night', viewTime:'08:00 PM'}];
+
+  todaysReminder() {
+
+
+    this.model = {
+      "noteIdList": [this.noteId.id],
+      "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 
+      this.currentDate.getDate(), 8, 0, 0, 0)
+    }
+    this.service.postDelete('notes/addUpdateReminderNotes', this.model,this.token).subscribe((result) => {
+     
+      this.remindEvent.emit();
+    })
+  }
+
 
   tomorrowsReminder() {
-    var currentDate = new Date();
-    // var tomorrow;
-    this.model =
-      {
-        'noteIdList': [this.noteId.id],
-        'reminder': new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1, 8, 0, 0)
-      }
-    this.service.postDelete('/notes/addUpdateReminderNotes', this.model, this.token)
-      .subscribe(data => {
-        LoggerService.log('tomorrows reminder',data);
-        this.remindEvent.emit();
-      },
-        error => {
-          LoggerService.log('error',error);
-        })
+    
+    this.model = {
+      "noteIdList": [this.noteId.id],
+      "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), (this.currentDate.getDate() + 1), 8, 0, 0, 0)
+    }
+    this.service.postDelete('notes/addUpdateReminderNotes',this.model,this.token).subscribe((result) => {
+      
+      this.remindEvent.emit();
+    })
   }
   weeklyReminder() {
-    var currentDate = new Date();
-    this.model =
-      {
-        'noteIdList': [this.noteId.id],
-        'reminder': new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 7, 8, 0, 0)
+    this.model = {
+      "noteIdList": [this.noteId.id],
+      "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 
+      (this.currentDate.getDate() + 7), 8, 0, 0, 0)
+    }
+    this.service.postDelete('notes/addUpdateReminderNotes', this.model,this.token).subscribe((result) => {
+     
+      this.remindEvent.emit();
+    })
+  }
+  show = true
+  showNHide() {
+    this.show = !this.show;
+  }
+  return() {
+    this.show = true;
+  }
+ 
+  customReminder(date,time){
+    debugger;
+    time.match('^[0-2][0-3]:[0-5][0-9]$');
+    if(time=='8:00 AM'){
+      this.model = {
+        "noteIdList": [this.noteId.id],
+        "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 8, 0, 0, 0)
       }
-    this.service.postDelete('/notes/addUpdateReminderNotes', this.model, this.token)
-      .subscribe(data => {
-        LoggerService.log('Weekly  reminder',data);
-        this.remindEvent.emit();
-      },
-        error => {
-          LoggerService.log('error',error);
-        })
+      
+    }else if(time=='1:00 PM'){
+      this.model = {
+        "noteIdList": [this.noteId.id],
+        "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 13, 0, 0, 0)
+      }
+     
+    }else if(time=='6:00 PM'){
+      this.model = {
+        "noteIdList": [this.noteId.id],
+        "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 18, 0, 0, 0)
+      }
+      LoggerService.log('modelllll',this.model)
+     
+    }else if(time=='8:00 PM'){
+      this.model = {
+        "noteIdList": [this.noteId.id],
+        "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 20, 0, 0, 0)
+      }
+    
+    }else if(time==this.modelReminder.time){
+      LoggerService.log("model Time",this.modelReminder.time);
+      var timeSlice=this.modelReminder.time.split("",8);
+      LoggerService.log("timeSlice",timeSlice);
+      var hour= Number(timeSlice[0]+timeSlice[1]);
+      LoggerService.log("hour",hour);
+      var minute= Number(timeSlice[3]+timeSlice[4]);
+      LoggerService.log("minute",minute);
+      var meridian = (timeSlice[6]+timeSlice[7]);
+      LoggerService.log("meridian",meridian);
+
+      if(meridian=='AM' || meridian=='am'){
+        this.model = {
+          "noteIdList": [this.noteId.id],
+          "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour, minute, 0, 0)
+        }
+       
+      }else if(meridian=='PM' || meridian=='pm'){
+        this.model = {
+          "noteIdList": [this.noteId.id],
+          "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour+12, minute, 0, 0)
+        }
+      
+      }
+      
+    }
+    this.service.postDelete('notes/addUpdateReminderNotes',this.model,this.token)
+    .subscribe((response) => {
+      this.remindEvent.emit();
+    })
   }
-  morning(){
-    this.morningTime='8.00AM'
-  }
+  
 
 }
 

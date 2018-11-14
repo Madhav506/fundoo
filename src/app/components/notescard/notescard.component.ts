@@ -171,7 +171,6 @@ newMessage(event){
       .subscribe(data => {
         LoggerService.log('reminder data removed',data);
         this.updateEvent.emit();
-
       });
     error => {
       console.log("error");
