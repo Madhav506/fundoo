@@ -59,7 +59,7 @@ export class AddlabelComponent implements OnInit {
     var label = this.label;
     // console.log(this.ArrayOfLabel);
     for (var j = 0; j < this.ArrayOfLabel.length; j++) {
-      if (this.ArrayOfLabel[j].label == label ) {
+      if (this.ArrayOfLabel[j].label == label) {
         this.message = "label  already exists"
         return false;
       }
@@ -115,18 +115,18 @@ export class AddlabelComponent implements OnInit {
       data: { name: 'label' }
     });
     dialogRef.afterClosed().subscribe(data => {
-    // console.log(labelid);
-    if (data) {
-      this.service.deleteData("noteLabels/" + labelid + "/deleteNoteLabel").subscribe(result => {
-        // console.log("delete note label");
-        
-        this.dataService.change(true);
-  
-        this.eventTwo.emit();
-        this.getLabel();
-      });
-    }
-   
+      // console.log(labelid);
+      if (data) {
+        this.service.deleteData("noteLabels/" + labelid + "/deleteNoteLabel").subscribe(result => {
+          // console.log("delete note label");
+
+          this.dataService.change(true);
+
+          this.eventTwo.emit();
+          this.getLabel();
+        });
+      }
+
     }),
       error => {
         console.log(error, "error");
@@ -146,13 +146,14 @@ export class AddlabelComponent implements OnInit {
       "id": label.id,
       "userId": this.id
     }
-    this.service.postDelete("noteLabels/" + label.id + "/updateNoteLabel", body, this.token).subscribe(result => {
-      // console.log("update note label", result);
-      this.dataService.change(true);
+    this.service.postDelete("noteLabels/" + label.id + "/updateNoteLabel", body, this.token)
+      .subscribe(result => {
+        // console.log("update note label", result);
+        this.dataService.change(true);
 
-      this.getLabel();
+        this.getLabel();
 
-    }),
+      }),
       error => {
         console.log(error, "error");
       }

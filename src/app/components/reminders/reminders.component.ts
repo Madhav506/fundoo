@@ -24,6 +24,7 @@ export class RemindersComponent implements OnInit {
         LoggerService.log('get reminder',data);
         // this.arrayData=data['data']['data'];
         this.arrayData = data['data']['data'].reverse();
+        this.arrayData.sort()
         // this.notesEvent.emit();
       })
     error => {

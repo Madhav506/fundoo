@@ -4,19 +4,17 @@
   <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
     <mat-icon fxFlex="25" aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
-  <div  class="title"><span fxFlex="10" style="font-family:BURW Chancery L, cursive">{{values}}
+  <div  class="title"><span fxFlex="10"  style="font-family:BURW Chancery L, cursive">{{values}}
   </span>
 </div>
                     <!--------------------- Search Globally-------------- -->
-  <form  fxFlex=80 
+  <form  fxFlex 
   fx.show=true
-  fxShow.xs=false
-  fxShow.sm=false
   class="search">
     <button  mat-icon-button  type="submit"><mat-icon >search</mat-icon></button>
     <input fxFlex type="text"  name="search" [(ngModel)]="searchInput" (click)="clickSearch()" 
     (keydown)="passmessage()"  placeholder="Search" >
-    <!-- <button  mat-icon-button (click)="clear()" type="submit"><mat-icon >clear</mat-icon></button> -->
+    <button  mat-icon-button (click)="clear()" type="submit"><mat-icon >clear</mat-icon></button>
   </form>
                        <!---------------------refresh------------------------->
 
@@ -24,19 +22,30 @@
   </button>
                       <!---------------------View-List or Grid------------- -->
 
-  <mat-icon fx.show="true" fxShow.xs="false" fxFlex="40px" *ngIf="value==0" (click)="listView()" matTooltip="View" >
+  <mat-icon fx.show="true" fxShow.xs="false" fxFlex="40px" *ngIf="value==0" (click)="listView()" 
+  matTooltip="View" >
       view_stream </mat-icon>
-  <mat-icon fx.show="true" fxShow.xs="false" fxFlex="40px" *ngIf="value==1" (click)="gridView()" matTooltip="View" >
+  <mat-icon fx.show="true" fxShow.xs="false" fxFlex="40px" *ngIf="value==1" (click)="gridView()"
+   matTooltip="View" >
       view_module </mat-icon>
                      <!---------------------notifications------------------------->
   <mat-icon fxFlex="40px" matTooltip="Notifications" >notifications_none</mat-icon>
 
                      <!---------------------profile Image-------------------------> 
 
-  <button  (click) = "$event.stopPropagation()"  matTooltip="fundoo Account" mat-mini-fab 
+  <button  *ngIf="imageNew != '' " (click) = "$event.stopPropagation()"  matTooltip="fundoo Account"
+   mat-mini-fab 
   [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}" 
    [matMenuTriggerFor]="appMenu" 
    style="background-color:white;color:black;text-transform:uppercase">
+  </button>
+
+
+  <button  *ngIf="imageNew == '' "  (click) = "$event.stopPropagation()"  matTooltip="fundoo Account"
+   mat-mini-fab 
+   [matMenuTriggerFor]="appMenu" 
+   style="background-color:white;color:black;text-transform:uppercase">
+   {{firstName |  slice : 0 : 1 }}
   </button>
 
   <mat-menu  #appMenu="matMenu" [overlapTrigger]="false">
@@ -74,7 +83,7 @@ mat-mini-fab class="imageSelect" >
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
     <mat-nav-list>
 
-      <a mat-list-item (click)="headingChange('fundooNotes')" class="back" 
+      <a mat-list-item (click)="headingChange('fundoo')" class="back" 
       routerLink="/home/notes"><img src="../../../assets/images/notes.svg">
       <span class="notes">Notes</span></a>
               <!----------------------reminders----------------------------------->
@@ -92,7 +101,7 @@ mat-mini-fab class="imageSelect" >
 
  <div class="back"fxLayoutAlign="space-between-around" fxLayoutGap="10px">
   <mat-icon style="padding-bottom:20px;padding-left:20px"  >label_outline</mat-icon>
-  <a routerLink="/home/labels/{{item.label}}"  (click)="heading(item)"   
+  <a routerLink="/home/labels/{{item.label}}" (stateEvent)="stateNew($event)" (click)="heading(item)"   
    style="padding-left:9px"> {{item.label}}
       
   </a>

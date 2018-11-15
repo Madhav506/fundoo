@@ -10,6 +10,7 @@ import { LoggerService } from '../../core/services/logger/logger.service';
 export class NotesParentComponent implements OnInit {
   arrayPinData=[];
   myArrayData=[];
+  public isPined=false;
   // @Output() pinEvent = new EventEmitter<any>();
 
   constructor(public service: HttpService) { }

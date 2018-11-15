@@ -20,7 +20,11 @@ export class NotescardComponent implements OnInit {
   @Output() unarchive = new EventEmitter<any>();
   @Output() reminderEvent = new EventEmitter<any>();
   @Output() pinEvent = new EventEmitter<any>();
+  @Output() stateEvent = new EventEmitter<Event>();
 
+  todaydate=new Date();
+tomorrow= new Date(this.todaydate.getFullYear(), this.todaydate.getMonth(), 
+(this.todaydate.getDate() + 1));
   token = localStorage.getItem('token')
   public element;
   @Input() myData
@@ -31,6 +35,7 @@ export class NotescardComponent implements OnInit {
  public view;
   condition = true;
   message: Event;
+  values: any;
   constructor(public service: HttpService, public dialog: MatDialog, public dataService: DataService) {
     this.dataService.cMsg.subscribe(message => {
       LoggerService.log('message'+message);
@@ -118,6 +123,15 @@ this.reminderEvent.emit();
     this.modifiedCheckList = checkList;
     this.updatelist(note);
   }
+  
+checkReminder(date){
+  var savedReminder=new Date().getTime();
+  var value=new Date(date).getTime();
+  if(value > savedReminder){
+return true;
+  }
+  else false;
+}
    
 updatelist(id){
   var checklistData = {
@@ -179,6 +193,12 @@ newMessage(event){
 
   }
   public modifiedCheckList;
+  state(event){
+    console.log("hahahaha",event);
+    
+     this.dataService.changeLabel(event);
+
+  }
 
 }
 

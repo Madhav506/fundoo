@@ -1,7 +1,6 @@
 .sidenav-container {
   height: 90%;
 
-
 }
 .row-height{
   height:100%;
@@ -17,8 +16,8 @@
   position: sticky;
   background:#fb0 ;
   color: black;
-
   top: 0;
+  margin-top:6px
 }
 .search{
 background-color:#fb0;
@@ -66,7 +65,8 @@ overflow: hidden;
 .contentstyle{
   font-size:17px;
   font-family:cursive;
-  text-align: center
+  text-align: center;
+  word-break:break-all;
 }
 .add{
   width:250px;

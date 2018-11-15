@@ -8,8 +8,8 @@
                         <div class="class4" align="center">Sign in </div><br>
                         <div class="class5" align="center">Continue to login </div><br>
                         <mat-form-field class="email">
-                            <input matInput placeholder="Email" [formControl]="email"
-                             [(ngModel)]="model.email" required>
+                            <input matInput placeholder="Email" [formControl]="email" 
+                                   [(ngModel)]="model.email" required>
                             <mat-error *ngIf="email.invalid">{{errorMessage()}}</mat-error>
                         </mat-form-field><br><br>
                         <div>
@@ -19,7 +19,8 @@
                         margin-bottom: -10px;color:#4285f4">
                             Create account</a>
                         <button (click)="next()" mat-raised-button style="margin-left:73px;
-                        margin-bottom:10px;color:white;background-color: #4285f4;margin-left:60px">
+                                 margin-bottom:10px;color:white;background-color: #4285f4;
+                                 margin-left:60px">
                             Next
                         </button>
                     </div>
@@ -30,20 +31,22 @@
                     <div class="class3" align="center">fundoo</div><br>
                     <div class="class4" align="center">Welcome </div><br>
                     <mat-form-field class="password">
-                        <input  matInput 
-                        placeholder="Enter password" [formControl]="password" 
-                        [(ngModel)]="model.password"
-                            type="password" [type]="hide ? 'password' : 'text'" required>
-                        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        <input matInput placeholder="Enter password" [formControl]="password"
+                              [(ngModel)]="model.password" type="password" 
+                              [type]="hide ? 'password' : 'text'"
+                            required>
+                        <mat-icon matSuffix (click)="hide = !hide">
+                                  {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         <mat-error *ngIf="password.invalid">{{errorpassword()}}</mat-error>
                     </mat-form-field>
                     <div>
                     </div>
                     <a mat-button routerLink="/forgotpassword" style="margin-right:50px;
-                    margin-bottom: -10px;color:#4285f4 "> forgot
-                        password?</a>
+                    margin-bottom: -10px;color:#4285f4 "> forgot password?
+                    </a>
                     <button (click)="signin()" mat-raised-button style="margin-top:30px;
-                    margin-left:73px;margin-bottom:10px;color:white;background-color: #4285f4;margin-right:-30px">
+                             margin-left:73px;margin-bottom:10px;color:white;
+                            background-color: #4285f4;margin-right:-30px">
                         Signin</button>
                 </form>
             </div>

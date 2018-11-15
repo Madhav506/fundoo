@@ -20,6 +20,7 @@ import { environment } from '../../../environments/environment';
 @Input()
 export class ToolbarComponent implements OnInit {
   @Output() eventClicked = new EventEmitter<Event>();
+
   searchInput;
   name = '';
   firstCharacter = '';
@@ -48,13 +49,22 @@ export class ToolbarComponent implements OnInit {
   image2: string;
   imageProfile: string;
 
-  constructor(private cdRef: ChangeDetectorRef, private breakpointObserver: BreakpointObserver, public dataService: DataService, public service: HttpService, public dialog: MatDialog, public snackBar: MatSnackBar, private router: Router, public http: HttpService) {
+  constructor(private cdRef: ChangeDetectorRef, private breakpointObserver: BreakpointObserver, 
+    public dataService: DataService, public service: HttpService, 
+    public dialog: MatDialog, public snackBar: MatSnackBar, private router: Router, public http: HttpService) {
 
   }
 
 
   ngOnInit() {
-    this.values='fundoo Notes'
+    // if(event){
+      this.dataService.currLabel.subscribe(message => 
+        this.values = message);
+      console.log('hahaha',this.values);
+    // }
+    // else{
+    this.values='fundoo'
+    // }
 
     this.raw_data = localStorage.getItem('first');
     this.firstName = localStorage.getItem('firstName');
@@ -66,6 +76,7 @@ export class ToolbarComponent implements OnInit {
     this.token = localStorage.getItem('token');
     // console.log(this.token);
     this.getLabel();
+   
   }
   logout() {
     this.http.postLogout("user/logout", this.token).subscribe(
@@ -133,9 +144,17 @@ export class ToolbarComponent implements OnInit {
     this.values = heading;
   }
 heading(item){
-  this.values=item.label
+  this.values=item.label;
   
 }
+// stateNew(event){
+//   console.log('hahaha',event);
+
+//   this.dataService.currLabel.subscribe(message => 
+//     this.values = message);
+//   console.log('hahaha',this.values);
+  
+// }
   imageFile = null;
   public imageNew = localStorage.getItem('imageUrl');
   img = "http://34.213.106.173/" + this.imageNew;

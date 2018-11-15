@@ -21,5 +21,5 @@ export class DeletedialogComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  
+
 }

@@ -43,14 +43,15 @@ export class ImagecropComponent implements OnInit {
   }
   token = localStorage.getItem('token');
 
-  cancel(){
+  cancel() {
     this.dialogRef.close();
   }
   imageUpload() {
     const uploadData = new FormData();
     uploadData.append('file', this.ImageFileCropped);
-    this.httpService.addImage('user/uploadProfileImage', uploadData, this.token).subscribe(response => {
-      LoggerService.log("response of Image",response);
+    this.httpService.addImage('user/uploadProfileImage', uploadData, this.token)
+        .subscribe(response => {
+      LoggerService.log("response of Image", response);
       localStorage.setItem('imageUrl', response['status'].imageUrl);
       this.dialogRef.close();
       this.service.changeImage(true);

@@ -8,7 +8,8 @@ import { HttpService } from '../../core/services/http/http.service';
 })
 export class ArchiveComponent implements OnInit {
   constructor(public service: HttpService) { }
-  /**OnInit is a lifecycle hook that is called after Angular has initialized all data-bound properties of a directive. */
+  /**OnInit is a lifecycle hook that is called after Angular has initialized all 
+   * data-bound properties of a directive. */
   ngOnInit() {
     this.getAllNotes();
   }
@@ -16,7 +17,7 @@ export class ArchiveComponent implements OnInit {
   token = localStorage.getItem('token');
 
   getAllNotes() {
-    
+
     this.service.getCardData("notes/getArchiveNotesList", this.token).subscribe(data => {
       // console.log(data);
       this.arrayData = data['data'].data.reverse();

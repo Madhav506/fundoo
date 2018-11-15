@@ -1,90 +1,124 @@
 <div fxlayout="row">
-    <div fxFlex.xs=0 fx.show="true" fxShow.xs="false" fxShow.sm="false"  
-    class="shrink" fxFlex></div>
- 
-    <div fx.show="true" fxShow.sm="false"  fxShow.md="false" 
-    fxShow.xs="false"  class="grow"  fxFlex="10">
-     </div> 
-  <div  fxLayoutAlign="start start"  class="main" fxLayout="row wrap"
-   fxLayoutWrap fxLayout.xs="column"
-   fxLayout.sm="100"
-    >
+
+  <div fxFlex.xs=0 fx.show="true" fxShow.xs="false" fxShow.sm="false" class="shrink" fxFlex>
+  </div>
+  <div fx.show="true" fxShow.sm="false" fxShow.md="false" fxShow.xs="false" class="grow" fxFlex="10">
+  </div>
+  <div fxLayoutAlign="start start" class="main" fxLayout="row wrap" fxLayoutWrap fxLayout.xs="column"
+       fxLayout.sm="100">
     <!-- NgFor is a built-in template directive that makes it easy to iterate over something
-       like an array or an object and create a template for each item.  -->
-    <mat-card 
-    ngStyle.sm="width:91%"
-    ngStyle.xs="width:91%"
-    ngstyle.gt-sm="width:100%"
-    ngStyle.md="width:100%" 
-    [ngClass]="{'viewGrid':condition,'viewList':!condition}"
-     class="matcard" *ngFor="let data of myData | searchData:searchInput"
-      [ngStyle]="{'background-color':data.color}">
-      <div >
+like an array or an object and create a template for each item.  -->
+    <mat-card ngStyle.sm="width:91%" ngStyle.xs="width:91%" ngstyle.gt-sm="width:100%" 
+              ngStyle.md="width:100%" [ngClass]="{'viewGrid':condition,'viewList':!condition}"
+              class="matcard" *ngFor="let data of myData | searchData:searchInput" 
+              [ngStyle]="{'background-color':data.color}">
+      <div>
         <mat-card-header>
           <mat-card-title>
 
-              <div fxLayout="row"  class="hiddenDiv">
-            <div contenteditable="false" dir="ltr" aria-multiline="true" style="font-size:19px"
-             [innerHTML]="data.title" role="textbox">{{data.title }} </div>
-            
+            <div fxLayout="row" class="hiddenDiv">
+              <div contenteditable="false" dir="ltr" aria-multiline="true" style="font-size:19px" 
+                   [innerHTML]="data.title" role="textbox">{{data.title}}
               </div>
-              <app-pin (eventEmit)="newPinMessage($event)" [noteId]="data"></app-pin>
 
-          </mat-card-title>        
-        </mat-card-header>
-      <div (click)="openDialog(data)">  <mat-card-content  class="content">
-          <div contenteditable="false" aria-multiline="true" role="textbox" 
-          [innerHTML]="data.description"> {{data.description}}
             </div>
-        </mat-card-content></div>
+            <app-pin (eventEmit)="newPinMessage($event)" [noteId]="data"></app-pin>
+
+          </mat-card-title>
+        </mat-card-header>
+             <!----------------Open Dialog --------------->
+        <div (click)="openDialog(data)">
+          <mat-card-content class="content">
+            <div contenteditable="false" aria-multiline="true" role="textbox" 
+                 [innerHTML]="data.description"> {{data.description}}
+            </div>
+          </mat-card-content>
+        </div>
       </div>
-      
-         <div  class="note" *ngFor="let checklist of data.noteCheckLists" fxLayout="row" > 
-            <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted" 
-            (click)=checkBox(checklist,data.id)></mat-checkbox>
-            <input *ngIf="!checklist.isDeleted && checklist.status=='open' " 
-            [(ngModel)]=checklist.itemName fxFlex="90%" class="note"
-              (click)="openDialog(data)" [ngStyle]="{'background-color':data.color}">
-           </div>
-          
-            <div class="note" *ngFor="let checklist of data.noteCheckLists" fxLayout="row">
-            <mat-checkbox fxFlex="10%" checked=true *ngIf="checklist.status=='close'&& 
-            !checklist.isDeleted"
-             (click)=checkBox(checklist,data.id)></mat-checkbox>
-            <del class="note1" *ngIf="!checklist.isDeleted && checklist.status=='close'"
+              <!----------------Checklist --------------->
+
+      <div class="note" *ngFor="let checklist of data.noteCheckLists" fxLayout="row">
+        <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted" 
+                      (click)=checkBox(checklist,data.id)>
+        </mat-checkbox>
+        <input *ngIf="!checklist.isDeleted && checklist.status=='open' " 
+               [(ngModel)]=checklist.itemName fxFlex="90%" class="note"
+               (click)="openDialog(data)" [ngStyle]="{'background-color':data.color}">
+      </div>
+
+      <div class="note" *ngFor="let checklist of data.noteCheckLists" fxLayout="row">
+        <mat-checkbox fxFlex="10%" checked=true *ngIf="checklist.status=='close'&& 
+                      !checklist.isDeleted" (click)=checkBox(checklist,data.id)>
+        </mat-checkbox>
+        <del class="note1" *ngIf="!checklist.isDeleted && checklist.status=='close'"
              (click)="openDialog(data)">{{checklist.itemName}}</del>
-          </div> 
-      
+      </div>
+                        <!----------------labels --------------->
+
       <div fxLayout="row wrap" fxlayoutAlign="start start" fxLayoutGap="5px">
         <div *ngFor="let item of data.noteLabels">
           <mat-chip-list selected>
-            <mat-chip  *ngIf="item.isDeleted==false">
+            <mat-chip routerLink="/home/labels/{{item.label}}" (click)="state(item.label)" 
+                      *ngIf="item.isDeleted==false">
               {{item.label}}
-              <mat-icon matChipRemove (click)="removeAssignments(item.id,data.id)">cancel</mat-icon>
+              <mat-icon matChipRemove (click)="removeAssignments(item.id,data.id)">cancel
+
+              </mat-icon>
 
             </mat-chip>
           </mat-chip-list>
         </div>
       </div>
 
+                      <!----------------reminders --------------->
 
-      <div fxLayout="row wrap" fxlayoutAlign="start start" fxLayoutGap="5px">
+      <div fxLayout="row" *ngIf="checkReminder(data.reminder[0])" fxLayoutAlign="start start" 
+           class="row-height" fxLayoutGap="5px">
         <div *ngFor="let item of data.reminder">
-            <mat-chip-list selected>
+          <mat-chip-list selected>
+            <div *ngIf='(todaydate | date:shortDate) == (item | date:shortDate )'>
               <mat-chip>
-                  <mat-icon class="access">access_time</mat-icon> 
-                  {{item|date:"medium"}}
-                <mat-icon matChipRemove (click)="removeReminders(data.id)">cancel</mat-icon>
-
+                <mat-icon>access_time</mat-icon>
+                Today {{item | date:"shortTime"}}
+                <mat-icon (click)="removeReminders(data.id)" matChipRemove>cancel</mat-icon>
               </mat-chip>
-            </mat-chip-list>
-          </div>
+            </div>
+            <div *ngIf='(tomorrow | date:shortDate) == (item | date:shortDate )'>
+              <mat-chip>
+                <mat-icon>access_time</mat-icon>
+                tomorrow {{item | date:"shortTime"}}
+                <mat-icon (click)="removeReminders(data.id)" matChipRemove>cancel</mat-icon>
+              </mat-chip>
+            </div>
+            <div *ngIf='(todaydate | date:shortDate) !==(item | date:shortDate ) && 
+                        (tomorrow | date:shortDate) !== (item | date:shortDate )'>
+              <mat-chip>
+                <mat-icon>access_time</mat-icon>
+                {{item | date:"medium"}}
+                <mat-icon (click)="removeReminders(index.id)" matChipRemove>cancel</mat-icon>
+              </mat-chip>
+            </div>
+          </mat-chip-list>
         </div>
-  
+      </div>
+      <div fxLayout="row" *ngIf="!checkReminder(data.reminder[0])" fxLayoutAlign="start start"
+           class="row-height" fxLayoutGap="5px">
+        <div *ngFor="let item of data.reminder">
+          <mat-chip-list selected>
+            <mat-chip>
+              <mat-icon>access_time</mat-icon>
+              <del>{{item | date:"medium"}}</del>
+              <mat-icon (click)="removeReminders(data.id)" matChipRemove>cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+
+
+      </div>
 
       <mat-card-actions class="icons" fxLayoutAlign="space-between">
 
-        <!-- <div >  -->
+                   <!----------------matcard actions --------------->
 
 
         <app-remindicon [noteId]="data" (remindEvent)="remind($event)"></app-remindicon>
@@ -92,23 +126,20 @@
         <app-coloricon [myNewColor]="data.id" (response)="color($event)"></app-coloricon>
         <app-imageicon></app-imageicon>
         <app-archiveicon [archiveNotesArray]="data" (unarchiveEvent)="unarchived($event)" 
-        (archiveEvent)=myArchive($event)></app-archiveicon>
-        <app-moreicon  [name]="name" (delEvent)="delete($event)" 
-        (eventTwo)="gotMessage($event)" (updateEvent)="gotMessage($event)"
-        (moreEvent)="gotMessage($event)" [arrayOfNotes]="data.id" [arrayOfMynotes]="data"></app-moreicon>
+                         (archiveEvent)=myArchive($event)></app-archiveicon>
+        <app-moreicon [name]="name" (delEvent)="delete($event)" (eventTwo)="gotMessage($event)"
+                      (updateEvent)="gotMessage($event)"
+          (moreEvent)="gotMessage($event)" [arrayOfNotes]="data.id" [arrayOfMynotes]="data">
+        </app-moreicon>
 
-        <!-- </div> -->
       </mat-card-actions>
 
     </mat-card>
   </div>
-  <div fx.show="true" fxShow.sm="false"  fxShow.md="false"  
-  fxShow.xs="false"  class="grow"  fxFlex="10">
-   </div> 
-   <div fxFlex.xs=0 fx.show="true" fxShow.md="false" fxShow.xs="false" fxShow.sm="false"  
-   class="shrink" fxFlex></div>
-
-
+  <div fx.show="true" fxShow.sm="false" fxShow.md="false" fxShow.xs="false" class="grow" fxFlex="10">
   </div>
-  <!-- </div> -->
-   
+  <div fxFlex.xs=0 fx.show="true" fxShow.md="false" fxShow.xs="false" fxShow.sm="false" 
+       class="shrink" fxFlex></div>
+
+
+</div>

@@ -10,8 +10,8 @@
         </div>
     </div>
     <mat-divider></mat-divider>
-    <div class="color" >{{message}}</div>
-    <div fxLayout="row" class="color1"  fxLayoutAlign="space-between center" 
+    <div class="color">{{message}}</div>
+    <div fxLayout="row" class="color1" fxLayoutAlign="space-between center"
          *ngFor="let label of ArrayOfLabel">
         <div fxLayout="row" fxLayoutAlign="space-between center" class="delete">
             <mat-icon (click)="deleteLabel(label.id)" class="hover" fxFlex=10 mat-icon-button>
@@ -19,9 +19,9 @@
         </div>
         <div fxFlex="80" [innerHTML]="label.label" class="label" 
              *ngIf="!canEdit || label.label!=editLabel"></div>
-        <div fxFlex="80" [innerHTML]="label.label" class="label" contenteditable="true"
+        <div fxFlex="80" [innerHTML]="label.label" class="label" contenteditable="true" 
              *ngIf="canEdit && label.label==editLabel"
-             #editDiv>
+            #editDiv>
         </div>
         <div fxFlex="10">
             <mat-icon (click)=edit(label) *ngIf="iconEdit || label.id!=idEdit">edit</mat-icon>

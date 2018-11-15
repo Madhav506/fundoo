@@ -19,6 +19,8 @@ import { MatDatepickerModule } from "@angular/material";
 export class RemindiconComponent implements OnInit {
 @Input() noteId;
 @Output() remindEvent=new EventEmitter<any>()
+@Output() remindTopEvent=new EventEmitter<any>()
+
   constructor(public snackBar:MatSnackBar,public service:HttpService) { }
 
   ngOnInit() {
@@ -32,6 +34,8 @@ public flag:boolean=false;
     "time":""
   }
   model = {};
+  show = true
+
   public currentDate = new Date();
   reminders: any[] = [
     { value: 'morning', viewDay:'Morning', viewTime:'08:00 AM'},
@@ -40,14 +44,15 @@ public flag:boolean=false;
     { value: 'night', viewDay:'Night', viewTime:'08:00 PM'}];
 
   todaysReminder() {
-
-
     this.model = {
       "noteIdList": [this.noteId.id],
       "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 
       this.currentDate.getDate(), 8, 0, 0, 0)
     }
-    this.service.postDelete('notes/addUpdateReminderNotes', this.model,this.token).subscribe((result) => {
+    this.remindTopEvent.emit(this.model['reminder']);
+    
+    this.service.postDelete('notes/addUpdateReminderNotes', this.model,this.token)
+    .subscribe((response) => {
      
       this.remindEvent.emit();
     })
@@ -58,9 +63,13 @@ public flag:boolean=false;
     
     this.model = {
       "noteIdList": [this.noteId.id],
-      "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), (this.currentDate.getDate() + 1), 8, 0, 0, 0)
+      "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 
+      (this.currentDate.getDate() + 1), 8, 0, 0, 0)
     }
-    this.service.postDelete('notes/addUpdateReminderNotes',this.model,this.token).subscribe((result) => {
+    this.remindTopEvent.emit(this.model['reminder']);
+
+    this.service.postDelete('notes/addUpdateReminderNotes',this.model,this.token)
+    .subscribe((response) => {
       
       this.remindEvent.emit();
     })
@@ -71,12 +80,13 @@ public flag:boolean=false;
       "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 
       (this.currentDate.getDate() + 7), 8, 0, 0, 0)
     }
-    this.service.postDelete('notes/addUpdateReminderNotes', this.model,this.token).subscribe((result) => {
+    this.remindTopEvent.emit(this.model['reminder']);
+
+    this.service.postDelete('notes/addUpdateReminderNotes', this.model,this.token).subscribe((response) => {
      
       this.remindEvent.emit();
     })
   }
-  show = true
   showNHide() {
     this.show = !this.show;
   }
@@ -87,32 +97,8 @@ public flag:boolean=false;
   customReminder(date,time){
     debugger;
     time.match('^[0-2][0-3]:[0-5][0-9]$');
-    if(time=='8:00 AM'){
-      this.model = {
-        "noteIdList": [this.noteId.id],
-        "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 8, 0, 0, 0)
-      }
-      
-    }else if(time=='1:00 PM'){
-      this.model = {
-        "noteIdList": [this.noteId.id],
-        "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 13, 0, 0, 0)
-      }
-     
-    }else if(time=='6:00 PM'){
-      this.model = {
-        "noteIdList": [this.noteId.id],
-        "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 18, 0, 0, 0)
-      }
-      LoggerService.log('modelllll',this.model)
-     
-    }else if(time=='8:00 PM'){
-      this.model = {
-        "noteIdList": [this.noteId.id],
-        "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 20, 0, 0, 0)
-      }
     
-    }else if(time==this.modelReminder.time){
+     if(time==this.modelReminder.time){
       LoggerService.log("model Time",this.modelReminder.time);
       var timeSlice=this.modelReminder.time.split("",8);
       LoggerService.log("timeSlice",timeSlice);
@@ -138,6 +124,8 @@ public flag:boolean=false;
       }
       
     }
+          this.remindTopEvent.emit(this.model['reminder']);
+
     this.service.postDelete('notes/addUpdateReminderNotes',this.model,this.token)
     .subscribe((response) => {
       this.remindEvent.emit();

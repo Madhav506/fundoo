@@ -35,7 +35,12 @@ export class NotesComponent implements OnInit {
   public isPinned = false;
     public isArchived=false;
   adding: boolean;
-  
+  noteNew = {
+    'id':''
+  }
+  todaydate=new Date();
+  tomorrow= new Date(this.todaydate.getFullYear(), this.todaydate.getMonth(), 
+  (this.todaydate.getDate() + 1));
 
   constructor(public service: HttpService, public snackBar: MatSnackBar) { }
   ngOnInit() {
@@ -75,13 +80,17 @@ console.log(this.choose3);
       "description": this.description,
       "labelIdList": JSON.stringify(this.array1),
       "checklist": "",
-      "isPined": "",
-      "color": ""
+      "isPined": this.isPinned,
+      "color": "",
+      "reminder":this.newReminder
+
 
     }
     LoggerService.log('body of normal note',this.body);
     this.body.color = this.colorMyevent;
     this.colorMyevent = "#ffffff";
+    this.remindArray=[];
+
   }
   
   else{
@@ -105,6 +114,7 @@ console.log(this.choose3);
                "color": "",
                "isArchived": this.isArchived,
                "labelIdList": JSON.stringify(this.array1),
+               "reminder":this.newReminder
               }
               console.log(this.body);
               this.body.color = this.colorMyevent;
@@ -123,6 +133,8 @@ console.log(this.choose3);
             this.array1 = [];
             this.array2 = [];
             this.dataarray=[];
+            // this.remindArray=[];
+
             this.adding=false
             this.eventClicked.emit();
       
@@ -160,7 +172,6 @@ console.log(this.choose3);
 
   clickFunc(temp) {
     // console.log(temp);
-
     if (!this.array2.some((data) => data == temp.label)) {
       this.array1.push(temp.id);
       this.array2.push(temp.label);
@@ -176,6 +187,8 @@ console.log(this.choose3);
 
   }
 
+
+ 
   //  public checkList=[];
   public i= 0;
    public data;
@@ -216,6 +229,21 @@ console.log(this.choose3);
     }
 
   }
+  remindArray=[];
+  newReminder;
+  reminding(event){
+    if(event){
+      this.newReminder=event
+    this.remindArray.push(event)
+
+  }
+  }
+  removeReminders(){
+    this.remindArray.pop();
+  }
+  // removeAssignments(){
+  //   this.array1=[];
+  // }
   
      
   
