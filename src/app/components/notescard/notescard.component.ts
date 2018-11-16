@@ -1,15 +1,19 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter,ViewChild, Input } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service'
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatSnackBar, MatMenu } from '@angular/material';
 import { DialogComponent } from '../dialog/dialog.component';
 import { DataService } from '../../core/services/data/data.service';
 import { LoggerService } from '../../core/services/logger/logger.service';
+import { RemindiconComponent } from '../remindicon/remindicon.component';
 
 @Component({
   selector: 'app-notescard',
   templateUrl: './notescard.component.html',
   styleUrls: ['./notescard.component.scss']
 })
+
+
+
 export class NotescardComponent implements OnInit {
   @Output() noteEvent = new EventEmitter<any>();
   @Output() colorevent = new EventEmitter<any>();
@@ -22,23 +26,26 @@ export class NotescardComponent implements OnInit {
   @Output() pinEvent = new EventEmitter<any>();
   @Output() stateEvent = new EventEmitter<Event>();
 
-  todaydate=new Date();
-tomorrow= new Date(this.todaydate.getFullYear(), this.todaydate.getMonth(), 
-(this.todaydate.getDate() + 1));
-  token = localStorage.getItem('token')
+  @ViewChild(RemindiconComponent) childComponentMenu: RemindiconComponent;
+
+  todaydate = new Date();
+
+  tomorrow = new Date(this.todaydate.getFullYear(), this.todaydate.getMonth(),
+    (this.todaydate.getDate() + 1));
+    @Input() myData
+    @Input() searchInput;
+    @Input() name;
+  public token = localStorage.getItem('token')
   public element;
-  @Input() myData
-  @Input() searchInput;
-  @Input() name;
-  public checkArray=[];
-  public isChecked=false;
- public view;
+  public checkArray = [];
+  public isChecked = false;
+  public view;
   condition = true;
-  message: Event;
-  values: any;
+  public message: Event;
+  public values: any;
   constructor(public service: HttpService, public dialog: MatDialog, public dataService: DataService) {
     this.dataService.cMsg.subscribe(message => {
-      LoggerService.log('message'+message);
+      LoggerService.log('message' + message);
 
       if (message) {
         this.updateEvent.emit();
@@ -56,7 +63,7 @@ tomorrow= new Date(this.todaydate.getFullYear(), this.todaydate.getMonth(),
   public data;
 
   gotMessage($event) {
-console.log('helooo');
+    console.log('helooo');
 
     this.noteEvent.emit();
 
@@ -74,13 +81,13 @@ console.log('helooo');
     this.unarchive.emit()
 
   }
-  remind(event){    
-this.reminderEvent.emit();
-    
+  remind(event) {
+    this.reminderEvent.emit();
+
   }
-  newPinMessage($event){
+  newPinMessage($event) {
     console.log('yesss1');
-    
+
     this.pinEvent.emit();
 
   }
@@ -111,7 +118,7 @@ this.reminderEvent.emit();
     });
   }
 
-  checkBox(checkList,note) {
+  checkBox(checkList, note) {
     LoggerService.log(note);
     if (checkList.status == "open") {
       checkList.status = "close"
@@ -123,39 +130,39 @@ this.reminderEvent.emit();
     this.modifiedCheckList = checkList;
     this.updatelist(note);
   }
-  
-checkReminder(date){
-  var savedReminder=new Date().getTime();
-  var value=new Date(date).getTime();
-  if(value > savedReminder){
-return true;
+
+  checkReminder(date) {
+    var savedReminder = new Date().getTime();
+    var value = new Date(date).getTime();
+    if (value > savedReminder) {
+      return true;
+    }
+    else false;
   }
-  else false;
-}
-   
-updatelist(id){
-  var checklistData = {
-    "itemName": this.modifiedCheckList.itemName,
-    "status": this.modifiedCheckList.status
+
+  updatelist(id) {
+    var checklistData = {
+      "itemName": this.modifiedCheckList.itemName,
+      "status": this.modifiedCheckList.status
+    }
+    LoggerService.log('checklist', checklistData);
+
+    var url = "notes/" + id + "/checklist/" + this.modifiedCheckList.id + "/update";
+    var checkNew = JSON.stringify(checklistData);
+
+    this.service.postDelete(url, checkNew, this.token).subscribe(response => {
+      LoggerService.log('response', response);
+      this.colorevent.emit();
+
+    })
   }
-  LoggerService.log('checklist',checklistData);
-  
-  var url = "notes/" + id + "/checklist/" + this.modifiedCheckList.id + "/update";
- var  checkNew=JSON.stringify(checklistData);
-
-  this.service.postDelete(url,checkNew,this.token).subscribe(response => {
-    LoggerService.log('response',response);
-    this.colorevent.emit();
-
-  })
-}
 
 
-newMessage(event){  
-  if(event){
-    this.message=event;
+  newMessage(event) {
+    if (event) {
+      this.message = event;
+    }
   }
-}
 
 
   removeAssignments(labelid, noteid) {
@@ -174,16 +181,16 @@ newMessage(event){
     }
 
   }
-  model={};
+  model = {};
 
   removeReminders(noteid) {
     LoggerService.log(noteid)
-  this.model={
-'noteIdList': [noteid],
-  }
+    this.model = {
+      'noteIdList': [noteid],
+    }
     this.service.postDelete("notes/removeReminderNotes", this.model, this.token)
       .subscribe(data => {
-        LoggerService.log('reminder data removed',data);
+        LoggerService.log('reminder data removed', data);
         this.updateEvent.emit();
       });
     error => {
@@ -193,10 +200,8 @@ newMessage(event){
 
   }
   public modifiedCheckList;
-  state(event){
-    console.log("hahahaha",event);
-    
-     this.dataService.changeLabel(event);
+  state(event) {
+    this.dataService.changeLabel(event);
 
   }
 

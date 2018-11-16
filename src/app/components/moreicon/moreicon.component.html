@@ -19,6 +19,8 @@
         <div class="title">Label note
 
         </div>
+                                <!--------search---------- -->
+
         <br><div fxLayout="row" (click)="$event.stopPropagation();">
             <mat-icon fxFlex="30" (click)="searchState()">search
 
@@ -26,6 +28,8 @@
             <input class="inputTitle" [(ngModel)]="search" placeholder="Enter label name">
         </div>
         <br>
+                                 <!--------label---------- -->
+
         <div *ngFor="let label of ArrayOfLabel | searchData:search">
             <mat-checkbox (click)="$event.stopPropagation();" (click)="clickFunc(label)"
                           [checked]="selectCheck(label)" class="example-margin">{{label.label}}

@@ -3,10 +3,15 @@
         <my-slide-panel [activePane]="isLeftVisible ? 'right' : 'left'">
             <div leftPane>
                 <form>
+                       <!--------login---------- -->
+
                     <div class="class2">
                         <div class="class3" align="center">fundooNotes</div><br>
                         <div class="class4" align="center">Sign in </div><br>
                         <div class="class5" align="center">Continue to login </div><br>
+
+                         <!--------Email---------- -->
+
                         <mat-form-field class="email">
                             <input matInput placeholder="Email" [formControl]="email" 
                                    [(ngModel)]="model.email" required>
@@ -30,6 +35,8 @@
                 <form>
                     <div class="class3" align="center">fundoo</div><br>
                     <div class="class4" align="center">Welcome </div><br>
+                        <!--------Password---------- -->
+
                     <mat-form-field class="password">
                         <input matInput placeholder="Enter password" [formControl]="password"
                               [(ngModel)]="model.password" type="password" 

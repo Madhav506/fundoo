@@ -28,7 +28,7 @@
             <mat-icon fxFlex="13" fxLayoutAlign="end"  class="icon1" matTooltip=" New Note" 
             aria-disabled="false" 
             (click)="choose3=false" (click)="choose2 = true"
-                (click)=" choose1 = false" mat-icon-button>check_box</mat-icon>
+            (click)=" choose1 = false" mat-icon-button>check_box</mat-icon>
 
         </div>
 
@@ -114,23 +114,35 @@
             <mat-chip-list selected>
               <div *ngIf='(todaydate | date:shortDate) == (item | date:shortDate )'>
                 <mat-chip>
-                  <mat-icon>access_time</mat-icon>
+                  <mat-icon [matMenuTriggerFor]="childComponentMenu?.menu">access_time</mat-icon>
                             Today {{item | date:"shortTime"}}
+                            <app-remindicon  style="opacity:0"[noteId]="noteNew" 
+                                             (remindTopEvent)="reminding($event)">
+                                </app-remindicon>
+              
                   <mat-icon (click)="removeReminders()" matChipRemove>cancel</mat-icon>
                 </mat-chip>
               </div>
               <div *ngIf='(tomorrow | date:shortDate) == (item | date:shortDate )'>
                 <mat-chip>
-                  <mat-icon>access_time</mat-icon>
+                  <mat-icon [matMenuTriggerFor]="childComponentMenu?.menu">access_time</mat-icon>
                             Tomorrow {{item | date:"shortTime"}}
+                            <app-remindicon  style="opacity:0"[noteId]="noteNew" 
+                            (remindTopEvent)="reminding($event)">
+               </app-remindicon>
+
                   <mat-icon (click)="removeReminders()" matChipRemove>cancel</mat-icon>
                 </mat-chip>
               </div>
               <div *ngIf='(todaydate | date:shortDate) !==(item | date:shortDate ) && 
               (tomorrow | date:shortDate) !== (item | date:shortDate )'>
                 <mat-chip>
-                  <mat-icon>access_time</mat-icon>
+                  <mat-icon [matMenuTriggerFor]="childComponentMenu?.menu">access_time</mat-icon>
                             {{item | date:"medium"}}
+                            <app-remindicon  style="opacity:0"[noteId]="noteNew" 
+                            (remindTopEvent)="reminding($event)">
+               </app-remindicon>
+
                   <mat-icon (click)="removeReminders()" matChipRemove>cancel</mat-icon>
                 </mat-chip>
               </div>

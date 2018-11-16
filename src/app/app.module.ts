@@ -30,8 +30,9 @@ import {
   MatMenuModule,
   MatChipsModule,
   MatNativeDateModule,
-  MatSelectModule
-   
+  MatSelectModule,
+  
+  MatMenu
 
 } from '@angular/material';
 
@@ -104,6 +105,7 @@ import { PinComponent } from './components/pin/pin.component';
     DeletedialogComponent,
     ImagecropComponent,
     PinComponent,
+ 
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -136,7 +138,8 @@ import { PinComponent } from './components/pin/pin.component';
     MatChipsModule,
     MatNativeDateModule,
     ImageCropperModule,
-    MatSelectModule
+    MatSelectModule,
+    
     // MomentDateAdapter,
     
 

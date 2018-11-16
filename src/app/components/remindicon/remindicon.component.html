@@ -1,89 +1,97 @@
-<mat-icon class="icon2" mat-icon-button style="margin-bottom:30px;user-select: none;"
- [matMenuTriggerFor]="menu"
-    (click)="$event.stopPropagation();" matTooltip="Remind me">touch_app</mat-icon>&nbsp;
-  <mat-menu #menu="matMenu"  [overlapTrigger]="false" class="remind" yPosition="below">
-      <div *ngIf="show" class="reminderMenu">
-          <div>
-              Reminder:
-          </div>
-  
-          <button mat-menu-item (click)="todaysReminder()">
-              <div fxFlex>Later today</div>
-              <div fxFlex></div>
-              <div fxFlex><span>08.00 PM</span></div>
-          </button>
-  
-          <button mat-menu-item (click)="tomorrowsReminder()">
-              <div fxFlex>Tomorrow</div>
-              <div fxFlex></div>
-              <div fxFlex><span>08.00 AM</span></div>
-          </button>
-  
-          <button mat-menu-item (click)="weeklyReminder()">
-              <div fxFlex>Next week</div>
-              <div fxFlex></div>
-              <div fxFlex><span>08.00 AM</span></div>
-          </button>
-
-          <!-- <button mat-menu-item (click)="weeklyReminder()">
-            <div fxFlex>Home</div>
+<mat-icon class="icon2" mat-icon-button 
+          [matMenuTriggerFor]="menu" (click)="$event.stopPropagation();"
+         >touch_app</mat-icon>&nbsp;
+<mat-menu #menu="matMenu" [overlapTrigger]="false" class="remind" yPosition="below">
+    <div *ngIf="show" class="reminderMenu">
+        <div>
+            Reminder:
+        </div>
+            <!-- -------------------Todays Reminder--------------------- -->
+        <button mat-menu-item (click)="todaysReminder()">
+            <div fxFlex>Later today</div>
             <div fxFlex></div>
-            <div fxFlex><span>KoparKharaine</span></div>
+            <div fxFlex><span>08.00 PM</span></div>
         </button>
-        <button mat-menu-item (click)="weeklyReminder()">
-            <div fxFlex>work</div>
-            <div fxFlex></div>
-            <div fxFlex><span>Govandi</span></div>
-        </button> -->
-  
-          <button mat-menu-item (click)="$event.stopPropagation(); showNHide()">
-              <div>
-                  <mat-icon>access_time</mat-icon>Pick Date and Time
-              </div>
-  
-          </button>
-      </div>
-  
-      <div *ngIf="!show" class="reminderMenu">
-          <button mat-icon-button (click)="$event.stopPropagation(); return()">
-              <mat-icon >keyboard_backspace</mat-icon>Pick Date and Time
-          </button>
-          <hr>
-          <mat-form-field>
-              <input  (click)="$event.stopPropagation()" matInput [matDatepicker]="picker" 
-              [(ngModel)]="modelReminder.date.value"  placeholder="Choose a date">
-              <mat-datepicker-toggle matSuffix  [for]="picker">
-                  <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-              </mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-          <div fxLayout="row">
-              <mat-form-field (click)="$event.stopPropagation()">
-                  <input matInput placeholder="Choose Time" (click)="$event.stopPropagation()"
-                   [matMenuTriggerFor]="timeMenu" [(ngModel)]="modelReminder.time">
-              </mat-form-field>
-                  <mat-icon (click)="$event.stopPropagation()" [matMenuTriggerFor]="timeMenu"
-                   class="timeSet">keyboard_arrow_down</mat-icon>
-              
-          </div>
-          <mat-menu #timeMenu [overlapTrigger]=false>
-          <div fxLayout="column" *ngFor="let timer of reminders">
-                  <button mat-button (click)="modelReminder.time = timer.viewTime"
-                   (click)="$event.stopPropagation()">
-                          
-                          <div fxFlex >{{timer.viewDay}}</div>
-                          <div fxFlex></div>
-                          <div fxFlex>{{timer.viewTime}}</div>
-                          
-                  </button>
+            <!-- -------------------Tomorrow Reminder--------------------- -->
 
-          </div>
-          <div>
-              <button mat-button fxFlex (click)="$event.stopPropagation()">Custom</button>
-          </div>
-      </mat-menu>
-          <div><button mat-button (click)="customReminder(modelReminder.date.value,modelReminder.time)">Save</button></div>
-  
-      </div>
-  
-  </mat-menu> 
+        <button mat-menu-item (click)="tomorrowsReminder()">
+            <div fxFlex>Tomorrow</div>
+            <div fxFlex></div>
+            <div fxFlex><span>08.00 AM</span></div>
+        </button>
+            <!-- -------------------weekly Reminder--------------------- -->
+
+        <button mat-menu-item (click)="weeklyReminder()">
+            <div fxFlex>Next week</div>
+            <div fxFlex></div>
+            <div fxFlex><span>08.00 AM</span></div>
+        </button>
+
+        <!-- <button mat-menu-item (click)="weeklyReminder()">
+<div fxFlex>Home</div>
+<div fxFlex></div>
+<div fxFlex><span>KoparKharaine</span></div>
+</button>
+<button mat-menu-item (click)="weeklyReminder()">
+<div fxFlex>work</div>
+<div fxFlex></div>
+<div fxFlex><span>Govandi</span></div>
+</button> -->
+
+        <button mat-menu-item (click)="$event.stopPropagation(); showNHide()">
+            <div>
+                <mat-icon>access_time</mat-icon>Pick Date and Time
+            </div>
+
+        </button>
+    </div>
+
+    <div *ngIf="!show" class="reminderMenu">
+        <button mat-icon-button (click)="$event.stopPropagation(); return()">
+            <mat-icon>keyboard_backspace</mat-icon>Pick Date and Time
+        </button>
+        <hr>
+        <mat-form-field>
+            <input (click)="$event.stopPropagation()" matInput [matDatepicker]="picker" 
+                   [(ngModel)]="modelReminder.date.value" placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="picker">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div fxLayout="row">
+            <mat-form-field (click)="$event.stopPropagation()">
+                <input matInput placeholder="Choose Time" (click)="$event.stopPropagation()"
+                      [matMenuTriggerFor]="timeMenu" [(ngModel)]="modelReminder.time" 
+                      (keyup)="disable($event)">
+            </mat-form-field>
+            <mat-icon class="arrow" (click)="$event.stopPropagation()" [matMenuTriggerFor]="timeMenu"
+                       class="timeSet">keyboard_arrow_down</mat-icon>
+
+        </div>
+        <mat-menu class="menuSub" #timeMenu [overlapTrigger]=false>
+            <div fxLayout="column" *ngFor="let timer of reminders">
+                <button mat-button (click)="modelReminder.time = timer.viewTime; dateflag=true"
+                       (click)="$event.stopPropagation()">
+            <!-- -------------------view day  and time--------------------- -->
+
+                    <div fxFlex=10>{{timer.viewDay}}</div>
+                    <div fxFlex=50></div>
+                    <div fxFlex=10>{{timer.viewTime}}</div>
+
+                </button>
+
+            </div>
+            <div>
+                <button mat-button fxFlex (click)="$event.stopPropagation()">Custom</button>
+            </div>
+        </mat-menu>
+                    <!-- -------------------cCustom Reminder--------------------- -->
+
+        <div><button mat-button [disabled]="dateflag==false" 
+                     (click)="customReminder(modelReminder.date.value,modelReminder.time)">
+                     Save</button></div>
+
+    </div>
+
+</mat-menu>

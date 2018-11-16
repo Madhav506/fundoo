@@ -24,17 +24,17 @@ export class MoreiconComponent implements OnInit {
   public array1 = [];
   public array2 = [];
 
-  noteArray;
-  isChecked;
-  model;
-  event: boolean;
+  public noteArray;
+  public isChecked;
+  public model;
+  public event: boolean;
   constructor(public service: HttpService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
 
   }
-  token = localStorage.getItem('token')
-  temp;
+  public token = localStorage.getItem('token')
+  public temp;
   deleteNotes(arrayOfNotes) {
 
     console.log(this.arrayOfNotes);

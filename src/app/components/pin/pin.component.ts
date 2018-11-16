@@ -10,50 +10,50 @@ import { MatSnackBar } from '@angular/material';
 })
 export class PinComponent implements OnInit {
   @Output() eventEmit = new EventEmitter<any>();
-@Input()  noteId
-  constructor(public service:HttpService,public snackBar:MatSnackBar) { }
+  @Input() noteId
+  constructor(public service: HttpService, public snackBar: MatSnackBar) { }
   public isDeleted = false;
   token = localStorage.getItem('token');
   public body: any = {};
-public isPinned=false;
-public newPin=true;;
+  public isPinned = false;
+  public newPin = true;;
   ngOnInit() {
-  if (this.noteId != undefined && this.noteId.isDeleted == true ) {
+    if (this.noteId != undefined && this.noteId.isDeleted == true) {
       this.isDeleted = true;
     }
     if (this.noteId != undefined && this.noteId.isPined == true) {
       this.isPinned = true;
-     
+
     }
-  
+
   }
 
-pin(){
-  this.eventEmit.emit();
+  pin() {
+    this.eventEmit.emit();
 
-  if(this.noteId!=undefined){
-    if (this.noteId.isPined == true){
-      this.newPin = false;
-    }
-    var arrayNoteId = []
-    arrayNoteId.push(this.noteId.id)
-    console.log(arrayNoteId);
-    if (this.noteId.id != undefined) {
-      var body={
-        "isPined": this.newPin,
-        "noteIdList": arrayNoteId
+    if (this.noteId != undefined) {
+      if (this.noteId.isPined == true) {
+        this.newPin = false;
       }
-      this.service.postDelete("notes/pinUnpinNotes",body , this.token).subscribe((data)=>{
-              LoggerService.log('data',data);
-              LoggerService.log(this.noteId)
-              this.eventEmit.emit();
+      var arrayNoteId = []
+      arrayNoteId.push(this.noteId.id)
+      console.log(arrayNoteId);
+      if (this.noteId.id != undefined) {
+        var body = {
+          "isPined": this.newPin,
+          "noteIdList": arrayNoteId
+        }
+        this.service.postDelete("notes/pinUnpinNotes", body, this.token).subscribe((data) => {
+          LoggerService.log('data', data);
+          LoggerService.log(this.noteId)
+          this.eventEmit.emit();
 
-            });
-        
-       
+        });
+
+
+      }
     }
   }
-}
 
 }
 

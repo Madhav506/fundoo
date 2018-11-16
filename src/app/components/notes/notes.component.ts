@@ -1,7 +1,8 @@
-import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input, ViewChild } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service'
 import { MatSnackBar } from '@angular/material';
 import { LoggerService } from '../../core/services/logger/logger.service';
+import { RemindiconComponent } from '../remindicon/remindicon.component';
 
 
 @Component({
@@ -15,29 +16,31 @@ export class NotesComponent implements OnInit {
   public body:any={}
   archiveNotesArray = { 'isArchived': false }
   colorMyevent = '#ffffff';
-  interval: any;
-  choose1 = true;
-  choose2 = false;
-  choose3 = true;
-  array1 = [];
-  array2 = [];
+  public interval: any;
+  public choose1 = true;
+  public choose2 = false;
+  public  choose3 = true;
+  public array1 = [];
+  public array2 = [];
   public note;
   public title;
   public description;
-  notes;
+  public notes;
   public addCheck=false;
   public status="open";
-  dataarray = [];
+  public dataarray = [];
   token = localStorage.getItem('token');
   public check=false;
   public isChecked=false;
-  dataArrayApi=[];
+  public dataArrayApi=[];
   public isPinned = false;
     public isArchived=false;
-  adding: boolean;
+    public adding: boolean;
   noteNew = {
     'id':''
   }
+  @ViewChild(RemindiconComponent) childComponentMenu: RemindiconComponent;
+
   todaydate=new Date();
   tomorrow= new Date(this.todaydate.getFullYear(), this.todaydate.getMonth(), 
   (this.todaydate.getDate() + 1));
@@ -82,9 +85,12 @@ console.log(this.choose3);
       "checklist": "",
       "isPined": this.isPinned,
       "color": "",
-      "reminder":this.newReminder
+      "reminder":''
 
 
+    }
+    if(this.newReminder!=undefined){
+      this.body.reminder=this.newReminder;
     }
     LoggerService.log('body of normal note',this.body);
     this.body.color = this.colorMyevent;
@@ -114,11 +120,14 @@ console.log(this.choose3);
                "color": "",
                "isArchived": this.isArchived,
                "labelIdList": JSON.stringify(this.array1),
-               "reminder":this.newReminder
+               "reminder":''
+              }
+              if(this.newReminder!=undefined){
+                this.body.reminder=this.newReminder;
               }
               console.log(this.body);
               this.body.color = this.colorMyevent;
-    this.colorMyevent = "#ffffff";
+              this.colorMyevent = "#ffffff";
               
       }
          
@@ -133,8 +142,8 @@ console.log(this.choose3);
             this.array1 = [];
             this.array2 = [];
             this.dataarray=[];
-            // this.remindArray=[];
-
+            this.remindArray=[];
+            this.newReminder='';
             this.adding=false
             this.eventClicked.emit();
       
@@ -233,17 +242,20 @@ console.log(this.choose3);
   newReminder;
   reminding(event){
     if(event){
+      if(this.remindArray.length==0){
       this.newReminder=event
     this.remindArray.push(event)
-
+  }
   }
   }
   removeReminders(){
     this.remindArray.pop();
+    this.newReminder='';
   }
-  // removeAssignments(){
-  //   this.array1=[];
-  // }
+  removeAssignments(){
+    this.array2.pop();
+    this.array1.pop();
+  }
   
      
   

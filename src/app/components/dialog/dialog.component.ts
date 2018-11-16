@@ -34,7 +34,7 @@ export class DialogComponent implements OnInit {
   public id;
   public array1 = [];
   public array2 = [];
-  addcheck
+  public addcheck;
   public temp;
   public newLabel;
   public checkArray = [];
@@ -176,6 +176,9 @@ export class DialogComponent implements OnInit {
   public addCheck = false;
   public status = "open"
 
+      /* adding the checklist of items for cards*/
+
+
   addList(event) {
     if (this.newList != "") {
       this.adding = true;
@@ -208,6 +211,7 @@ export class DialogComponent implements OnInit {
         })
     }
   }
+        /* removing the label for cards*/
 
   removeAssignments(label, noteid) {
     // console.log(label);
@@ -228,6 +232,9 @@ export class DialogComponent implements OnInit {
     }
 
   }
+
+    /* removing the reminders for cards*/
+
   removeReminders(item, noteid) {
     LoggerService.log(noteid)
     this.model = {

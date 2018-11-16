@@ -18,6 +18,8 @@ export class ColoriconComponent implements OnInit {
 
   ngOnInit() {
   }
+  /*  applying array of colors for cards*/
+
   colorsObject = [
 
     [{ 'color': '#ccff90', 'tipname': 'Green' },
@@ -34,6 +36,8 @@ export class ColoriconComponent implements OnInit {
     { 'color': '#f28b82', 'tipname': 'Red' },
     { 'color': '#fbbc04', 'tipname': 'Orange' },
     { 'color': '#fff475', 'tipname': 'Yellow' }],]
+
+      /*  Changing  the colors for cards*/
 
   changeColor(paint) {
     this.responseNew.emit(paint);

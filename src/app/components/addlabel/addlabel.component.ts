@@ -55,6 +55,8 @@ export class AddlabelComponent implements OnInit {
   id = localStorage.getItem('userId')
   token = localStorage.getItem('token')
 
+            /* ****************adding labels********************************/
+            
   addLabel() {
     var label = this.label;
     // console.log(this.ArrayOfLabel);
@@ -81,6 +83,10 @@ export class AddlabelComponent implements OnInit {
         console.log(error, "errorrrrrr");
       }
   }
+
+
+/*  get labels whatever the labels are present in labelarray */
+
   getLabel() {
     this.service.getCardData("noteLabels/getNoteLabelList", this.token).subscribe(result => {
       console.log(result['data'].details);
@@ -107,6 +113,7 @@ export class AddlabelComponent implements OnInit {
     this.editLabel = label.label;
 
   }
+/*  Delete labels whatever the labels are present in labelarray */
 
   deleteLabel(labelid) {
     const dialogRef = this.dialog.open(DeletedialogComponent, {
@@ -132,6 +139,8 @@ export class AddlabelComponent implements OnInit {
         console.log(error, "error");
       }
   }
+
+/*  edit the labels whatever the labels are present in labelarray */
 
   editlabel(label) {
     this.iconEdit = true;

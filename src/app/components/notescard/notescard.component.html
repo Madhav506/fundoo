@@ -74,19 +74,30 @@ like an array or an object and create a template for each item.  -->
 
       <div fxLayout="row" *ngIf="checkReminder(data.reminder[0])" fxLayoutAlign="start start" 
            class="row-height" fxLayoutGap="5px">
+
         <div *ngFor="let item of data.reminder">
           <mat-chip-list selected>
             <div *ngIf='(todaydate | date:shortDate) == (item | date:shortDate )'>
+                  <!----------------today reminders --------------->
               <mat-chip>
-                <mat-icon>access_time</mat-icon>
-                Today {{item | date:"shortTime"}}
-                <mat-icon (click)="removeReminders(data.id)" matChipRemove>cancel</mat-icon>
+                <mat-icon  [matMenuTriggerFor]="childComponentMenu?.menu" >access_time</mat-icon>
+                
+                Today {{item | date:"shortTime"}}   
+                <app-remindicon  style="opacity:0"[noteId]="data" (remindEvent)="remind($event)">
+                  </app-remindicon>
+                <mat-icon  (click)="removeReminders(data.id)" matChipRemove>cancel</mat-icon>
+                
               </mat-chip>
             </div>
             <div *ngIf='(tomorrow | date:shortDate) == (item | date:shortDate )'>
               <mat-chip>
                 <mat-icon>access_time</mat-icon>
-                tomorrow {{item | date:"shortTime"}}
+                               <!----------------tomorrow reminders --------------->
+
+                Tomorrow {{item | date:"shortTime"}}
+                <app-remindicon  style="opacity:0"[noteId]="data" (remindEvent)="remind($event)">
+                  </app-remindicon>
+
                 <mat-icon (click)="removeReminders(data.id)" matChipRemove>cancel</mat-icon>
               </mat-chip>
             </div>
@@ -94,22 +105,46 @@ like an array or an object and create a template for each item.  -->
                         (tomorrow | date:shortDate) !== (item | date:shortDate )'>
               <mat-chip>
                 <mat-icon>access_time</mat-icon>
+                              <!----------------other date reminders --------------->
+
                 {{item | date:"medium"}}
+                 <app-remindicon  style="opacity:0"[noteId]="data" (remindEvent)="remind($event)">
+                  </app-remindicon>
+
                 <mat-icon (click)="removeReminders(index.id)" matChipRemove>cancel</mat-icon>
               </mat-chip>
             </div>
           </mat-chip-list>
         </div>
       </div>
+
       <div fxLayout="row" *ngIf="!checkReminder(data.reminder[0])" fxLayoutAlign="start start"
            class="row-height" fxLayoutGap="5px">
+        
         <div *ngFor="let item of data.reminder">
           <mat-chip-list selected>
-            <mat-chip>
-              <mat-icon>access_time</mat-icon>
-              <del>{{item | date:"medium"}}</del>
-              <mat-icon (click)="removeReminders(data.id)" matChipRemove>cancel</mat-icon>
-            </mat-chip>
+            <div *ngIf='(todaydate | date:shortDate) == (item | date:shortDate )'>
+              <mat-chip>
+                <mat-icon>access_time</mat-icon>
+              <del>  Today {{item | date:"shortTime"}}</del>
+                <mat-icon (click)="removeReminders(data.id)" matChipRemove>cancel</mat-icon>
+              </mat-chip>
+            </div>
+            <div *ngIf='(tomorrow | date:shortDate) == (item | date:shortDate )'>
+              <mat-chip>
+                <mat-icon>access_time</mat-icon>
+               <del> tomorrow {{item | date:"shortTime"}}</del>
+                <mat-icon (click)="removeReminders(data.id)" matChipRemove>cancel</mat-icon>
+              </mat-chip>
+            </div>
+            <div *ngIf='(todaydate | date:shortDate) !==(item | date:shortDate ) && 
+                        (tomorrow | date:shortDate) !== (item | date:shortDate )'>
+              <mat-chip>
+                <mat-icon>access_time</mat-icon>
+              <del>  {{item | date:"medium"}}</del>
+                <mat-icon (click)="removeReminders(index.id)" matChipRemove>cancel</mat-icon>
+              </mat-chip>
+            </div>
           </mat-chip-list>
         </div>
 
@@ -136,7 +171,7 @@ like an array or an object and create a template for each item.  -->
 
     </mat-card>
   </div>
-  <div fx.show="true" fxShow.sm="false" fxShow.md="false" fxShow.xs="false" class="grow" fxFlex="10">
+  <div fx.show="true"  fxShow.sm="false" fxShow.md="false" fxShow.xs="false" class="grow" fxFlex="10">
   </div>
   <div fxFlex.xs=0 fx.show="true" fxShow.md="false" fxShow.xs="false" fxShow.sm="false" 
        class="shrink" fxFlex></div>

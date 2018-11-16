@@ -5,11 +5,15 @@
 .row-height{
   height:100%;
   
+  
 }
 .sidenav {
   width: 300px;
-  margin-top:70px;
-  overflow-y: scroll
+  margin-top:56px;
+  overflow-y: scroll;
+  position: fixed;
+  
+ 
  
 }
 .mat-toolbar.mat-primary {
@@ -17,7 +21,9 @@
   background:#fb0 ;
   color: black;
   top: 0;
-  margin-top:6px
+  z-index:3;
+
+  // margin-top:6px
 }
 .search{
 background-color:#fb0;
@@ -25,7 +31,9 @@ overflow: hidden;
 
 
 }
-
+.mat-drawer-backdrop.mat-drawer-shown {
+   background-color: white;
+}
 
 .search input{
   border:none;
@@ -61,12 +69,14 @@ overflow: hidden;
 .mat-select-panel {
   margin-top: 45px;
 }
-
+.content{
+  margin-left:40px;
+}
 .contentstyle{
   font-size:17px;
   font-family:cursive;
   text-align: center;
-  word-break:break-all;
+  word-break:break-word;
 }
 .add{
   width:250px;
@@ -79,8 +89,11 @@ overflow: hidden;
   margin-left:20px;
 }
 .logout{
-  background-color: white;
-  color:rgb(2, 2, 2)
+  font-family: cursive;
+  background-color:lightblue;
+  color:rgb(2, 2, 2);
+  margin-left:30px;
+  height:30px;
 }
 .back:hover{
   background-color:lightyellow;

@@ -48,6 +48,7 @@ export class NotesParentComponent implements OnInit {
 
 
   }
+  
   getPinNotes() {
     console.log('yesss2');
 

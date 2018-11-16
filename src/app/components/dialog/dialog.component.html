@@ -8,11 +8,13 @@
         <app-pin (eventEmit)=newMessage($event) [noteId]="data"></app-pin>
       </div>
     </div>
+                        <!-------- Take a note----------- -->
+
     <div *ngIf="!checklist" class="inputNote" id="note" [innerHTML]="data.description" 
           contenteditable="true" placeholder="Take a note"
           autofocus>
       {{data.description}} </div>
-
+                        <!--------checklist---------- -->
 
     <div class="note" *ngFor="let check of checkArray" fxLayout="row">
 
@@ -51,7 +53,7 @@
     </div>
 
 
-
+                          <!--------labels---------- -->
 
     <div fxLayout="row wrap" fxlayoutAlign="start start" fxLayoutGap="8px">
       <div *ngFor="let item of array1">
@@ -64,6 +66,7 @@
         </mat-chip-list>
       </div>
     </div>
+                           <!--------Reminders---------- -->
 
     <div fxLayout="row wrap" fxlayoutAlign="start start" fxLayoutGap="5px">
       <div *ngFor="let item of array2">
@@ -76,6 +79,7 @@
         </mat-chip-list>
       </div>
     </div>
+                            <!--------matcard actions---------- -->
 
     <div fxLayoutAlign="space-between">
       <div fxFlex="70" class="icons" fxLayoutAlign="space-between">

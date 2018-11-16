@@ -17,7 +17,7 @@ export class DataService {
   currentImage = this.Image.asObservable();
   
 
-  private label = new BehaviorSubject(false);
+  private label = new Subject<boolean>();
   currLabel = this.label.asObservable();
   
   constructor() { }
@@ -36,8 +36,6 @@ export class DataService {
     this.Image.next(message);
   }
   changeLabel(message:boolean){
-    console.log(message);
-    
     this.label.next(message);
   }
 

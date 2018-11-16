@@ -5,6 +5,9 @@
             <mat-icon fxFlex=10 (click)="addLabel()" mat-icon-button>done</mat-icon>
         </div>
         <input fxFlex=70 class="inputNote" [(ngModel)]="label" placeholder="Create new Label">
+                                  
+                             <!-------- clear----------- -->
+
         <div class="clear">
             <mat-icon fxFlex=10 (click)="clear()" mat-icon-button>clear</mat-icon>
         </div>
@@ -13,6 +16,8 @@
     <div class="color">{{message}}</div>
     <div fxLayout="row" class="color1" fxLayoutAlign="space-between center"
          *ngFor="let label of ArrayOfLabel">
+                             <!-------- delete label----------- -->
+
         <div fxLayout="row" fxLayoutAlign="space-between center" class="delete">
             <mat-icon (click)="deleteLabel(label.id)" class="hover" fxFlex=10 mat-icon-button>
                 delete</mat-icon>
@@ -23,11 +28,15 @@
              *ngIf="canEdit && label.label==editLabel"
             #editDiv>
         </div>
+                             <!-------- edit label----------- -->
+
         <div fxFlex="10">
             <mat-icon (click)=edit(label) *ngIf="iconEdit || label.id!=idEdit">edit</mat-icon>
             <mat-icon (click)=editlabel(label) *ngIf="clickEdit && label.id==idEdit">done</mat-icon>
         </div>
     </div>
     <mat-divider></mat-divider>
+                            <!-------- close----------- -->
+
     <div class="btn" mat-button (click)="close()">Done</div>
 </div>
