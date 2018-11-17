@@ -6,12 +6,22 @@
   </div>
   <div fxLayoutAlign="start start" class="main" fxLayout="row wrap" fxLayoutWrap fxLayout.xs="column"
        fxLayout.sm="100">
+       <div *ngIf = "length!=0" style = "width: 100%">{{string}}</div>
     <!-- NgFor is a built-in template directive that makes it easy to iterate over something
 like an array or an object and create a template for each item.  -->
-    <mat-card ngStyle.sm="width:91%" ngStyle.xs="width:91%" ngstyle.gt-sm="width:100%" 
-              ngStyle.md="width:100%" [ngClass]="{'viewGrid':condition,'viewList':!condition}"
+<!-- ngStyle.sm="width:91%" 
+              ngStyle.xs="width:91%" 
+              ngstyle.gt-sm="width:100%"  -->
+    <mat-card 
+              ngStyle.sm="width:85%" 
+              ngStyle.xs="width:85%" 
+              ngstyle.gt-sm="width:100%"
+              ngStyle.md="width:100%"
+ 
+              [ngClass]="{'viewGrid':condition,'viewList':!condition}"
               class="matcard" *ngFor="let data of myData | searchData:searchInput" 
-              [ngStyle]="{'background-color':data.color}">
+              [ngStyle]="{'background-color':data.color}"
+              >
       <div>
         <mat-card-header>
           <mat-card-title>
@@ -59,7 +69,7 @@ like an array or an object and create a template for each item.  -->
         <div *ngFor="let item of data.noteLabels">
           <mat-chip-list selected>
             <mat-chip routerLink="/home/labels/{{item.label}}" (click)="state(item.label)" 
-                      *ngIf="item.isDeleted==false">
+                     *ngIf="item.isDeleted==false">
               {{item.label}}
               <mat-icon matChipRemove (click)="removeAssignments(item.id,data.id)">cancel
 
@@ -80,38 +90,48 @@ like an array or an object and create a template for each item.  -->
             <div *ngIf='(todaydate | date:shortDate) == (item | date:shortDate )'>
                   <!----------------today reminders --------------->
               <mat-chip>
-                <mat-icon  [matMenuTriggerFor]="childComponentMenu?.menu" >access_time</mat-icon>
-                
+                <mat-icon   >access_time</mat-icon>
+                <app-remindicon  style="opacity:0;width:8px" [noteId]="data" (remindEvent)="remind($event)">
+                  </app-remindicon>
                 Today {{item | date:"shortTime"}}   
-                <app-remindicon  style="opacity:0"[noteId]="data" (remindEvent)="remind($event)">
+                <app-remindicon  style="opacity:0;width:8px" [noteId]="data" 
+                                 (remindEvent)="remind($event)">
                   </app-remindicon>
                 <mat-icon  (click)="removeReminders(data.id)" matChipRemove>cancel</mat-icon>
                 
               </mat-chip>
             </div>
+               <!----------------tomorrow reminders --------------->
+
             <div *ngIf='(tomorrow | date:shortDate) == (item | date:shortDate )'>
               <mat-chip>
                 <mat-icon>access_time</mat-icon>
-                               <!----------------tomorrow reminders --------------->
-
+                <app-remindicon  style="opacity:0;width:8px" [noteId]="data"
+                                (remindEvent)="remind($event)">
+                 </app-remindicon>
                 Tomorrow {{item | date:"shortTime"}}
-                <app-remindicon  style="opacity:0"[noteId]="data" (remindEvent)="remind($event)">
+               
+                <app-remindicon  style="opacity:0;width:8px" [noteId]="data" 
+                                 (remindEvent)="remind($event)">
                   </app-remindicon>
-
                 <mat-icon (click)="removeReminders(data.id)" matChipRemove>cancel</mat-icon>
               </mat-chip>
             </div>
+                    <!----------------other date reminders --------------->
+
             <div *ngIf='(todaydate | date:shortDate) !==(item | date:shortDate ) && 
                         (tomorrow | date:shortDate) !== (item | date:shortDate )'>
               <mat-chip>
+
                 <mat-icon>access_time</mat-icon>
-                              <!----------------other date reminders --------------->
-
-                {{item | date:"medium"}}
-                 <app-remindicon  style="opacity:0"[noteId]="data" (remindEvent)="remind($event)">
+ <app-remindicon  style="opacity:0;width:8px" [noteId]="data" (remindEvent)="remind($event)">
                   </app-remindicon>
-
-                <mat-icon (click)="removeReminders(index.id)" matChipRemove>cancel</mat-icon>
+                {{item | date:"medium"}}
+                
+                <app-remindicon  style="opacity:0;width:8px" [noteId]="data" 
+                                 (remindEvent)="remind($event)">
+                  </app-remindicon>
+                <mat-icon (click)="removeReminders(data.id)" matChipRemove>cancel</mat-icon>
               </mat-chip>
             </div>
           </mat-chip-list>
@@ -122,26 +142,50 @@ like an array or an object and create a template for each item.  -->
            class="row-height" fxLayoutGap="5px">
         
         <div *ngFor="let item of data.reminder">
+                            <!----------------today reminders --------------->
+
           <mat-chip-list selected>
             <div *ngIf='(todaydate | date:shortDate) == (item | date:shortDate )'>
               <mat-chip>
                 <mat-icon>access_time</mat-icon>
+                <app-remindicon  style="opacity:0;width:8px" [noteId]="data"
+                                 (remindEvent)="remind($event)">
+                  </app-remindicon>
               <del>  Today {{item | date:"shortTime"}}</del>
+              <app-remindicon  style="opacity:0;width:8px" [noteId]="data"
+                               (remindEvent)="remind($event)">
+                </app-remindicon>
                 <mat-icon (click)="removeReminders(data.id)" matChipRemove>cancel</mat-icon>
               </mat-chip>
             </div>
+                           <!----------------tomorrow reminders --------------->
+
             <div *ngIf='(tomorrow | date:shortDate) == (item | date:shortDate )'>
               <mat-chip>
                 <mat-icon>access_time</mat-icon>
+                <app-remindicon  style="opacity:0;width:8px" [noteId]="data"
+                                 (remindEvent)="remind($event)">
+                  </app-remindicon>
                <del> tomorrow {{item | date:"shortTime"}}</del>
+               <app-remindicon  style="opacity:0;width:8px" [noteId]="data" 
+                                (remindEvent)="remind($event)">
+                </app-remindicon>
                 <mat-icon (click)="removeReminders(data.id)" matChipRemove>cancel</mat-icon>
               </mat-chip>
             </div>
+                                <!----------------other date reminders --------------->
+
             <div *ngIf='(todaydate | date:shortDate) !==(item | date:shortDate ) && 
                         (tomorrow | date:shortDate) !== (item | date:shortDate )'>
               <mat-chip>
                 <mat-icon>access_time</mat-icon>
+                <app-remindicon  style="opacity:0;width:8px" [noteId]="data" 
+                                 (remindEvent)="remind($event)">
+                  </app-remindicon>
               <del>  {{item | date:"medium"}}</del>
+              <app-remindicon  style="opacity:0;width:8px" [noteId]="data" 
+                               (remindEvent)="remind($event)">
+                </app-remindicon>
                 <mat-icon (click)="removeReminders(index.id)" matChipRemove>cancel</mat-icon>
               </mat-chip>
             </div>

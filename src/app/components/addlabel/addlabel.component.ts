@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { HttpService } from '../../core/services/http/http.service'
 import { DataService } from '../../core/services/data/data.service';
 import { DeletedialogComponent } from '../deletedialog/deletedialog.component';
+import { LoggerService } from '../../core/services/logger/logger.service';
 
 export interface DialogData {
   "title": String,
@@ -80,7 +81,7 @@ export class AddlabelComponent implements OnInit {
       // console.log(result);
     }),
       error => {
-        console.log(error, "errorrrrrr");
+        LoggerService.log( "error",error);
       }
   }
 
@@ -102,7 +103,7 @@ export class AddlabelComponent implements OnInit {
 
     }),
       error => {
-        console.log(error, "error");
+        LoggerService.log( "error",error);
       }
   }
   edit(label) {
@@ -136,7 +137,7 @@ export class AddlabelComponent implements OnInit {
 
     }),
       error => {
-        console.log(error, "error");
+        LoggerService.log( "error",error);
       }
   }
 
@@ -164,7 +165,7 @@ export class AddlabelComponent implements OnInit {
 
       }),
       error => {
-        console.log(error, "error");
+        LoggerService.log( "error",error);
       }
   }
 

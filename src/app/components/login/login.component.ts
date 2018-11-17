@@ -60,11 +60,25 @@ export class LoginComponent {
         localStorage.setItem('lastName', data['lastName']);
         localStorage.setItem('userId', data['userId']);
         localStorage.setItem('imageUrl', data['imageUrl']);
+
+        var token=localStorage.getItem('token');
+        console.log(token,"token in login");      
+        var pushToken=localStorage.getItem('pushToken')
+        console.log('pushtoken in login',pushToken);
+        var body={
+                "pushToken":pushToken
+              }
+
+              this.httpService.postDelete('user/registerPushToken',body,token).subscribe(
+                  data=>{
+
+                    console.log("post of pushToken",data)
+                  });
+        
         this.router.navigate(['/home']);
         this.snackBar.open("login successfull", "login", {
           duration: 10000,
-
-        });
+  });
       }),
       error => {/**if error exists then displays the error message using snackbar */
         console.log("Error", error);

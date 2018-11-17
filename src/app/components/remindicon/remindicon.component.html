@@ -66,7 +66,7 @@
                       (keyup)="disable($event)">
             </mat-form-field>
             <mat-icon class="arrow" (click)="$event.stopPropagation()" [matMenuTriggerFor]="timeMenu"
-                       class="timeSet">keyboard_arrow_down</mat-icon>
+                       >keyboard_arrow_down</mat-icon>
 
         </div>
         <mat-menu class="menuSub" #timeMenu [overlapTrigger]=false>
@@ -88,9 +88,9 @@
         </mat-menu>
                     <!-- -------------------cCustom Reminder--------------------- -->
 
-        <div><button mat-button [disabled]="dateflag==false" 
+        <div><button mat-button [disabled]="dateflag==false" class="save"  
                      (click)="customReminder(modelReminder.date.value,modelReminder.time)">
-                     Save</button></div>
+                       Save</button></div>
 
     </div>
 

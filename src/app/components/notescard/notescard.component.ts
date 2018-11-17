@@ -26,7 +26,7 @@ export class NotescardComponent implements OnInit {
   @Output() pinEvent = new EventEmitter<any>();
   @Output() stateEvent = new EventEmitter<Event>();
 
-  @ViewChild(RemindiconComponent) childComponentMenu: RemindiconComponent;
+  // @ViewChild(RemindiconComponent) childComponentMenu: RemindiconComponent;
 
   todaydate = new Date();
 
@@ -35,11 +35,13 @@ export class NotescardComponent implements OnInit {
     @Input() myData
     @Input() searchInput;
     @Input() name;
+    @Input() string;
   public token = localStorage.getItem('token')
   public element;
   public checkArray = [];
   public isChecked = false;
   public view;
+  @Input()  length;
   condition = true;
   public message: Event;
   public values: any;
@@ -58,6 +60,9 @@ export class NotescardComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('i am string',this.string);
+    console.log('i am length',this.length);
+
 
   }
   public data;

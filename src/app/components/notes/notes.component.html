@@ -114,9 +114,9 @@
             <mat-chip-list selected>
               <div *ngIf='(todaydate | date:shortDate) == (item | date:shortDate )'>
                 <mat-chip>
-                  <mat-icon [matMenuTriggerFor]="childComponentMenu?.menu">access_time</mat-icon>
+                  <mat-icon >access_time</mat-icon>
                             Today {{item | date:"shortTime"}}
-                            <app-remindicon  style="opacity:0"[noteId]="noteNew" 
+                            <app-remindicon style="opacity:0" [noteId]="noteNew" 
                                              (remindTopEvent)="reminding($event)">
                                 </app-remindicon>
               
@@ -125,9 +125,9 @@
               </div>
               <div *ngIf='(tomorrow | date:shortDate) == (item | date:shortDate )'>
                 <mat-chip>
-                  <mat-icon [matMenuTriggerFor]="childComponentMenu?.menu">access_time</mat-icon>
+                  <mat-icon >access_time</mat-icon>
                             Tomorrow {{item | date:"shortTime"}}
-                            <app-remindicon  style="opacity:0"[noteId]="noteNew" 
+                            <app-remindicon  style="opacity:0;width:8px" [noteId]="noteNew" 
                             (remindTopEvent)="reminding($event)">
                </app-remindicon>
 
@@ -137,7 +137,7 @@
               <div *ngIf='(todaydate | date:shortDate) !==(item | date:shortDate ) && 
               (tomorrow | date:shortDate) !== (item | date:shortDate )'>
                 <mat-chip>
-                  <mat-icon [matMenuTriggerFor]="childComponentMenu?.menu">access_time</mat-icon>
+                  <mat-icon >access_time</mat-icon>
                             {{item | date:"medium"}}
                             <app-remindicon  style="opacity:0"[noteId]="noteNew" 
                             (remindTopEvent)="reminding($event)">

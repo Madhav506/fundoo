@@ -121,3 +121,8 @@ display: none;
 .backNew{
   margin-left:10px;
 }
+.new{
+  white-space: nowrap;
+   text-overflow: ellipsis;
+   overflow: hidden !important;
+}

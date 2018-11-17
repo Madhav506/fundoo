@@ -1,5 +1,7 @@
-<div [ngStyle]="{'background-color':data.color}">
-  <div fxFlex="85" class="hiddenCard">
+<div 
+[ngStyle]="{'background-color':data.color}">
+  <div fxFlex="85" 
+  class="hiddenCard">
     <div fxLayout="row" class="hiddenDiv">
       <div class="inputNote" id="title" fxFlex="95" [innerHTML]="data.title" contenteditable="true" 
            placeholder="Title">{{data.title}}
@@ -73,7 +75,8 @@
         <mat-chip-list selected>
           <mat-chip>
             {{item|date:"medium"}}
-            <mat-icon matChipRemove (click)="removeReminders(item,data.id)">cancel
+            <mat-icon matChipRemove (click)="removeReminders(item,data.id)">
+                      cancel
             </mat-icon>
           </mat-chip>
         </mat-chip-list>
@@ -86,7 +89,7 @@
         <app-remindicon [noteId]="data" (remindEvent)=reminder($event)></app-remindicon>
         <!-- [noteId]="data" (remindEvent)="remind($event)" -->
         <app-collaboratoricon></app-collaboratoricon>
-        <app-coloricon [myNewColor]="data.id" (updateEvent)="color($event)"></app-coloricon>
+        <app-coloricon [color]="data.id"  (updateEvent)="colorNew($event)"></app-coloricon>
         <app-imageicon></app-imageicon>
         <app-archiveicon [archiveNotesArray]='archiveNotesArray' [archiveNotesArray]="data.id" 
                          (archiveEvent)="archive($event)">

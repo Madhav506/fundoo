@@ -73,6 +73,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { ImagecropComponent } from './components/imagecrop/imagecrop.component';
 import { PinComponent } from './components/pin/pin.component';
+import { MessagingService } from './core/services/messaging/messaging.service';
 
 
 @NgModule({
@@ -145,7 +146,7 @@ import { PinComponent } from './components/pin/pin.component';
 
   ],
   entryComponents: [DialogComponent, AddlabelComponent, DeletedialogComponent,ImagecropComponent,ToolbarComponent,],
-  providers: [HttpService,AuthguardGuard, DataService, LoggerService],
+  providers: [HttpService,AuthguardGuard, DataService, LoggerService,MessagingService],
   bootstrap: [AppComponent]//2
 })
 export class AppModule { }

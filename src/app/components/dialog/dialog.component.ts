@@ -42,17 +42,18 @@ export class DialogComponent implements OnInit {
   public newData: any = {}
   public modifiedCheckList;
   public checklist = false;
+  color;
   @Input() noteId;
   ngOnInit() {
     // console.log(this.data['noteLabels']);
     this.array1 = this.data['noteLabels'];
     this.array2 = this.data['reminder'];
+    this.color=this.data['color']
 
     if (this.data['noteCheckLists'].length > 0) {
       this.checklist = true;
     }
     this.checkArray = this.data['noteCheckLists']
-
   }
   newMessage(event) {
 
@@ -94,8 +95,8 @@ export class DialogComponent implements OnInit {
         "noteId": [id],
         "title": this.title,
         "description": this.note,
-        "color": "",
-        "noteLabels": ""
+        // "color": "",
+        // "noteLabels": ""
 
       }
 
@@ -255,6 +256,11 @@ export class DialogComponent implements OnInit {
       LoggerService.log("error");
 
     }
+
+  }
+  colorNew(event){
+    LoggerService.log('color',event)
+    this.color=event;
 
   }
 

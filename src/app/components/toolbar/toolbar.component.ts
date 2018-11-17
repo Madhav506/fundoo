@@ -93,7 +93,8 @@ export class ToolbarComponent implements OnInit {
       });
     }
   }
-
+  
+  
   getLabel() {
     this.service.getCardData("noteLabels/getNoteLabelList", this.token).subscribe(result => {
       // console.log(result['data'].details);
@@ -101,6 +102,11 @@ export class ToolbarComponent implements OnInit {
       for (var index = 0; index < result['data'].details.length; index++) {
         if (result['data'].details[index].isDeleted == false) {
           this.ArrayOfLabel.push(result['data'].details[index]);
+          // this.ArrayOfLabel.sort((one, two) => (one > two ? -1 : 1)).reverse();
+          this.ArrayOfLabel.sort(function(obj1, obj2) {
+            return obj1.label - obj2.label;
+          });
+          LoggerService.log('sorting label',this.ArrayOfLabel)
         }
       }
       // console.log(this.ArrayOfLabel);

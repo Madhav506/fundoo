@@ -4,7 +4,11 @@
   <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
     <mat-icon fxFlex="25" aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
-  <div  class="title"><span fxFlex="10"  style="font-family:BURW Chancery L, cursive">{{values}}
+  <div  class="title"><span fxFlex="10" 
+       ngStyle.xs="width:10%"
+       ngStyle.sm="width:10%"
+       ngStyle.md="width:10%"
+        style="font-family:BURW Chancery L, cursive">{{values}}
   </span>
 </div>
                     <!--------------------- Search Globally-------------- -->
@@ -112,8 +116,9 @@
 <div   *ngFor="let item of ArrayOfLabel">
 
  <div class="back"fxLayoutAlign="space-between-around" fxLayoutGap="10px">
-  <mat-icon style="padding-bottom:20px;padding-left:20px"  >label_outline</mat-icon>
-  <a routerLink="/home/labels/{{item.label}}" (stateEvent)="stateNew($event)" (click)="heading(item)"   
+  <mat-icon style="padding-bottom:20px;padding-left:20px" >label_outline</mat-icon>
+  <a routerLink="/home/labels/{{item.label}}" class="new" (stateEvent)="stateNew($event)"
+   (click)="heading(item)"   
      style="padding-left:9px"> {{item.label}}
       
   </a>

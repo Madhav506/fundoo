@@ -1,7 +1,7 @@
 
 <app-notes (eventClicked)="getAllNotes($event)" ></app-notes><br>
 
-<div *ngIf="arrayPinData.length!=0">
+<!-- <div *ngIf="arrayPinData.length!=0">
  <h3 class="pin">Pinned</h3>
  <app-notescard [myData]="arrayPinData" (pinEvent)="notes($event)"(noteEvent)="getAllNotes($event)"  
  (colorevent)="getAllNotes($event)" (archive)="getAllNotes($event)" 
@@ -16,19 +16,14 @@
 (colorevent)="getAllNotes($event)" (archive)="getAllNotes($event)" 
  (updateEvent)="getAllNotes($event)"
  (reminderEvent)="getAllNotes($event)"></app-notescard>
-</div>
+</div> -->
 
-<div *ngIf="arrayPinData.length==0">
+<!-- <div *ngIf="arrayPinData.length==0"> -->
  <app-notescard [myData]="arrayPinData" (pinEvent)="notes($event)"(noteEvent)="getAllNotes($event)"  
  (colorevent)="getAllNotes($event)" (archive)="getAllNotes($event)" 
-  (updateEvent)="getAllNotes($event)"
-  (reminderEvent)="getAllNotes($event)"
- ></app-notescard>
+  (updateEvent)="getAllNotes($event)" (reminderEvent)="getAllNotes($event)" [length] = "arrayPinData.length" [string]="'Pinned'"></app-notescard>
  
 
 <app-notescard [myData]="arrayNewData" (notesEvent)="getAllNotes()"  (pinEvent)="notes($event)" 
- (noteEvent)="getAllNotes($event)" 
-(colorevent)="getAllNotes($event)" (archive)="getAllNotes($event)" 
- (updateEvent)="getAllNotes($event)"
- (reminderEvent)="getAllNotes($event)"></app-notescard>
- </div>
+ (noteEvent)="getAllNotes($event)" (colorevent)="getAllNotes($event)" (archive)="getAllNotes($event)" (updateEvent)="getAllNotes($event)" (reminderEvent)="getAllNotes($event)" [length]="arrayPinData.length" [string]="'Others'"></app-notescard>
+ <!-- </div> -->

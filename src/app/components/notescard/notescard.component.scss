@@ -49,7 +49,12 @@ mat-card-content{
   }
   mat-chip {
     justify-content: space-between;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden !important;
+    
   }
+ 
   
 
 .mat-chip.mat-standard-chip .mat-chip-remove {
@@ -71,11 +76,12 @@ mat-card-content{
     margin-bottom: -2px;
     margin-top:15px;
     background-color: lightgray;
-  
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden !important;
   color:black;
   cursor: pointer;
-  text-overflow: ellipsis;
-white-space: nowrap;
+ 
 font-size: 11px;
 }
 .image{

@@ -242,10 +242,11 @@ console.log(this.choose3);
   newReminder;
   reminding(event){
     if(event){
-      if(this.remindArray.length==0){
+      // if(this.remindArray.length==0){
       this.newReminder=event
+      this.remindArray=[];
     this.remindArray.push(event)
-  }
+  // }
   }
   }
   removeReminders(){
