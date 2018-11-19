@@ -1,4 +1,5 @@
 <div 
+ngStyle.xs="width:100%" class="flex" 
 [ngStyle]="{'background-color':data.color}">
   <div fxFlex="85" 
   class="hiddenCard">
@@ -86,7 +87,7 @@
 
     <div fxLayoutAlign="space-between">
       <div fxFlex="70" class="icons" fxLayoutAlign="space-between">
-        <app-remindicon [noteId]="data" (remindEvent)=reminder($event)></app-remindicon>
+        <app-remindicon [noteId]="data"  (remindEvent)="emit($event)"  ></app-remindicon>
         <!-- [noteId]="data" (remindEvent)="remind($event)" -->
         <app-collaboratoricon></app-collaboratoricon>
         <app-coloricon [color]="data.id"  (updateEvent)="colorNew($event)"></app-coloricon>

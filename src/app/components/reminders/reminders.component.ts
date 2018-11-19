@@ -11,6 +11,7 @@ import { LoggerService } from '../../core/services/logger/logger.service';
 export class RemindersComponent implements OnInit {
   public arrayData1 = [];
   public arrayData = [];
+  private remName;
   @Output() notesEvent = new EventEmitter<any>();
   
 
@@ -37,7 +38,7 @@ export class RemindersComponent implements OnInit {
     }
    
   }
-  
+ 
   reminders(event) {
     this.getReminderNotes();
   }

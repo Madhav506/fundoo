@@ -33,17 +33,17 @@ export class RemindiconComponent implements OnInit {
   ngOnInit() {
   }
   public flag: boolean = false;
-  public token = localStorage.getItem('token');
+  private token = localStorage.getItem('token');
 
   
   public modelReminder = {
     "date": new FormControl(new Date()),
     "time": ""
   }
-  public model = {};
-  public show = true
+  private model = {};
+  private show = true
 
-  public currentDate = new Date();
+  private currentDate = new Date();
   reminders: any[] = [
     { value: 'morning', viewDay: 'Morning', viewTime: '08:00 AM' },
     { value: 'afternoon', viewDay: 'Afternoon', viewTime: '01:00 PM' },

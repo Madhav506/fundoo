@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service';
+import { LoggerService } from '../../core/services/logger/logger.service';
 
 @Component({
   selector: 'app-archive',
@@ -13,7 +14,7 @@ export class ArchiveComponent implements OnInit {
   ngOnInit() {
     this.getAllNotes();
   }
-  arrayData = [];
+  private  arrayData = [];
   token = localStorage.getItem('token');
 
   getAllNotes() {
@@ -24,7 +25,7 @@ export class ArchiveComponent implements OnInit {
       // console.log(this.arrayData);
     }),
       error => {
-        console.log("Error", error);
+        LoggerService.log("Error", error);
 
       }
   }

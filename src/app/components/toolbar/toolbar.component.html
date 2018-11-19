@@ -15,7 +15,7 @@
   <form  fxFlex 
   fx.show=true
   class="search">
-    <button  mat-icon-button  type="submit"><mat-icon >search</mat-icon>
+    <button  mat-icon-button (click)="clickSearch()" fx.show="true" fxShow.xs="false"  type="submit"><mat-icon >search</mat-icon>
     </button>
     <input fxFlex type="text"  name="search" [(ngModel)]="searchInput" (click)="clickSearch()" 
     (keydown)="passmessage()"  placeholder="Search" >
@@ -24,7 +24,7 @@
   </form>
                        <!---------------------refresh------------------------->
 
-  <button mat-icon-button> <mat-icon matTooltip="Refresh" fxFlex="40px" >refresh</mat-icon>
+  <button mat-icon-button> <mat-icon matTooltip="Refresh" (click)="refresh()" fxFlex="40px" >refresh</mat-icon>
   </button>
                       <!---------------------View-List or Grid------------- -->
 
@@ -36,7 +36,7 @@
             matTooltip="View" >
             view_module </mat-icon>
                      <!---------------------notifications------------------------->
-  <mat-icon fxFlex="40px" matTooltip="Notifications" >notifications_none</mat-icon>
+  <!-- <mat-icon fxFlex="40px" matTooltip="Notifications" >notifications_none</mat-icon> -->
 
                      <!---------------------profile Image-------------------------> 
 

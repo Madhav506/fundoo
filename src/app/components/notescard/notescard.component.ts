@@ -36,7 +36,7 @@ export class NotescardComponent implements OnInit {
     @Input() searchInput;
     @Input() name;
     @Input() string;
-  public token = localStorage.getItem('token')
+    private token = localStorage.getItem('token')
   public element;
   public checkArray = [];
   public isChecked = false;
@@ -60,15 +60,12 @@ export class NotescardComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('i am string',this.string);
-    console.log('i am length',this.length);
-
+   
 
   }
   public data;
 
   gotMessage($event) {
-    console.log('helooo');
 
     this.noteEvent.emit();
 
@@ -91,7 +88,6 @@ export class NotescardComponent implements OnInit {
 
   }
   newPinMessage($event) {
-    console.log('yesss1');
 
     this.pinEvent.emit();
 
@@ -106,7 +102,7 @@ export class NotescardComponent implements OnInit {
 
     // this.updateEvent.emit();
     const dialogRef = this.dialog.open(DialogComponent, {
-      width: '450px',
+      // width: '450px',
       height: 'auto',
       data: dialogData,
       panelClass: 'myapp-no-padding-dialog'
@@ -131,7 +127,7 @@ export class NotescardComponent implements OnInit {
     else {
       checkList.status = "open"
     }
-    console.log(checkList);
+    // console.log(checkList);
     this.modifiedCheckList = checkList;
     this.updatelist(note);
   }
@@ -181,7 +177,7 @@ export class NotescardComponent implements OnInit {
 
       });
     error => {
-      console.log("error");
+      LoggerService.log("error");
 
     }
 
@@ -199,7 +195,7 @@ export class NotescardComponent implements OnInit {
         this.updateEvent.emit();
       });
     error => {
-      console.log("error");
+      LoggerService.log("error");
 
     }
 

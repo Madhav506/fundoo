@@ -20,14 +20,14 @@ export interface DialogData {
 export class AddlabelComponent implements OnInit {
   @Output() eventNew = new EventEmitter<string>();
   @Output() eventTwo = new EventEmitter();
-  changeText: boolean;
-  clickEdit;
-  idEdit;
-  iconEdit;
-  canEdit;
-  editLabel;
-  messageDisplay;
-  message;
+  private changeText: boolean;
+  private clickEdit;
+  private idEdit;
+  private iconEdit;
+  private canEdit;
+  private editLabel;
+  private messageDisplay;
+  private message;
   constructor(public service: HttpService, public dataService: DataService, public dialog: MatDialog,
     public dialogRef: MatDialogRef<AddlabelComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -40,9 +40,9 @@ export class AddlabelComponent implements OnInit {
     this.getLabel();
 
   }
-  public label;
-  ArrayOfLabel = [];
-  public newLabel;
+  private label;
+  private ArrayOfLabel = [];
+  private newLabel;
   clear() {
     this.label = ' ';
   }

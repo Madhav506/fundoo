@@ -1,1 +1,9 @@
-<app-notescard  [myData]="arrayData" (remindEvent)="archive($event)"   ></app-notescard>
+<app-notes></app-notes>
+<div *ngIf="arrayData.length!=0">
+    <div class="array"></div>
+<app-notescard   [myData]="arrayData" (remindEvent)="archive($event)"   ></app-notescard>
+</div>
+<div *ngIf="arrayData.length==0">
+        <div class="array"></div>
+    <span class="span"> Reminders Empty</span>
+ </div>

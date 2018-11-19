@@ -21,20 +21,20 @@ import { environment } from '../../../environments/environment';
 export class ToolbarComponent implements OnInit {
   @Output() eventClicked = new EventEmitter<Event>();
 
-  public searchInput;
+  private searchInput;
   public  name = '';
   public firstCharacter = '';
-  public token;
+  private token;
   public firstName;
   public lastName;
   public labelItem = [];
-  public  ArrayOfLabel = [];
+  private  ArrayOfLabel = [];
   public file1 = [];
-  public values;
+  private values;
   public value = 0;
   public url: string;
   public result;
-  public profile;
+  private profile;
 
 
   // image= localStorage.getItem('imageUrl')
@@ -60,7 +60,7 @@ export class ToolbarComponent implements OnInit {
     this.dataService.currLabel.subscribe(message =>
       this.values = message);
       
-    console.log('hahaha', this.values);
+    // console.log('hahaha', this.values);
 
     this.values = 'fundoo'
 
@@ -93,7 +93,9 @@ export class ToolbarComponent implements OnInit {
       });
     }
   }
-  
+  refresh(){
+    location.reload();
+  }
   
   getLabel() {
     this.service.getCardData("noteLabels/getNoteLabelList", this.token).subscribe(result => {
@@ -102,15 +104,17 @@ export class ToolbarComponent implements OnInit {
       for (var index = 0; index < result['data'].details.length; index++) {
         if (result['data'].details[index].isDeleted == false) {
           this.ArrayOfLabel.push(result['data'].details[index]);
-          // this.ArrayOfLabel.sort((one, two) => (one > two ? -1 : 1)).reverse();
-          this.ArrayOfLabel.sort(function(obj1, obj2) {
-            return obj1.label - obj2.label;
-          });
-          LoggerService.log('sorting label',this.ArrayOfLabel)
+         
         }
       }
-      // console.log(this.ArrayOfLabel);
-
+      this.ArrayOfLabel.sort(function(first, second){
+        var one=first.label.toLowerCase(), two=second.label.toLowerCase()
+        if (one < two) 
+        return -1 
+        if (one > two)
+        return 1
+        return 0 
+        })   
     }),
       error => {
         console.log(error, "error");

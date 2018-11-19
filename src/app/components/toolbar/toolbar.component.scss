@@ -126,3 +126,11 @@ display: none;
    text-overflow: ellipsis;
    overflow: hidden !important;
 }
+@media only screen and (min-width: 300px) and (max-width: 600px){
+    .title {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden !important;
+      width:80px;
+    }
+    }

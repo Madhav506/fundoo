@@ -1,10 +1,19 @@
  .matcard{
-    margin: 10px;
+    margin: 5px;
     /* height:auto; */
-     width:190px; 
+     width:200px; 
     border-radius: 10px 10px 10px 10px;
-  
 } 
+// .matcard :hover{
+//    box-shadow: 0px 5px 10px;
+// } 
+.span{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden !important;
+    width: 50px;
+    
+}
 .note{
     outline:none;
     border:none;
@@ -41,11 +50,12 @@ mat-card-content{
     opacity:1;
     
   }
-  .main{
+   .main{
       /* padding:5px; */
       width:799px;
-      flex-wrap: wrap;
-      /* flex-basis: 100% */
+    //   flex-wrap: wrap;
+    //    flex-basis: 100% 
+    display: flex;
   }
   mat-chip {
     justify-content: space-between;

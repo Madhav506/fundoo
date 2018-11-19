@@ -19,31 +19,34 @@ export interface DialogData {
 export class DialogComponent implements OnInit {
   @Output() archiveEvent = new EventEmitter<any>();
   @Output() updateEvent = new EventEmitter<any>();
+  @Input() noteId;
+
   archiveNotesArray = { 'isArchived': false }
   eventOne = new EventEmitter<boolean>();
   model: { 'noteIdList': any[]; };
   message: any;
+  reminderNew: any;
+  remindArray: any[];
 
   constructor(public service: HttpService, public dataService: DataService,
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, public snackBar: MatSnackBar) {
 
   }
-  public title;
-  public note;
+  private title;
+  private note;
   public id;
-  public array1 = [];
-  public array2 = [];
-  public addcheck;
-  public temp;
+  private array1 = [];
+  private array2 = [];
+  public  addcheck;
+  public  temp;
   public newLabel;
-  public checkArray = [];
-  public newList;
-  public newData: any = {}
-  public modifiedCheckList;
-  public checklist = false;
+  private checkArray = [];
+  private newList;
+  private newData: any = {}
+  private modifiedCheckList;
+  private checklist = false;
   color;
-  @Input() noteId;
   ngOnInit() {
     // console.log(this.data['noteLabels']);
     this.array1 = this.data['noteLabels'];
@@ -263,5 +266,13 @@ export class DialogComponent implements OnInit {
     this.color=event;
 
   }
+  // emit(event){
+  //   console.log('event reminder',event)
+  //   if(event){
+  //     this.reminderNew=event
+  //     this.remindArray=[];
+  //   this.remindArray.push(event)
+  // }
+  // }
 
 }

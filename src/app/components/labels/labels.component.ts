@@ -8,7 +8,7 @@ import { HttpService } from '../../core/services/http/http.service'
   styleUrls: ['./labels.component.scss']
 })
 export class LabelsComponent implements OnInit {
-  public labelName;
+  private labelName;
   constructor(public activeRoute: ActivatedRoute, public service: HttpService) {
     this.activeRoute.params.subscribe(params => {
       // console.log(params);

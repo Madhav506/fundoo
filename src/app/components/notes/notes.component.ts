@@ -12,6 +12,8 @@ import { RemindiconComponent } from '../remindicon/remindicon.component';
 })
 export class NotesComponent implements OnInit {
   @Output() eventClicked = new EventEmitter<Event>();
+  @Output() notesNew = new EventEmitter<Event>();
+
   ArrayOfLabel;
   public body:any={}
   archiveNotesArray = { 'isArchived': false }
@@ -20,22 +22,22 @@ export class NotesComponent implements OnInit {
   public choose1 = true;
   public choose2 = false;
   public  choose3 = true;
-  public array1 = [];
-  public array2 = [];
+  private array1 = [];
+  private array2 = [];
   public note;
-  public title;
-  public description;
+  private title;
+  private description;
   public notes;
-  public addCheck=false;
-  public status="open";
-  public dataarray = [];
-  token = localStorage.getItem('token');
+  private addCheck=false;
+  private status="open";
+  private dataarray = [];
+  private token = localStorage.getItem('token');
   public check=false;
-  public isChecked=false;
-  public dataArrayApi=[];
-  public isPinned = false;
-    public isArchived=false;
-    public adding: boolean;
+  private isChecked=false;
+  private dataArrayApi=[];
+  private isPinned = false;
+  private isArchived=false;
+    private adding: boolean;
   noteNew = {
     'id':''
   }
@@ -132,6 +134,7 @@ console.log(this.choose3);
       }
          
         this.service.postpassword("notes/addnotes", this.body, this.token).subscribe(data => {
+          this.notesNew.emit(data['status'].details)
             LoggerService.log('data',data);
             this.choose3 = true;
             this.snackBar.open("note created  successfully", "Notes", {

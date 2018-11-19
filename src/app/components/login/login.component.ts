@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  hide = true;
+  public hide = true;
 
   constructor(public httpService: HttpService, public snackBar: MatSnackBar, public router: Router) { }
   /**OnInit is a lifecycle hook that is called after Angular has initialized all data-bound properties of a directive. */

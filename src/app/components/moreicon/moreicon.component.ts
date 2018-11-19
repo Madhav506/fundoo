@@ -18,22 +18,22 @@ export class MoreiconComponent implements OnInit {
   @Output() moreEvent = new EventEmitter<any>();
   @Input() name;
 
-  public ArrayOfLabel = [];
+  private ArrayOfLabel = [];
   public checklist = []; Forever
   public check = true;
-  public array1 = [];
-  public array2 = [];
+  private array1 = [];
+  private array2 = [];
 
   public noteArray;
   public isChecked;
-  public model;
+  private model;
   public event: boolean;
   constructor(public service: HttpService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
 
   }
-  public token = localStorage.getItem('token')
+  private token = localStorage.getItem('token')
   public temp;
   deleteNotes(arrayOfNotes) {
 

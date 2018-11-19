@@ -10,7 +10,7 @@ export class TrashComponent implements OnInit {
 
 
   constructor(public service: HttpService) { }
-  myData = []
+  private myData = []
 
   name = 'trash';
   token = localStorage.getItem('token')

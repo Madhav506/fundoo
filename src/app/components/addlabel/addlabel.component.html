@@ -6,7 +6,7 @@
         </div>
         <input fxFlex=70 class="inputNote" [(ngModel)]="label"  placeholder="Create new Label">
                                   
-                             <!-------- clear----------- -->
+        <!------------------------- clear---------------------------------------- -->
 
         <div class="clear">
             <mat-icon fxFlex=10 (click)="clear()" mat-icon-button>clear</mat-icon>
@@ -16,7 +16,7 @@
     <div class="color">{{message}}</div>
     <div fxLayout="row" class="color1" fxLayoutAlign="space-between center"
          *ngFor="let label of ArrayOfLabel">
-                             <!-------- delete label----------- -->
+         <!------------------------- delete label---------------------------------------- -->
 
         <div fxLayout="row" fxLayoutAlign="space-between center" class="delete">
             <mat-icon (click)="deleteLabel(label.id)" class="hover" fxFlex=10 mat-icon-button>
@@ -28,7 +28,8 @@
              *ngIf="canEdit && label.label==editLabel"
             #editDiv>
         </div>
-                             <!-------- edit label----------- -->
+         <!------------------------- edit label---------------------------------------- -->
+
 
         <div fxFlex="10">
             <mat-icon (click)=edit(label) *ngIf="iconEdit || label.id!=idEdit">edit</mat-icon>
@@ -36,7 +37,7 @@
         </div>
     </div>
     <mat-divider></mat-divider>
-                            <!-------- close----------- -->
+        <!------------------------- close---------------------------------------- -->
 
     <div class="btn" mat-button (click)="close()">Done</div>
 </div>

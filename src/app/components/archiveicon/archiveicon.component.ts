@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service';
 import { MatSnackBar } from '@angular/material';
+import { LoggerService } from '../../core/services/logger/logger.service';
 
 @Component({
   selector: 'app-archiveicon',
@@ -16,7 +17,7 @@ export class ArchiveiconComponent implements OnInit {
   ngOnInit() {
 
   }
-  token = localStorage.getItem('token')
+  private token = localStorage.getItem('token')
 
   archiveNotes() {
     // console.log(this.archiveNotesArray);
@@ -58,7 +59,7 @@ export class ArchiveiconComponent implements OnInit {
 
     }),
       error => {
-        console.log("Error", error);
+       LoggerService.log("Error", error);
 
       }
   }

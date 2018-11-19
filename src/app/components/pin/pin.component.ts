@@ -16,7 +16,7 @@ export class PinComponent implements OnInit {
   token = localStorage.getItem('token');
   public body: any = {};
   public isPinned = false;
-  public newPin = true;;
+  private newPin = true;;
   ngOnInit() {
     if (this.noteId != undefined && this.noteId.isDeleted == true) {
       this.isDeleted = true;

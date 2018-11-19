@@ -1,6 +1,7 @@
 import { Component, Output, Input, OnInit, EventEmitter } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service';
 import { MatSnackBar } from '@angular/material';
+import { LoggerService } from '../../core/services/logger/logger.service';
 
 @Component({
   selector: 'app-coloricon',
@@ -12,9 +13,9 @@ export class ColoriconComponent implements OnInit {
   @Output() response = new EventEmitter<string>()
   @Output() responseNew = new EventEmitter<string>()
 
-  newColor = 1;
+  private newColor = 1;
   constructor(public service: HttpService, public snackBar: MatSnackBar) { }
-  token = localStorage.getItem("token");
+  private token = localStorage.getItem("token");
 
   ngOnInit() {
   }
@@ -56,7 +57,7 @@ export class ColoriconComponent implements OnInit {
 
     }),
       error => {
-        console.log(error);
+        LoggerService.log(error);
       }
 
   }
