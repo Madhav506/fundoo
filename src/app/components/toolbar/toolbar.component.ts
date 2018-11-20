@@ -11,6 +11,9 @@ import { DataService } from '../../core/services/data/data.service';
 import { LoggerService } from '../../core/services/logger/logger.service';
 import { ImagecropComponent } from '../imagecrop/imagecrop.component';
 import { environment } from '../../../environments/environment';
+import { NotesService } from '../../core/services/notes/notes.service';
+import { UserService } from '../../core/services/user/user.service';
+import { Label } from '../../core/model/note';
 
 @Component({
   selector: 'app-toolbar',
@@ -50,36 +53,32 @@ export class ToolbarComponent implements OnInit {
   imageProfile: string;
 
   constructor(private cdRef: ChangeDetectorRef, private breakpointObserver: BreakpointObserver,
-    public dataService: DataService, public service: HttpService,
-    public dialog: MatDialog, public snackBar: MatSnackBar, private router: Router, public http: HttpService) {
-
+    public dataService: DataService, public service: HttpService,public notesService:NotesService,
+    public dialog: MatDialog, public snackBar: MatSnackBar, private router: Router, 
+    public http: HttpService,public userService:UserService) {
   }
 
 
   ngOnInit() {
+   
     this.dataService.currLabel.subscribe(message =>
       this.values = message);
-      
-    // console.log('hahaha', this.values);
 
-    this.values = 'fundoo'
-
+    this.values='fundoo';
+    
+    this.values=localStorage.getItem('values')
     this.raw_data = localStorage.getItem('first');
     this.firstName = localStorage.getItem('firstName');
     this.lastName = localStorage.getItem('lastName');
-    // console.log(this.raw_data);
     var user = this.raw_data.split("");
     this.firstCharacter = user[0];
-    // console.log(this.firstCharacter);
     this.token = localStorage.getItem('token');
-    // console.log(this.token);
     this.getLabel();
 
   }
   logout() {
-    this.http.postLogout("user/logout", this.token).subscribe(
+    this.userService.postLogout().subscribe(
       data => {
-        // console.log(data);
         localStorage.clear();
 
         this.router.navigate(['/login']);
@@ -87,7 +86,7 @@ export class ToolbarComponent implements OnInit {
       }
     );
     error => {
-      console.log("Error", error);
+      LoggerService.log("Error", error);
       this.snackBar.open("error", "logout unsuccessfull", {
         duration: 10000,
       });
@@ -98,12 +97,13 @@ export class ToolbarComponent implements OnInit {
   }
   
   getLabel() {
-    this.service.getCardData("noteLabels/getNoteLabelList", this.token).subscribe(result => {
-      // console.log(result['data'].details);
+    this.notesService.getLabels().subscribe(result => {
       this.ArrayOfLabel = [];
-      for (var index = 0; index < result['data'].details.length; index++) {
-        if (result['data'].details[index].isDeleted == false) {
-          this.ArrayOfLabel.push(result['data'].details[index]);
+      var response:Label[]=[]=result['data'].details;
+
+      for (var index = 0; index <  response.length; index++) {
+        if ( response[index].isDeleted == false) {
+          this.ArrayOfLabel.push( response[index]);
          
         }
       }
@@ -117,9 +117,10 @@ export class ToolbarComponent implements OnInit {
         })   
     }),
       error => {
-        console.log(error, "error");
+        LoggerService.log(error, "error");
       }
   }
+
   clear() {
     this.searchInput = '';
   }
@@ -132,12 +133,11 @@ export class ToolbarComponent implements OnInit {
       panelClass: 'myapp-no-padding-dialog'
     });
     const sub = dialogRef.componentInstance.eventTwo.subscribe((data) => {
-      // console.log("sub", data);
+     
     });
     dialogRef.afterClosed().subscribe(data => {
       this.getLabel();
-      // console.log(data);
-      // console.log('The dialog was closed');
+     
     });
   }
   clickSearch() {
@@ -150,17 +150,17 @@ export class ToolbarComponent implements OnInit {
 
   headingChange(heading) {
     this.values = heading;
+
   }
   heading(item) {
     this.values = item.label;
 
   }
   // stateNew(event){
-  //   console.log('hahaha',event);
+  //  
 
   //   this.dataService.currLabel.subscribe(message => 
   //     this.values = message);
-  //   console.log('hahaha',this.values);
 
   // }
   imageFile = null;

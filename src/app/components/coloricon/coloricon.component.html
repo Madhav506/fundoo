@@ -8,11 +8,10 @@
 
         <div fxLayoutGap=10px fxLayout=row class="top" *ngFor='let colors of colorsObject'>
             <div *ngFor='let color of colors'>
-                <button class="colorNew" [ngStyle]="{'background-color': color.color }" (click)='changeColor(color.color)' matTooltip="{{color.tipname}}"
+                <button class="colorNew" [ngStyle]="{'background-color': color.color }" 
+                        (click)='changeColor(color.color)' matTooltip="{{color.tipname}}"
                     mat-mini-fab></button>
             </div>
         </div>
-
-
     </div>
 </mat-menu>

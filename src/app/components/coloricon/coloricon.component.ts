@@ -1,20 +1,25 @@
-import { Component, Output, Input, OnInit, EventEmitter } from '@angular/core';
+import { Component, Output, Input, OnInit, EventEmitter, OnDestroy } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service';
 import { MatSnackBar } from '@angular/material';
 import { LoggerService } from '../../core/services/logger/logger.service';
+import { NotesService } from '../../core/services/notes/notes.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-coloricon',
   templateUrl: './coloricon.component.html',
   styleUrls: ['./coloricon.component.scss']
 })
-export class ColoriconComponent implements OnInit {
+export class ColoriconComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   @Input() myNewColor
   @Output() response = new EventEmitter<string>()
   @Output() responseNew = new EventEmitter<string>()
 
   private newColor = 1;
-  constructor(public service: HttpService, public snackBar: MatSnackBar) { }
+  constructor(public service: HttpService, public noteService:NotesService,public snackBar: MatSnackBar) { }
   private token = localStorage.getItem("token");
 
   ngOnInit() {
@@ -42,13 +47,15 @@ export class ColoriconComponent implements OnInit {
 
   changeColor(paint) {
     this.responseNew.emit(paint);
+console.log(this.myNewColor);
 
     var content = {
       "color": paint,
       "noteIdList": [this.myNewColor]
     }
-    this.service.postDelete("notes/changesColorNotes", content, this.token).subscribe(data => {
-      // console.log("color is", this.myNewColor);
+    this.noteService.postChangeColor( content)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(data => {
       this.snackBar.open("colour changed  successfully", "colorchange", {
         duration: 10000,
 
@@ -60,6 +67,11 @@ export class ColoriconComponent implements OnInit {
         LoggerService.log(error);
       }
 
+  }
+  ngOnDestroy() { 
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 
 }

@@ -1,34 +1,38 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service';
 import { MatSnackBar } from '@angular/material';
 import { LoggerService } from '../../core/services/logger/logger.service';
+import { NotesService } from '../../core/services/notes/notes.service'
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-archiveicon',
   templateUrl: './archiveicon.component.html',
   styleUrls: ['./archiveicon.component.scss']
 })
-export class ArchiveiconComponent implements OnInit {
+export class ArchiveiconComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   @Input() archiveNotesArray;
   @Output() archiveEvent = new EventEmitter<any>()
   @Output() unarchiveEvent = new EventEmitter<any>()
 
-  constructor(public service: HttpService, public snackBar: MatSnackBar) { }
+  constructor(public service: HttpService, public snackBar: MatSnackBar,public noteService:NotesService) { }
   ngOnInit() {
 
   }
   private token = localStorage.getItem('token')
 
   archiveNotes() {
-    // console.log(this.archiveNotesArray);
 
-    // console.log(this.archiveNotesArray.id,"archived");
     var model = {
       "isArchived": true,
       "noteIdList": [this.archiveNotesArray.id]
     }
-    this.service.postDelete("notes/archiveNotes", model, this.token).subscribe(data => {
-      // console.log("archive note",data);
+    this.noteService.postArchiveNotes( model)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(data => {
       this.snackBar.open("note archived successfully,please check in archive", "archive", {
         duration: 10000,
 
@@ -37,31 +41,33 @@ export class ArchiveiconComponent implements OnInit {
 
     }),
       error => {
-        console.log("Error", error);
+        LoggerService.log("Error", error);
 
       }
   }
   unarchiveNotes() {
-    // console.log(this.archiveNotesArray);
-    // console.log(this.archiveNotesArray.id,"unarchived");
     var model = {
       "isArchived": false,
       "noteIdList": [this.archiveNotesArray.id]
     }
-    this.service.postDelete("notes/archiveNotes", model, this.token).subscribe(data => {
-      // console.log("unarchive note",data);
+    this.noteService.postArchiveNotes( model)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(data => {
       this.unarchiveEvent.emit();
       this.snackBar.open("note unarchived successfully,please check in notes", "notes", {
         duration: 10000,
 
       });
-
-
     }),
       error => {
        LoggerService.log("Error", error);
 
       }
+  }
+  ngOnDestroy() { 
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 
 }

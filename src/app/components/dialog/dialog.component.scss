@@ -83,3 +83,9 @@ padding:0px;
 //    width:300px;
 //     }
 //     }
+.span{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden !important;
+    width:50px;
+}

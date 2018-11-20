@@ -3,6 +3,9 @@ import {FormControl, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material';
 import { HttpService } from '../../core/services/http/http.service'
 import { Router,ActivatedRoute } from '@angular/router';
+import { NotesService } from '../../core/services/notes/notes.service';
+import { UserService } from '../../core/services/user/user.service';
+import { LoggerService } from '../../core/services/logger/logger.service';
 
 @Component({
   selector: 'app-resetpassword',
@@ -17,7 +20,8 @@ export class ResetpasswordComponent implements OnInit {
   } ;
   hide=true;
   // The route path and parameters are available through an injected router service called the ActivatedRoute. 
-  constructor(public service:HttpService,public route:ActivatedRoute ,public snackBar: MatSnackBar)  { }
+  constructor(public service:HttpService,public route:ActivatedRoute,
+    public user:UserService ,public snackBar: MatSnackBar)  { }
   // public token=this.route.snapshot.params.id;
 
   ngOnInit() {
@@ -30,9 +34,6 @@ set(){
     "newPassword":this.model.password
   }
   
- 
-
-
 
   this.service.postpassword("user/reset-password",body,this.token).subscribe(Response=>{
     // console.log("successful",Response);
@@ -61,4 +62,3 @@ set(){
   
 }
 }
-

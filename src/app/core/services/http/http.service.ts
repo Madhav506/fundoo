@@ -7,117 +7,80 @@ import{environment} from '../../../../environments/environment'
 export class HttpService {
   
   url=environment.baseUrl;
-  // profileUrlNew=environment.profileUrl;
+  profileUrlNew=environment.profileUrl;
 
   constructor(private http: HttpClient) { }
 
+public httpPost(url,body){
+  // var  token = localStorage.getItem('token');
 
-  // getDataService  to get data from service api
-
-  getDataService(url) {
-    url =  this.url+ url;
-    return this.http.get(url);
-  }
-
-  //addDataService to post the data to server
-  addDataService(url, body) {
-
-    url = this.url + url;
-
-    return this.http.post(url, body);
-
-  }
-  //to retrieve data  stored in server
-  getAddService(url) {
-    url = this.url + url
-    return this.http.get(url);
-  }
-
-  postpassword(url, input, token) {
-    // console.log(token);
-    // console.log(input);
-
-    url = this.url + url;
-    var httpAuthOptions1 = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': token
-      })
-
-    };
-
-
-    return this.http.post(url, this.getFormUrlEncoded(input), httpAuthOptions1);
-
-  }
-  getFormUrlEncoded(toConvert) {
-    const formBody = [];
-    for (const property in toConvert) {
-      const encodedKey = encodeURIComponent(property);
-      const encodedValue = encodeURIComponent(toConvert[property]);
-      formBody.push(encodedKey + '=' + encodedValue);
-    }
-    return formBody.join('&');
-  }
-//post api for logout
-
-postLogout(url,token){
-  // console.log("token to logout",token);
-  url = this.url + url;
-  var option = {
+  var httpAuthOptions2 = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': token
+      // 'Authorization': token
     })
-  
   };
-  // post should send 3 parameters. Url, body and then headers.
-  return this.http.post(url,{}, option);
-
+  /**passing the input & calling the  getFormUrlEncoded()*/
+  return this.http.post(url, body, httpAuthOptions2);
 }
-getCardData(url,token){
-  // console.log("token while getnotes list",token);
-  url = this.url + url;
-  var option1 = {
+public httpget(url){
+  // var  token = localStorage.getItem('token');
+  var httpAuthOptions3 = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
+      // 'Authorization': token
+    })
+
+  };
+  return this.http.get(url, httpAuthOptions3);
+
+}
+
+public httppostpassword(url,body){
+  // var  token = localStorage.getItem('token');
+
+var httpAuthOptions1 = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/x-www-form-urlencoded',
+    // 'Authorization': token
+  })
+};
+return this.http.post(url, this.getFormUrlEncoded(body),httpAuthOptions1)/**passing the input & calling the  getFormUrlEncoded()*/
+}
+getFormUrlEncoded(toConvert) {
+  const formBody = [];
+  for (const property in toConvert) {
+    const encodedKey = encodeURIComponent(property);
+    const encodedValue = encodeURIComponent(toConvert[property]);
+    formBody.push(encodedKey + '=' + encodedValue);
+  }
+  return formBody.join('&');
+}
+public httpImage(url,body){
+  var  token = localStorage.getItem('token');
+var http={
+  headers:new HttpHeaders({
+   
+   'Authorization':token
+  })
+};
+return this.http.post(url,body,http)
+}
+
+postpassword(url, input,token) {
+
+  url = this.url + url;
+  var httpAuthOptions1 = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
       'Authorization': token
     })
-  
+
   };
-  return this.http.get(url,option1);
+  return this.http.post(url, this.getFormUrlEncoded(input), httpAuthOptions1);
+
 }
-
-postDelete(url,body,token){
-  // console.log(" service")
-    url=this.url+url;
-    var option2 = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': token
-      })
-    
-    };
-    return this.http.post(url,body,option2);
-
-  }
-  deleteData(url){
-    url=this.url+url;
-    return this.http.delete(url);
-
-  }
-  addImage(url,body,token){
-    // console.log(token);
-    var http={
-      headers:new HttpHeaders({
-       
-       'Authorization':token
-      })
-    };
-    return this.http.post(this.url+"/"+url,body,http)
-  }
-  
-  
 }
 
 
+  

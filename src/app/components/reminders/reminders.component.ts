@@ -2,6 +2,9 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { HttpService } from '../../core/services/http/http.service';
 import { LoggerService } from '../../core/services/logger/logger.service';
+import { NotesService } from '../../core/services/notes/notes.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-reminders',
@@ -9,13 +12,13 @@ import { LoggerService } from '../../core/services/logger/logger.service';
   styleUrls: ['./reminders.component.scss']
 })
 export class RemindersComponent implements OnInit {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   public arrayData1 = [];
   public arrayData = [];
-  private remName;
   @Output() notesEvent = new EventEmitter<any>();
   
 
-  constructor(public snackBar: MatSnackBar, public service: HttpService) { }
+  constructor(public snackBar: MatSnackBar, public notesService:NotesService,public service: HttpService) { }
   ngOnInit() {
     this.getReminderNotes();
     
@@ -23,9 +26,11 @@ export class RemindersComponent implements OnInit {
   }
   public token = localStorage.getItem('token')
   getReminderNotes() {
-    this.service.getCardData('/notes/getReminderNotesList', this.token)
+    this.notesService.getReminders()
+    .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
         LoggerService.log('get reminder', data);
+        
         this.arrayData = data['data']['data'].reverse();
         // this.arrayData.sort(this.sortedItems);
          this.arrayData.sort((oldDate, newDate) =>
@@ -37,6 +42,11 @@ export class RemindersComponent implements OnInit {
       LoggerService.log('error', error);
     }
    
+  }
+  ngOnDestroy() { 
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
  
   reminders(event) {

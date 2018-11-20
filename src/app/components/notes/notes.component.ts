@@ -1,8 +1,11 @@
-import { Component, EventEmitter, OnInit, Output, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input, ViewChild, OnDestroy } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service'
 import { MatSnackBar } from '@angular/material';
 import { LoggerService } from '../../core/services/logger/logger.service';
 import { RemindiconComponent } from '../remindicon/remindicon.component';
+import { NotesService } from '../../core/services/notes/notes.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -10,21 +13,23 @@ import { RemindiconComponent } from '../remindicon/remindicon.component';
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.scss']
 })
-export class NotesComponent implements OnInit {
+export class NotesComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   @Output() eventClicked = new EventEmitter<Event>();
   @Output() notesNew = new EventEmitter<Event>();
 
   ArrayOfLabel;
-  public body:any={}
+  private body:any={}
   archiveNotesArray = { 'isArchived': false }
   colorMyevent = '#ffffff';
-  public interval: any;
-  public choose1 = true;
-  public choose2 = false;
-  public  choose3 = true;
+  // public interval: any;
+  private choose1 = true;
+  private choose2 = false;
+  private  choose3 = true;
   private array1 = [];
   private array2 = [];
-  public note;
+  private note;
   private title;
   private description;
   public notes;
@@ -32,7 +37,7 @@ export class NotesComponent implements OnInit {
   private status="open";
   private dataarray = [];
   private token = localStorage.getItem('token');
-  public check=false;
+  private check=false;
   private isChecked=false;
   private dataArrayApi=[];
   private isPinned = false;
@@ -41,13 +46,13 @@ export class NotesComponent implements OnInit {
   noteNew = {
     'id':''
   }
-  @ViewChild(RemindiconComponent) childComponentMenu: RemindiconComponent;
+  // @ViewChild(RemindiconComponent) childComponentMenu: RemindiconComponent;
 
   todaydate=new Date();
   tomorrow= new Date(this.todaydate.getFullYear(), this.todaydate.getMonth(), 
   (this.todaydate.getDate() + 1));
 
-  constructor(public service: HttpService, public snackBar: MatSnackBar) { }
+  constructor(public service: HttpService, public snackBar: MatSnackBar,public notesService:NotesService) { }
   ngOnInit() {
     
   }
@@ -72,10 +77,7 @@ export class NotesComponent implements OnInit {
     this.array2 = [];
     this.title = document.getElementById('title').innerHTML;
 
-    console.log(this.title);
-    
-console.log(this.choose3);
-
+   
     if(this.choose3==true){
    
     this.description = document.getElementById('description').innerHTML;
@@ -113,7 +115,7 @@ console.log(this.choose3);
          this.dataArrayApi.push(apiObj)
          this.status="open"
        }
-       console.log("dataArrayapi",this.dataArrayApi);
+       LoggerService.log("dataArrayapi",this.dataArrayApi);
        
              this.body={
                "title": this.title,
@@ -127,13 +129,15 @@ console.log(this.choose3);
               if(this.newReminder!=undefined){
                 this.body.reminder=this.newReminder;
               }
-              console.log(this.body);
+              LoggerService.log(this.body);
               this.body.color = this.colorMyevent;
               this.colorMyevent = "#ffffff";
               
       }
          
-        this.service.postpassword("notes/addnotes", this.body, this.token).subscribe(data => {
+        this.notesService.addNotes( this.body)     
+         .pipe(takeUntil(this.destroy$))
+        .subscribe(data => {
           this.notesNew.emit(data['status'].details)
             LoggerService.log('data',data);
             this.choose3 = true;
@@ -153,7 +157,7 @@ console.log(this.choose3);
           }
       
           ),error=>{
-            console.log('error',error);
+            LoggerService.log('error',error);
             
           }
        
@@ -163,8 +167,10 @@ console.log(this.choose3);
 
   getLabel() {
 
-    this.service.getCardData("noteLabels/getNoteLabelList", this.token).subscribe(result => {
-      // console.log(result['data'].details);
+    this.notesService.getLabels( )
+    .pipe(takeUntil(this.destroy$))
+
+    .subscribe(result => {
 
       this.ArrayOfLabel = [];
       for (var index = 0; index < result['data'].details.length; index++) {
@@ -172,18 +178,15 @@ console.log(this.choose3);
           this.ArrayOfLabel.push(result['data'].details[index]);
         }
       }
-      // console.log(this.ArrayOfLabel);
-      // console.log("emitting");
-
+     
 
     }),
       error => {
-        console.log(error, "error");
+        LoggerService.log(error, "error");
       }
   }
 
   clickFunc(temp) {
-    // console.log(temp);
     if (!this.array2.some((data) => data == temp.label)) {
       this.array1.push(temp.id);
       this.array2.push(temp.label);
@@ -215,7 +218,6 @@ console.log(this.choose3);
     this.i++;
     this.isChecked=this.addCheck;
     if (this.data != null  ) {
-      // console.log(event,"keydown");
       var obj = {
         "index": this.i,
         "data": this.data,
@@ -260,7 +262,11 @@ console.log(this.choose3);
     this.array2.pop();
     this.array1.pop();
   }
-  
+  ngOnDestroy() { 
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
      
   
 }      

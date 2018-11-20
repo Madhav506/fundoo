@@ -2,6 +2,9 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service'
 import { LoggerService } from '../../core/services/logger/logger.service';
 import { MatSnackBar } from '@angular/material';
+import { NotesService } from '../../core/services/notes/notes.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pin',
@@ -9,11 +12,11 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./pin.component.scss']
 })
 export class PinComponent implements OnInit {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   @Output() eventEmit = new EventEmitter<any>();
   @Input() noteId
-  constructor(public service: HttpService, public snackBar: MatSnackBar) { }
+  constructor(public service: HttpService,public notesService:NotesService, public snackBar: MatSnackBar) { }
   public isDeleted = false;
-  token = localStorage.getItem('token');
   public body: any = {};
   public isPinned = false;
   private newPin = true;;
@@ -29,7 +32,7 @@ export class PinComponent implements OnInit {
   }
 
   pin() {
-    this.eventEmit.emit();
+    this.eventEmit.emit({});
 
     if (this.noteId != undefined) {
       if (this.noteId.isPined == true) {
@@ -37,16 +40,18 @@ export class PinComponent implements OnInit {
       }
       var arrayNoteId = []
       arrayNoteId.push(this.noteId.id)
-      console.log(arrayNoteId);
+      LoggerService.log('arrayNoteId',arrayNoteId);
       if (this.noteId.id != undefined) {
         var body = {
           "isPined": this.newPin,
           "noteIdList": arrayNoteId
         }
-        this.service.postDelete("notes/pinUnpinNotes", body, this.token).subscribe((data) => {
+        this.notesService.postPinUnpin( body)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((data) => {
           LoggerService.log('data', data);
           LoggerService.log(this.noteId)
-          this.eventEmit.emit();
+          this.eventEmit.emit({});
 
         });
 
@@ -54,6 +59,12 @@ export class PinComponent implements OnInit {
       }
     }
   }
+  ngOnDestroy() { 
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
+
 
 }
 

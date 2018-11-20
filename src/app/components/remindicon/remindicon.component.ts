@@ -1,13 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter,ViewChild} from '@angular/core';
 import { FormControl } from '@angular/forms';
-// import {MomentDateAdapter} from '@angular/material-moment-adapter';
-// import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-// import * as _moment from 'moment'; 
-// import * as moment_1 from 'moment';
 import { MatSnackBar, MatMenu} from '@angular/material';
 import { LoggerService } from '../../core/services/logger/logger.service';
 import { HttpService } from '../../core/services/http/http.service';
 import { MatDatepickerModule } from "@angular/material";
+import { NotesService } from '../../core/services/notes/notes.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -20,6 +19,7 @@ import { MatDatepickerModule } from "@angular/material";
 
 
 export class RemindiconComponent implements OnInit {
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   @ViewChild(MatMenu) menu: MatMenu;
   @Input() noteId;
@@ -28,7 +28,7 @@ export class RemindiconComponent implements OnInit {
   dateflag=false;
   setDate: any;
 
-  constructor(public snackBar: MatSnackBar, public service: HttpService) { }
+  constructor(public snackBar: MatSnackBar,public NotesService:NotesService, public service: HttpService) { }
 
   ngOnInit() {
   }
@@ -59,7 +59,9 @@ export class RemindiconComponent implements OnInit {
     }
     this.remindTopEvent.emit(this.model['reminder']);
 
-    this.service.postDelete('notes/addUpdateReminderNotes', this.model, this.token)
+    this.NotesService.postAddUpdateReminderNotes( this.model)
+    .pipe(takeUntil(this.destroy$))
+
       .subscribe((response) => {
 
         this.remindEvent.emit();
@@ -76,7 +78,9 @@ export class RemindiconComponent implements OnInit {
     }
     this.remindTopEvent.emit(this.model['reminder']);
 
-    this.service.postDelete('notes/addUpdateReminderNotes', this.model, this.token)
+    this.NotesService.postAddUpdateReminderNotes(this.model)
+    .pipe(takeUntil(this.destroy$))
+
       .subscribe((response) => {
 
         this.remindEvent.emit();
@@ -90,7 +94,8 @@ export class RemindiconComponent implements OnInit {
     }
     this.remindTopEvent.emit(this.model['reminder']);
 
-    this.service.postDelete('notes/addUpdateReminderNotes', this.model, this.token)
+    this.NotesService.postAddUpdateReminderNotes( this.model)
+    .pipe(takeUntil(this.destroy$))
     .subscribe((response) => {
 
       this.remindEvent.emit();
@@ -137,7 +142,9 @@ export class RemindiconComponent implements OnInit {
     }
     this.remindTopEvent.emit(this.model['reminder']);
 
-    this.service.postDelete('notes/addUpdateReminderNotes', this.model, this.token)
+    this.NotesService.postAddUpdateReminderNotes(this.model)
+    .pipe(takeUntil(this.destroy$))
+
       .subscribe((response) => {
         this.remindEvent.emit();
       })
@@ -172,7 +179,11 @@ export class RemindiconComponent implements OnInit {
   //   }
   
   // }
-
+  ngOnDestroy() { 
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 
 
 }

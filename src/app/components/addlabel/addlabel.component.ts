@@ -1,9 +1,14 @@
-import { Component, Inject, EventEmitter, Output, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, Inject, EventEmitter, Output, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { HttpService } from '../../core/services/http/http.service'
+import { NotesService } from '../../core/services/notes/notes.service'
+
 import { DataService } from '../../core/services/data/data.service';
 import { DeletedialogComponent } from '../deletedialog/deletedialog.component';
 import { LoggerService } from '../../core/services/logger/logger.service';
+import { Label } from '../../core/model/note';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 export interface DialogData {
   "title": String,
@@ -17,7 +22,9 @@ export interface DialogData {
   styleUrls: ['./addlabel.component.scss']
 })
 
-export class AddlabelComponent implements OnInit {
+export class AddlabelComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   @Output() eventNew = new EventEmitter<string>();
   @Output() eventTwo = new EventEmitter();
   private changeText: boolean;
@@ -28,7 +35,7 @@ export class AddlabelComponent implements OnInit {
   private editLabel;
   private messageDisplay;
   private message;
-  constructor(public service: HttpService, public dataService: DataService, public dialog: MatDialog,
+  constructor(public service: HttpService,public notesService:NotesService, public dataService: DataService, public dialog: MatDialog,
     public dialogRef: MatDialogRef<AddlabelComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.changeText = false;
@@ -41,7 +48,7 @@ export class AddlabelComponent implements OnInit {
 
   }
   private label;
-  private ArrayOfLabel = [];
+  private ArrayOfLabel:Label[]=[];
   private newLabel;
   clear() {
     this.label = ' ';
@@ -60,7 +67,6 @@ export class AddlabelComponent implements OnInit {
             
   addLabel() {
     var label = this.label;
-    // console.log(this.ArrayOfLabel);
     for (var j = 0; j < this.ArrayOfLabel.length; j++) {
       if (this.ArrayOfLabel[j].label == label) {
         this.message = "label  already exists"
@@ -72,13 +78,13 @@ export class AddlabelComponent implements OnInit {
       "isDeleted": false,
       "userId": this.id
     }
-    this.service.postDelete("noteLabels", model, this.token).subscribe(result => {
-      // console.log("adding label")
+    this.notesService.postNoteLabels( model)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(result => {
       this.clear();
 
       this.getLabel();
 
-      // console.log(result);
     }),
       error => {
         LoggerService.log( "error",error);
@@ -89,17 +95,19 @@ export class AddlabelComponent implements OnInit {
 /*  get labels whatever the labels are present in labelarray */
 
   getLabel() {
-    this.service.getCardData("noteLabels/getNoteLabelList", this.token).subscribe(result => {
-      console.log(result['data'].details);
+    this.notesService.getLabels()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(result => {
+      LoggerService.log(result['data'].details);
       this.ArrayOfLabel = [];
-      for (var index = 0; index < result['data'].details.length; index++) {
-        if (result['data'].details[index].isDeleted == false) {
-          this.ArrayOfLabel.push(result['data'].details[index]);
+      var response:Label[]=[]=result['data'].details;
+
+      for (var index = 0; index < response.length; index++) {
+        if (response[index].isDeleted == false) {
+          this.ArrayOfLabel.push(response[index]);
         }
       }
-      // console.log(this.ArrayOfLabel);
       this.eventTwo.emit(this.ArrayOfLabel);
-      // console.log("emitting");
 
     }),
       error => {
@@ -122,11 +130,13 @@ export class AddlabelComponent implements OnInit {
       panelClass: 'myapp-no-paddding-dialog',
       data: { name: 'label' }
     });
-    dialogRef.afterClosed().subscribe(data => {
-      // console.log(labelid);
+    dialogRef.afterClosed()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(data => {
       if (data) {
-        this.service.deleteData("noteLabels/" + labelid + "/deleteNoteLabel").subscribe(result => {
-          // console.log("delete note label");
+        this.notesService.deleteData( labelid)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(result => {
 
           this.dataService.change(true);
 
@@ -148,7 +158,6 @@ export class AddlabelComponent implements OnInit {
     this.clickEdit = false;
     this.canEdit = false;
     this.newLabel = this.editDiv.nativeElement.innerHTML
-    // console.log(this.newLabel, "label");
 
     var body = {
       "label": this.newLabel,
@@ -156,19 +165,21 @@ export class AddlabelComponent implements OnInit {
       "id": label.id,
       "userId": this.id
     }
-    this.service.postDelete("noteLabels/" + label.id + "/updateNoteLabel", body, this.token)
+    this.notesService.postUpdateNotelabel( label.id, body)
+    .pipe(takeUntil(this.destroy$))
       .subscribe(result => {
-        // console.log("update note label", result);
         this.dataService.change(true);
-
         this.getLabel();
-
       }),
       error => {
         LoggerService.log( "error",error);
       }
   }
-
+  ngOnDestroy() { 
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 
 
 }

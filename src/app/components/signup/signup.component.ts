@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../core/services/user/user.service'
 import { HttpService } from '../../core/services/http/http.service'
+
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms'
 import { MatSnackBar } from '@angular/material';
+import { LoggerService } from '../../core/services/logger/logger.service';
 
 @Component({
     selector: 'app-signup',
@@ -45,17 +48,17 @@ export class SignupComponent implements OnInit {
 
 
     public card = [];
-    service;
+   private  service;
     hide = true;
 
 
-    constructor(public httpService: HttpService, public display: MatSnackBar, public validate: FormBuilder) { }
+    constructor(public user: UserService, public display: MatSnackBar, public validate: FormBuilder) { }
 
     // Initialize the directive/component after Angular first displays the data-bound properties and sets the directive/component's input properties.
 
     ngOnInit() {
 
-        this.httpService.getDataService("user/service")
+        this.user.getDataServiceBasicAdvance()
 
             //whenever response from server arrives the callback passed to subscribe()
             .subscribe((response) => {
@@ -63,12 +66,10 @@ export class SignupComponent implements OnInit {
                 for (var i = 0; i < data.data.length; i++) {
                     this.card.push(data.data[i]);
                 }
-                // console.log(this.card);
             })
 
     }
     changeCardColor(card) {
-        // console.log(card.name);
         this.service = card.name;
         card.check = true;
         for (var i = 0; i < this.card.length; i++) {
@@ -84,20 +85,17 @@ export class SignupComponent implements OnInit {
 
 
     sendData() {
-        // console.log(this.detailsObject.Firstname);
-        // console.log(this.detailsObject.Lastname);
-        // console.log(this.detailsObject.Email);
-      
+       
 
             if (this.detailsObject.cpassword != this.detailsObject.password) {
-                this.display.open("password mismatch", "hhh", {
+                this.display.open("password mismatch", "mismatch", {
                     duration: 10000,
                 });
                 return false;
             }
             else {
-                this.httpService
-                    .addDataService('user/userSignUp', {
+                this.user
+                    .postSignUp( {
                         "firstName": this.detailsObject.Firstname,
                         "lastName": this.detailsObject.Lastname,
                         "service": this.service,
@@ -109,7 +107,6 @@ export class SignupComponent implements OnInit {
                     })
                     .subscribe(
                         (data) => {
-                            // console.log(" successful ", data);
                             this.display.open("Registered successfull", "continue", {
                                 duration: 10000,
                             });
@@ -117,7 +114,7 @@ export class SignupComponent implements OnInit {
 
                         },
                         error => {
-                            // console.log("Error", error);
+                            LoggerService.log("Error", error);
                             this.display.open("Registration unsuccessfull", "register", {
                                 duration: 10000,
                             });
@@ -130,14 +127,17 @@ export class SignupComponent implements OnInit {
        
 
 
-        this.httpService.getAddService("user")
+
+
+
+        this.user.getAddService()
             .subscribe(
                 (data) => {
-                    console.log("data in server is", data);
+                    LoggerService.log("data in server is", data);
 
                 },
                 error => {
-                    console.log("Error", error);
+                    LoggerService.log("Error", error);
                 })
 
 

@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service'
+import { NotesService } from '../../core/services/notes/notes.service';
+import { LoggerService } from '../../core/services/logger/logger.service';
 
 @Component({
   selector: 'app-trash',
@@ -9,7 +11,7 @@ import { HttpService } from '../../core/services/http/http.service'
 export class TrashComponent implements OnInit {
 
 
-  constructor(public service: HttpService) { }
+  constructor(public service: HttpService,public notesService:NotesService) { }
   private myData = []
 
   name = 'trash';
@@ -18,7 +20,7 @@ export class TrashComponent implements OnInit {
     this.getNotes();
   }
   getNotes() {
-    this.service.getCardData("notes/getNotesList", this.token).subscribe(data => {
+    this.notesService.getNotesList().subscribe(data => {
       this.myData = data['data'].data.reverse();
       this.myData = []
       for (var i = 0; i < data['data'].data.length - 1; i++) {
@@ -28,7 +30,7 @@ export class TrashComponent implements OnInit {
       }
     }),
       error => {
-        console.log("Error", error);
+        LoggerService.log("Error", error);
 
       }
   }

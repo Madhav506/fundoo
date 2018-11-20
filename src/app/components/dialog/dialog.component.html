@@ -1,6 +1,6 @@
 <div 
 ngStyle.xs="width:100%" class="flex" 
-[ngStyle]="{'background-color':data.color}">
+[ngStyle]="{'background-color':color}">
   <div fxFlex="85" 
   class="hiddenCard">
     <div fxLayout="row" class="hiddenDiv">
@@ -25,7 +25,7 @@ ngStyle.xs="width:100%" class="flex"
                     (click)=checkBox(check)>
       </mat-checkbox>
       <input [(ngModel)]=check.itemName fxFlex="80%" class="note" (keydown)=editing(check,$event) 
-             [ngStyle]="{'background-color':data.color}"
+             [ngStyle]="{'background-color':color}"
         *ngIf="!check.isDeleted && check.status=='open'">
       <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check) 
                 *ngIf="!check.isDeleted && check.status=='open'">clear
@@ -38,7 +38,7 @@ ngStyle.xs="width:100%" class="flex"
       <mat-checkbox *ngIf="adding" [(ngModel)]=addCheck color="primary">
       </mat-checkbox>
       <input fxFlex="95%" class="note" placeholder="List Item" 
-             [ngStyle]="{'background-color':data.color}" [(ngModel)]=newList
+             [ngStyle]="{'background-color':color}" [(ngModel)]=newList
              (keydown)=addList($event)/>
     </div>
     <mat-divider *ngIf="checklist"></mat-divider>
@@ -49,7 +49,7 @@ ngStyle.xs="width:100%" class="flex"
       </mat-checkbox>
       <input [(ngModel)]=check.itemName class="note" style="text-decoration: line-through;"
              fxFlex="80%" *ngIf="check.status=='close' && !check.isDeleted"
-        [ngStyle]="{'background-color':data.color}" (keydown)=editing(check,$event)>
+        [ngStyle]="{'background-color':color}" (keydown)=editing(check,$event)>
       <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check) 
                 *ngIf="!check.isDeleted && check.status=='close'">clear
       </mat-icon>
@@ -62,7 +62,7 @@ ngStyle.xs="width:100%" class="flex"
       <div *ngFor="let item of array1">
         <mat-chip-list #noteLabels selected>
           <mat-chip *ngIf="item.isDeleted==false">
-            {{item.label}}
+            <span class="span">{{item.label}}</span>
             <mat-icon matChipRemove (click)="removeAssignments(item,data.id)">cancel
             </mat-icon>
           </mat-chip>
@@ -90,9 +90,9 @@ ngStyle.xs="width:100%" class="flex"
         <app-remindicon [noteId]="data"  (remindEvent)="emit($event)"  ></app-remindicon>
         <!-- [noteId]="data" (remindEvent)="remind($event)" -->
         <app-collaboratoricon></app-collaboratoricon>
-        <app-coloricon [color]="data.id"  (updateEvent)="colorNew($event)"></app-coloricon>
+        <app-coloricon [myNewColor]="data.id"  (responseNew)="colorNew($event)"></app-coloricon>
         <app-imageicon></app-imageicon>
-        <app-archiveicon [archiveNotesArray]='archiveNotesArray' [archiveNotesArray]="data.id" 
+        <app-archiveicon [archiveNotes]='archiveNotesArray' [archiveNotesArray]="data" 
                          (archiveEvent)="archive($event)">
 
         </app-archiveicon>

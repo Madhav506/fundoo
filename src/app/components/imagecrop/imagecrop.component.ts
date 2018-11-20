@@ -14,18 +14,23 @@
 
 // }
 
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject,OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { HttpService } from '../../core/services/http/http.service';
 import { DataService } from '../../core/services/data/data.service';
 import { ToolbarComponent } from '../toolbar/toolbar.component';
 import { LoggerService } from '../../core/services/logger/logger.service';
+import { NotesService } from '../../core/services/notes/notes.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-imagecrop',
   templateUrl: './imagecrop.component.html',
   styleUrls: ['./imagecrop.component.scss']
 })
-export class ImagecropComponent implements OnInit {
+export class ImagecropComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   ImageFileCropped: any;
 
 
@@ -33,6 +38,7 @@ export class ImagecropComponent implements OnInit {
     private dialogRef: MatDialogRef<ToolbarComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private httpService: HttpService,
+    public notesService:NotesService,
     private service: DataService
   ) { }
 
@@ -41,7 +47,7 @@ export class ImagecropComponent implements OnInit {
   imageCropped(event) {
     this.ImageFileCropped = event.file;
   }
-  token = localStorage.getItem('token');
+  private  token = localStorage.getItem('token');
 
   cancel() {
     this.dialogRef.close();
@@ -49,7 +55,8 @@ export class ImagecropComponent implements OnInit {
   imageUpload() {
     const uploadData = new FormData();
     uploadData.append('file', this.ImageFileCropped);
-    this.httpService.addImage('user/uploadProfileImage', uploadData, this.token)
+    this.notesService.imageUpload( uploadData)
+    .pipe(takeUntil(this.destroy$))
         .subscribe(response => {
       LoggerService.log("response of Image", response);
       localStorage.setItem('imageUrl', response['status'].imageUrl);
@@ -59,6 +66,11 @@ export class ImagecropComponent implements OnInit {
       LoggerService.log(error);
     })
 
+  }
+  ngOnDestroy() { 
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 
 

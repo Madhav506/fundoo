@@ -1,19 +1,29 @@
 
 import { HttpService } from '../../core/services/http/http.service'
-import { Component } from '@angular/core';
+import { UserService } from '../../core/services/user/user.service'
+
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { NotesService } from '../../core/services/notes/notes.service';
+import { LoggerService } from '../../core/services/logger/logger.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
+// import{user} from ''
 /** @title Form field with error messages */
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   public hide = true;
 
-  constructor(public httpService: HttpService, public snackBar: MatSnackBar, public router: Router) { }
+  constructor(public httpService: HttpService,
+    public notesService:NotesService, public user:UserService,public snackBar: MatSnackBar, public router: Router) { }
   /**OnInit is a lifecycle hook that is called after Angular has initialized all data-bound properties of a directive. */
   ngOnInit() {
     //   var token;
@@ -44,16 +54,18 @@ export class LoginComponent {
       this.isLeftVisible = !this.isLeftVisible;
     }
     else {
-      console.log("invalid details");
+      LoggerService.log("invalid details");
     }
 
   }
   signin() {
     var first = this.model.email;
-    this.httpService.addDataService("user/login", this.model).subscribe(
+
+    
+    this.user.postLogin( this.model)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       data => {
-        console.log(data)
-        // console.log(data['id']);
         localStorage.setItem('token', data['id']);
         localStorage.setItem('first', first);
         localStorage.setItem('firstName', data['firstName']);
@@ -62,17 +74,19 @@ export class LoginComponent {
         localStorage.setItem('imageUrl', data['imageUrl']);
 
         var token=localStorage.getItem('token');
-        console.log(token,"token in login");      
+        LoggerService.log(token,"token in login");      
         var pushToken=localStorage.getItem('pushToken')
-        console.log('pushtoken in login',pushToken);
+        LoggerService.log('pushtoken in login',pushToken);
         var body={
                 "pushToken":pushToken
               }
 
-              this.httpService.postDelete('user/registerPushToken',body,token).subscribe(
+              this.notesService.postRegisterPushToken(body)
+              .pipe(takeUntil(this.destroy$))
+              .subscribe(
                   data=>{
 
-                    console.log("post of pushToken",data)
+                    LoggerService.log("post of pushToken",data)
                   });
         
         this.router.navigate(['/home']);
@@ -81,13 +95,19 @@ export class LoginComponent {
   });
       }),
       error => {/**if error exists then displays the error message using snackbar */
-        console.log("Error", error);
+        LoggerService.log("Error", error);
         this.snackBar.open("enter valid details ", "login unsuccessfull", {
           duration: 10000,
         });
 
       }
+      
 
+  }
+  ngOnDestroy() { 
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }
 

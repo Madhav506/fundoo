@@ -65,7 +65,7 @@ import { DeletedialogComponent } from './components/deletedialog/deletedialog.co
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -74,7 +74,11 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { ImagecropComponent } from './components/imagecrop/imagecrop.component';
 import { PinComponent } from './components/pin/pin.component';
 import { MessagingService } from './core/services/messaging/messaging.service';
+import { UserService } from './core/services/user/user.service';
+import { NotesService } from './core/services/notes/notes.service';
 
+import { InterceptService} from './core/services/interceptor/interceptor.service';
+// import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -140,13 +144,18 @@ import { MessagingService } from './core/services/messaging/messaging.service';
     MatNativeDateModule,
     ImageCropperModule,
     MatSelectModule,
-    
+    HttpClientModule
     // MomentDateAdapter,
     
 
   ],
   entryComponents: [DialogComponent, AddlabelComponent, DeletedialogComponent,ImagecropComponent,ToolbarComponent,],
-  providers: [HttpService,AuthguardGuard, DataService, LoggerService,MessagingService],
+  providers: [HttpService,AuthguardGuard, DataService, UserService,NotesService,
+    LoggerService,MessagingService,InterceptService,{
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptService,
+      multi: true
+    }],
   bootstrap: [AppComponent]//2
 })
 export class AppModule { }

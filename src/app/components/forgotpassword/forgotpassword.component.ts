@@ -1,19 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { HttpService } from '../../core/services/http/http.service'
+import { UserService } from '../../core/services/user/user.service'
 import { MatSnackBar } from '@angular/material';
+import { LoggerService } from '../../core/services/logger/logger.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-forgotpassword',
   templateUrl: './forgotpassword.component.html',
   styleUrls: ['./forgotpassword.component.scss']
 })
-export class ForgotpasswordComponent implements OnInit {
+export class ForgotpasswordComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   body: any = {
     "email": "",
 
   };
 
-  constructor(public forgotService: HttpService, public snackBar: MatSnackBar) { }
+  constructor(public forgotService: HttpService,public user:UserService, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
@@ -24,10 +30,10 @@ export class ForgotpasswordComponent implements OnInit {
         'Not a valid email';
   }
   forgotPassword() {
-    console.log(this.body.email);
+    LoggerService.log(this.body.email);
 
     if (this.body.email.length == 0) {
-      // console.log("Email is required");
+      LoggerService.log("Email is required");
       this.snackBar.open("Email is required ", "Enter your mailid", {
         duration: 10000,
 
@@ -35,11 +41,12 @@ export class ForgotpasswordComponent implements OnInit {
 
     }
     else {
-      this.forgotService.addDataService('user/reset', this.body)
+      this.user.postReset( this.body)
+      .pipe(takeUntil(this.destroy$))
         .subscribe(
           data => {
 
-            // console.log("reset successfull,check your mail once");
+            LoggerService.log("reset successfull,check your mail once");
             this.snackBar.open("To reset  ", "check your mail once a link has been sent", {
               duration: 10000,
             });
@@ -47,7 +54,7 @@ export class ForgotpasswordComponent implements OnInit {
 
           }),
         error => {
-          // console.log("Error", error);
+          LoggerService.log("Error", error);
           this.snackBar.open("enter valid details ", "login unsuccessfull", {
             duration: 10000,
 
@@ -57,6 +64,11 @@ export class ForgotpasswordComponent implements OnInit {
 
 
     }
+  }
+  ngOnDestroy() { 
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 
 

@@ -1,17 +1,23 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service'
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DialogComponent } from '../dialog/dialog.component';
 import { AddlabelComponent } from '../addlabel/addlabel.component';
 import { MatSnackBar } from '@angular/material';
 import { DeletedialogComponent } from '../deletedialog/deletedialog.component';
+import { NotesService } from '../../core/services/notes/notes.service';
+import { LoggerService } from '../../core/services/logger/logger.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-moreicon',
   templateUrl: './moreicon.component.html',
   styleUrls: ['./moreicon.component.scss']
 })
-export class MoreiconComponent implements OnInit {
+export class MoreiconComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   @Input() arrayOfNotes;
   @Input() arrayOfMynotes;
   @Output() delEvent = new EventEmitter<any>();
@@ -19,7 +25,8 @@ export class MoreiconComponent implements OnInit {
   @Input() name;
 
   private ArrayOfLabel = [];
-  public checklist = []; Forever
+  public checklist = [];
+  //  Forever
   public check = true;
   private array1 = [];
   private array2 = [];
@@ -28,7 +35,7 @@ export class MoreiconComponent implements OnInit {
   public isChecked;
   private model;
   public event: boolean;
-  constructor(public service: HttpService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
+  constructor(public service: HttpService,public notesService:NotesService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
 
@@ -37,13 +44,15 @@ export class MoreiconComponent implements OnInit {
   public temp;
   deleteNotes(arrayOfNotes) {
 
-    console.log(this.arrayOfNotes);
+    LoggerService.log(this.arrayOfNotes);
     var model = {
       "isDeleted": true,
       "noteIdList": [this.arrayOfNotes]
     }
-    this.service.postDelete("notes/trashNotes", model, this.token).subscribe(data => {
-      console.log("delete note", data);
+    this.notesService.postTrashNotes(model)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(data => {
+      LoggerService.log("delete note", data);
       this.snackBar.open("note deleted  successfully,please check in trash", "trash", {
         duration: 10000,
 
@@ -52,14 +61,16 @@ export class MoreiconComponent implements OnInit {
 
     }),
       error => {
-        console.log("Error", error);
+        LoggerService.log("Error", error);
 
       }
   }
   getLabel() {
 
-    this.service.getCardData("noteLabels/getNoteLabelList", this.token).subscribe(result => {
-      console.log(result['data'].details);
+    this.notesService.getLabels()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(result => {
+      LoggerService.log(result['data'].details);
 
       this.ArrayOfLabel = [];
       for (var index = 0; index < result['data'].details.length; index++) {
@@ -67,29 +78,28 @@ export class MoreiconComponent implements OnInit {
           this.ArrayOfLabel.push(result['data'].details[index]);
         }
       }
-      console.log(this.ArrayOfLabel);
-      console.log("emitting");
+      LoggerService.log("emitting",this.ArrayOfLabel);
 
 
     }),
       error => {
-        console.log(error, "error");
+        LoggerService.log(error, "error");
       }
   }
   addLabelList(label) {
-console.log('yesss');
 
-    console.log(label.id);
-    console.log("noteid", this.arrayOfNotes);
-    this.service.postDelete("notes/" + this.arrayOfNotes + "/addLabelToNotes/" + label.id 
-    + "/add", {}, this.token).subscribe(response => {
-      console.log("adding label to note", response);
+    LoggerService.log(label.id);
+    LoggerService.log("noteid", this.arrayOfNotes);
+    this.notesService.postAddLabelnotes(label.id, this.arrayOfNotes, {})
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(response => {
+      LoggerService.log("adding label to note", response);
 
       this.moreEvent.emit(label);
 
     })
     error => {
-      console.log("error", error);
+      LoggerService.log("error", error);
     }
   }
   selectCheck(labelOption){
@@ -103,10 +113,10 @@ console.log('yesss');
   }
 
   clickFunc(label) {
-    console.log(label);
+    LoggerService.log(label);
 
-    console.log(label.id, "yess");
-    console.log(label.label, "yesw");
+    LoggerService.log(label.id, "yess");
+    LoggerService.log(label.label, "yes...");
 
 
     if (!this.array2.some((data) => data == label.label)) {
@@ -135,7 +145,9 @@ console.log('yesss');
           "isDeleted": true,
           "noteIdList": [this.arrayOfNotes]
         }
-        this.service.postDelete('notes/deleteForeverNotes', this.model, this.token).subscribe(data => {
+        this.notesService.postDeleteForeverNotes(this.model)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(data => {
           this.delEvent.emit();
           this.snackBar.open("note deleted  permanently", "trash", {
             duration: 10000,
@@ -150,7 +162,9 @@ console.log('yesss');
       "isDeleted": false,
       "noteIdList": [this.arrayOfNotes]
     }
-    this.service.postDelete("notes/trashNotes", model, this.token).subscribe(data => {
+    this.notesService.postTrashNotes(model)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(data => {
       this.snackBar.open("note restored  successfully,please check in notes", "notes", {
         duration: 10000,
 
@@ -159,11 +173,15 @@ console.log('yesss');
 
     }),
       error => {
-        console.log("Error", error);
+        LoggerService.log("Error", error);
 
       }
   }
-  
+  ngOnDestroy() { 
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 
 }
 

@@ -5,6 +5,9 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { DataService } from '../../core/services/data/data.service';
 import { LoggerService } from '../../core/services/logger/logger.service';
 import { RemindiconComponent } from '../remindicon/remindicon.component';
+import { NotesService } from '../../core/services/notes/notes.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-notescard',
@@ -15,6 +18,8 @@ import { RemindiconComponent } from '../remindicon/remindicon.component';
 
 
 export class NotescardComponent implements OnInit {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   @Output() noteEvent = new EventEmitter<any>();
   @Output() colorevent = new EventEmitter<any>();
   @Output() archive = new EventEmitter<any>();
@@ -45,8 +50,12 @@ export class NotescardComponent implements OnInit {
   condition = true;
   public message: Event;
   public values: any;
-  constructor(public service: HttpService, public dialog: MatDialog, public dataService: DataService) {
-    this.dataService.cMsg.subscribe(message => {
+  constructor(public service: HttpService,
+    public notesService:NotesService, public dialog: MatDialog, public dataService: DataService) {
+    this.dataService.cMsg
+    .pipe(takeUntil(this.destroy$))
+
+    .subscribe(message => {
       LoggerService.log('message' + message);
 
       if (message) {
@@ -54,7 +63,9 @@ export class NotescardComponent implements OnInit {
 
       }
     }),
-      this.dataService.currentmsg.subscribe(response => {
+      this.dataService.currentmsg
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(response => {
         this.condition = response;
       })
   }
@@ -102,18 +113,20 @@ export class NotescardComponent implements OnInit {
 
     // this.updateEvent.emit();
     const dialogRef = this.dialog.open(DialogComponent, {
-      // width: '450px',
+      width: '450px',
       height: 'auto',
       data: dialogData,
       panelClass: 'myapp-no-padding-dialog'
 
     });
-    const sub = dialogRef.componentInstance.eventOne.subscribe((data) => {
-      // console.log("sub", data);
+    const sub = dialogRef.componentInstance.eventOne
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((data) => {
       this.updateEvent.emit();
     });
-    // console.log(dialogRef,"dialogggg")
-    dialogRef.afterClosed().subscribe(data => {
+    dialogRef.afterClosed()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(data => {
       LoggerService.log('The dialog was closed');
       this.updateEvent.emit();
     });
@@ -127,7 +140,6 @@ export class NotescardComponent implements OnInit {
     else {
       checkList.status = "open"
     }
-    // console.log(checkList);
     this.modifiedCheckList = checkList;
     this.updatelist(note);
   }
@@ -148,10 +160,12 @@ export class NotescardComponent implements OnInit {
     }
     LoggerService.log('checklist', checklistData);
 
-    var url = "notes/" + id + "/checklist/" + this.modifiedCheckList.id + "/update";
+    // var url = "notes/" + id + "/checklist/" + this.modifiedCheckList.id + "/update";
     var checkNew = JSON.stringify(checklistData);
 
-    this.service.postDelete(url, checkNew, this.token).subscribe(response => {
+    this.notesService.postUpdateChecklist(id,this.modifiedCheckList.id,checkNew)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(response => {
       LoggerService.log('response', response);
       this.colorevent.emit();
 
@@ -167,12 +181,11 @@ export class NotescardComponent implements OnInit {
 
 
   removeAssignments(labelid, noteid) {
-    // console.log(labelid);
-    // console.log(noteid);
+ 
 
-    this.service.postDelete("notes/" + noteid + "/addLabelToNotes/" + labelid + "/remove", {}, this.token)
+    this.notesService.postAddLabelnotesRemove(noteid , labelid, {})
+    .pipe(takeUntil(this.destroy$))
       .subscribe(response => {
-        // console.log("removing labels",response);
         this.updateEvent.emit();
 
       });
@@ -189,7 +202,8 @@ export class NotescardComponent implements OnInit {
     this.model = {
       'noteIdList': [noteid],
     }
-    this.service.postDelete("notes/removeReminderNotes", this.model, this.token)
+    this.notesService.postRemoveReminders(this.model)
+    .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
         LoggerService.log('reminder data removed', data);
         this.updateEvent.emit();
@@ -204,6 +218,11 @@ export class NotescardComponent implements OnInit {
   state(event) {
     this.dataService.changeLabel(event);
 
+  }
+  ngOnDestroy() { 
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 
 }

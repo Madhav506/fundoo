@@ -1,9 +1,15 @@
 
-  <span *ngIf="!isDeleted" (click)="pin()" >
+  <span *ngIf="!noteId.isPined" (click)="pin()" >
       <div  class="pindiv" ><img class="pin1"  (noteEvent)="message($event)"
             fx.show=true
             fxShow.xs=false
             fxShow.sm=false
-            src="../../../assets/images/favicon.svg" alt="" > </div>
+            src="../../../assets/images/pin.svg" alt="" > </div>
    </span>
-  
+   <span *ngIf="noteId.isPined" (click)="pin()" >
+    <div  class="pindiv" ><img class="pin2"  (noteEvent)="message($event)"
+          fx.show=true
+          fxShow.xs=false
+          fxShow.sm=false
+          src="../../../assets/images/favicon.svg" alt="" > </div>
+ </span>

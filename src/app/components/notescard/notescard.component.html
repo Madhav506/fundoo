@@ -4,7 +4,7 @@
   </div>
   <div fx.show="true" fxShow.sm="false" fxShow.md="false" fxShow.xs="false" class="grow" fxFlex="10">
   </div>
-  <div
+  <div 
   ngStyle.gt-lg="width:85%" 
   
    fxLayoutAlign="start start" class="main"  fxLayout="row wrap">
@@ -31,7 +31,7 @@ like an array or an object and create a template for each item.  -->
         <mat-card-header>
           <mat-card-title>
 
-            <div fxLayout="row" class="hiddenDiv">
+            <div (click)="openDialog(data)" fxLayout="row" class="hiddenDiv">
               <div contenteditable="false" dir="ltr" aria-multiline="true" style="font-size:19px" 
                    [innerHTML]="data.title" role="textbox">{{data.title}}
               </div>
@@ -48,8 +48,9 @@ like an array or an object and create a template for each item.  -->
                  [innerHTML]="data.description"> {{data.description}}
             </div>
           </mat-card-content>
-        </div>
+      
       </div>
+    </div>
               <!----------------Checklist --------------->
 
       <div class="note" *ngFor="let checklist of data.noteCheckLists" fxLayout="row">
@@ -219,6 +220,7 @@ like an array or an object and create a template for each item.  -->
 
     </mat-card>
   </div>
+  
   <div fx.show="true"  fxShow.sm="false" fxShow.md="false" fxShow.xs="false" class="grow" fxFlex="10">
   </div>
   <div fxFlex.xs=0 fx.show="true" fxShow.md="false" fxShow.xs="false" fxShow.sm="false" 
