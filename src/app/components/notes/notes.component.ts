@@ -104,11 +104,11 @@ export class NotesComponent implements OnInit,OnDestroy {
   }
   
   else{
-    for(var i=0;i<this.dataarray.length;i++){
+    for(let i=0;i<this.dataarray.length;i++){
          if(this.dataarray[i].isChecked==true){
           this.status="close"
          }
-         var apiObj={
+         let apiObj={
            "itemName":this.dataarray[i].data,
            "status":this.status
          }
@@ -173,7 +173,7 @@ export class NotesComponent implements OnInit,OnDestroy {
     .subscribe(result => {
 
       this.ArrayOfLabel = [];
-      for (var index = 0; index < result['data'].details.length; index++) {
+      for (let index = 0; index < result['data'].details.length; index++) {
         if (result['data'].details[index].isDeleted == false) {
           this.ArrayOfLabel.push(result['data'].details[index]);
         }
@@ -218,7 +218,7 @@ export class NotesComponent implements OnInit,OnDestroy {
     this.i++;
     this.isChecked=this.addCheck;
     if (this.data != null  ) {
-      var obj = {
+      let obj = {
         "index": this.i,
         "data": this.data,
         "isChecked":this.isChecked
@@ -235,7 +235,7 @@ export class NotesComponent implements OnInit,OnDestroy {
 
   
   remove(removed) {
-    for (var i = 0; i < this.dataarray.length; i++) {
+    for (let i = 0; i < this.dataarray.length; i++) {
       if (removed.index == this.dataarray[i].index) {
         this.dataarray.splice(i, 1);
         break;

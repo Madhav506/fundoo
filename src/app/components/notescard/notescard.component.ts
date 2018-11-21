@@ -1,6 +1,6 @@
-import { Component, OnInit, Output, EventEmitter,ViewChild, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, Input } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service'
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatSnackBar, MatMenu } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatMenu } from '@angular/material';
 import { DialogComponent } from '../dialog/dialog.component';
 import { DataService } from '../../core/services/data/data.service';
 import { LoggerService } from '../../core/services/logger/logger.service';
@@ -37,41 +37,41 @@ export class NotescardComponent implements OnInit {
 
   tomorrow = new Date(this.todaydate.getFullYear(), this.todaydate.getMonth(),
     (this.todaydate.getDate() + 1));
-    @Input() myData
-    @Input() searchInput;
-    @Input() name;
-    @Input() string;
-    private token = localStorage.getItem('token')
-  public element;
-  public checkArray = [];
-  public isChecked = false;
-  public view;
-  @Input()  length;
+  @Input() myData
+  @Input() searchInput;
+  @Input() name;
+  @Input() string;
+  private token = localStorage.getItem('token')
+  private element;
+  private checkArray = [];
+  private isChecked = false;
+  private view;
+  @Input() length;
   condition = true;
-  public message: Event;
-  public values: any;
+  private message: Event;
+  private values: any;
   constructor(public service: HttpService,
-    public notesService:NotesService, public dialog: MatDialog, public dataService: DataService) {
+    public notesService: NotesService, public dialog: MatDialog, public dataService: DataService) {
     this.dataService.cMsg
-    .pipe(takeUntil(this.destroy$))
-
-    .subscribe(message => {
-      LoggerService.log('message' + message);
-
-      if (message) {
-        this.updateEvent.emit();
-
-      }
-    }),
-      this.dataService.currentmsg
       .pipe(takeUntil(this.destroy$))
-      .subscribe(response => {
-        this.condition = response;
-      })
+
+      .subscribe(message => {
+        LoggerService.log('message' + message);
+
+        if (message) {
+          this.updateEvent.emit();
+
+        }
+      }),
+      this.dataService.currentmsg
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(response => {
+          this.condition = response;
+        })
   }
 
   ngOnInit() {
-   
+
 
   }
   public data;
@@ -79,23 +79,28 @@ export class NotescardComponent implements OnInit {
   gotMessage($event) {
 
     this.noteEvent.emit();
+    this.pinEvent.emit();
 
   }
   color($event) {
     this.colorevent.emit();
+    this.pinEvent.emit();
 
   }
   myArchive($event) {
     this.archive.emit();
+    this.pinEvent.emit();
 
   }
   unarchived($event) {
 
     this.unarchive.emit()
+    this.pinEvent.emit();
 
   }
   remind(event) {
     this.reminderEvent.emit();
+    this.pinEvent.emit();
 
   }
   newPinMessage($event) {
@@ -107,11 +112,13 @@ export class NotescardComponent implements OnInit {
 
   delete(event) {
     this.deleted.emit();
+    this.pinEvent.emit();
+
   }
 
   openDialog(dialogData): void {
 
-    // this.updateEvent.emit();
+    this.updateEvent.emit();
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '450px',
       height: 'auto',
@@ -120,16 +127,18 @@ export class NotescardComponent implements OnInit {
 
     });
     const sub = dialogRef.componentInstance.eventOne
-    .pipe(takeUntil(this.destroy$))
-    .subscribe((data) => {
-      this.updateEvent.emit();
-    });
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        this.updateEvent.emit();
+      });
     dialogRef.afterClosed()
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(data => {
-      LoggerService.log('The dialog was closed');
-      this.updateEvent.emit();
-    });
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(data => {
+        LoggerService.log('The dialog was closed');
+        this.updateEvent.emit();
+        this.pinEvent.emit();
+
+      });
   }
 
   checkBox(checkList, note) {
@@ -145,8 +154,8 @@ export class NotescardComponent implements OnInit {
   }
 
   checkReminder(date) {
-    var savedReminder = new Date().getTime();
-    var value = new Date(date).getTime();
+    let savedReminder = new Date().getTime();
+    let value = new Date(date).getTime();
     if (value > savedReminder) {
       return true;
     }
@@ -154,22 +163,23 @@ export class NotescardComponent implements OnInit {
   }
 
   updatelist(id) {
-    var checklistData = {
+    let checklistData = {
       "itemName": this.modifiedCheckList.itemName,
       "status": this.modifiedCheckList.status
     }
     LoggerService.log('checklist', checklistData);
 
     // var url = "notes/" + id + "/checklist/" + this.modifiedCheckList.id + "/update";
-    var checkNew = JSON.stringify(checklistData);
+    let checkNew = JSON.stringify(checklistData);
 
-    this.notesService.postUpdateChecklist(id,this.modifiedCheckList.id,checkNew)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(response => {
-      LoggerService.log('response', response);
-      this.colorevent.emit();
+    this.notesService.postUpdateChecklist(id, this.modifiedCheckList.id, checkNew)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(response => {
+        LoggerService.log('response', response);
+        this.colorevent.emit();
+        this.pinEvent.emit();
 
-    })
+      })
   }
 
 
@@ -181,12 +191,14 @@ export class NotescardComponent implements OnInit {
 
 
   removeAssignments(labelid, noteid) {
- 
 
-    this.notesService.postAddLabelnotesRemove(noteid , labelid, {})
-    .pipe(takeUntil(this.destroy$))
+
+    this.notesService.postAddLabelnotesRemove(noteid, labelid, {})
+      .pipe(takeUntil(this.destroy$))
       .subscribe(response => {
         this.updateEvent.emit();
+        this.pinEvent.emit();
+
 
       });
     error => {
@@ -203,10 +215,12 @@ export class NotescardComponent implements OnInit {
       'noteIdList': [noteid],
     }
     this.notesService.postRemoveReminders(this.model)
-    .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
         LoggerService.log('reminder data removed', data);
         this.updateEvent.emit();
+        this.pinEvent.emit();
+
       });
     error => {
       LoggerService.log("error");
@@ -219,7 +233,7 @@ export class NotescardComponent implements OnInit {
     this.dataService.changeLabel(event);
 
   }
-  ngOnDestroy() { 
+  ngOnDestroy() {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:
     this.destroy$.unsubscribe();

@@ -45,7 +45,7 @@ export class MoreiconComponent implements OnInit,OnDestroy {
   deleteNotes(arrayOfNotes) {
 
     LoggerService.log(this.arrayOfNotes);
-    var model = {
+    let model = {
       "isDeleted": true,
       "noteIdList": [this.arrayOfNotes]
     }
@@ -73,7 +73,7 @@ export class MoreiconComponent implements OnInit,OnDestroy {
       LoggerService.log(result['data'].details);
 
       this.ArrayOfLabel = [];
-      for (var index = 0; index < result['data'].details.length; index++) {
+      for (let index = 0; index < result['data'].details.length; index++) {
         if (result['data'].details[index].isDeleted == false) {
           this.ArrayOfLabel.push(result['data'].details[index]);
         }
@@ -103,6 +103,7 @@ export class MoreiconComponent implements OnInit,OnDestroy {
     }
   }
   selectCheck(labelOption){
+    
     if (this.arrayOfMynotes.noteLabels.some((data) => data.label == labelOption.label)) {
     return true;
     }
@@ -158,7 +159,7 @@ export class MoreiconComponent implements OnInit,OnDestroy {
     });
   }
   restore(arrayOfNotes) {
-    var model = {
+    let model = {
       "isDeleted": false,
       "noteIdList": [this.arrayOfNotes]
     }

@@ -9,7 +9,8 @@ import { SearchPipe } from './core/pipes/search/search.pipe';
 import { AppRoutingModule } from './app-routing.module';
 import {
   NgModule,
-  CUSTOM_ELEMENTS_SCHEMA
+  CUSTOM_ELEMENTS_SCHEMA,
+  ErrorHandler
 } from '@angular/core';
 import {
   MatTooltipModule,
@@ -78,6 +79,7 @@ import { UserService } from './core/services/user/user.service';
 import { NotesService } from './core/services/notes/notes.service';
 
 import { InterceptService} from './core/services/interceptor/interceptor.service';
+import { ErrorsHandler } from './core/services/errorhandler/errors-handler';
 // import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
@@ -155,6 +157,10 @@ import { InterceptService} from './core/services/interceptor/interceptor.service
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptService,
       multi: true
+    },
+    {
+      provide: ErrorHandler,
+      useClass: ErrorsHandler,
     }],
   bootstrap: [AppComponent]//2
 })

@@ -94,11 +94,11 @@ export class DialogComponent implements OnInit,OnDestroy {
   update() {
 
     if (this.checklist == false) {
-      var id = this.data['id'];
+      let id = this.data['id'];
       this.title = document.getElementById('title').innerHTML;
       this.note = document.getElementById('note').innerHTML;
 
-      var model = {
+      let model = {
         "noteId": [id],
         "title": this.title,
         "description": this.note,
@@ -121,10 +121,11 @@ export class DialogComponent implements OnInit,OnDestroy {
       })
     }
     else {
-      var apiData = {
+      let apiData = {
         "itemName": this.modifiedCheckList.itemName,
         "status": this.modifiedCheckList.status
       }
+      // if(  this.modifiedCheckList.id!=undefined){
       // var url = "notes/" + this.data['id'] + "/checklist/" + this.modifiedCheckList.id + "/update";
       this.notesService.postUpdateChecklist(this.data['id'],this.modifiedCheckList.id,
        JSON.stringify(apiData))
@@ -133,7 +134,7 @@ export class DialogComponent implements OnInit,OnDestroy {
         this.archiveEvent.emit();
 
       })
-
+    // }
 
     }
     error => {
@@ -175,7 +176,7 @@ export class DialogComponent implements OnInit,OnDestroy {
     .pipe(takeUntil(this.destroy$))
                      .subscribe((response) => {
                       // LoggerService.log(response);
-      for (var i = 0; i < this.checkArray.length; i++) {
+      for (let i = 0; i < this.checkArray.length; i++) {
         if (this.checkArray[i].id == this.removedList.id) {
           this.checkArray.splice(i, 1)
         }
@@ -208,7 +209,7 @@ export class DialogComponent implements OnInit,OnDestroy {
         "itemName": this.newList,
         "status": this.status
       }
-      var url = "notes/" + this.data['id'] + "/checklist/add";
+      // var url = "notes/" + this.data['id'] + "/checklist/add";
 
       this.notesService.postCheckListAdd(this.data['id'], this.newData)
       .pipe(takeUntil(this.destroy$))

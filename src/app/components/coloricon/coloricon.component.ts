@@ -49,7 +49,7 @@ export class ColoriconComponent implements OnInit,OnDestroy {
     this.responseNew.emit(paint);
 console.log(this.myNewColor);
 
-    var content = {
+    let content = {
       "color": paint,
       "noteIdList": [this.myNewColor]
     }

@@ -27,7 +27,7 @@ export class ArchiveComponent implements OnInit,OnDestroy {
     this.noteService.getArchiveNotes()
     .pipe(takeUntil(this.destroy$))
     .subscribe(data => {
-      var response:Note[]=[]= data['data'].data;
+      let response:Note[]=[]= data['data'].data;
             this.arrayData =response.reverse();
     }),
       error => {

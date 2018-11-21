@@ -2,11 +2,10 @@ import { Component, Inject, EventEmitter, Output, OnInit, ViewChild, ElementRef,
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { HttpService } from '../../core/services/http/http.service'
 import { NotesService } from '../../core/services/notes/notes.service'
-
 import { DataService } from '../../core/services/data/data.service';
 import { DeletedialogComponent } from '../deletedialog/deletedialog.component';
 import { LoggerService } from '../../core/services/logger/logger.service';
-import { Label } from '../../core/model/note';
+import { Label } from '../../core/model/label';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -66,14 +65,14 @@ export class AddlabelComponent implements OnInit,OnDestroy {
             /* ****************adding labels********************************/
             
   addLabel() {
-    var label = this.label;
-    for (var j = 0; j < this.ArrayOfLabel.length; j++) {
+    let label = this.label;
+    for (let j = 0; j < this.ArrayOfLabel.length; j++) {
       if (this.ArrayOfLabel[j].label == label) {
         this.message = "label  already exists"
         return false;
       }
     }
-    var model = {
+    let model = {
       "label": this.label,
       "isDeleted": false,
       "userId": this.id
@@ -100,9 +99,9 @@ export class AddlabelComponent implements OnInit,OnDestroy {
     .subscribe(result => {
       LoggerService.log(result['data'].details);
       this.ArrayOfLabel = [];
-      var response:Label[]=[]=result['data'].details;
+      let response:Label[]=[]=result['data'].details;
 
-      for (var index = 0; index < response.length; index++) {
+      for (let index = 0; index < response.length; index++) {
         if (response[index].isDeleted == false) {
           this.ArrayOfLabel.push(response[index]);
         }
@@ -159,7 +158,7 @@ export class AddlabelComponent implements OnInit,OnDestroy {
     this.canEdit = false;
     this.newLabel = this.editDiv.nativeElement.innerHTML
 
-    var body = {
+    let body = {
       "label": this.newLabel,
       "isDeleted": false,
       "id": label.id,

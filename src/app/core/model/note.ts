@@ -1,3 +1,6 @@
+import { Label } from "./label";
+import { checkLists } from "./checkList";
+
 export interface Note {
     title:string,
     description:string,
@@ -18,18 +21,4 @@ export interface Note {
     collaborators:[Object],
     questionAndAnswerNotes:[Object],
 }
-export interface Label {
-id:string,
-label:string,
-isDeleted:boolean,
-userId:string
-}
-export interface checkLists{
-    id:string,
-    itemName:string,
-    isDeleted:boolean,
-    createdDate:Date,
-    modifiedDate:Date,
-    noteId:string,
-    status:string
-}
+

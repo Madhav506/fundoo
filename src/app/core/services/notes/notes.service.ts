@@ -39,7 +39,7 @@ export class NotesService {
     let url = this.url + "noteLabels";
     return this.service.httpPost(url, body);
   }
-  postAddLabelnotes(label, note, { }) {
+  postAddLabelnotes(label, note, {}) {
     let url = this.url + "notes/" + note + "/addLabelToNotes/" + label + "/add";;
     return this.service.httpPost(url, {});
   }
@@ -89,12 +89,12 @@ export class NotesService {
     return this.service.httpPost(url, model);
   }
   postChecklistRemove(dataid, removeid, model) {
-    var url = this.url + "notes/" + dataid + "/checklist/" + removeid + "/remove";
+    let url = this.url + "notes/" + dataid + "/checklist/" + removeid + "/remove";
     return this.service.httpPost(url, model);
   }
 
   postCheckListAdd(dataid, model) {
-    var url = this.url + "notes/" + dataid + "/checklist/add";
+    let url = this.url + "notes/" + dataid + "/checklist/add";
     return this.service.httpPost(url, model);
   }
 

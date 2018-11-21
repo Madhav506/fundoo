@@ -19,3 +19,9 @@
 .menu{
     padding-top:30px;
 }
+.span{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden !important;
+    width:20px;
+}

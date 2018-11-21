@@ -39,7 +39,7 @@ public httpget(url){
 public httppostpassword(url,body){
   // var  token = localStorage.getItem('token');
 
-var httpAuthOptions1 = {
+let httpAuthOptions1 = {
   headers: new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded',
     // 'Authorization': token
@@ -67,13 +67,13 @@ var http={
 return this.http.post(url,body,http)
 }
 
-postpassword(url, input,token) {
-
-  url = this.url + url;
+postpassword(input,access_token) {
+  console.log(access_token);
+    let url = this.url + "user/reset-password"
   var httpAuthOptions1 = {
     headers: new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': token
+      'Authorization': access_token
     })
 
   };

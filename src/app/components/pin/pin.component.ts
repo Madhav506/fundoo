@@ -32,17 +32,17 @@ export class PinComponent implements OnInit {
   }
 
   pin() {
-    this.eventEmit.emit({});
+    // this.eventEmit.emit({});
 
     if (this.noteId != undefined) {
       if (this.noteId.isPined == true) {
         this.newPin = false;
       }
-      var arrayNoteId = []
+      let arrayNoteId = []
       arrayNoteId.push(this.noteId.id)
       LoggerService.log('arrayNoteId',arrayNoteId);
       if (this.noteId.id != undefined) {
-        var body = {
+        let body = {
           "isPined": this.newPin,
           "noteIdList": arrayNoteId
         }

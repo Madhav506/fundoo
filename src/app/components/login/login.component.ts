@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit,OnDestroy {
 
   }
   signin() {
-    var first = this.model.email;
+    let first = this.model.email;
 
     
     this.user.postLogin( this.model)
@@ -73,11 +73,11 @@ export class LoginComponent implements OnInit,OnDestroy {
         localStorage.setItem('userId', data['userId']);
         localStorage.setItem('imageUrl', data['imageUrl']);
 
-        var token=localStorage.getItem('token');
+        let token=localStorage.getItem('token');
         LoggerService.log(token,"token in login");      
-        var pushToken=localStorage.getItem('pushToken')
+        let pushToken=localStorage.getItem('pushToken')
         LoggerService.log('pushtoken in login',pushToken);
-        var body={
+        let body={
                 "pushToken":pushToken
               }
 

@@ -1,19 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../../core/services/http/http.service'
 import { NotesService } from '../../core/services/notes/notes.service';
 import { LoggerService } from '../../core/services/logger/logger.service';
 import { Note } from '../../core/model/note';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-labels',
   templateUrl: './labels.component.html',
   styleUrls: ['./labels.component.scss']
 })
-export class LabelsComponent implements OnInit {
+export class LabelsComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   private labelName;
   constructor(public activeRoute: ActivatedRoute,public notesService:NotesService, public service: HttpService) {
-    this.activeRoute.params.subscribe(params => {
+    this.activeRoute.params
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(params => {
       if (params) {
         this.labelName = params.id;
         this.getAllNotes();
@@ -31,12 +36,14 @@ export class LabelsComponent implements OnInit {
    * this getAllNotes method used to display the notes with selected labels in label state particularly
    */
   getAllNotes() {
-    this.notesService.getNotesList().subscribe(data => {
+    this.notesService.getNotesList()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(data => {
      
-      var response:Note[]=[]= data['data'].data;
+      let response:Note[]=[]= data['data'].data;
       this.arrayData = response.reverse();
       this.arrayNewData = [];
-      for (var i = 0; i < response.length - 1; i++) {
+      for (let i = 0; i < response.length - 1; i++) {
         if (response[i].isDeleted == false && response[i].isArchived == false) {
           for (let noteLabelIndex = 0; noteLabelIndex < response[i].noteLabels.length;
             noteLabelIndex++) {
@@ -52,6 +59,11 @@ export class LabelsComponent implements OnInit {
         LoggerService.log("Error", error);
 
       }
+     
   }
-
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 }

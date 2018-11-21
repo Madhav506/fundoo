@@ -114,13 +114,13 @@ export class RemindiconComponent implements OnInit {
 
     if (time == this.modelReminder.time) {
       LoggerService.log("model Time", this.modelReminder.time);
-      var timeSlice = this.modelReminder.time.split("", 8);
+      let timeSlice = this.modelReminder.time.split("", 8);
       LoggerService.log("timeSlice", timeSlice);
-      var hour = Number(timeSlice[0] + timeSlice[1]);
+      let hour = Number(timeSlice[0] + timeSlice[1]);
       LoggerService.log("hour", hour);
-      var minute = Number(timeSlice[3] + timeSlice[4]);
+      let minute = Number(timeSlice[3] + timeSlice[4]);
       LoggerService.log("minute", minute);
-      var meridian = (timeSlice[6] + timeSlice[7]);
+      let meridian = (timeSlice[6] + timeSlice[7]);
       LoggerService.log("meridian", meridian);
 
       if (meridian == 'AM' || meridian == 'am') {
@@ -152,7 +152,7 @@ export class RemindiconComponent implements OnInit {
   disable(event)
   {
     this.dateflag=false;
-    var pattern=/^(2[0-3]|1[0-9]|[0][0-9]):[0-5][0-9] (AM|PM|pm|am|Pm|pM|Am|aM)$/;
+    let pattern=/^(2[0-3]|1[0-9]|[0][0-9]):[0-5][0-9] (AM|PM|pm|am|Pm|pM|Am|aM)$/;
    if(pattern.test( this.modelReminder.time))
    {
     this.dateflag=true;

@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../../core/services/user/user.service'
 import { HttpService } from '../../core/services/http/http.service'
 
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms'
 import { MatSnackBar } from '@angular/material';
 import { LoggerService } from '../../core/services/logger/logger.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-signup',
@@ -12,9 +14,11 @@ import { LoggerService } from '../../core/services/logger/logger.service';
     styleUrls: ['signup.component.scss']
 })
 
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit,OnDestroy {
+    destroy$: Subject<boolean> = new Subject<boolean>();
 
     firstname = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]*'), Validators.minLength(3)]);
+  regform: any;
     errorFirstname() {
         return this.firstname.hasError('required') ? 'first name is required' :
             this.firstname.hasError('pattern') ? 'Not a valid first name' :
@@ -61,9 +65,10 @@ export class SignupComponent implements OnInit {
         this.user.getDataServiceBasicAdvance()
 
             //whenever response from server arrives the callback passed to subscribe()
+            .pipe(takeUntil(this.destroy$))
             .subscribe((response) => {
-                var data = response["data"];
-                for (var i = 0; i < data.data.length; i++) {
+                let data = response["data"];
+                for (let i = 0; i < data.data.length; i++) {
                     this.card.push(data.data[i]);
                 }
             })
@@ -72,7 +77,7 @@ export class SignupComponent implements OnInit {
     changeCardColor(card) {
         this.service = card.name;
         card.check = true;
-        for (var i = 0; i < this.card.length; i++) {
+        for (let i = 0; i < this.card.length; i++) {
             if (card.name == this.card[i].name) {
                 continue;
             }
@@ -105,6 +110,7 @@ export class SignupComponent implements OnInit {
                         "confirmpassword": this.detailsObject.cpassword,
 
                     })
+                    .pipe(takeUntil(this.destroy$))
                     .subscribe(
                         (data) => {
                             this.display.open("Registered successfull", "continue", {
@@ -131,6 +137,7 @@ export class SignupComponent implements OnInit {
 
 
         this.user.getAddService()
+        .pipe(takeUntil(this.destroy$))
             .subscribe(
                 (data) => {
                     LoggerService.log("data in server is", data);
@@ -146,6 +153,11 @@ export class SignupComponent implements OnInit {
 
 
     }
+    ngOnDestroy() {
+        this.destroy$.next(true);
+        // Now let's also unsubscribe from the subject itself:
+        this.destroy$.unsubscribe();
+      }
 }
 
 

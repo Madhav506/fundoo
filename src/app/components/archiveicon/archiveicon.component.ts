@@ -26,7 +26,7 @@ export class ArchiveiconComponent implements OnInit,OnDestroy {
 
   archiveNotes() {
 
-    var model = {
+    let model = {
       "isArchived": true,
       "noteIdList": [this.archiveNotesArray.id]
     }
@@ -46,7 +46,7 @@ export class ArchiveiconComponent implements OnInit,OnDestroy {
       }
   }
   unarchiveNotes() {
-    var model = {
+    let model = {
       "isArchived": false,
       "noteIdList": [this.archiveNotesArray.id]
     }

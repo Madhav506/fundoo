@@ -30,8 +30,10 @@ export class NotesParentComponent implements OnInit,OnDestroy{
   token = localStorage.getItem('token');
   notes(event)
   {
+    // if(event){
     this.getAllNotes();
     this.getPinNotes();
+  // }
   }
   noteOff(newData:Note){
     this.arrayNewData.splice(0,0,newData)
@@ -45,9 +47,9 @@ export class NotesParentComponent implements OnInit,OnDestroy{
       this.arrayData = data['data'].data.reverse();
       this.arrayNewData = [];
 
-      var response:Note[]=[]=data['data'].data;
+      let response:Note[]=[]=data['data'].data;
 
-      for (var i = 0; i < data['data'].data.length - 1; i++) {
+      for (let i = 0; i < data['data'].data.length - 1; i++) {
         if (response[i].isDeleted == false && response[i].isArchived == false
       && response[i].isPined == false) {
           this.arrayNewData.push(response[i]);
@@ -71,7 +73,7 @@ export class NotesParentComponent implements OnInit,OnDestroy{
     .subscribe(data => {
       this.arrayPinData = [];
       this.myArrayData = data['data'].data.reverse();
-      for (var i = 0; i < data['data'].data.length - 1; i++) {
+      for (let i = 0; i < data['data'].data.length - 1; i++) {
         if(data['data'].data[i].isPined == true) {
           this.arrayPinData.push(data['data'].data[i]);
         }
