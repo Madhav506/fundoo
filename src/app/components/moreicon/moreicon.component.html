@@ -1,4 +1,4 @@
-<mat-icon class="icon2" mat-icon-button style="margin-bottom:30px;user-select: none;" 
+<mat-icon class="icon2" mat-icon-button
           [matMenuTriggerFor]="menu" matTooltip="More">more_vert
 </mat-icon>&nbsp;
 <mat-menu class="menu" #menu="matMenu" [overlapTrigger]="false">
@@ -33,7 +33,7 @@
         <div *ngFor="let label of ArrayOfLabel | searchData:search">
             <mat-checkbox (click)="$event.stopPropagation();" (click)="clickFunc(label)"
                           [checked]="selectCheck(label)" class="example-margin">
-                          <span class="input">{{label.label}}</span>
+                          <span class="span">{{label.label}}</span>
             </mat-checkbox>
         </div>
     </mat-menu>

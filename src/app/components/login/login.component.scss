@@ -1,18 +1,50 @@
+@import '../../../scss/_variables.scss';
+@import '../../../scss/_mixins.scss';
 
 .class3 {
-font-size: 25px;
-color:  #4285f4;
-}
-.container {
-height: 100vh;
-}
-.class6{
-font-size:15px;
-} 
-.email{
-width: 100%;
-} 
-.password{
-width: 100%;
-margin-top:30px;width:300px
-}
+    font-size: 25px;
+    color: $lightblue;
+  }
+  
+  .container {
+    height: 100vh;
+  }
+  
+  .class6 {
+    font-size: 15px;
+  }
+  
+  .email {
+    width: 100%;
+  }
+  
+  .password {
+    width: 100%;
+    margin-top: 30px;
+    width: 300px;
+  }
+  .logIn{
+    margin-right:50px;
+    margin-bottom: -10px;
+    color:$lightblue
+  }
+  .forgotPassword{
+    margin-right:50px;
+    margin-bottom: -10px;
+    color:$lightblue;
+  }
+  .signIn{
+    margin-top:30px;
+    margin-left:73px;
+    margin-bottom:10px;
+    color:$white;
+    background-color:$lightblue;
+    margin-right:-30px;
+  }
+  .nextNew{
+    margin-left:73px;
+    margin-bottom:10px;
+    color:$white;
+    background-color: $lightblue;
+    margin-left:60px;
+  }

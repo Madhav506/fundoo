@@ -1,17 +1,22 @@
-.innerIcon{
-opacity:0.5;
-}
-.innerIcon:hover{
-opacity:1;
-}
-.sample{
-height:auto;
-overflow: hidden;
-}
-.colorNew{
+@import '../../../scss/_mixins.scss';
+@import '../../../scss/_variables.scss';
+.innerIcon {
+    opacity: 0.5;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  
+  .sample {
+    height: auto;
+    @include over();
+  }
+  
+  .colorNew {
     width: 35px;
-    height:35px;
-}
-.top{
-    margin-top:5px;
-}
+    height: 35px;
+  }
+  
+  .top {
+    margin-top: 5px;
+  }

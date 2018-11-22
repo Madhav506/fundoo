@@ -80,6 +80,7 @@ import { NotesService } from './core/services/notes/notes.service';
 
 import { InterceptService} from './core/services/interceptor/interceptor.service';
 import { ErrorsHandler } from './core/services/errorhandler/errors-handler';
+import { DialogCollaboratorComponent } from './components/dialog-collaborator/dialog-collaborator.component';
 // import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
@@ -112,6 +113,7 @@ import { ErrorsHandler } from './core/services/errorhandler/errors-handler';
     DeletedialogComponent,
     ImagecropComponent,
     PinComponent,
+    DialogCollaboratorComponent,
  
 
   ],
@@ -151,7 +153,9 @@ import { ErrorsHandler } from './core/services/errorhandler/errors-handler';
     
 
   ],
-  entryComponents: [DialogComponent, AddlabelComponent, DeletedialogComponent,ImagecropComponent,ToolbarComponent,],
+  entryComponents: [DialogComponent, AddlabelComponent, DeletedialogComponent,
+    ImagecropComponent,ToolbarComponent,DialogCollaboratorComponent],
+    
   providers: [HttpService,AuthguardGuard, DataService, UserService,NotesService,
     LoggerService,MessagingService,InterceptService,{
       provide: HTTP_INTERCEPTORS,

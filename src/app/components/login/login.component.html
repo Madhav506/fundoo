@@ -20,12 +20,9 @@
                         <div>
                             <div class="class6">Please continue to login </div><br><br>
                         </div>
-                        <a mat-button routerLink="/signup" style="margin-right:50px;
-                        margin-bottom: -10px;color:#4285f4">
+                        <a mat-button class="logIn" routerLink="/signup">
                             Create account</a>
-                        <button (click)="next()" mat-raised-button style="margin-left:73px;
-                                 margin-bottom:10px;color:white;background-color: #4285f4;
-                                 margin-left:60px">
+                        <button class="nextNew" (click)="next()" mat-raised-button>
                             Next
                         </button>
                     </div>
@@ -48,12 +45,9 @@
                     </mat-form-field>
                     <div>
                     </div>
-                    <a mat-button routerLink="/forgotpassword" style="margin-right:50px;
-                    margin-bottom: -10px;color:#4285f4 "> forgot password?
+                    <a mat-button class="forgotPassword" routerLink="/forgotpassword" > forgot password?
                     </a>
-                    <button (click)="signin()" mat-raised-button style="margin-top:30px;
-                             margin-left:73px;margin-bottom:10px;color:white;
-                            background-color: #4285f4;margin-right:-30px">
+                    <button class="signIn" (click)="signin()" mat-raised-button >
                         Signin</button>
                 </form>
             </div>

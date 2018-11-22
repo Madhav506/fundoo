@@ -233,6 +233,10 @@ export class NotescardComponent implements OnInit {
     this.dataService.changeLabel(event);
 
   }
+
+  openCollaborator(){
+    
+  }
   ngOnDestroy() {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:

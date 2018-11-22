@@ -1,27 +1,44 @@
-.innerIcon{
-    opacity:0.5;
-}
-.innerIcon:hover{
-    opacity:1;
-}
-::ng-deep .mat-checkbox {
-    border-color:black;
+@import '../../../scss/_mixins.scss';
+@import '../../../scss/_variables.scss';
+
+.innerIcon {
+    opacity: 0.5;
+    &:hover {
+      opacity: 1;
+    }
   }
-::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, 
-.mat-checkbox-indeterminate.mat-accent 
-.mat-checkbox-background, .mat-accent 
-.mat-pseudo-checkbox-checked, .mat-accent
- .mat-pseudo-checkbox-indeterminate, 
- .mat-pseudo-checkbox-checked, 
- .mat-pseudo-checkbox-indeterminate {
-    background-color:lightslategrey !important; 
-}
-.menu{
-    padding-top:30px;
-}
-.span{
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden !important;
-    width:20px;
-}
+  
+  ::ng-deep {
+    .mat-checkbox {
+      border-color:$black;
+    }
+    .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+      background-color:$grey !important;
+    }
+  }
+  
+  .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color:$grey !important;
+  }
+  
+  .mat-accent {
+    .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate {
+      background-color:$grey !important;
+    }
+  }
+  
+  .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate {
+    background-color: $grey !important;
+  }
+  
+  .menu {
+    padding-top: 30px;
+  }
+  
+  .span {
+    @include ellipsis();
+    width: 30px;
+  }
+  .icon2{
+    margin-bottom:30px;
+  }

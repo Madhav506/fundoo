@@ -18,8 +18,20 @@ describe('LoginComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+expect(component).toBeTruthy();
+});
+it('Form should be valid '),async(()=>{
+expect(component.model.email.toEqual('madhavi@gmail.com'));
+expect(component.model.password.toEqual('madhu'));
+expect(component.model.email).toBeTruthy();
+expect(component.model.password).toBeTruthy();
+})
+
+it('Invalid Form'),async(()=>{
+expect(component.model.email.toEqual(''));
+expect(component.model.password.toEqual(''));
+expect(component.model.email).toBeFalsy();
+expect(component.model.password).toBeFalsy();
+})
 });

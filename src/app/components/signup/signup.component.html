@@ -29,7 +29,7 @@
                 </mat-form-field>
             </div>
             <div>
-                <mat-form-field style="font-weight:normal">
+                <mat-form-field clas="field">
                     <input matInput placeholder="Password" [formControl]="password" type="password" [type]="hide ? 'password' : 'text'" [(ngModel)]="detailsObject.password"
                            required>
                     <mat-error *ngIf="password.invalid">{{ errorpassword()}}</mat-error>
@@ -48,10 +48,11 @@
             <div flexLayout="row wrap" fxFlexLayout="center" fxLayoutGap="5px" class="cards">
                 <div fxFlex.lg="50" *ngFor="let data of card">
 
-                    <mat-card mat-button (click)="  changeCardColor(data)" [ngClass]="data.check? 'check': 'uncheck'" style="height:70px;width:100px">
-                        <mat-card-title style="font-size:20px;width:30px;padding-top:-50px;margin-bottom:2px;margin-top:-10px">
+                    <mat-card mat-button (click)="  changeCardColor(data)" class="data"
+                             [ngClass]="data.check? 'check': 'uncheck'" >
+                        <mat-card-title class="newData" style="font-size:20px;width:30px;padding-top:-50px;margin-bottom:2px;margin-top:-10px">
                                         {{data.name}}</mat-card-title>
-                        <mat-card-content style="font-size:12px">{{data.description}}
+                        <mat-card-content class="description" >{{data.description}}
                         </mat-card-content>
                     </mat-card>
                 </div>

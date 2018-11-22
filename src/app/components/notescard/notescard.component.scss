@@ -1,111 +1,113 @@
- .matcard{
+@import '../../../scss/_mixins.scss';
+@import '../../../scss/_variables.scss';
+.matcard {
     margin: 5px;
     /* height:auto; */
-     width:195px; 
+    width: 195px;
     border-radius: 10px 10px 10px 10px;
-} 
-
-.span{
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden !important;
+  }
+  
+  .span {
+    @include ellipsis();
     width: 40px;
-    
-}
-.note{
-    outline:none;
-    border:none;
-    margin-left:7px;
-}
-.note1{
-    margin-left:7px;
-
-}
-mat-card-title{
+  }
+  
+  .note {
+   @include border();
+    margin-left: 7px;
+  }
+  
+  .note1 {
+    margin-left: 7px;
+  }
+  
+  mat-card-title {
     word-wrap: break-word;
-    width:200px; 
-    font-family: 'Google Sans',Roboto,Arial,sans-serif;
-font-size: 1.0rem;
-font-weight: 400;
-line-height: 1.0rem;
-}
-mat-card-content{
-    width:200px;
+    width: 200px;
+@include font();
+    font-size: 1.0rem;
+    font-weight: 400;
+    line-height: 1.0rem;
+  }
+  
+  mat-card-content {
+    width: 200px;
     word-wrap: break-word;
     /* font-size:20px */
-    font-family: 'Google Sans',Roboto,Arial,sans-serif;
+    @include font();
     font-size: 1.125rem;
     font-weight: 400;
     line-height: 1.5rem;
-}
-
-.icons{
-    opacity:0;
-    margin-top:15px;
   }
-.icons:hover{
-   
-    opacity:1;
-    
+  
+  .icons {
+    opacity: 0;
+    margin-top: 15px;
+    &:hover {
+      opacity: 1;
+    }
   }
-   .main{
-      /* padding:5px; */
-      width:799px;
+  
+  .main {
+    /* padding:5px; */
+    width: 799px;
     //   flex-wrap: wrap;
-    //    flex-basis: 100% 
+    //    flex-basis: 100%
     display: flex;
   }
+  
   mat-chip {
     justify-content: space-between;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden !important;
-    
+   @include ellipsis();
   }
- 
   
-
-.mat-chip.mat-standard-chip .mat-chip-remove {
-    color: rgba(0,0,0,.87);
+  .mat-chip.mat-standard-chip .mat-chip-remove {
+    color:$chipColorRemove;
     opacity: 0;
-    margin-top:4px;
-    margin-left:0px;
-
-}
-.mat-chip.mat-standard-chip .mat-chip-remove:hover {
-    color: rgba(0,0,0,.87);
-    opacity: 0.54;
-}
-.mat-standard-chip.mat-chip-with-trailing-icon {
+    margin-top: 4px;
+    margin-left: 0px;
+    &:hover {
+      color: $chipColorRemove;
+      opacity: 0.54;
+    }
+  }
+  
+  .mat-standard-chip.mat-chip-with-trailing-icon {
+    @include ellipsis();
     padding-top: 5px;
     padding-bottom: 5px;
     padding-right: 0px;
     padding-left: 10px;
     margin-bottom: -2px;
-    margin-top:15px;
-    background-color: lightgray;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden !important;
-  color:black;
-  cursor: pointer;
+    margin-top: 15px;
+    background-color: $greylight;
+    color: $black;
+    cursor: pointer;
+    font-size: 11px;
+  }
+  
+  .image {
+    display: none;
+  }
+  
+  ::ngdeep.viewGrid {
+    width: 150px;
  
-font-size: 11px;
-}
-.image{
-    display:none
-}
-::ngdeep.viewGrid{
-width:150px;
-/* display:flex;
-flex-wrap: wrap; */
-
-}
-.viewList{
-    width:800px;
-}
-.access{
-    opacity:0.7;
-
+  }
+  
+  .viewList {
+    width: 800px;
+  }
+  
+  .access {
+    opacity: 0.7;
     font-size: 22px;
-}
+  }
+  @media only screen and (min-width: 650px) and (max-width: 850px) {
+    .mat-card { 
+      width: 200px;
+    }
+    .remine{
+      opacity:0;width:8px;
+    }
+  }

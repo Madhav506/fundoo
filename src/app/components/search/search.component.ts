@@ -25,6 +25,7 @@ export class SearchComponent implements OnInit,OnDestroy {
       LoggerService.log(this.searchInput, "searchComponent");
 
       this.getAllNotes();
+      
     })
 
 

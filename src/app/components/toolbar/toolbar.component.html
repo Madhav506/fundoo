@@ -8,7 +8,7 @@
        ngStyle.xs="width:10%"
        ngStyle.sm="width:10%"
        ngStyle.md="width:10%"
-        style="font-family:BURW Chancery L, cursive">{{values}}
+      >{{values}}
   </span>
 </div>
                     <!--------------------- Search Globally-------------- -->
@@ -43,15 +43,15 @@
   <button  *ngIf="imageNew != '' " (click) = "$event.stopPropagation()"  matTooltip="fundoo Account"
             mat-mini-fab 
             [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}" 
-            [matMenuTriggerFor]="appMenu" 
-            style="background-color:white;color:black;text-transform:uppercase">
+            [matMenuTriggerFor]="appMenu" class="imagetext"
+            >
   </button>
 
 
   <button  *ngIf="imageNew == '' "  (click) = "$event.stopPropagation()"  matTooltip="fundoo Account"
             mat-mini-fab 
             [matMenuTriggerFor]="appMenu" 
-            style="background-color:white;color:black;text-transform:uppercase">
+          class="imagetext">
             {{firstName |  slice : 0 : 1 }}
   </button>
 
@@ -73,7 +73,7 @@
 </div>
 
 
-<mat-content fxFlex class="content" style="margin-top:5px;float:left" >
+<mat-content fxFlex class="content"  >
 {{firstName | titlecase}} {{lastName | titlecase}}<br>
 <mat-content class="contentstyle">{{raw_data}}
 

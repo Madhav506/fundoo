@@ -1,4 +1,7 @@
+@import '../../../scss/_mixins.scss';
+@import '../../../scss/_variables.scss';
+
 .pin{
     font-weight:normal;
-    font-family:cursive;
+    @include font();
 }

@@ -1,6 +1,6 @@
-.innerIcon{
-opacity:0.5;
-}
-.innerIcon:hover{
-opacity:1;
-}
+.innerIcon {
+    opacity: 0.5;
+    &:hover {
+      opacity: 1;
+    }
+  }

@@ -65,7 +65,8 @@
                       [matMenuTriggerFor]="timeMenu" [(ngModel)]="modelReminder.time" 
                       (keyup)="disable($event)">
             </mat-form-field>
-            <mat-icon class="arrow" (click)="$event.stopPropagation()" [matMenuTriggerFor]="timeMenu"
+            <mat-icon class="arrow" (click)="$event.stopPropagation()"
+             [matMenuTriggerFor]="timeMenu"
                        >keyboard_arrow_down</mat-icon>
 
         </div>

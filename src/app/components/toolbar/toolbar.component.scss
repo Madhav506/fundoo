@@ -1,137 +1,138 @@
+@import '../../../scss/_variables.scss';
+@import '../../../scss/_mixins.scss';
+
 .sidenav-container {
   height: 90%;
+}
 
+.row-height {
+  height: 100%;
 }
-.row-height{
-  height:100%;
-  
-  
-}
+
 .sidenav {
   width: 300px;
-  margin-top:56px;
+  margin-top: 56px;
   overflow-y: scroll;
   position: fixed;
-  
- 
- 
 }
+
 .mat-toolbar.mat-primary {
   position: sticky;
-  background:#fb0 ;
+  background: $yellow;
   color: black;
   top: 0;
-  z-index:3;
-
+  z-index: 3;
   // margin-top:6px
 }
-.search{
-background-color:#fb0;
-overflow: hidden;
 
-
+.search {
+  background-color: $yellow;
+@include over();
 }
+
 .mat-drawer-backdrop.mat-drawer-shown {
-   background-color: white;
-}
-
-.search input{
-  border:none;
-  font-size:15px;
-  height:40px;
-  outline: none;
-  background-color:#fb0;
-  min-width:100px;
-  /* width:700%; */
-  overflow: hidden;
-
-}
-.search input:focus{
-  background-color:white
-
-}
-
-.search input:hover{
   background-color: white;
 }
-.notes{
+
+.search input {
+ @include border();
+  font-size: 15px;
+  height: 40px;
+  background-color: $yellow;
+  min-width: 100px;
+  /* width:700%; */
+  &:focus, &:hover {
+    background-color:$white;
+  }
+}
+
+.notes, .Reminders, .archive, .trash {
   margin-left: 20px;
 }
-.Reminders{
-  margin-left: 20px;
-}
-.archive{
-  margin-left: 20px;
-}
-.trash{
-  margin-left: 20px;
-}
+
 .mat-select-panel {
   margin-top: 45px;
 }
-.content{
-  margin-left:40px;
+
+.content {
+  margin-left: 40px;
+  margin-top:5px;float:left
 }
-.contentstyle{
-  font-size:17px;
-  font-family:cursive;
+
+.contentstyle {
+  font-size: 17px;
+ @include font();
   text-align: center;
-  word-break:break-word;
+  word-break: break-word;
 }
-.add{
-  width:250px;
-  margin-top:10px;
- 
+
+.add {
+  width: 250px;
+  margin-top: 10px;
 }
-.addaccount{
-  background-color: white;
-  color:rgb(15, 11, 11);
-  margin-left:20px;
+
+.addaccount {
+  background-color: $white;
+  color: rgb(15, 11, 11);
+  margin-left: 20px;
 }
-.logout{
+
+.logout {
   font-family: cursive;
-  background-color:lightblue;
-  color:rgb(2, 2, 2);
-  margin-left:30px;
-  height:30px;
-}
-.back:hover{
-  background-color:lightyellow;
-}
-.image{
-display: none;
-
-}
-.change{
-  font-size:10px;
-  color:white;
-  padding-top:40px;
-  
-}
-.imageSelect{
-  background-color:#fb0;
-  
-  color:white;
-  text-transform:uppercase;
-  height:75px;
-  margin-left:10px;
-  width:80px;
-
-}
-.backNew{
-  margin-left:10px;
-}
-.new{
-  white-space: nowrap;
-   text-overflow: ellipsis;
-   overflow: hidden !important;
+  background-color: $lightblue;
+  color:$white;
+  margin-left: 30px;
+  height: 30px;
 }
 
-@media only screen and (min-width: 300px) and (max-width: 600px){
-    .title {
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden !important;
-      width:80px;
-    }
-    }
+.back:hover {
+  background-color: lightyellow;
+}
+
+.image {
+  display: none;
+}
+
+.change {
+  font-size: 10px;
+  color: $white;
+  padding-top: 40px;
+}
+
+.imageSelect {
+  background-color: $yellow;
+  color: white;
+  text-transform: uppercase;
+  height: 75px;
+  margin-left: 10px;
+  width: 80px;
+}
+
+.backNew {
+  margin-left: 10px;
+}
+.imagetext{
+  background-color:$white;
+  color:$black;
+}
+
+.new {
+ @include ellipsis();
+}
+.newlabel{
+  padding-left:9px;
+}
+.newItem{
+  margin-top:15px;margin-bottom:15px
+
+}
+.newlabelNew{
+  padding-bottom:20px;padding-left:20px
+}
+// @media only screen and (min-width: 300px) and (max-width: 600px) {
+//   .title {
+//     white-space: nowrap;
+//     text-overflow: ellipsis;
+//     overflow: hidden !important;    
+//     width: 60px;
+//   }

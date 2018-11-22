@@ -3,7 +3,7 @@
      <div fxFlex.xs=0   class="grow"  fxFlex="10">
      </div> 
 
-      <div  fxLayout="row" style="border:solid" style="width:800px"
+      <div  fxLayout="row" 
        fxLayoutAlign="center center" class="row-height">
     <mat-card
       fxFlex="54"
@@ -50,7 +50,7 @@
         <div fxLayout="row" class="hiddenDiv">
 
             <div class="inputNote" id="title" fxFlex="95" contenteditable="true" 
-            style="font-weight:bold" placeholder="Title"></div>
+            placeholder="Title"></div>
             <div> <img class="pinIcon" src="../../../assets/images/pin.svg" alt="">
             </div>
         </div>
@@ -170,7 +170,7 @@
                 [matMenuTriggerFor]="menu" matTooltip="More">more_vert
             </mat-icon>&nbsp;
               </div>
-                <mat-menu style="padding-top:30px;" class="menu" #menu="matMenu"
+                <mat-menu  class="menu" #menu="matMenu"
                  [overlapTrigger]="false">
 
                     <button mat-menu-item (click)="getLabel()" [matMenuTriggerFor]="addlabel">
@@ -204,14 +204,6 @@
         </div>
     </mat-card>
 </div>
-<!-- <div   fxFlex></div> -->
-
-
-    
-    <!-- <div fx.show="true" fxShow.xs="false" fxShow.sm="false" fxFlex="10">
-
-    </div>  
-         -->
          
          <div 
          fxFlex.xs=0

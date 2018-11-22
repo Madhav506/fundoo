@@ -1,13 +1,15 @@
+@import '../../../scss/_variables.scss';
+@import '../../../scss/_mixins.scss';
 
-
-.icons{
-    opacity:0.75;
-
-}
-.remind{
-    overflow: hidden
-}
-.mat-menu-panel {
+.icons {
+    opacity: 0.75;
+  }
+  
+  .remind {
+    @include over();
+  }
+  
+  .mat-menu-panel {
     min-width: 112px;
     max-width: 280px;
     overflow: none;
@@ -15,15 +17,17 @@
     max-height: calc(100vh - 48px);
     border-radius: 2px;
     outline: 0;
-}
-.save{
-margin-left:40px;
-}
-.arrow {
+  }
+  
+  .save {
+    margin-left: 40px;
+  }
+  
+  .arrow {
     background-repeat: no-repeat;
     display: inline-block;
     fill: currentColor;
     height: 24px;
     width: 24px;
     padding-top: 30px;
-}
+  }

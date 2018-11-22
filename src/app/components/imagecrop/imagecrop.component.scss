@@ -1,8 +1,14 @@
+@import '../../../scss/_mixins.scss';
+@import '../../../scss/_variables.scss';
+
+
 .upload{
-    background-color:lightblue;
-    float:right;
+    background-color:$lightblue;
+    color:$white;
+    @include right();
 }
 .cancel{
-    background-color: lightblue;
+    background-color:$lightblue;
+    color:$white;
    
 }

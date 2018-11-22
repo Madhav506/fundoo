@@ -1,0 +1,49 @@
+@import '../../../scss/_mixins.scss';
+@import '../../../scss/_variables.scss';
+
+
+.collab{
+    width:200px;
+    font-weight: bold;
+    font-family:cursive;
+    font-size:1.4em;
+}
+.content{
+    font-weight: bold;
+    @include font();
+    font-size: 15px;
+}
+.contentNew{
+    font-weight:normal;
+    @include font();
+    margin-left:58px;
+    margin-top:-20px;
+    font-size: 14px;
+}
+.person{
+    margin-top:15px;
+}
+.right{
+    @include right();
+    margin-top:5px;
+}
+.input{
+    @include border();
+    margin-left:18px; 
+    width:330px;
+}
+.cancel{
+    background-color:$white;
+    color:$black;
+}
+.fab{
+    border: solid;
+    border-width: thin;
+}
+.footer{
+    background-color: gainsboro
+}
+.menu{
+    width:120px;
+overflow-x: hidden;
+overflow-y: hidden}

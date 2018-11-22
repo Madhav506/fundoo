@@ -1,7 +1,10 @@
+@import '../../../scss/_mixins.scss';
+@import '../../../scss/_variables.scss';
+
 .span{
     margin-left:280px;
     font-size:30px;
-    font-family: cursive
+  @include font();
 }
 .array{
     margin-top:30px;

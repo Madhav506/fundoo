@@ -1,23 +1,28 @@
+@import '../../../scss/_mixins.scss';
+@import '../../../scss/_variables.scss';
 .pin {
-    opacity: 0;
-    float:right;
-    margin-top:0px;
-  }
-.pin1:hover{
-  opacity: 1;
+  opacity: 0;
+  @include right();
+  margin-top: 0px;
 }
-.pin1{
+
+.pin1 {
+  &:hover {
+    opacity: 1;
+  }
   opacity: 0;
 }
-.pindiv{
-  height:10px;
-  float:right;
-  width:20px;
-  margin-top:-18px
+
+.pindiv {
+  height: 10px;
+ @include right();
+  width: 20px;
+  margin-top: -18px;
 }
-.pin2:hover{
-  opacity: 1;
-}
-.pin2{
+
+.pin2 {
+  &:hover {
+    opacity: 1;
+  }
   opacity: 0;
 }

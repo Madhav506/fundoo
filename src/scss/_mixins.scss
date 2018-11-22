@@ -1,0 +1,20 @@
+@mixin border(){
+border: none;
+outline: none;
+}
+
+@mixin ellipsis() {
+white-space: nowrap;
+text-overflow: ellipsis;
+overflow: hidden !important;
+
+}
+@mixin over(){
+overflow: hidden;
+}
+@mixin right(){
+float:right;
+}
+@mixin font(){
+font-family: 'Google Sans',Roboto,Arial,sans-serif;
+}

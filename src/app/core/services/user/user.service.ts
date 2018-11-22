@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import{environment} from '../../../../environments/environment'
 import  {HttpService} from '../http/http.service'
+import { LoggerService } from '../logger/logger.service';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
@@ -16,6 +17,7 @@ const httpOptions = {
 })
 export class UserService {
   private token=localStorage.getItem('token');
+  email: any;
 
   constructor(private http: HttpClient,
               private service :HttpService) { }
@@ -44,7 +46,13 @@ export class UserService {
     return this.http.post(url, body);
   }
   postReset(body){
+    LoggerService.log('body',body)
     let url = this.url +"user/reset";
+    return this.http.post(url, body);
+
+  }
+  getPeopleList(body){
+    let url = this.url +"user/searchUserList";
     return this.http.post(url, body);
 
   }

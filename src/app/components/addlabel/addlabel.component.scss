@@ -1,51 +1,46 @@
+@import '../../../scss/_mixins.scss';
+@import '../../../scss/_variables.scss';
+
 .inputNote{
-border:none;
-outline: none;
-padding-left: 15px;
-font-size: 16px;
-font-family: cursive;
-white-space: nowrap;
-text-overflow: ellipsis;
-overflow: hidden !important;
-
-
+    @include border();
+    @include ellipsis();
+    @include font();
+    padding-left: 15px;
+    font-size: 16px;
+   
 }
-.label{
-font-size: 20px;
-padding-left:15px;
-white-space: nowrap;
-text-overflow: ellipsis;
-overflow: hidden !important;
-
-}
-
-div[contenteditable=true]:empty::before {
-content: attr(placeholder);
-opacity: 0.6;
-}
-.done{
-padding-left:15px;
-}
-
-.clear{
-padding-left: 15px;
-padding-right: 10px;
-}
-.btn{
-margin-top:15px;
-padding-bottom: 10px;
-float:right;
-padding-right:25px;
-}
-.label{
-outline: none;
-border:none
-}
-.color{
-color:red;
-font-family:cursive;
-margin-left:55px
-}
-.color1{
-margin-top:15px;
-}
+    .label{
+    @include ellipsis();
+    font-size: 20px;
+    padding-left:15px;
+    }
+    
+    div[contenteditable=true]:empty::before {
+    content: attr(placeholder);
+    opacity: 0.6;
+    }
+    .done{
+    padding-left:15px;
+    }
+    
+    .clear{
+    padding-left: 15px;
+    padding-right: 10px;
+    }
+    .btn{
+    margin-top:15px;
+    padding-bottom: 10px;
+   @include right();
+    padding-right:25px;
+    }
+    .label{
+    @include border();
+    }
+    .color{
+    color:$red;
+    @include font();
+    margin-left:55px
+    }
+    .color1{
+    margin-top:15px;
+    }

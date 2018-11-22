@@ -1,0 +1,42 @@
+<mat-card class="collaborator">
+  <mat-card-content>
+    <div class="collab">Collaborators</div>
+    <hr>
+    <div fxLayout="row" fxLayoutGap="20px">
+      <button *ngIf="img!=''" mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}">
+      </button>
+      <button *ngIf="img==''" mat-mini-fab> {{firstName | slice : 0 : 1 }}
+      </button>
+
+      <mat-content fxFlex class="content">
+        {{firstName | titlecase}} {{lastName | titlecase}} <i>(owner)</i>
+      </mat-content>
+    </div>
+    <div class="contentNew">
+      <mat-content fxFlex>{{mail}}</mat-content>
+    </div>
+    <div class="person">
+      <button class="fab" mat-mini-fab color="disabled"><mat-icon>person_add</mat-icon>
+      </button>
+      <input [matMenuTriggerFor]="menu" class="input" type="text"  
+      (keyup)="searchPeople(searchEmail)"  name="search" 
+      [(ngModel)]="searchEmail" placeholder="Person or email to share with">
+    
+    <mat-menu class="menu" #menu="matMenu" [overlapTrigger]="false" >
+      
+    <a *ngFor="let item of FriendsList">
+    {{item.firstName}} {{item.lastName}}<span><{{item.email}} ></span>
+    </a>
+    
+      </mat-menu>
+    </div>
+    
+  </mat-card-content>
+
+  
+  <div fxLayoutAlign="end" fxLayoutGap="10px">
+    <button class="cancel" mat-button color="basic">Cancel</button>
+    <button class="cancel" mat-button color="basic">Save</button>
+  </div>
+
+</mat-card>
