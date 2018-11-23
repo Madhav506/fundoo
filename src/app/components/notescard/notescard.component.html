@@ -206,7 +206,7 @@ like an array or an object and create a template for each item.  -->
                    <!----------------matcard actions --------------->
 
         <app-remindicon [noteId]="data" (remindEvent)="remind($event)"></app-remindicon>
-        <app-collaboratoricon ></app-collaboratoricon>
+        <app-collaboratoricon [noteId]="data" ></app-collaboratoricon>
         <app-coloricon [myNewColor]="data.id" (response)="color($event)"></app-coloricon>
         <app-imageicon></app-imageicon>
         <app-archiveicon [archiveNotesArray]="data" (unarchiveEvent)="unarchived($event)" 

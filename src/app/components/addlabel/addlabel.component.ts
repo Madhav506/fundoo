@@ -15,6 +15,7 @@ export interface DialogData {
   "notesIdList": String,
   "color": String
 }
+
 @Component({
   selector: 'app-addlabel',
   templateUrl: './addlabel.component.html',

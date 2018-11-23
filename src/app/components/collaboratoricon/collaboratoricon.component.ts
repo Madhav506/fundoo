@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DialogCollaboratorComponent } from '../dialog-collaborator/dialog-collaborator.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatMenu } from '@angular/material';
 
@@ -10,7 +10,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatMenu } from '
 export class CollaboratoriconComponent implements OnInit {
 
   constructor(public dialog:MatDialog) { }
-
+@Input() noteId;
   ngOnInit() {
   }
 
@@ -18,6 +18,7 @@ export class CollaboratoriconComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogCollaboratorComponent, {
       width: '450px',
       height: 'auto',
+      data:this.noteId,
       panelClass: 'myapp-no-padding-dialog'
 
     });

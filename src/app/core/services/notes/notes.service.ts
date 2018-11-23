@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpService } from '../http/http.service';
+import { LoggerService } from '../logger/logger.service';
 
 
 @Injectable({
@@ -129,7 +130,12 @@ export class NotesService {
     let url = this.url + "notes/pinUnpinNotes";
     return this.service.httpPost(url, model);
   }
+  addCollaborator(noteid,body){
+    LoggerService.log('noteid',noteid)
+    let url = this.url +"/notes/"+noteid+"/AddcollaboratorsNotes";
+    return this.http.post(url, body);
 
+  }
 
 }
 
