@@ -160,25 +160,7 @@ export class RemindiconComponent implements OnInit {
    else
    this.dateflag=false;
   }
-  // disabledates(){
-  //   if ((new Date(this.setDate).getFullYear()-new Date(this.todaydate).getFullYear()) === 0) {
-  //     if ((new Date(this.setDate).getMonth() - new Date(this.todaydate).getMonth()) === 0) {
-  //       if ((new Date(this.setDate).getDate() - new Date(this.todaydate).getDate()) === 0) {
-  //         if ((new Date(this.setDate).getHours()) > 8) {
-  //           this.remind[0].disableStatus = true;
-  //         } if ((new Date(this.setDate).getHours()) > 13) {
-  //           this.remind[1].disableStatus = true;
-  //         } if ((new Date(this.setDate).getHours()) > 18) {
-  //           this.remind[2].disableStatus = true;
-  //         } if ((new Date(this.setDate).getHours()) > 20) {
-  //           this.remind[3].disableStatus = true;
-  //         }
-  //       }
-        
-  //     }
-  //   }
   
-  // }
   ngOnDestroy() { 
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:

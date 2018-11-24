@@ -29,9 +29,9 @@ export class DialogComponent implements OnInit,OnDestroy {
   @Input() archiveNotes = { 'isArchived': false }
   eventOne = new EventEmitter<boolean>();
   model: { 'noteIdList': any[]; };
-  message: any;
-  reminderNew: any;
-  remindArray: any[];
+  public message;
+  public reminderNew;
+  public remindArray: any[];
 
   constructor(public service: HttpService, public dataService: DataService,
     public dialogRef: MatDialogRef<DialogComponent>,public notesService:NotesService,
@@ -75,13 +75,10 @@ export class DialogComponent implements OnInit,OnDestroy {
   more(temp) {
     this.array1.push(temp);
 
-    // this.array1 =  Array.from(new Set(this.array1 ));
 
 
   }
-  // reminder(temp1) {
-  //   this.array2.push(temp1)
-  // }
+  
   archive(event) {
     this.archiveEvent.emit();
   }
@@ -102,8 +99,6 @@ export class DialogComponent implements OnInit,OnDestroy {
         "noteId": [id],
         "title": this.title,
         "description": this.note,
-        // "color": "",
-        // "noteLabels": ""
 
       }
 
@@ -125,8 +120,7 @@ export class DialogComponent implements OnInit,OnDestroy {
         "itemName": this.modifiedCheckList.itemName,
         "status": this.modifiedCheckList.status
       }
-      // if(  this.modifiedCheckList.id!=undefined){
-      // var url = "notes/" + this.data['id'] + "/checklist/" + this.modifiedCheckList.id + "/update";
+      
       this.notesService.postUpdateChecklist(this.data['id'],this.modifiedCheckList.id,
        JSON.stringify(apiData))
        .pipe(takeUntil(this.destroy$))
@@ -134,12 +128,9 @@ export class DialogComponent implements OnInit,OnDestroy {
         this.archiveEvent.emit();
 
       })
-    // }
 
     }
-    error => {
-      LoggerService.log(error);
-    }
+    
   }
 
   editing(editedList, event) {
@@ -170,12 +161,10 @@ export class DialogComponent implements OnInit,OnDestroy {
     this.removeCheckList()
   }
   removeCheckList() {
-    // var url = "notes/" + this.data['id'] + "/checklist/" + this.removedList.id + "/remove";
 
     this.notesService.postChecklistRemove(this.data['id'] , this.removedList.id ,null)
     .pipe(takeUntil(this.destroy$))
                      .subscribe((response) => {
-                      // LoggerService.log(response);
       for (let i = 0; i < this.checkArray.length; i++) {
         if (this.checkArray[i].id == this.removedList.id) {
           this.checkArray.splice(i, 1)
@@ -209,7 +198,6 @@ export class DialogComponent implements OnInit,OnDestroy {
         "itemName": this.newList,
         "status": this.status
       }
-      // var url = "notes/" + this.data['id'] + "/checklist/add";
 
       this.notesService.postCheckListAdd(this.data['id'], this.newData)
       .pipe(takeUntil(this.destroy$))
@@ -227,23 +215,16 @@ export class DialogComponent implements OnInit,OnDestroy {
         /* removing the label for cards*/
 
   removeAssignments(label, noteid) {
-    // LoggerService.log(label);
-    // LoggerService.log(noteid);
-    this.notesService.postAddLabelnotesRemove( noteid,label.id, {})
+    this.notesService.postAddLabelnotesRemove( noteid,label.id)
     .pipe(takeUntil(this.destroy$))
                      .subscribe(response => {
-        // LoggerService.log("removing labels",response);
         this.eventOne.emit(true)
         const index = this.array1.indexOf(label, 0);
         if (index > -1) {
           this.array1.splice(index, 1);
         }
 
-      });
-    error => {
-      LoggerService.log("error");
-
-    }
+      })
 
   }
 
@@ -265,11 +246,7 @@ export class DialogComponent implements OnInit,OnDestroy {
           this.array2.splice(index, 1);
         }
 
-      });
-    error => {
-      LoggerService.log("error");
-
-    }
+      })
 
   }
   colorNew(event){

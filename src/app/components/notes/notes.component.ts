@@ -23,7 +23,6 @@ export class NotesComponent implements OnInit,OnDestroy {
   private body:any={}
   archiveNotesArray = { 'isArchived': false }
   colorMyevent = '#ffffff';
-  // public interval: any;
   private choose1 = true;
   private choose2 = false;
   private  choose3 = true;
@@ -46,7 +45,7 @@ export class NotesComponent implements OnInit,OnDestroy {
   noteNew = {
     'id':''
   }
-  // @ViewChild(RemindiconComponent) childComponentMenu: RemindiconComponent;
+  vate collab:boolean=true;
 
   todaydate=new Date();
   tomorrow= new Date(this.todaydate.getFullYear(), this.todaydate.getMonth(), 
@@ -156,10 +155,7 @@ export class NotesComponent implements OnInit,OnDestroy {
       
           }
       
-          ),error=>{
-            LoggerService.log('error',error);
-            
-          }
+          )
        
   }
 
@@ -180,10 +176,7 @@ export class NotesComponent implements OnInit,OnDestroy {
       }
      
 
-    }),
-      error => {
-        LoggerService.log(error, "error");
-      }
+    })
   }
 
   clickFunc(temp) {
@@ -192,7 +185,6 @@ export class NotesComponent implements OnInit,OnDestroy {
       this.array2.push(temp.label);
     }
     else {
-      /* width:60px; */
 
       const index = this.array2.indexOf(temp.label, 0);
       if (index > -1) {
@@ -202,9 +194,6 @@ export class NotesComponent implements OnInit,OnDestroy {
 
   }
 
-
- 
-  //  public checkList=[];
   public i= 0;
    public data;
 
@@ -247,11 +236,9 @@ export class NotesComponent implements OnInit,OnDestroy {
   newReminder;
   reminding(event){
     if(event){
-      // if(this.remindArray.length==0){
       this.newReminder=event
       this.remindArray=[];
     this.remindArray.push(event)
-  // }
   }
   }
   removeReminders(){

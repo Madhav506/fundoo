@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit,OnDestroy {
   errorMessage() {
     return this.email.hasError('required') ? 'email is required' :
       this.email.hasError('email') ? 'Not a valid email' :
-        'Not a valid email';
+        '';
   }
   password = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9@!@#$%]*')]);
 
@@ -93,14 +93,7 @@ export class LoginComponent implements OnInit,OnDestroy {
         this.snackBar.open("login successfull", "login", {
           duration: 10000,
   });
-      }),
-      error => {/**if error exists then displays the error message using snackbar */
-        LoggerService.log("Error", error);
-        this.snackBar.open("enter valid details ", "login unsuccessfull", {
-          duration: 10000,
-        });
-
-      }
+      })
       
 
   }

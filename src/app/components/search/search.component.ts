@@ -46,11 +46,7 @@ export class SearchComponent implements OnInit,OnDestroy {
         }
 
       }
-    }),
-      error => {
-        LoggerService.log("Error", error);
-
-      }
+    })
   }
   ngOnDestroy() {
     this.destroy$.next(true);

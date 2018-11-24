@@ -8,6 +8,8 @@ import { RemindiconComponent } from '../remindicon/remindicon.component';
 import { NotesService } from '../../core/services/notes/notes.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { DialogCollaboratorComponent } from '../dialog-collaborator/dialog-collaborator.component';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-notescard',
@@ -50,6 +52,10 @@ export class NotescardComponent implements OnInit {
   condition = true;
   private message: Event;
   private values: any;
+
+  // private receiverImage = this.data['user'];
+  // private img = environment.profileUrl + this.receiverImage.imageUrl;
+
   constructor(public service: HttpService,
     public notesService: NotesService, public dialog: MatDialog, public dataService: DataService) {
     this.dataService.cMsg
@@ -126,11 +132,11 @@ export class NotescardComponent implements OnInit {
       panelClass: 'myapp-no-padding-dialog'
 
     });
-    const sub = dialogRef.componentInstance.eventOne
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        this.updateEvent.emit();
-      });
+    // const sub = dialogRef.componentInstance.eventOne
+    //   .pipe(takeUntil(this.destroy$))
+    //   .subscribe((data) => {
+    //     this.updateEvent.emit();
+    //   });
     dialogRef.afterClosed()
       .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
@@ -159,7 +165,7 @@ export class NotescardComponent implements OnInit {
     if (value > savedReminder) {
       return true;
     }
-    else false;
+    // else false;
   }
 
   updatelist(id) {
@@ -169,7 +175,6 @@ export class NotescardComponent implements OnInit {
     }
     LoggerService.log('checklist', checklistData);
 
-    // var url = "notes/" + id + "/checklist/" + this.modifiedCheckList.id + "/update";
     let checkNew = JSON.stringify(checklistData);
 
     this.notesService.postUpdateChecklist(id, this.modifiedCheckList.id, checkNew)
@@ -193,18 +198,14 @@ export class NotescardComponent implements OnInit {
   removeAssignments(labelid, noteid) {
 
 
-    this.notesService.postAddLabelnotesRemove(noteid, labelid, {})
+    this.notesService.postAddLabelnotesRemove(noteid, labelid)
       .pipe(takeUntil(this.destroy$))
       .subscribe(response => {
         this.updateEvent.emit();
         this.pinEvent.emit();
 
 
-      });
-    error => {
-      LoggerService.log("error");
-
-    }
+      })
 
   }
   model = {};
@@ -221,11 +222,7 @@ export class NotescardComponent implements OnInit {
         this.updateEvent.emit();
         this.pinEvent.emit();
 
-      });
-    error => {
-      LoggerService.log("error");
-
-    }
+      })
 
   }
   public modifiedCheckList;
@@ -234,7 +231,14 @@ export class NotescardComponent implements OnInit {
 
   }
 
-  openCollaborator(){
+  openCollaborator(note){
+    const dialogRef = this.dialog.open(DialogCollaboratorComponent, {
+      width: '450px',
+      height: 'auto',
+      data:note,
+      panelClass: 'myapp-no-padding-dialog'
+
+    });
     
   }
   ngOnDestroy() {

@@ -17,8 +17,6 @@ export class NotesParentComponent implements OnInit,OnDestroy{
   private arrayPinData=[];
  public myArrayData=[];
   private isPined=false;
-  // @Output() pinEvent = new EventEmitter<any>();
-
   constructor(public service: HttpService,public notesService:NotesService) { }
 
   ngOnInit() {
@@ -30,10 +28,8 @@ export class NotesParentComponent implements OnInit,OnDestroy{
   token = localStorage.getItem('token');
   notes(event)
   {
-    // if(event){
     this.getAllNotes();
     this.getPinNotes();
-  // }
   }
   noteOff(newData:Note){
     this.arrayNewData.splice(0,0,newData)
@@ -53,15 +49,10 @@ export class NotesParentComponent implements OnInit,OnDestroy{
         if (response[i].isDeleted == false && response[i].isArchived == false
       && response[i].isPined == false) {
           this.arrayNewData.push(response[i]);
-          // LoggerService.log('dataaaa',this.arrayNewData)
 
         }
       }
-    }),
-      error => {
-        LoggerService.log("Error", error);
-
-      }
+    })
 
 
   }
@@ -79,13 +70,8 @@ export class NotesParentComponent implements OnInit,OnDestroy{
         }
 
       }
-      // LoggerService.log('arrayPinData',this.arrayPinData);
-      // this.pinEvent.emit();
-    }),
-      error => {
-        LoggerService.log("Error", error);
-
-      }
+     
+    })
 
 
   }

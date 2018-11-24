@@ -27,7 +27,7 @@ export class ForgotpasswordComponent implements OnInit,OnDestroy {
   errorMessage() {
     return this.email.hasError('required') ? 'Enter a valid email' :
       this.email.hasError('email') ? 'Not a valid email' :
-        'Not a valid email';
+        '';
   }
   forgotPassword() {
     LoggerService.log(this.body.email);
@@ -45,23 +45,14 @@ export class ForgotpasswordComponent implements OnInit,OnDestroy {
       .pipe(takeUntil(this.destroy$))
         .subscribe(
           data => {
-
             LoggerService.log("reset successfull,check your mail once");
             this.snackBar.open("To reset  ", "check your mail once a link has been sent", {
               duration: 10000,
             });
 
 
-          }),
-        error => {
-          LoggerService.log("Error", error);
-          this.snackBar.open("enter valid details ", "login unsuccessfull", {
-            duration: 10000,
-
-          });
-
-        }
-
+          })
+      
 
     }
   }

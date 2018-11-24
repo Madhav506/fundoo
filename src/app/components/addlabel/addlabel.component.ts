@@ -85,10 +85,7 @@ export class AddlabelComponent implements OnInit,OnDestroy {
 
       this.getLabel();
 
-    }),
-      error => {
-        LoggerService.log( "error",error);
-      }
+    })
   }
 
 
@@ -109,10 +106,7 @@ export class AddlabelComponent implements OnInit,OnDestroy {
       }
       this.eventTwo.emit(this.ArrayOfLabel);
 
-    }),
-      error => {
-        LoggerService.log( "error",error);
-      }
+    })
   }
   edit(label) {
     this.clickEdit = true;
@@ -145,10 +139,7 @@ export class AddlabelComponent implements OnInit,OnDestroy {
         });
       }
 
-    }),
-      error => {
-        LoggerService.log( "error",error);
-      }
+    })
   }
 
 /*  edit the labels whatever the labels are present in labelarray */
@@ -170,10 +161,7 @@ export class AddlabelComponent implements OnInit,OnDestroy {
       .subscribe(result => {
         this.dataService.change(true);
         this.getLabel();
-      }),
-      error => {
-        LoggerService.log( "error",error);
-      }
+      })
   }
   ngOnDestroy() { 
     this.destroy$.next(true);

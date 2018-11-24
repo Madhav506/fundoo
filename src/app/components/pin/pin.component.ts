@@ -32,7 +32,6 @@ export class PinComponent implements OnInit {
   }
 
   pin() {
-    // this.eventEmit.emit({});
 
     if (this.noteId != undefined) {
       if (this.noteId.isPined == true) {

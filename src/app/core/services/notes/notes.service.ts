@@ -40,17 +40,17 @@ export class NotesService {
     let url = this.url + "noteLabels";
     return this.service.httpPost(url, body);
   }
-  postAddLabelnotes(label, note, {}) {
+  postAddLabelnotes(label, note) {
     let url = this.url + "notes/" + note + "/addLabelToNotes/" + label + "/add";;
-    return this.service.httpPost(url, {});
+    return this.service.httpPost(url, null);
   }
   postUpdateNotelabel(labelid, body) {
     let url = this.url + "noteLabels/" + labelid + "/updateNoteLabel";
     return this.service.httpPost(url, body);
   }
-  postAddLabelnotesRemove(note, label, { }) {
+  postAddLabelnotesRemove(note, label) {
     let url = this.url + "notes/" + note + "/addLabelToNotes/" + label + "/remove";;
-    return this.service.httpPost(url, {});
+    return this.service.httpPost(url, null);
   }
   deleteData(labelid) {/**get() service to get the data */
     let url = this.url + "noteLabels/" + labelid + "/deleteNoteLabel";
@@ -131,9 +131,13 @@ export class NotesService {
     return this.service.httpPost(url, model);
   }
   addCollaborator(noteid,body){
-    LoggerService.log('noteid',noteid)
     let url = this.url +"/notes/"+noteid+"/AddcollaboratorsNotes";
     return this.http.post(url, body);
+
+  }
+  removeCollab(userId,noteid){
+    let url = this.url +"notes/"+noteid+"/removeCollaboratorsNotes/"+userId;
+    return this.http.delete(url);
 
   }
 

@@ -69,23 +69,37 @@ like an array or an object and create a template for each item.  -->
         <del class="note1" *ngIf="!checklist.isDeleted && checklist.status=='close'"
              (click)="openDialog(data)">{{checklist.itemName}}</del>
       </div>
+
+                
+
                         <!----------------labels --------------->
 
       <div fxLayout="row wrap" fxlayoutAlign="start start" fxLayoutGap="5px">
-        <div *ngFor="let item of data.noteLabels">
-          <mat-chip-list selected>
-            <mat-chip routerLink="/home/labels/{{item.label}}" (click)="state(item.label)" 
-                     *ngIf="item.isDeleted==false">
-              <span class="span">{{item.label}}</span>
-              <mat-icon matChipRemove (click)="removeAssignments(item.id,data.id)">cancel
-
-              </mat-icon>
-
-            </mat-chip>
-          </mat-chip-list>
-        </div>
-      </div>
-
+          <div *ngFor="let item of data.noteLabels">
+            <mat-chip-list selected>
+              <mat-chip routerLink="/home/labels/{{item.label}}" (click)="state(item.label)" 
+                       *ngIf="item.isDeleted==false">
+                <span class="span">{{item.label}}</span>
+                <mat-icon matChipRemove (click)="removeAssignments(item.id,data.id)">cancel
+  
+                </mat-icon>
+  
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+          
+         <!----------------collaborators --------------->
+        <div fxLayout="row wrap" >
+              <div  *ngFor="let person of  data.collaborators"  class="index" fxLayoutGap="40px">
+ 
+           <button  matTooltip="{{person.email}}" (click)="openCollaborator(data)"
+           class="basic" mat-mini-fab color="basic">
+              {{person.firstName | uppercase | slice : 0 : 1 }}
+           </button>
+       
+           </div>
+           </div>
+          </div>  
                       <!----------------reminders --------------->
 
       <div fxLayout="row" *ngIf="checkReminder(data.reminder[0])" fxLayoutAlign="start start" 

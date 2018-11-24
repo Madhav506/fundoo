@@ -32,15 +32,12 @@ export class RemindersComponent implements OnInit {
         LoggerService.log('get reminder', data);
         
         this.arrayData = data['data']['data'].reverse();
-        // this.arrayData.sort(this.sortedItems);
          this.arrayData.sort((oldDate, newDate) =>
         new Date(oldDate.reminder).getTime() - new Date(newDate.reminder).getTime()
     );
         this.notesEvent.emit();
       })
-    error => {
-      LoggerService.log('error', error);
-    }
+    
    
   }
   ngOnDestroy() { 
@@ -52,7 +49,5 @@ export class RemindersComponent implements OnInit {
   reminders(event) {
     this.getReminderNotes();
   }
-  // new($event){
-  //   this.notesEvent.emit();
-  // }
+  
 }

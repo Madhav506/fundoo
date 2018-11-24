@@ -62,10 +62,7 @@ console.log(this.myNewColor);
       });
       this.response.emit();
 
-    }),
-      error => {
-        LoggerService.log(error);
-      }
+    })
 
   }
   ngOnDestroy() { 

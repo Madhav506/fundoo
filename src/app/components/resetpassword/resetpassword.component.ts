@@ -26,7 +26,6 @@ export class ResetpasswordComponent implements OnInit,OnDestroy {
   // The route path and parameters are available through an injected router service called the ActivatedRoute. 
   constructor(public service:HttpService,public route:ActivatedRoute,
     public user:UserService ,public snackBar: MatSnackBar)  { }
-  // public token=this.route.snapshot.params.id;
 
   ngOnInit() {
   }
@@ -42,11 +41,9 @@ set(){
   if(this.model.password.length==0){
     return;
   }
-// this.input.password.append('newPassword',this.model.password)
   this.service.postpassword(body,this.access_token)
   .pipe(takeUntil(this.destroy$))
   .subscribe(Response=>{
-    // console.log("successful",Response);
     this.snackBar.open("Success"," password",{
       duration:10000,
     });
@@ -67,8 +64,8 @@ set(){
 
     });
 
-  })
-  // console.log('the id is  ',this.token);
+  }
+)
   
 }
 ngOnDestroy() {

@@ -22,14 +22,14 @@ export class SignupComponent implements OnInit,OnDestroy {
     errorFirstname() {
         return this.firstname.hasError('required') ? 'first name is required' :
             this.firstname.hasError('pattern') ? 'Not a valid first name' :
-                'Not a valid firstname';
+                '';
     }
 
     lastname = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]*')]);
     errorLastname() {
         return this.lastname.hasError('required') ? 'last name is required' :
             this.lastname.hasError('pattern') ? 'Not a valid last name' :
-                'Not a valid lastname';
+                '';
     }
     email = new FormControl('', [Validators.required, Validators.email]);
     erroremail() {
@@ -41,13 +41,13 @@ export class SignupComponent implements OnInit,OnDestroy {
     errorpassword() {
         return this.password.hasError('required') ? 'password is required' :
             this.password.hasError('pattern') ? 'Not a valid password' :
-                'Not a valid password';
+                '';
     }
     cpassword = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9@]*'), Validators.minLength(4)]);
     errorCpassword() {
         return this.password.hasError('required') ? 'Confirmpassword is required' :
             this.password.hasError('pattern') ? 'Not a valid password' :
-                'Not a valid password';
+                '';
     }
 
 
@@ -118,13 +118,6 @@ export class SignupComponent implements OnInit,OnDestroy {
                             });
 
 
-                        },
-                        error => {
-                            LoggerService.log("Error", error);
-                            this.display.open("Registration unsuccessfull", "register", {
-                                duration: 10000,
-                            });
-
                         }
                     )
             }
@@ -142,9 +135,6 @@ export class SignupComponent implements OnInit,OnDestroy {
                 (data) => {
                     LoggerService.log("data in server is", data);
 
-                },
-                error => {
-                    LoggerService.log("Error", error);
                 })
 
 

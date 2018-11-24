@@ -59,11 +59,7 @@ export class MoreiconComponent implements OnInit,OnDestroy {
       });
       this.moreEvent.emit();
 
-    }),
-      error => {
-        LoggerService.log("Error", error);
-
-      }
+    })
   }
   getLabel() {
 
@@ -81,16 +77,13 @@ export class MoreiconComponent implements OnInit,OnDestroy {
       LoggerService.log("emitting",this.ArrayOfLabel);
 
 
-    }),
-      error => {
-        LoggerService.log(error, "error");
-      }
+    })
   }
   addLabelList(label) {
 
     LoggerService.log(label.id);
     LoggerService.log("noteid", this.arrayOfNotes);
-    this.notesService.postAddLabelnotes(label.id, this.arrayOfNotes, {})
+    this.notesService.postAddLabelnotes(label.id, this.arrayOfNotes)
     .pipe(takeUntil(this.destroy$))
     .subscribe(response => {
       LoggerService.log("adding label to note", response);
@@ -98,9 +91,7 @@ export class MoreiconComponent implements OnInit,OnDestroy {
       this.moreEvent.emit(label);
 
     })
-    error => {
-      LoggerService.log("error", error);
-    }
+   
   }
   selectCheck(labelOption){
     
@@ -172,11 +163,7 @@ export class MoreiconComponent implements OnInit,OnDestroy {
       });
       this.delEvent.emit();
 
-    }),
-      error => {
-        LoggerService.log("Error", error);
-
-      }
+    })
   }
   ngOnDestroy() { 
     this.destroy$.next(true);

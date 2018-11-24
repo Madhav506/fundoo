@@ -27,13 +27,15 @@ export class ArchiveComponent implements OnInit,OnDestroy {
     this.noteService.getArchiveNotes()
     .pipe(takeUntil(this.destroy$))
     .subscribe(data => {
+      this.arrayData=[];
       let response:Note[]=[]= data['data'].data;
-            this.arrayData =response.reverse();
-    }),
-      error => {
-        LoggerService.log("Error", error);
-
+      for(let i=response.length-1;i>=0;i--){
+        if(response[i].isArchived==true && response[i].isDeleted==false){
+          this.arrayData.push(response[i]);
+        } 
       }
+            // this.arrayData =response.reverse();
+    })
   }
   ngOnDestroy() { 
     this.destroy$.next(true);

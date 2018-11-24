@@ -9,7 +9,7 @@
     font-size:1.4em;
 }
 .content{
-    font-weight: bold;
+    font-weight: normal;
     @include font();
     font-size: 15px;
     opacity:0.95;
@@ -31,7 +31,7 @@
     margin-top:5px;
 }
 .input{
-    @include border();
+ @include border();
     margin-left:18px; 
     width:320px;
 }
@@ -43,14 +43,11 @@
     border: solid;
     border-width: thin;
 }
-.footer{
-    background-color: gainsboro
-}
+
 .menu{
 width:250px;
 word-break: break-word;
  overflow: hidden;
-//  @include ellipsis();
 }
 ::ng-deep.mat-menu-panel {
     min-width: 112px;
@@ -67,5 +64,12 @@ word-break: break-word;
 }
 .email{
     margin-top:15px;
-    margin-left: -316px;
+}
+.basic{
+    color:white;
+    border-width:thin;
+    font-size:18px;
+}
+.delete{
+    cursor:pointer;
 }

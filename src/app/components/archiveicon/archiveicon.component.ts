@@ -39,11 +39,7 @@ export class ArchiveiconComponent implements OnInit,OnDestroy {
       });
       this.archiveEvent.emit();
 
-    }),
-      error => {
-        LoggerService.log("Error", error);
-
-      }
+    })
   }
   unarchiveNotes() {
     let model = {
@@ -58,11 +54,7 @@ export class ArchiveiconComponent implements OnInit,OnDestroy {
         duration: 10000,
 
       });
-    }),
-      error => {
-       LoggerService.log("Error", error);
-
-      }
+    })
   }
   ngOnDestroy() { 
     this.destroy$.next(true);

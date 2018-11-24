@@ -1,9 +1,13 @@
 @import '../../../scss/_variables.scss';
 @import '../../../scss/_mixins.scss';
 
-.icons {
-    opacity: 0.75;
+.innerIcon {
+  opacity: 0.5;
+  &:hover {
+    opacity: 1;
   }
+}
+
   
   .remind {
     @include over();

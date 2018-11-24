@@ -111,13 +111,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
           this.router.navigate(['/login']);
 
         }
-      );
-    error => {
-      LoggerService.log("Error", error);
-      this.snackBar.open("error", "logout unsuccessfull", {
-        duration: 10000,
-      });
-    }
+      )
   }
   refresh() {
     location.reload();
@@ -144,10 +138,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
             return 1
           return 0
         })
-      }),
-      error => {
-        LoggerService.log(error, "error");
-      }
+      })
   }
 
   clear() {
@@ -190,13 +181,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     this.values = item.label;
 
   }
-  // stateNew(event){
-  //  
-
-  //   this.dataService.currLabel.subscribe(message => 
-  //     this.values = message);
-
-  // }
+  
   imageFile = null;
   public imageNew = localStorage.getItem('imageUrl');
   img = environment.profileUrl + this.imageNew;

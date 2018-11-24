@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
 import { environment } from '../../../environments/environment';
@@ -7,8 +7,9 @@ import { UserService } from '../../core/services/user/user.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NotesService } from '../../core/services/notes/notes.service';
-import { DialogData,DialogComponent } from '../dialog/dialog.component'
+import { DialogData, DialogComponent } from '../dialog/dialog.component'
 import { User } from 'firebase';
+import { DataService } from '../../core/services/data/data.service';
 @Component({
   selector: 'app-dialog-collaborator',
   templateUrl: './dialog-collaborator.component.html',
@@ -16,29 +17,31 @@ import { User } from 'firebase';
 })
 export class DialogCollaboratorComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
- 
+
   constructor(public user: UserService,
     public dialogRef: MatDialogRef<DialogCollaboratorComponent>,
-     public noteService: NotesService,public dialog:MatDialog,
+    public noteService: NotesService, public dialog: MatDialog,
+    public dataService: DataService,
 
-  @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+  @Output() remove = new EventEmitter<string>()
 
   ngOnInit() {
-    // for(let ind)
-    for(let i=0 ;i<this.data['collaborators'].length;i++){
-      this.receiverList.push(this.data['collaborators'][i]);
-      }
+    for (let i = 0; i < this.data['collaborators'].length; i++) {
+      this.friendsNewList.push(this.data['collaborators'][i]);
+    }
+
   }
-  private imageNew = localStorage.getItem('imageUrl');
-  private img = environment.profileUrl + this.imageNew;
+
+  private receiverImage = this.data['user'];
+  private img = environment.profileUrl + this.receiverImage.imageUrl;
+
   private mail = localStorage.getItem('first');
   private firstName = localStorage.getItem('firstName');
   private lastName = localStorage.getItem('lastName');
-  
-  //  private FriendsList:User[]=[];
-  // private receiverList:User[]=[];
-  private FriendsList=[];
-  private receiverList=[];
+  private friendsNewList = [];
+  private FriendsList = [];
+  private receiverList = [];
   searchEmail;
 
   searchPeople(searchEmail) {
@@ -51,22 +54,24 @@ export class DialogCollaboratorComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         LoggerService.log('UserListdata', data);
         LoggerService.log('k', data['data']['details']);
-this.FriendsList=data['data']['details'];
-        // let FriendsList:User[]=[] = (data['data']['details']);
+        this.FriendsList = data['data']['details'];
 
       })
 
   }
-  onEnter(searchFriend){
-    
-    for(let index=0;index<this.FriendsList.length;index++){
-      if(this.FriendsList[index].email==searchFriend){
-      this.receiverList=this.FriendsList[index];
+  onEnter(searchFriend) {
+
+    for (let index = 0; index < this.FriendsList.length; index++) {
+      if (this.FriendsList[index].email == searchFriend) {
+        this.friendsNewList.push(this.FriendsList[index]);
+      }
     }
-    }
-    LoggerService.log('list',this.receiverList)
+    this.searchEmail = [];
+
+    LoggerService.log('list', this.friendsNewList)
 
   }
+
 
   addingCollaborator(receiver) {
     LoggerService.log('receiver', receiver);
@@ -79,38 +84,50 @@ this.FriendsList=data['data']['details'];
     this.noteService.addCollaborator(this.data['id'], body)
       .pipe(takeUntil(this.destroy$))
       .subscribe(response => {
-        LoggerService.log('item', response);
-        this.receiverList=response['data']['details'];
 
-        // var receiverList:User[]=[]=response['data']['details'];
-      
+        LoggerService.log('item', response);
+        this.receiverList = response['data']['details'];
+this.dialogRef.close();
       })
 
   }
-  removeCollaborator(user_detail){
-    LoggerService.log('remove', user_detail);
+  removeCollaborator(user_Id) {
+    LoggerService.log('remove', user_Id);
+    this.noteService.removeCollab(user_Id, this.data['id'])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(response => {
+
+        LoggerService.log('item', response);
+
+        for (var i = 0; i < this.friendsNewList.length; i++) {
+          if (this.friendsNewList[i].userId == user_Id) {
+            this.friendsNewList.splice(i, 1)
+          }
+        }
+        // this.dataService.change()
+
+      })
 
   }
-  cancel(){
-  this.dialogRef.close()
-      const dialogRef = this.dialog.open(DialogComponent, {
-        width: '450px',
-        height: 'auto',
-        data:this.data,
-        panelClass: 'myapp-no-padding-dialog'
-  
-      });
-  
-  
-  
-  }
-  clickUser(userMail){
-    this.searchEmail=userMail;
-    // LoggerService.log(selectedEmail)
-  }
-  friendsNewList=[];
+  cancel() {
+    this.dialogRef.close()
+    this.dialog.open(DialogComponent, {
+      width: '450px',
+      height: 'auto',
+      data: this.data,
+      panelClass: 'myapp-no-padding-dialog'
 
- 
+    });
+
+
+
+  }
+
+  clickUser(userMail) {
+    this.searchEmail = userMail;
+  }
+
+
   ngOnDestroy() {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:

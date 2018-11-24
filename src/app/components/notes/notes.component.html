@@ -162,7 +162,7 @@
          <div  fxLayoutAlign="space-between"   class="action"  fxFlex >       
               <div fxLayoutAlign="space-between" fxFlex> 
                    <app-remindicon [noteId]="noteNew"  (remindTopEvent)="reminding($event)" ></app-remindicon>
-                <app-collaboratoricon></app-collaboratoricon>
+                <app-collaboratoricon ></app-collaboratoricon>
                 <app-coloricon (responseNew)="change($event)"></app-coloricon>
                 <app-imageicon></app-imageicon>
                 <app-archiveicon [archiveNotesArray]='archiveNotesArray'></app-archiveicon>
@@ -214,4 +214,6 @@
             fxFlex.xs=0
              fxFlex></div>
 
-                
+
+
+ 

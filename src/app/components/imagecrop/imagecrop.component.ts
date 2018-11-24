@@ -62,8 +62,6 @@ export class ImagecropComponent implements OnInit,OnDestroy {
       localStorage.setItem('imageUrl', response['status'].imageUrl);
       this.dialogRef.close();
       this.service.changeImage(true);
-    }, error => {
-      LoggerService.log(error);
     })
 
   }

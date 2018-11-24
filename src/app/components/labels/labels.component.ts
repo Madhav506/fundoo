@@ -41,7 +41,12 @@ export class LabelsComponent implements OnInit,OnDestroy {
     .subscribe(data => {
      
       let response:Note[]=[]= data['data'].data;
-      this.arrayData = response.reverse();
+      // this.arrayData = response.reverse();
+      for(let i=response.length-1;i>=0;i--){
+        if(response[i].isArchived==true && response[i].isDeleted==false){
+          this.arrayData.push(response[i]);
+        } 
+      }
       this.arrayNewData = [];
       for (let i = 0; i < response.length - 1; i++) {
         if (response[i].isDeleted == false && response[i].isArchived == false) {
@@ -54,11 +59,7 @@ export class LabelsComponent implements OnInit,OnDestroy {
         }
 
       }
-    }),
-      error => {
-        LoggerService.log("Error", error);
-
-      }
+    })
      
   }
   ngOnDestroy() {

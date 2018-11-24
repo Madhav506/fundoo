@@ -25,7 +25,7 @@ export class UserService {
 
   postLogout() {
     let url = this.url + "user/logout";
-    return this.service.httpPost(url, {});
+    return this.service.httpPost(url,null);
   }
   getDataServiceBasicAdvance()
   {
