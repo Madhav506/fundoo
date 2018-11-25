@@ -17,20 +17,21 @@ export class ArchiveiconComponent implements OnInit,OnDestroy {
   @Input() archiveNotesArray;
   @Output() archiveEvent = new EventEmitter<any>()
   @Output() unarchiveEvent = new EventEmitter<any>()
+  
+  public model;
 
   constructor(public service: HttpService, public snackBar: MatSnackBar,public noteService:NotesService) { }
   ngOnInit() {
 
   }
-  private token = localStorage.getItem('token')
 
   archiveNotes() {
 
-    let model = {
+     this.model = {
       "isArchived": true,
       "noteIdList": [this.archiveNotesArray.id]
     }
-    this.noteService.postArchiveNotes( model)
+    this.noteService.postArchiveNotes( this.model)
     .pipe(takeUntil(this.destroy$))
     .subscribe(data => {
       this.snackBar.open("note archived successfully,please check in archive", "archive", {

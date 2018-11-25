@@ -69,6 +69,19 @@ ngStyle.xs="width:100%" class="flex"
         </mat-chip-list>
       </div>
     </div>
+
+    <!-------------------------------collaborators --------------------------->
+    <div fxLayout="row wrap" >
+      <div  *ngFor="let person of  collaborators"  class="index" fxLayoutGap="40px">
+
+   <button  matTooltip="{{person.email}}" (click)="openCollaborator()"
+   class="basic" mat-mini-fab >
+      {{person.firstName | uppercase | slice : 0 : 1 }}
+   </button>
+
+   </div>
+   </div>
+
                            <!--------Reminders---------- -->
 
     <div fxLayout="row wrap" fxlayoutAlign="start start" fxLayoutGap="5px">
@@ -89,7 +102,7 @@ ngStyle.xs="width:100%" class="flex"
       <div fxFlex="70" class="icons" fxLayoutAlign="space-between">
         <app-remindicon [noteId]="data"  (remindEvent)="emit($event)"  ></app-remindicon>
         <!-- [noteId]="data" (remindEvent)="remind($event)" -->
-        <app-collaboratoricon></app-collaboratoricon>
+        <app-collaboratoricon [noteId]="data"  ></app-collaboratoricon>
         <app-coloricon [myNewColor]="data.id"  (responseNew)="colorNew($event)"></app-coloricon>
         <app-imageicon></app-imageicon>
         <app-archiveicon [archiveNotes]='archiveNotesArray' [archiveNotesArray]="data" 

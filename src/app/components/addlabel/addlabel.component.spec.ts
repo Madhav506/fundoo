@@ -22,4 +22,7 @@ describe('AddlabelComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should add label', async(()=>{
+    expect(component.model['label']).toContain('akm 123');
+  }));
 });

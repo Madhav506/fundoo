@@ -22,4 +22,15 @@ describe('MoreiconComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should delete note', async(()=>{
+    expect(component.model.isDeleted).toEqual(true);
+    expect(component.model.isDeleted).toBeTruthy();
+  }))
+  it('should not delete note', async(()=>{
+    expect(component.model.isDeleted).toEqual(false);
+    expect(component.model.isDeleted).toBeFalsy();
+  }))
+  it('should not add label', async(()=>{
+    expect(component.model.isDeleted).toBeFalsy();
+  }))
 });

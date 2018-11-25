@@ -33,7 +33,7 @@ export class MoreiconComponent implements OnInit,OnDestroy {
 
   public noteArray;
   public isChecked;
-  private model;
+  public model;
   public event: boolean;
   constructor(public service: HttpService,public notesService:NotesService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
 

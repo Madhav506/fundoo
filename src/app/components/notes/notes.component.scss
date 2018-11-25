@@ -81,3 +81,78 @@ div[contenteditable=true]:empty::before {
 .menu{
   padding-top:30px;
 }
+
+
+
+
+.collab{
+  width:200px;
+  font-weight: bold;
+  font-family:cursive;
+  font-size:1.4em;
+}
+.content{
+  font-weight: normal;
+  @include font();
+  font-size: 15px;
+  opacity:0.95;
+  word-wrap: break-word;
+}
+.contentNew{
+  font-weight:normal;
+  @include font();
+  opacity:0.65;
+  margin-left:58px;
+  margin-top:-20px;
+  font-size: 14px;
+}
+.person{
+  margin-top:15px;
+}
+.right{
+  @include right();
+  margin-top:5px;
+}
+.input{
+@include border();
+  margin-left:18px; 
+  width:320px;
+}
+.cancel{
+  background-color:$white;
+  color:$black;
+}
+.fab{
+  border: solid;
+  border-width: thin;
+}
+
+.menuNew{
+width:250px;
+word-break: break-word;
+overflow: hidden;
+}
+::ng-deep.mat-menu-panel {
+  min-width: 112px;
+  max-width: 350px;
+  overflow: hidden;
+ 
+}
+.done{
+  opacity:0.6;
+  cursor: pointer;
+}
+.index{
+  margin-top:10px;
+}
+.email{
+  margin-top:15px;
+}
+.basic{
+  color:white;
+  border-width:thin;
+  font-size:18px;
+}
+.delete{
+  cursor:pointer;
+}

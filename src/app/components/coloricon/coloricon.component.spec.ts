@@ -22,4 +22,5 @@ describe('ColoriconComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
 });

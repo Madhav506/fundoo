@@ -35,6 +35,9 @@ export class AddlabelComponent implements OnInit,OnDestroy {
   private editLabel;
   private messageDisplay;
   private message;
+
+ public model;
+ 
   constructor(public service: HttpService,public notesService:NotesService, public dataService: DataService, public dialog: MatDialog,
     public dialogRef: MatDialogRef<AddlabelComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -73,12 +76,12 @@ export class AddlabelComponent implements OnInit,OnDestroy {
         return false;
       }
     }
-    let model = {
+    this.model = {
       "label": this.label,
       "isDeleted": false,
       "userId": this.id
     }
-    this.notesService.postNoteLabels( model)
+    this.notesService.postNoteLabels( this.model)
     .pipe(takeUntil(this.destroy$))
     .subscribe(result => {
       this.clear();

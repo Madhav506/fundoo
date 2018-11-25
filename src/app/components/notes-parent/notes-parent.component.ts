@@ -46,8 +46,7 @@ export class NotesParentComponent implements OnInit,OnDestroy{
       let response:Note[]=[]=data['data'].data;
 
       for (let i = 0; i < data['data'].data.length - 1; i++) {
-        if (response[i].isDeleted == false && response[i].isArchived == false
-      && response[i].isPined == false) {
+        if (response[i].isDeleted == false && response[i].isArchived == false && response[i].isPined == false) {
           this.arrayNewData.push(response[i]);
 
         }

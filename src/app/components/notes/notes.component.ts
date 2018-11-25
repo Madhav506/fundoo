@@ -6,6 +6,8 @@ import { RemindiconComponent } from '../remindicon/remindicon.component';
 import { NotesService } from '../../core/services/notes/notes.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { UserService } from '../../core/services/user/user.service';
 
 
 @Component({
@@ -20,7 +22,7 @@ export class NotesComponent implements OnInit,OnDestroy {
   @Output() notesNew = new EventEmitter<Event>();
 
   ArrayOfLabel;
-  private body:any={}
+  public  body:any={}
   archiveNotesArray = { 'isArchived': false }
   colorMyevent = '#ffffff';
   private choose1 = true;
@@ -42,18 +44,25 @@ export class NotesComponent implements OnInit,OnDestroy {
   private isPinned = false;
   private isArchived=false;
     private adding: boolean;
+    public   collab=true;
   noteNew = {
     'id':''
   }
-  vate collab:boolean=true;
+  private FriendsList = [];
+  private receiverList=[];
+  private collaborators=[];
+  private searchEmail;
 
   todaydate=new Date();
   tomorrow= new Date(this.todaydate.getFullYear(), this.todaydate.getMonth(), 
   (this.todaydate.getDate() + 1));
 
-  constructor(public service: HttpService, public snackBar: MatSnackBar,public notesService:NotesService) { }
+  constructor(public service: HttpService, public snackBar: MatSnackBar,public userService:UserService,
+    public notesService:NotesService) { }
   ngOnInit() {
-    
+    for (let i = 0; i < this.data['collaborators'].length; i++) {
+      this.collaborators.push(this.data['collaborators'][i]);
+    }
   }
 
   openNote() {
@@ -88,7 +97,9 @@ export class NotesComponent implements OnInit,OnDestroy {
       "checklist": "",
       "isPined": this.isPinned,
       "color": "",
-      "reminder":''
+      "reminder":'',
+      "collaberators": JSON.stringify(this.collaborators)
+
 
 
     }
@@ -99,6 +110,8 @@ export class NotesComponent implements OnInit,OnDestroy {
     this.body.color = this.colorMyevent;
     this.colorMyevent = "#ffffff";
     this.remindArray=[];
+    this.collaborators=[];
+
 
   }
   
@@ -123,7 +136,8 @@ export class NotesComponent implements OnInit,OnDestroy {
                "color": "",
                "isArchived": this.isArchived,
                "labelIdList": JSON.stringify(this.array1),
-               "reminder":''
+               "reminder":'',
+               "collaberators": JSON.stringify(this.collaborators)
               }
               if(this.newReminder!=undefined){
                 this.body.reminder=this.newReminder;
@@ -152,6 +166,7 @@ export class NotesComponent implements OnInit,OnDestroy {
             this.newReminder='';
             this.adding=false
             this.eventClicked.emit();
+            this.collaborators=[];
       
           }
       
@@ -249,6 +264,81 @@ export class NotesComponent implements OnInit,OnDestroy {
     this.array2.pop();
     this.array1.pop();
   }
+
+
+  openCollaborator(){
+   this.collab=!this.collab;
+   LoggerService.log("collab",true);
+ }
+
+ private image2 = localStorage.getItem('imageUrl');
+ img = environment.profileUrl + this.image2;
+
+ private firstName = localStorage.getItem('firstName');
+ private lastName = localStorage.getItem('lastName');
+  private email = localStorage.getItem('first');
+ 
+
+ searchPeople(searchEmail) {
+  LoggerService.log('search', searchEmail);
+  var body = {
+    "searchWord": searchEmail
+  }
+  this.userService.getPeopleList(body)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(data => {
+      LoggerService.log('UserListdata', data);
+      LoggerService.log('k', data['data']['details']);
+      this.FriendsList = data['data']['details'];
+
+    })
+
+}
+
+public friendsNewList=[];
+clickUser(userMail) {
+      this.searchEmail = userMail;
+      LoggerService.log(this.searchEmail);
+    }
+  onEnter(searchFriend) {
+    LoggerService.log(searchFriend);
+
+    for (let index = 0; index < this.FriendsList.length; index++) {
+      if (this.FriendsList[index].email == searchFriend) {
+        this.collaborators.push(this.FriendsList[index]);
+      }
+    }
+    this.addingCollaborator(this.collaborators)
+    this.searchEmail = [];
+
+  }
+
+addingCollaborator(userDetails) {
+    
+  let userBody = {
+    "firstName": userDetails.firstName,
+    "lastName": userDetails.lastName,
+    "email": userDetails.email,
+    "userId": userDetails.userId
+  }
+ 
+  
+}
+
+removeCollaborator(collaboratorId){
+  for(let i=0; i<this.collaborators.length; i++){
+    if(collaboratorId==this.collaborators[i].userId){
+      this.collaborators.splice(i,1);
+    }
+  }
+
+}
+ 
+ closeCollaborator(){
+   this.collab=!this.collab
+   
+ }
+
   ngOnDestroy() { 
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:

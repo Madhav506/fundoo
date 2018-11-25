@@ -91,6 +91,7 @@ this.dialogRef.close();
       })
 
   }
+  
   removeCollaborator(user_Id) {
     LoggerService.log('remove', user_Id);
     this.noteService.removeCollab(user_Id, this.data['id'])

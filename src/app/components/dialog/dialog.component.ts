@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { HttpService } from '../../core/services/http/http.service'
 import { MatSnackBar } from '@angular/material';
 import { DataService } from '../../core/services/data/data.service';
@@ -7,6 +7,7 @@ import { LoggerService } from '../../core/services/logger/logger.service';
 import { NotesService } from '../../core/services/notes/notes.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { DialogCollaboratorComponent } from '../dialog-collaborator/dialog-collaborator.component';
 
 export interface DialogData {
   "title": String,
@@ -35,7 +36,7 @@ export class DialogComponent implements OnInit,OnDestroy {
 
   constructor(public service: HttpService, public dataService: DataService,
     public dialogRef: MatDialogRef<DialogComponent>,public notesService:NotesService,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, public snackBar: MatSnackBar) {
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,  public dialog: MatDialog,public snackBar: MatSnackBar) {
 
   }
   private title;
@@ -52,10 +53,14 @@ export class DialogComponent implements OnInit,OnDestroy {
   private modifiedCheckList;
   private checklist = false;
   color;
+  private collaborators=[];
   ngOnInit() {
     this.array1 = this.data['noteLabels'];
     this.array2 = this.data['reminder'];
-    this.color=this.data['color']
+    this.color=this.data['color'];
+    for (let i = 0; i < this.data['collaborators'].length; i++) {
+      this.collaborators.push(this.data['collaborators'][i]);
+    }
 
     if (this.data['noteCheckLists'].length > 0) {
       this.checklist = true;
@@ -74,9 +79,6 @@ export class DialogComponent implements OnInit,OnDestroy {
   }
   more(temp) {
     this.array1.push(temp);
-
-
-
   }
   
   archive(event) {
@@ -254,6 +256,18 @@ export class DialogComponent implements OnInit,OnDestroy {
     this.color=event;
 
   }
+
+  // openCollaborator(){
+  //   const dialogRef = this.dialog.open(DialogCollaboratorComponent, {
+  //     width: '450px',
+  //     height: 'auto',
+  //     data:this.noteId.id,
+  //     panelClass: 'myapp-no-padding-dialog'
+
+  //   });
+    
+  // }
+
   ngOnDestroy() { 
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:
