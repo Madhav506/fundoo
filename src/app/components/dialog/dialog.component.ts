@@ -256,17 +256,22 @@ export class DialogComponent implements OnInit,OnDestroy {
     this.color=event;
 
   }
+  closePopUp(){
+this.dialogRef.close();
+  }
 
-  // openCollaborator(){
-  //   const dialogRef = this.dialog.open(DialogCollaboratorComponent, {
-  //     width: '450px',
-  //     height: 'auto',
-  //     data:this.noteId.id,
-  //     panelClass: 'myapp-no-padding-dialog'
+  openCollaborator(noteData){
+    LoggerService.log(noteData)
+     this.dialog.open(DialogCollaboratorComponent, {
+      maxWidth: 'auto',
+      height: 'auto',
+      data:noteData,
+      panelClass: 'myapp-no-padding-dialog'
 
-  //   });
-    
-  // }
+    });
+
+    // dialogRef.afterClosed();
+  }
 
   ngOnDestroy() { 
     this.destroy$.next(true);

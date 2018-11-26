@@ -15,7 +15,8 @@
   <form  fxFlex 
   fx.show=true
   class="search">
-    <button  mat-icon-button (click)="clickSearch()" fx.show="true" fxShow.xs="false"  type="submit"><mat-icon >search</mat-icon>
+    <button  mat-icon-button (click)="clickSearch()" fx.show="true" fxShow.xs="false" 
+     type="submit"><mat-icon >search</mat-icon>
     </button>
     <input fxFlex type="text"  name="search" [(ngModel)]="searchInput" (click)="clickSearch()" 
     (keydown)="passmessage()"  placeholder="Search" >

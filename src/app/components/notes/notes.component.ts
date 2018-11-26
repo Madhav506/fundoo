@@ -60,9 +60,9 @@ export class NotesComponent implements OnInit,OnDestroy {
   constructor(public service: HttpService, public snackBar: MatSnackBar,public userService:UserService,
     public notesService:NotesService) { }
   ngOnInit() {
-    for (let i = 0; i < this.data['collaborators'].length; i++) {
-      this.collaborators.push(this.data['collaborators'][i]);
-    }
+    // for (let i = 0; i < this.data['collaborators'].length; i++) {
+    //   this.collaborators.push(this.data['collaborators'][i]);
+    // }
   }
 
   openNote() {
@@ -308,22 +308,11 @@ clickUser(userMail) {
         this.collaborators.push(this.FriendsList[index]);
       }
     }
-    this.addingCollaborator(this.collaborators)
     this.searchEmail = [];
 
   }
 
-addingCollaborator(userDetails) {
-    
-  let userBody = {
-    "firstName": userDetails.firstName,
-    "lastName": userDetails.lastName,
-    "email": userDetails.email,
-    "userId": userDetails.userId
-  }
- 
-  
-}
+
 
 removeCollaborator(collaboratorId){
   for(let i=0; i<this.collaborators.length; i++){

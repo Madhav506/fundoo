@@ -26,7 +26,7 @@ describe('MoreiconComponent', () => {
     expect(component.model.isDeleted).toEqual(true);
     expect(component.model.isDeleted).toBeTruthy();
   }))
-  it('should not delete note', async(()=>{
+  it('should not delete the note', async(()=>{
     expect(component.model.isDeleted).toEqual(false);
     expect(component.model.isDeleted).toBeFalsy();
   }))

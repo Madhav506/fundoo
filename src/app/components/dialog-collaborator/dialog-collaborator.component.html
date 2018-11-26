@@ -1,4 +1,6 @@
-<mat-card ngStyle.xs="width:100%" class="collaborator">
+<mat-card 
+ngStyle.xs="width:80%" 
+class="collaborator">
   <mat-card-content>
     <div class="collab">Collaborators</div>
     <hr>
@@ -41,14 +43,14 @@
       <button class="fab" mat-mini-fab color="disabled"><mat-icon>person_add</mat-icon>
       </button>
 
-      <input [matMenuTriggerFor]="menu" class="input" type="text" (keyup)="searchPeople(searchEmail)"
+      <input fxFlex   [matMenuTriggerFor]="menu" class="input" type="text" (keyup)="searchPeople(searchEmail)"
               name="search" [(ngModel)]="searchEmail"
         placeholder="Person or email to share with">
 
-      <mat-button matTooltip="Add Collaborator" (click)="onEnter(searchEmail)">
+      <mat-button fxFlex="7" matTooltip="Add Collaborator" (click)="onEnter(searchEmail)">
         <mat-icon class="done">done</mat-icon>
       </mat-button>
-
+<!-- <div>{{messageDisplay}}</div> -->
       <!-- --------------------------------mat menu div-------------------------------------- -->
       <mat-menu class="menu" #menu="matMenu" [overlapTrigger]="false">
 
@@ -66,7 +68,7 @@
 
   <div fxLayoutAlign="end" fxLayoutGap="10px">
     <button class="cancel" matTooltip="Cancel" (click)="cancel()" mat-button color="basic">Cancel</button>
-    <button class="cancel" matTooltip="Save" (click)="cancel();addingCollaborator(item)"
+    <button class="cancel" matTooltip="Save" (click)="cancel()"
             mat-button color="basic">Save</button>
   </div>
 

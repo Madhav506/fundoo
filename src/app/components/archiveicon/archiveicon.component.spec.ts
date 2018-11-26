@@ -1,3 +1,4 @@
+/**TestBed is a powerful unit testing tool provided by angular, and it is initialized in this file. */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ArchiveiconComponent } from './archiveicon.component';
@@ -12,7 +13,7 @@ describe('ArchiveiconComponent', () => {
     })
     .compileComponents();
   }));
-
+/** “beforeEach” is setting all the needed dependencies to start the test module. */
   beforeEach(() => {
     fixture = TestBed.createComponent(ArchiveiconComponent);
     component = fixture.componentInstance;

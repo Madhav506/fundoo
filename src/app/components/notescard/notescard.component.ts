@@ -126,7 +126,7 @@ export class NotescardComponent implements OnInit {
 
     this.updateEvent.emit();
     const dialogRef = this.dialog.open(DialogComponent, {
-      width: '450px',
+      maxWidth: 'auto',
       height: 'auto',
       data: dialogData,
       panelClass: 'myapp-no-padding-dialog'
@@ -233,7 +233,7 @@ export class NotescardComponent implements OnInit {
 
   openCollaborator(note){
     const dialogRef = this.dialog.open(DialogCollaboratorComponent, {
-      width: '450px',
+      maxWidth: 'auto',
       height: 'auto',
       data:note,
       panelClass: 'myapp-no-padding-dialog'

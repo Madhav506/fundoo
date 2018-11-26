@@ -47,29 +47,32 @@ export class AddlabelComponent implements OnInit,OnDestroy {
   @ViewChild('editDiv') editDiv: ElementRef;
 
   ngOnInit() {
-    this.getLabel();
+    this.getLabel();//calling getLabels() function in ngOnInit()
 
   }
   private label;
   private ArrayOfLabel:Label[]=[];
   private newLabel;
+  //clear the label after clicking enter 
   clear() {
     this.label = ' ';
   }
+  //closing the dialog Component and calling addLabel() and getLabel() functions
   close() {
     this.dialogRef.close();
     this.addLabel();
     this.getLabel();
 
   }
-
+//storing the userId in id variable
   id = localStorage.getItem('userId')
-  token = localStorage.getItem('token')
+  // token = localStorage.getItem('token')
 
             /* ****************adding labels********************************/
             
   addLabel() {
     let label = this.label;
+    //to remove duplicates and push only unique label names
     for (let j = 0; j < this.ArrayOfLabel.length; j++) {
       if (this.ArrayOfLabel[j].label == label) {
         this.message = "label  already exists"
@@ -81,6 +84,7 @@ export class AddlabelComponent implements OnInit,OnDestroy {
       "isDeleted": false,
       "userId": this.id
     }
+    //adding the label 
     this.notesService.postNoteLabels( this.model)
     .pipe(takeUntil(this.destroy$))
     .subscribe(result => {
@@ -127,7 +131,7 @@ export class AddlabelComponent implements OnInit,OnDestroy {
       panelClass: 'myapp-no-paddding-dialog',
       data: { name: 'label' }
     });
-    dialogRef.afterClosed()
+    dialogRef.afterClosed()//closing the dialogcomponent
     .pipe(takeUntil(this.destroy$))
     .subscribe(data => {
       if (data) {
@@ -135,7 +139,7 @@ export class AddlabelComponent implements OnInit,OnDestroy {
         .pipe(takeUntil(this.destroy$))
         .subscribe(result => {
 
-          this.dataService.change(true);
+          this.dataService.change(true);//sharing data through data service
 
           this.eventTwo.emit();
           this.getLabel();

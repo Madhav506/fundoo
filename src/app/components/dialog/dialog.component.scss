@@ -81,3 +81,6 @@ div[contenteditable=true]:empty::before {
  @include ellipsis();
   width: 50px;
 }
+.basic{
+  margin:5px 10px 5px 0px;
+}

@@ -1,6 +1,6 @@
 
          <div fxFlex.xs=0  class="shrink" fxFlex></div>
-     <div fxFlex.xs=0   class="grow"  fxFlex="10">
+     <div fxFlex.xs=0  class="grow"  fxFlex="10">
      </div> 
 
       <div  fxLayout="row" 
@@ -14,7 +14,7 @@
           class="card" *ngIf="choose1 && collab ">
 
 
-        <div>
+        <div >
             <span><input fxFlex="70" (click)="openNote()" class="input" placeholder="Take a note..">
             </span></div>
 
@@ -120,7 +120,7 @@
 
     <!----------------------- reminders Begins----------------------- -->
         
-                <!----------------------- reminders----------------------- -->
+       <!----------------------- reminders----------------------- -->
 
 
  <div fxLayout="row wrap" fxlayoutAlign="start start" fxLayoutGap="5px">
@@ -227,7 +227,13 @@
 
 
 <!-- ------------------------------Collaborators------------------------------------------------------ -->
-<mat-card *ngIf="!collab" ngStyle.xs="width:100%" class="collaborator">
+<mat-card 
+fxFlex="54"
+fxFlex.md="100%"
+fxFlex.sm="100%"
+fxFlex.xs="100%"
+   *ngIf="!collab" 
+    class="collaborator">
     <mat-card-content>
       <div class="collab">Collaborators</div>
       <hr>
@@ -270,11 +276,11 @@
         <button class="fab" mat-mini-fab color="disabled"><mat-icon>person_add</mat-icon>
         </button>
   
-        <input [matMenuTriggerFor]="menu" class="input" type="text" (keyup)="searchPeople(searchEmail)"
+        <input fxFlex [matMenuTriggerFor]="menu" class="input" type="text" (keyup)="searchPeople(searchEmail)"
                 name="search" [(ngModel)]="searchEmail"
           placeholder="Person or email to share with">
   
-        <mat-button matTooltip="Add Collaborator" (click)="onEnter(searchEmail)">
+        <mat-button fxFlex="7"   matTooltip="Add Collaborator" (click)="onEnter(searchEmail)">
           <mat-icon class="done">done</mat-icon>
         </mat-button>
   
@@ -282,7 +288,7 @@
         <mat-menu class="menuNew" #menu="matMenu" [overlapTrigger]="false">
   
           <div *ngFor="let item of FriendsList">
-            <button (click)="addingCollaborator(item);clickUser(item.email)" mat-button>
+            <button (click)="clickUser(item.email)" mat-button>
               {{item.firstName}} {{item.lastName}} <{{item.email}} >
             </button>
           </div>

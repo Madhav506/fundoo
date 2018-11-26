@@ -16,7 +16,7 @@ export class CollaboratoriconComponent implements OnInit {
 
   addCollaborator(){
     const dialogRef = this.dialog.open(DialogCollaboratorComponent, {
-      width: '450px',
+      maxWidth: 'auto',
       height: 'auto',
       data:this.noteId,
       panelClass: 'myapp-no-padding-dialog'

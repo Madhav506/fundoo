@@ -5,14 +5,14 @@
     @include border();
     @include ellipsis();
     @include font();
-    padding-left: 15px;
+    // padding-left: 15px;
     font-size: 16px;
    
 }
     .label{
     @include ellipsis();
     font-size: 20px;
-    padding-left:15px;
+    // padding-left:15px;
     }
     
     div[contenteditable=true]:empty::before {
@@ -24,7 +24,7 @@
     }
     
     .clear{
-    padding-left: 15px;
+    // padding-left: 15px;
     padding-right: 10px;
     }
     .btn{

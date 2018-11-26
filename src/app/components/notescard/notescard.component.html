@@ -114,7 +114,7 @@ like an array or an object and create a template for each item.  -->
                 <app-remindicon  style="opacity:0;width:8px" [noteId]="data" (remindEvent)="remind($event)">
                   </app-remindicon>
                 Today {{item | date:"shortTime"}}   
-                <app-remindicon  class="remine" [noteId]="data" 
+                <app-remindicon style="opacity:0;width:8px"  class="remine" [noteId]="data" 
                                  (remindEvent)="remind($event)">
                   </app-remindicon>
                 <mat-icon  (click)="removeReminders(data.id)" matChipRemove>cancel</mat-icon>

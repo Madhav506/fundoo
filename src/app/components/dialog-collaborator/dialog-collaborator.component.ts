@@ -43,9 +43,10 @@ export class DialogCollaboratorComponent implements OnInit, OnDestroy {
   private FriendsList = [];
   private receiverList = [];
   searchEmail;
-
+/**SearchPeople() to search for users list  */
   searchPeople(searchEmail) {
     LoggerService.log('search', searchEmail);
+
     var body = {
       "searchWord": searchEmail
     }
@@ -59,17 +60,21 @@ export class DialogCollaboratorComponent implements OnInit, OnDestroy {
       })
 
   }
+  /**onEnter() to search for users list  */
+
   onEnter(searchFriend) {
 
+LoggerService.log('nnn',this.FriendsList[0].email);
+LoggerService.log('ndddnn',searchFriend);
+
     for (let index = 0; index < this.FriendsList.length; index++) {
-      if (this.FriendsList[index].email == searchFriend) {
+      if (this.FriendsList[index].email == searchFriend ) {
         this.friendsNewList.push(this.FriendsList[index]);
       }
+     
     }
+   
     this.searchEmail = [];
-
-    LoggerService.log('list', this.friendsNewList)
-
   }
 
 
@@ -87,7 +92,7 @@ export class DialogCollaboratorComponent implements OnInit, OnDestroy {
 
         LoggerService.log('item', response);
         this.receiverList = response['data']['details'];
-this.dialogRef.close();
+        this.data['collaborators'].push(receiver);
       })
 
   }
@@ -103,23 +108,23 @@ this.dialogRef.close();
         for (var i = 0; i < this.friendsNewList.length; i++) {
           if (this.friendsNewList[i].userId == user_Id) {
             this.friendsNewList.splice(i, 1)
+            this.data['collaborators'].splice(i,1);
+
           }
         }
-        // this.dataService.change()
 
       })
 
   }
   cancel() {
     this.dialogRef.close()
-    this.dialog.open(DialogComponent, {
-      width: '450px',
+   const dialogRef= this.dialog.open(DialogComponent, {
+    maxWidth: 'auto',
       height: 'auto',
       data: this.data,
       panelClass: 'myapp-no-padding-dialog'
 
     });
-
 
 
   }
