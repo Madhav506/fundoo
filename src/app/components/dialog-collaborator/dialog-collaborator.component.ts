@@ -117,7 +117,7 @@ LoggerService.log('ndddnn',searchFriend);
 
   }
   cancel() {
-    this.dialogRef.close()
+    this.dialogRef.close();
    const dialogRef= this.dialog.open(DialogComponent, {
     maxWidth: 'auto',
       height: 'auto',
