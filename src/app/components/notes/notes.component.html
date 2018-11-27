@@ -110,7 +110,7 @@
           <div  *ngFor="let person of  collaborators"  class="index" fxLayoutGap="40px">
 
        <button  matTooltip="{{person.email}}" (click)="openCollaborator()"
-       class="basic" mat-mini-fab >
+       class="disabled" mat-mini-fab >
           {{person.firstName | uppercase | slice : 0 : 1 }}
        </button>
    

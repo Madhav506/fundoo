@@ -93,7 +93,7 @@ like an array or an object and create a template for each item.  -->
               <div  *ngFor="let person of  data.collaborators"  class="index" fxLayoutGap="40px">
  
            <button  matTooltip="{{person.email}}" (click)="openCollaborator(data)"
-           class="basic" mat-mini-fab  color="basic">
+           class="disabled" mat-mini-fab  color="basic">
               {{person.firstName | uppercase | slice : 0 : 1 }}
            </button>
        

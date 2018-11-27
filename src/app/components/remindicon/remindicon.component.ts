@@ -109,7 +109,6 @@ export class RemindiconComponent implements OnInit {
   }
 
   customReminder(date, time) {
-    debugger;
     time.match('^[0-2][0-3]:[0-5][0-9]$');
 
     if (time == this.modelReminder.time) {

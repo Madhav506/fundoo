@@ -24,11 +24,11 @@ export class ForgotpasswordComponent implements OnInit,OnDestroy {
   ngOnInit() {
   }
   email = new FormControl('', [Validators.required, Validators.email]);
-  errorMessage() {
-    return this.email.hasError('required') ? 'Enter a valid email' :
-      this.email.hasError('email') ? 'Not a valid email' :
-        '';
-  }
+  // errorMessage() {
+  //   return this.email.hasError('required') ? 'Enter a valid email' :
+  //     this.email.hasError('email') ? 'Not a valid email' :
+  //       '';
+  // }
   forgotPassword() {
     LoggerService.log(this.body.email);
 
