@@ -277,7 +277,7 @@ export class NotesComponent implements OnInit,OnDestroy {
  private firstName = localStorage.getItem('firstName');
  private lastName = localStorage.getItem('lastName');
   private email = localStorage.getItem('first');
- 
+ private messageDisplay;
 
  searchPeople(searchEmail) {
   LoggerService.log('search', searchEmail);
@@ -295,14 +295,19 @@ export class NotesComponent implements OnInit,OnDestroy {
 
 }
 
-public friendsNewList=[];
+// public friendsNewList=[];
 clickUser(userMail) {
       this.searchEmail = userMail;
       LoggerService.log(this.searchEmail);
     }
   onEnter(searchFriend) {
-    LoggerService.log(searchFriend);
-
+    for(let j=0;j<this.collaborators.length;j++){
+      if(this.searchEmail==this.collaborators[j].email){
+        this.messageDisplay="This email already exists";
+        this.searchEmail=[];
+        return false;
+      }
+    }
     for (let index = 0; index < this.FriendsList.length; index++) {
       if (this.FriendsList[index].email == searchFriend) {
         this.collaborators.push(this.FriendsList[index]);
@@ -323,10 +328,10 @@ removeCollaborator(collaboratorId){
 
 }
  
- closeCollaborator(){
-   this.collab=!this.collab
+//  closeCollaborator(){
+//    this.collab=!this.collab
    
- }
+//  }
 
   ngOnDestroy() { 
     this.destroy$.next(true);

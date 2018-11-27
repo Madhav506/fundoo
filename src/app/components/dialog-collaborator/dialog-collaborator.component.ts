@@ -42,7 +42,8 @@ export class DialogCollaboratorComponent implements OnInit, OnDestroy {
   private friendsNewList = [];
   private FriendsList = [];
   private receiverList = [];
-  searchEmail;
+  private searchEmail;
+  private messageDisplay;
 /**SearchPeople() to search for users list  */
   searchPeople(searchEmail) {
     LoggerService.log('search', searchEmail);
@@ -67,6 +68,13 @@ export class DialogCollaboratorComponent implements OnInit, OnDestroy {
 LoggerService.log('nnn',this.FriendsList[0].email);
 LoggerService.log('ndddnn',searchFriend);
 
+for(let j=0;j<this.friendsNewList.length;j++){
+  if(this.searchEmail==this.friendsNewList[j].email){
+    this.messageDisplay="This email already exists";
+    this.searchEmail=[];
+    return false;
+  }
+}
     for (let index = 0; index < this.FriendsList.length; index++) {
       if (this.FriendsList[index].email == searchFriend ) {
         this.friendsNewList.push(this.FriendsList[index]);

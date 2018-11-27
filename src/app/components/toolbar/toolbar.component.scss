@@ -85,9 +85,9 @@
   height: 30px;
 }
 
-.back:hover {
-  background-color: lightyellow;
-}
+// .back {
+//   background-color: white;
+// }
 
 .image {
   display: none;
@@ -132,12 +132,12 @@
 .newlabelNew{
   padding-bottom:20px;padding-left:20px
 }
-@media only screen and (min-width: 300px) and (max-width: 600px) {
+@media only screen and (min-width: 300px) and (max-width: 400px) {
   .title {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden !important;    
-    width: 60px;
+    width:65px;
   }
   @media only screen and (min-width: 300px) and (max-width: 600px) {
     .side{
@@ -145,4 +145,8 @@
     // z-index:3;
     }
 }
+}
+.mat-nav-list .active_link{
+  background-color:gainsboro;
+  border-radius:0px 20px 20px 0px;
 }

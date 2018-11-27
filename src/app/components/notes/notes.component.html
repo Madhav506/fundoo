@@ -6,11 +6,10 @@
       <div  fxLayout="row" 
        fxLayoutAlign="center center" class="row-height">
     <mat-card   
-      fxFlex="54"
-   fxFlex.md="100%"
-   fxFlex.sm="100%"
+      fxFlex="60"
    fxFlex.xs="100%"
-   
+   ngStyle.sm="max-width:500px"
+   ngStyle.md="max-width:500px"
           class="card" *ngIf="choose1 && collab ">
 
 
@@ -256,10 +255,11 @@ fxFlex.xs="100%"
       </div>
   
       <!-------------------------------------  receiver div--------------------------------- -->
-  
+      <div class="scroll">
+
       <div *ngFor="let person of collaborators" fxLayout="row" class="index" fxLayoutGap="20px">
   
-        <button class="basic" mat-mini-fab> {{person.firstName | uppercase | slice : 0 : 1 }}
+        <button class="basic" color="basic" mat-mini-fab> {{person.firstName | uppercase | slice : 0 : 1 }}
         </button>
   
         <mat-content  fxFlex class="content">
@@ -269,7 +269,7 @@ fxFlex.xs="100%"
           <mat-icon>clear</mat-icon>
         </mat-button>
       </div>
-  
+  </div>
       <!------------------------------------- search receiver div--------------------------------- -->
   
       <div class="person">
@@ -280,7 +280,7 @@ fxFlex.xs="100%"
                 name="search" [(ngModel)]="searchEmail"
           placeholder="Person or email to share with">
   
-        <mat-button fxFlex="7"   matTooltip="Add Collaborator" (click)="onEnter(searchEmail)">
+        <mat-button *ngIf="searchEmail!=null" fxFlex="7"   matTooltip="Add Collaborator" (click)="onEnter(searchEmail)">
           <mat-icon class="done">done</mat-icon>
         </mat-button>
   
@@ -300,8 +300,9 @@ fxFlex.xs="100%"
   
   
     <div fxLayoutAlign="end" fxLayoutGap="10px">
-      <button class="cancel" matTooltip="Cancel" (click)="closeCollaborator()" mat-button color="basic">Cancel</button>
-      <button class="cancel" matTooltip="Save" (click)="closeCollaborator()"
+        <div class="display">{{messageDisplay}}</div>
+      <button class="cancel" matTooltip="Cancel" (click)="openCollaborator()" mat-button color="basic">Cancel</button>
+      <button class="cancel" matTooltip="Save" (click)="openCollaborator()"
               mat-button color="basic">Save</button>
     </div>
   

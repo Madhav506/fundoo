@@ -18,3 +18,7 @@ float:right;
 @mixin font(){
 font-family: 'Google Sans',Roboto,Arial,sans-serif;
 }
+@mixin word(){
+word-wrap:break-word;
+    }
+    

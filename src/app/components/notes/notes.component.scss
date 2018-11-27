@@ -20,6 +20,8 @@
   height: 45px;
   left: 0;
   right: 0;
+  max-width:500px;
+  // width:300px;
   margin: auto;
   padding: 2px;
   margin-top: 25px;
@@ -29,7 +31,11 @@
   margin-top: -19px;
   font-weight: lighter;
 }
-
+.display{
+  color:rgb(235, 23, 23);
+  font-size:15px;
+  margin-left:20px;
+}
 .inputNote {
   @include border();
   margin-top: 2px;
@@ -101,6 +107,8 @@ div[contenteditable=true]:empty::before {
 .content{
   font-weight: normal;
   @include font();
+  @include ellipsis();
+  width:20px;
   font-size: 15px;
   opacity:0.95;
   word-wrap: break-word;
@@ -152,6 +160,7 @@ overflow: hidden;
 }
 .index{
   margin-top:10px;
+  margin-left:3px;
 }
 .email{
   margin-top:15px;
@@ -161,6 +170,12 @@ overflow: hidden;
   border-width:thin;
   font-size:18px;
 }
+.scroll{
+  max-height: 200px;
+  overflow-y:auto;
+  overflow-x:hidden !important;
+  }
+  
 .delete{
   cursor:pointer;
 }
