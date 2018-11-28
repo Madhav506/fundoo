@@ -75,6 +75,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
       })
 
+  
+
     if (this.router.url == "/home/notes") {
       this.values = "fundoo"
     }
@@ -89,6 +91,9 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     }
     if (this.router.url == "/home/trash") {
       this.values = "Trash "
+    }
+    if (this.router.url == "/home/notes/:noteid/questionAnswers") {
+      this.values = "fundoo "
     }
 
 
@@ -165,7 +170,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
       });
   }
   clickSearch() {
-    this.router.navigate(['home/search']);
+    this.router.navigate(['home/notes/search']);
   }
   passmessage() {
     this.dataService.changeMessage(this.searchInput);

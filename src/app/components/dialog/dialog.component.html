@@ -75,7 +75,7 @@ ngStyle.xs="width:100%" class="flex"
       <div  *ngFor="let person of  data.collaborators"  class="index" fxLayoutGap="10px">
 
    <button  matTooltip="{{person.email}}" (click)="openCollaborator(data);closePopUp()"
-   class="basic" color="disabled"  mat-mini-fab >
+   class="basic" color="basic"  mat-mini-fab >
       {{person.firstName | uppercase | slice : 0 : 1 }}
    </button>
 

@@ -75,6 +75,7 @@ word-break: break-word;
     color:white;
     border-width:thin;
     font-size:18px;
+    color:$black;
 }
 .delete{
     cursor:pointer;
@@ -89,7 +90,7 @@ word-break: break-word;
     overflow-y:auto;
     overflow-x:hidden !important;
     }
-::ng-deep.cdk-overlay-backdrop{
-        opacity:0.7!important;
-        background-color: #fff!important;
-        }  
+// ::ng-deep.cdk-overlay-backdrop{
+//         opacity:0.7!important;
+//         background-color: #fff!important;
+//         }  

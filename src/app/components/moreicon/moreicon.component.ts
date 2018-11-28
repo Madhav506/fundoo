@@ -9,6 +9,7 @@ import { NotesService } from '../../core/services/notes/notes.service';
 import { LoggerService } from '../../core/services/logger/logger.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-moreicon',
@@ -35,7 +36,8 @@ export class MoreiconComponent implements OnInit,OnDestroy {
   public isChecked;
   public model;
   public event: boolean;
-  constructor(public service: HttpService,public notesService:NotesService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
+  constructor(public service: HttpService,public notesService:NotesService, private router: Router, 
+    public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
 
@@ -44,7 +46,7 @@ export class MoreiconComponent implements OnInit,OnDestroy {
   public temp;
   deleteNotes(arrayOfNotes) {
 
-    LoggerService.log(this.arrayOfNotes);
+    LoggerService.log('noteid ',this.arrayOfNotes);
     let model = {
       "isDeleted": true,
       "noteIdList": [this.arrayOfNotes]
@@ -164,6 +166,10 @@ export class MoreiconComponent implements OnInit,OnDestroy {
       this.delEvent.emit();
 
     })
+  }
+  questionState(){
+    this.router.navigate(['/home/notes/'+this.arrayOfNotes+'/questionAnswers']);
+   
   }
   ngOnDestroy() { 
     this.destroy$.next(true);

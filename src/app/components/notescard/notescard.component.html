@@ -93,7 +93,7 @@ like an array or an object and create a template for each item.  -->
               <div  *ngFor="let person of  data.collaborators"  class="index" fxLayoutGap="40px">
  
            <button  matTooltip="{{person.email}}" (click)="openCollaborator(data)"
-           class="disabled" mat-mini-fab  color="basic">
+           class="basic" mat-mini-fab  color="basic">
               {{person.firstName | uppercase | slice : 0 : 1 }}
            </button>
        
@@ -231,6 +231,27 @@ like an array or an object and create a template for each item.  -->
         </app-moreicon>
 
       </mat-card-actions>
+<!-- <div *ngIf="data.questionAndAnswerNotes.message==null"></div> -->
+
+           <!----------------Question Answers--------------->
+
+           <div  fxLayout="row wrap" >
+
+              <div  *ngFor="let value of  data.questionAndAnswerNotes" 
+                    class="value" fxLayoutGap="40px">
+                     <mat-divider></mat-divider>
+
+                <div class="valueNew value ">Question Asked</div>
+
+           <div class="value" >
+            
+              {{value.message }}
+           </div>
+       
+           </div>
+           </div>
+        
+        <!----------------Question Answers ending--------------->
 
     </mat-card>
   </div>

@@ -23,12 +23,11 @@ public httpPost(url,body){
   /**passing the input & calling the  getFormUrlEncoded()*/
   return this.http.post(url, body, httpAuthOptions2);
 }
+
 public httpget(url){
-  // var  token = localStorage.getItem('token');
   var httpAuthOptions3 = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      // 'Authorization': token
     })
 
   };
@@ -37,12 +36,10 @@ public httpget(url){
 }
 
 public httppostpassword(url,body){
-  // var  token = localStorage.getItem('token');
 
 let httpAuthOptions1 = {
   headers: new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded',
-    // 'Authorization': token
   })
 };
 return this.http.post(url, this.getFormUrlEncoded(body),httpAuthOptions1)/**passing the input & calling the  getFormUrlEncoded()*/

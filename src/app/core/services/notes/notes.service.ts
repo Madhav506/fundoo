@@ -130,6 +130,8 @@ export class NotesService {
     let url = this.url + "notes/pinUnpinNotes";
     return this.service.httpPost(url, model);
   }
+    /**collaborator service methods */
+
   addCollaborator(noteid,body){
     let url = this.url +"/notes/"+noteid+"/AddcollaboratorsNotes";
     return this.http.post(url, body);
@@ -140,7 +142,7 @@ export class NotesService {
     return this.http.delete(url);
 
   }
-
+  
 }
 
 

@@ -15,6 +15,7 @@ import { AuthguardGuard as AuthGuard } from './core/services/auth/authGuard/auth
 import { NotesParentComponent } from './components/notes-parent/notes-parent.component';
 import { SearchComponent } from './components/search/search.component';
 import { LabelsComponent } from './components/labels/labels.component';
+import { QuestionAndAnswerComponent } from './components/question-and-answer/question-and-answer.component';
 
 
 const appRoutes: Routes = [
@@ -32,7 +33,8 @@ const appRoutes: Routes = [
       { path: 'reminders', component: RemindersComponent },
       { path: 'archive', component: ArchiveComponent },
       { path: 'trash', component: TrashComponent },
-      { path: 'search', component: SearchComponent },
+      { path: 'notes/search', component: SearchComponent },
+      { path: 'notes/:noteid/questionAnswers', component:  QuestionAndAnswerComponent},
 
     ]
   },

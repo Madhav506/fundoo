@@ -11,6 +11,9 @@
     <button *ngIf="name != 'trash'" mat-menu-item (click)="deleteNotes(arrayofnotes)">
         <span>Delete Note</span>
     </button>
+    <button *ngIf="name != 'trash'" mat-menu-item (click)="questionState()">
+        <span>Ask a Question</span>
+    </button>
     <button *ngIf="name != 'trash'" mat-menu-item (click)="getLabel()" 
             [matMenuTriggerFor]="addlabel">
         <span>Add label</span>

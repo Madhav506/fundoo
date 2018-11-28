@@ -1,0 +1,56 @@
+<!--  --------------------------------Main question answer matcard----------------------------------------- -->
+<div fxFlex></div>
+<div fxLayout="column">
+  <div ngStyle.xs="width:95%" class="questionCard">
+    <!-- -------------------------displaying Title----------------------------------------- -->
+
+    <div fxLayout="row">
+      <div [innerHTML]="noteTitle" class="title" fxFlex></div>
+      <button fxFlex="5" mat-button (click)="closeQuestion()">CLOSE</button>
+    </div>
+    <!-- -------------------------displaying Description----------------------------------------- -->
+
+    <div>
+      <div class="desc" [innerHTML]="noteDescription"></div>
+      <hr>
+     
+    <!-- -------------------------asking Question----------------------------------------- -->
+    <div class="top">Question Asked
+      </div>
+    <div *ngIf="message==null">
+       
+      <input [(ngModel)]="questionAsked" class="border" 
+      (keydown.enter)="askQuestion(questionAsked)" placeholder="Ask a Question">
+    
+    </div>
+    <!-- -------------------------asked Questions----------------------------------------- -->
+
+    <div *ngIf="message!=null" class="textNew">
+    <div class="newMsg">
+        <div> {{message}}</div>
+      </div>
+
+    </div>
+        <!-- ------------------------- new Division Questions----------------------------------------- -->
+
+    <div fxLayout="row" fxLayoutGap="15px" class="text">
+   <div fxFlex='5' class="fabBtn">   <button  mat-mini-fab></button></div>
+      <div fxFlex >  <div class="user">Username</div> 
+        <div fxLayout="row" fxLayoutGap="15px"> <div>{{message}}</div>
+         <div><mat-icon (click)="like()">thumb_up</mat-icon></div>
+        </div>
+        </div>
+
+      </div>
+
+  </div>
+
+  
+
+</div>
+<!-- -------------------------displaying ----------------------------------------- -->
+
+
+</div>
+
+<div fxFlex></div>
