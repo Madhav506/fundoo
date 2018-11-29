@@ -20,15 +20,29 @@ export class AddquestionService {
     return this.service.httpget(url);
   }
   addQuestion(body){
-    let url = this.url +"/questionAndAnswerNotes/addQuestionAndAnswer"
+    let url = this.url +"questionAndAnswerNotes/addQuestionAndAnswer"
     return this.http.post(url, body);
 
   }
   likeQuestion(parentId,body){
-    let url = this.url +"/questionAndAnswerNotes/like/"+parentId;
+    let url = this.url +"questionAndAnswerNotes/like/"+parentId;
 
     return this.http.post(url, body);
 
+  }
+  rateAnswer(parentId,body){
+    let url = this.url +"questionAndAnswerNotes/rate/"+parentId;
+
+    return this.service.httpPost(url, body);
+
+
+  }
+  leaveReplyAdd(id,body){
+    LoggerService.log('tejaaaa',id)
+    LoggerService.log('tejaaaa',body)
+
+    let url = this.url +"questionAndAnswerNotes/reply/"+id;
+    return this.service.httpPost(url, body);
   }
 
 }

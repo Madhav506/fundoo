@@ -10,6 +10,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DialogCollaboratorComponent } from '../dialog-collaborator/dialog-collaborator.component';
 import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-notescard',
@@ -57,7 +58,8 @@ export class NotescardComponent implements OnInit {
   // private img = environment.profileUrl + this.receiverImage.imageUrl;
 
   constructor(public service: HttpService,
-    public notesService: NotesService, public dialog: MatDialog, public dataService: DataService) {
+    public notesService: NotesService,
+    public router:Router, public dialog: MatDialog, public dataService: DataService) {
     this.dataService.cMsg
       .pipe(takeUntil(this.destroy$))
 
@@ -245,6 +247,9 @@ export class NotescardComponent implements OnInit {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:
     this.destroy$.unsubscribe();
+  }
+  askQuestion(noteid){
+    this.router.navigate(['/home/notes/'+noteid+'/questionAnswers']);
   }
 
 }

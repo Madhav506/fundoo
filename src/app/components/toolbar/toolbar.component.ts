@@ -92,9 +92,9 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     if (this.router.url == "/home/trash") {
       this.values = "Trash "
     }
-    if (this.router.url == "/home/notes/:noteid/questionAnswers") {
-      this.values = "fundoo "
-    }
+    // if (this.router.url == "/home/notes/:noteid/questionAnswers") {
+    //   this.values = "fundoo "
+    // }
 
 
     this.raw_data = localStorage.getItem('first');

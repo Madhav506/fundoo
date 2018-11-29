@@ -237,15 +237,15 @@ like an array or an object and create a template for each item.  -->
 
            <div  fxLayout="row wrap" >
 
-              <div  *ngFor="let value of  data.questionAndAnswerNotes" 
+              <div  *ngIf="data.questionAndAnswerNotes.length != 0" 
                     class="value" fxLayoutGap="40px">
                      <mat-divider></mat-divider>
 
-                <div class="valueNew value ">Question Asked</div>
+                <div (click)="askQuestion(data.id)" class="valueNew value ">Question Asked</div>
 
-           <div class="value" >
+           <div (click)="askQuestion(data.id)" class="value" >
             
-              {{value.message }}
+              {{data.questionAndAnswerNotes[0].message }}
            </div>
        
            </div>
