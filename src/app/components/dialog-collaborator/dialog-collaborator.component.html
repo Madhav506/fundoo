@@ -4,7 +4,8 @@
     <hr>
     <!------------------------------------- owner div---------------------------------------- -->
     <div fxLayout="row " fxLayoutGap="20px">
-      <button *ngIf="img!=''" mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}">
+      <button *ngIf="img!=''" mat-mini-fab 
+              [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}">
       </button>
       <button *ngIf="img==''" mat-mini-fab>
         {{receiverImage.firstName | titlecase | slice : 0 : 1 }}

@@ -3,7 +3,7 @@ import { HttpService } from '../../core/services/http/http.service'
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
-import { Router, ParamMap, ActivatedRoute } from '@angular/router';
+import { Router, ParamMap, ActivatedRoute, Params } from '@angular/router';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { AddlabelComponent } from '../addlabel/addlabel.component';
@@ -59,9 +59,13 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     public dialog: MatDialog, public snackBar: MatSnackBar, private router: Router,
     public http: HttpService, public userService: UserService, public route: ActivatedRoute) {
   }
-
-
+private idOfNote;
   ngOnInit() {
+    // this.route.params.subscribe((params: Params) => {
+    //   this.idOfNote = params['noteid'];
+    //   this.values = "fundoo "
+    //   LoggerService.log('noteDetailsss', this.idOfNote);
+    // });
 
     this.dataService.currLabel
       .pipe(takeUntil(this.destroy$))
@@ -75,26 +79,39 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
       })
 
-  
 
     if (this.router.url == "/home/notes") {
+      this.values = "fundoo"
+    }
+    else{
       this.values = "fundoo"
     }
     if (this.router.url == "/home/archive") {
       this.values = "Archive"
     }
+    else{
+      this.values = "fundoo"
+    }
     if (this.router.url == "/home/search") {
+      this.values = "fundoo"
+    }
+    else{
       this.values = "fundoo"
     }
     if (this.router.url == "/home/reminders") {
       this.values = "Reminders"
     }
+    else{
+      this.values = "fundoo"
+    }
     if (this.router.url == "/home/trash") {
       this.values = "Trash "
     }
-    // if (this.router.url == "/home/notes/:noteid/questionAnswers") {
-    //   this.values = "fundoo "
-    // }
+    else{
+      this.values = "fundoo"
+    }
+   
+   
 
 
     this.raw_data = localStorage.getItem('first');

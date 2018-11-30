@@ -38,9 +38,6 @@ export class AddquestionService {
 
   }
   leaveReplyAdd(id,body){
-    LoggerService.log('tejaaaa',id)
-    LoggerService.log('tejaaaa',body)
-
     let url = this.url +"questionAndAnswerNotes/reply/"+id;
     return this.service.httpPost(url, body);
   }
