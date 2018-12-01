@@ -15,7 +15,8 @@ import { environment } from '../../../environments/environment';
 })
 export class QuestionAndAnswerComponent implements OnInit {
   destroy$: Subject<boolean> = new Subject<boolean>();
-
+  
+  @ViewChild("questionEntered") public questionText: ElementRef;
   @ViewChild("replyEntered") public replyText: ElementRef;
 
   constructor(private route: ActivatedRoute, private notesService: NotesService,
@@ -23,7 +24,7 @@ export class QuestionAndAnswerComponent implements OnInit {
   private noteId;
   private noteTitle;
   private noteDescription;
-  private noteDetails;
+  public noteDetails;
   private checkList = [];
   private noteColor;
   private message;
@@ -33,8 +34,13 @@ export class QuestionAndAnswerComponent implements OnInit {
   private img;
   private img1;
   private questionAnswerArray;
-  private show = true;
+  private hide = false;
+  private open=true;
+  private close=true;
+  private starRating;
+  private averageRate;
   replyQuestion;
+  private noOfReply;
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -78,27 +84,24 @@ export class QuestionAndAnswerComponent implements OnInit {
   closeQuestion() {
     this.router.navigate(['home/notes']);
   }
-  questionEnter() {
-
-  }
   ngOnDestroy() {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:
     this.destroy$.unsubscribe();
   }
 
-  askQuestion(questionAsked) {
+  askQuestion() {
+    console.log(this.questionText.nativeElement.innerHTML);
+    
     var content = {
-      'message': questionAsked,
+      'message': this.questionText.nativeElement.innerHTML,
       'notesId': this.noteId
     }
     this.quesService.addQuestion(content).subscribe(data => {
       this.getNoteDetailsInQuestion();
       LoggerService.log('success in adding', data);
       this.message = data['data']['details'].message;
-
     })
-
   }
   like(value) {
     LoggerService.log(value);
@@ -125,15 +128,21 @@ export class QuestionAndAnswerComponent implements OnInit {
         LoggerService.log('success in rating', data);
       })
   }
-  // reply(){
-  //   console.log('iamshow',this.show);
+ 
+  ratingAverage(ratingGiven){
+    this.starRating=0;
+    if(ratingGiven.length!=0){
+    for(let i=0; i<ratingGiven.length; i++){
+    this.starRating+=ratingGiven[i].rate
+    }
+    this.averageRate=this.starRating/ratingGiven.length;
+   let avg= this.averageRate.toFixed(1);
+    return avg;
+    }
     
-  //   this.show=!this.show;
-  //   console.log('i m not show',this.show);
-
-  // }
+  }
   leaveReply(replyId) {
-    let replySend=this.replyText.nativeElement.textContent
+    let replySend=this.replyText.nativeElement.innerHTML;
     LoggerService.log('msgggg',replySend);
   let  content = {
       'message': replySend
@@ -146,15 +155,16 @@ export class QuestionAndAnswerComponent implements OnInit {
         LoggerService.log('success in replying', data);
 
       })
-      // replySend='';
+      // this.replyText='';
   }
-//   rateCount(data){
-// if(data.length==0){
-//   return 0;
-// }
-// else{
-//   for(let i=0;i<data.length;i++){
-//   }
-// }
-//   }
+  numberOfReplies(array){
+this.noOfReply=0;
+for(let i=0;i<this.questionAnswerArray.length;i++){
+  if(array.id == this.questionAnswerArray[0].id ){
+  this.noOfReply++;
+}
+}
+return this.noOfReply;
+  }
+
 }

@@ -68,9 +68,7 @@ width:800px;
 @include border();
 }
 .scroll{
-max-height: 380px;
-overflow-y:auto;
-overflow-x:hidden !important;
+@include scroll();
 }
 
 @media only screen and (min-width: 300px) and (max-width: 440px) {
@@ -79,11 +77,14 @@ overflow-x:hidden !important;
     }
 }
 .secondDiv{
-    margin:-10px 0 0 10% ;
+    margin:-10px 0 0 5% ;
 }
 [contentEditable=true]:empty:not(:focus):before{
     content:attr(data-text)
 }
 .sendMessage{
     margin-top:25px;
+}
+.replies{
+    font-size:10px;
 }

@@ -21,4 +21,8 @@ font-family: 'Google Sans',Roboto,Arial,sans-serif;
 @mixin word(){
 word-wrap:break-word;
     }
-    
+@mixin scroll(){
+    height: 400px;
+overflow-y:auto;
+overflow-x:hidden !important;
+}
