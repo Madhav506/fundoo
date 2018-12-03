@@ -2,15 +2,18 @@
 <div fxFlex=5 fxShow=true fxShow.xs=true fxShow.sm=true></div>
 <div fxFlex=95 ngStyle.xs="width:90%" class="questionCard">
   <!--  --------------------------------Title Division---------------------------------------- -->
-  <div fxLayout="row" fxLayout.md="row" fxLayout.sm="column" fxLayout.xs="column">
-    <div [innerHTML]="noteTitle" class="title" fxFlex></div>
+  <div class="scrolling">
+  <div  fxLayout="row" fxLayout.md="row" fxLayout.sm="column" fxLayout.xs="column">
+    
+    <div [innerHTML]="noteTitle " class="title" fxFlex></div>
     <div fxLayoutAlign="end" (click)="closeQuestion()">CLOSE</div>
   </div>
   <!--  --------------------------------Description Division---------------------------------------- -->
-  <div>
-    <div class="desc" [innerHTML]="noteDescription"></div>
+  <div >
+    <div class="desc"  [innerHTML]="noteDescription"></div>
     <hr>
   </div>
+</div>
   <!--  --------------------------------CheckList Division---------------------------------------- -->
   <div *ngFor="let list of checkList">
     <div>
@@ -31,16 +34,18 @@
 
   <div *ngIf="message==null">
     <div fxLayout="row">
-      <div contenteditable="true" class="textNew user border " data-text="Ask a Question" #questionEntered>
+      <div contenteditable="true" class="textNew user border scrolling " data-text="Ask a Question"
+           #questionEntered>
       </div>
-      <div fxFlex=20 class="sendMessage"><button (click)="askQuestion()" mat-button><mat-icon>send</mat-icon></button></div>
+      <div fxFlex=20 class="sendMessage"><button (click)="askQuestion()" mat-button><mat-icon>
+           send</mat-icon></button></div>
     </div>
 
   </div>
-  <!-------------------------Question enetered division------------------------------------------ -->
+  <!-------------------------Question entered division------------------------------------------ -->
 
-  <div class="newMsg">
-    <div> {{message}}</div>
+  <div class="newMsg ">
+    <div [innerHTML]="message"></div>
   </div>
   <!--------If questions were asked then to display the question division------------------------ -->
   <div class="scroll" *ngIf="message!=null">
@@ -52,7 +57,8 @@
 
           <div>
 
-            <button *ngIf="img!=''" mat-mini-fab [ngStyle]="{'background-image':'url(' +img1+ ')','background-size':'cover'}">
+            <button *ngIf="img!=''" mat-mini-fab 
+                     [ngStyle]="{'background-image':'url(' +img1+ ')','background-size':'cover'}">
             </button>
             <button *ngIf="img==''" mat-mini-fab>
               {{questionAnswerArray[0].user.firstName | titlecase | slice : 0 : 1 }}
@@ -62,7 +68,8 @@
           <div class="msgNew"></div>
           <!------------------------first Division for asking questions------------------------------------- -->
 
-          <div class="user">{{questionAnswerArray[0].user.firstName | titlecase}} {{questionAnswerArray[0].user.lastName
+          <div class="user">{{questionAnswerArray[0].user.firstName | titlecase}} 
+                            {{questionAnswerArray[0].user.lastName
             | titlecase}}
             <span class="span">{{questionAnswerArray[0].modifiedDate | date:medium}}</span>
             <div class="msg " [innerHTML]="questionAnswerArray[0].message"></div>
@@ -70,11 +77,12 @@
         </div>
         <div fxLayout="row">
 
-          <div  fxFlex=100 ></div>
+          <div fxFlex=50></div>
           <div fxFlex fxLayoutAlign="end" class="icons" fxLayout="row">
             <!-- -------------------------reply icon Division----------------------------------------- -->
             <div>
-              <mat-icon matTooltip="Reply" class="icon" (click)="replyQuestion = questionAnswerArray[0].id " (click)='hide = !hide'>
+              <mat-icon matTooltip="Reply" class="icon" 
+                        (click)="replyQuestion = questionAnswerArray[0].id " (click)='hide = !hide'>
                 reply</mat-icon>
             </div>
             <!-- -------------------------like Division----------------------------------------- -->
@@ -87,32 +95,32 @@
 
 
             <div class="icon" class="rate " *ngIf="questionAnswerArray[0].rate.length==0">
-              <bar-rating matTooltip="Rate" (rateChange)="ratingAnswer(questionAnswerArray[0],$event)" [max]="5"></bar-rating>
+              <bar-rating matTooltip="Rate" (rateChange)="ratingAnswer(questionAnswerArray[0],$event)"
+                          [max]="5"></bar-rating>
 
             </div>
             <div class="icon" class="rate " *ngIf="questionAnswerArray[0].rate.length!=0">
-              <bar-rating (rateChange)="ratingAnswer(questionAnswerArray[0],$event)" [(rate)]="questionAnswerArray[0].rate[0].rate" [max]="5"></bar-rating>
+              <bar-rating (rateChange)="ratingAnswer(questionAnswerArray[0],$event)"
+                          [(rate)]="questionAnswerArray[0].rate[0].rate" [max]="5"></bar-rating>
             </div>
             <div>{{ratingAverage(questionAnswerArray[0].rate)}}</div>
             <div *ngIf="open==true">
-              <mat-icon matTooltip="View {{noOfReply}} replies" class="icon" (click)="open = !open">arrow_drop_down
+              <mat-icon matTooltip="View {{noOfReply}} replies" class="icon" (click)="open = !open">
+                        arrow_drop_down
               </mat-icon>
-              <span fxFlex="15" *ngIf="numberOfReplies(questionAnswerArray[0])>1" class="replies">
-             view {{noOfReply}}replies
+              <span  fxFlex *ngIf="numberOfReplies(questionAnswerArray[0])>1" class="replies">
+                View {{noOfReply}} replies
               </span>
+
             </div>
 
-            <div  *ngIf="open==false" >
-                <mat-icon matTooltip="Hide" class="icon" (click)="open = !open">arrow_drop_up
-                </mat-icon>
-                <span fxFlex="15"  class="replies">
-                  Hide replies
-                </span>
-              </div>
-              
-
-
-            <!-- <span fxFlex="15" fxHide.xs=true *ngIf="open == false" class="replies">Hide replies</span> -->
+            <div *ngIf="open==false">
+              <mat-icon matTooltip="Hide" class="icon" (click)="open = !open">arrow_drop_up
+              </mat-icon>
+              <span  fxFlex class="replies">
+                Hide replies
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -123,7 +131,8 @@
       <div fxLayout="row">
         <div contenteditable="true" class="textNew user " data-text="Leave a reply " #replyEntered>
         </div>
-        <div fxFlex=15 class="sendMessage"><button (click)="leaveReply(questionAnswerArray[0].id)" mat-button><mat-icon>send</mat-icon></button></div>
+        <div fxFlex=15 class="sendMessage"><button (click)="leaveReply(questionAnswerArray[0].id)" 
+             mat-button><mat-icon>send</mat-icon></button></div>
       </div>
     </div>
     <!-- ------------------------2nd division for entering the reply--------------------------------- -->
@@ -135,7 +144,8 @@
           <div fxLayout="column" fxLayout.xs="column" fxlayout.md="column" fxLayout.sm="column">
             <div fxLayout=row>
               <div>
-                <button *ngIf="img!=''" mat-mini-fab [ngStyle]="{'background-image':'url(' +img+value.user.imageUrl+ ')','background-size':'cover'}">
+                <button *ngIf="img!=''" mat-mini-fab 
+                        [ngStyle]="{'background-image':'url(' +img+value.user.imageUrl+ ')','background-size':'cover'}">
                 </button>
                 <button *ngIf="img==''" mat-mini-fab>
                   {{value.user.firstName | titlecase | slice : 0 : 1 }}
@@ -144,22 +154,22 @@
               <div class="msgNew"></div>
 
               <div class="user">{{value.user.firstName | titlecase}} {{value.user.lastName | titlecase}}
-                <span class="span">{{value.modifiedDate | date:medium}}</span>
+                <span class="span">{{value.modifiedDate | date:short}}</span>
                 <div class="msg " [innerHTML]="value.message"></div>
               </div>
             </div>
             <!-- *********************************actions********************************************* -->
             <div fxLayout="row">
-              <div fxFlex=100></div>
+              <div fxFlex=50></div>
               <div fxFlex fxLayoutAlign="end" class="icons" fxLayout="row">
                 <!-- -------------------------reply icon divison----------------------------------------- -->
 
                 <div>
-                  <mat-icon matTooltip="Reply" class="icon" (click)="replyQuestion = value.id" (click)="hide = !hide">reply
+                  <mat-icon matTooltip="Reply" class="icon" (click)="replyQuestion = value.id" 
+                            (click)="hide = !hide">reply
                   </mat-icon>
                 </div>
                 <!-- -------------------------like icon division----------------------------------------- -->
-
                 <div>
                   <mat-icon matTooltip="Like" class="icon" (click)="like(value.id)">thumb_up_alt
                   </mat-icon>
@@ -168,7 +178,8 @@
                 <!-- ------------------------- rating Division ----------------------------------------- -->
 
                 <div class="icon" class="rate " *ngIf="value.rate.length!=0">
-                  <bar-rating (rateChange)="ratingAnswer(value,$event)" [(rate)]="value.rate[0].rate" [max]="5"></bar-rating>
+                  <bar-rating (rateChange)="ratingAnswer(value,$event)" [(rate)]="value.rate[0].rate"
+                              [max]="5"></bar-rating>
 
                 </div>
 
@@ -177,21 +188,17 @@
                   </bar-rating>
                 </div>
                 <div>{{ratingAverage(value.rate)}}</div>
-                <div>
-                  <mat-icon matTooltip="Hide" class="icon" 
-                  (click)="replyQuestion = value.id" (click)="close = !close">arrow_drop_down</mat-icon>
+                <div *ngIf="close==true ">
+                  <mat-icon matTooltip="View" class="icon" 
+                            (click)="close = !close;replyQuestion = value.id">arrow_drop_down
+                  </mat-icon><span fxFlex class="replies">View {{numberOfReplies(value)}} replies</span>
                 </div>
-                <!-- <div *ngIf="close==true ">
-                    <mat-icon matTooltip="View {{noOfReply}} replies" class="icon"
-                     (click)="close = !close;replyQuestion = value.id">arrow_drop_down
-                    </mat-icon>
-                  </div>
-      
-                  <div  *ngIf="close==false" >
-                      <mat-icon matTooltip="Hide replies" class="icon"
-                       (click)="close = !close;replyQuestion = value.id">arrow_drop_up
-                      </mat-icon>
-                    </div> -->
+
+                <div *ngIf="close==false">
+                  <mat-icon matTooltip="Hide replies" class="icon" 
+                            (click)="close = !close;replyQuestion = value.id">arrow_drop_up
+                  </mat-icon><span fxFlex class="replies">Hide replies</span>
+                </div>
 
               </div>
             </div>
@@ -202,9 +209,11 @@
 
         <div *ngIf="replyQuestion == value.id && hide == true">
           <div fxLayout="row">
-            <div contenteditable="true" class="textNew user border " data-text="Leave a reply " #replyEntered>
+            <div contenteditable="true" class="textNew user border " data-text="Leave a reply "
+                  #replyEntered>
             </div>
-            <div fxFlex=15 class="sendMessage"><button (click)="leaveReply(value.id)" mat-button><mat-icon>send</mat-icon></button></div>
+            <div fxFlex=15 class="sendMessage"><button (click)="leaveReply(value.id)" mat-button>
+              <mat-icon>send</mat-icon></button></div>
           </div>
         </div>
         <!-- -----------------------------------------3rd division---------------------------------------->
@@ -214,7 +223,8 @@
               <div fxLayout="column" fxLayout.xs="column" fxlayout.md="column" fxLayout.sm="column">
                 <div fxLayout=row>
                   <div>
-                    <button *ngIf="img!=''" mat-mini-fab [ngStyle]="{'background-image':'url(' +img+value2.user.imageUrl+ ')',
+                    <button *ngIf="img!=''" mat-mini-fab 
+                             [ngStyle]="{'background-image':'url(' +img+value2.user.imageUrl+ ')',
                                    'background-size':'cover'}">
                     </button>
                     <button *ngIf="img==''" mat-mini-fab>
@@ -223,7 +233,8 @@
                   </div>
                   <div class="msgNew"></div>
 
-                  <div fxFlex class="user">{{value2.user.firstName | titlecase}} {{value2.user.lastName | titlecase}}
+                  <div fxFlex class="user">{{value2.user.firstName | titlecase}}
+                                           {{value2.user.lastName | titlecase}}
                     <span class="span">{{value2.modifiedDate | date:medium}}</span>
                     <div class="msg " [innerHTML]="value2.message"></div>
                   </div>
@@ -245,12 +256,14 @@
                     <!-- ------------------------- rating Division----------------------------------------- -->
 
                     <div class="icon" class="rate " *ngIf="value2.rate.length!=0">
-                      <bar-rating (rateChange)="ratingAnswer(value2,$event)" [(rate)]="value2.rate[0].rate" [max]="5"></bar-rating>
+                      <bar-rating (rateChange)="ratingAnswer(value2,$event)"
+                                  [(rate)]="value2.rate[0].rate" [max]="5"></bar-rating>
                     </div>
                     <div> {{ratingAverage(value2.rate)}}</div>
 
                     <div class="icon" class="rate " *ngIf="value2.rate.length==0">
-                      <bar-rating matTooltip="Rate" (rateChange)="ratingAnswer(value2,$event)" [max]="5"></bar-rating>
+                      <bar-rating matTooltip="Rate" (rateChange)="ratingAnswer(value2,$event)" 
+                                  [max]="5"></bar-rating>
                     </div>
                   </div>
                 </div>

@@ -35,4 +35,67 @@ describe('QuestionAndAnswerComponent', () => {
     expect(component.noteDetails.description).toEqual('');
     expect(component.noteDetails.description).toBeFalsy();
   }));
+  it('question to be asked', () => {
+  
+    let content={
+      "message": "what is angular",
+      "notesId": "123abcd456ughtefg5678"
+    }
+        expect(component.askQuestion()).toBeTruthy();
+       
+        content = {
+        "message": "",
+        "notesId": ""
+      }
+        expect(component.askQuestion()).toBeFalsy();
+    
+      });
+    
+  
+  it('to be liked', () => {
+    let like=[{
+      like:Boolean,
+      userId:"5bc040b25414a900407e8e71"
+    }]
+    let content={
+      like: like
+    }
+    expect(component.like(content)).toBeTruthy();
+
+     like=[{
+      like:null,
+      userId:""
+    }]
+     content={
+      like:null
+    }
+    expect(component.like(content)).toBeFalsy();
+  });
+
+   
+  it('rating to be given', () => {
+   
+    let content = {
+      id: "5c00c196019ffc00400b0d9b"
+    }
+    expect(component.ratingAnswer(content,event)).toBeTruthy();
+  
+    content = {
+      id: ""
+    }
+    expect(component.ratingAnswer(content,event)).toBeFalsy();
+  });
+  it('reply to be given', () => {
+   
+    let ques = {
+      id: "5c00c196019ffc00400b0d9b"
+    }
+    expect(component.replyQuestion(ques)).toBeTruthy();
+  
+    ques = {
+      id: ""
+    }
+    expect(component.replyQuestion(ques)).toBeFalsy();
+  });
+ 
 });

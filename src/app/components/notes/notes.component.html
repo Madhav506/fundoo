@@ -50,8 +50,10 @@
 
             <div class="inputNote" id="title" fxFlex="95" contenteditable="true" 
             placeholder="Title"></div>
-            <div> <img class="pinIcon" src="../../../assets/images/pin.svg" alt="">
-            </div>
+            <!-- <div> <img class="pinIcon" src="../../../assets/images/pin.svg" alt="">
+            </div> -->
+            <!-- <div><app-pin ></app-pin></div> -->
+
         </div>
                         <!-- -----------------Take a note------------------------- -->
 
@@ -166,7 +168,6 @@
   
             <!-- ---------------------reminders end----------------------- -->
         
-
         <div fxLayoutAlign="space-between" 
         fxLayout="row" fxLayout.xs="row" 
         fxLayout.sm="row" fxLayout.lg="row" >
@@ -259,7 +260,7 @@ fxFlex.xs="100%"
 
       <div *ngFor="let person of collaborators" fxLayout="row" class="index" fxLayoutGap="20px">
   
-        <button class="basic" color="basic" mat-mini-fab> {{person.firstName | uppercase | slice : 0 : 1 }}
+        <button class="basic"  mat-mini-fab> {{person.firstName | uppercase | slice : 0 : 1 }}
         </button>
   
         <mat-content  fxFlex class="content">

@@ -78,3 +78,8 @@ div[contenteditable=true]:empty::before {
 .basic{
   margin:5px 10px 5px 0px;
 }
+.scroll{
+  height:120px;
+  overflow-x: hidden !important;
+  overflow-y: auto;
+}

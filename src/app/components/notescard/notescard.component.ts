@@ -53,7 +53,6 @@ export class NotescardComponent implements OnInit {
   condition = true;
   private message: Event;
   private values: any;
-
   // private receiverImage = this.data['user'];
   // private img = environment.profileUrl + this.receiverImage.imageUrl;
 

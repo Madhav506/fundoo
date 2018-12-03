@@ -17,6 +17,8 @@ export class NotesParentComponent implements OnInit,OnDestroy{
   private arrayPinData=[];
  public myArrayData=[];
   private isPined=false;
+  private showLoader=false;
+
   constructor(public service: HttpService,public notesService:NotesService) { }
 
   ngOnInit() {
@@ -51,7 +53,9 @@ export class NotesParentComponent implements OnInit,OnDestroy{
 
         }
       }
-    })
+       this.showLoader=true;
+
+    });
 
 
   }

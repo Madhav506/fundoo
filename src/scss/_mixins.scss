@@ -26,3 +26,6 @@ word-wrap:break-word;
 overflow-y:auto;
 overflow-x:hidden !important;
 }
+@mixin topmargin(){
+    margin-top:10px;
+}

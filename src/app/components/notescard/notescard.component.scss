@@ -3,7 +3,7 @@
 .matcard {
     margin: 5px;
     /* height:auto; */
-    width: 195px;
+    width: 200px;
     border-radius: 10px 10px 10px 10px;
   }
   
@@ -132,3 +132,16 @@ font-family: cursive;
   .valueNew{
     font-size:20px;
   }
+
+.ellipsis{
+  word-wrap:break-word;
+  // height:auto;
+  max-height:75px;
+  width:190px;
+  white-space: nowrap;
+  text-overflow: ellipsis ;
+  overflow: hidden !important;
+  
+}
+
+  

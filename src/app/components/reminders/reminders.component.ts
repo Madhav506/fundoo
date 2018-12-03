@@ -15,6 +15,8 @@ export class RemindersComponent implements OnInit {
   destroy$: Subject<boolean> = new Subject<boolean>();
   public arrayData1 = [];
   public arrayData = [];
+  private showLoader=false;
+
   @Output() notesEvent = new EventEmitter<any>();
   
 
@@ -35,6 +37,7 @@ export class RemindersComponent implements OnInit {
          this.arrayData.sort((oldDate, newDate) =>
         new Date(oldDate.reminder).getTime() - new Date(newDate.reminder).getTime()
     );
+    this.showLoader=true;
         this.notesEvent.emit();
       })
     

@@ -33,7 +33,7 @@ like an array or an object and create a template for each item.  -->
 
             <div (click)="openDialog(data)" fxLayout="row" class="hiddenDiv">
               <div contenteditable="false" dir="ltr" aria-multiline="true" style="font-size:19px" 
-                   [innerHTML]="data.title" role="textbox">{{data.title}}
+                   [innerHTML]="data.title" role="textbox">
               </div>
 
             </div>
@@ -45,7 +45,7 @@ like an array or an object and create a template for each item.  -->
         <div (click)="openDialog(data)">
           <mat-card-content class="content">
             <div contenteditable="false" aria-multiline="true" role="textbox" 
-                 [innerHTML]="data.description"> {{data.description}}
+                 [innerHTML]="data.description"> 
             </div>
           </mat-card-content>
       
@@ -93,7 +93,7 @@ like an array or an object and create a template for each item.  -->
               <div  *ngFor="let person of  data.collaborators"  class="index" fxLayoutGap="40px">
  
            <button  matTooltip="{{person.email}}" (click)="openCollaborator(data)"
-           class="basic" mat-mini-fab  color="basic">
+           class="basic" mat-mini-fab >
               {{person.firstName | uppercase | slice : 0 : 1 }}
            </button>
        
@@ -243,9 +243,8 @@ like an array or an object and create a template for each item.  -->
 
                 <div (click)="askQuestion(data.id)" class="valueNew value ">Question Asked</div>
 
-           <div (click)="askQuestion(data.id)" class="value" >
-            
-              {{data.questionAndAnswerNotes[0].message }}
+           <div (click)="askQuestion(data.id)" [innerHTML]="data.questionAndAnswerNotes[0].message" 
+                class="value ellipsis " >
            </div>
        
            </div>
@@ -255,7 +254,7 @@ like an array or an object and create a template for each item.  -->
 
     </mat-card>
   </div>
-  
+         
   <div fx.show="true"  fxShow.sm="false" fxShow.md="false" fxShow.xs="false" class="grow" fxFlex="10">
   </div>
   <div fxFlex.xs=0 fx.show="true" fxShow.md="false" fxShow.xs="false" fxShow.sm="false" 

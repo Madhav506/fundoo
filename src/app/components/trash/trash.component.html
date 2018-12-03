@@ -1,2 +1,5 @@
-<app-notescard [myData]="myData" [name]="name" (deleted)="notedelete($event)">
-</app-notescard>
+<div  *ngIf="showLoader"><app-notescard [myData]="myData" [name]="name" (deleted)="notedelete($event)">
+</app-notescard></div>
+<div>
+        <app-loader *ngIf="!showLoader"></app-loader>
+      </div>

@@ -3,6 +3,7 @@ ngStyle.xs="width:100%" class="flex"
 [ngStyle]="{'background-color':color}">
   <div fxFlex="85" 
   class="hiddenCard">
+  <div  class=scroll>
     <div fxLayout="row" class="hiddenDiv">
       <div class="inputNote" id="title" fxFlex="95" [innerHTML]="data.title" contenteditable="true" 
            placeholder="Title">{{data.title}}
@@ -75,7 +76,7 @@ ngStyle.xs="width:100%" class="flex"
       <div  *ngFor="let person of  data.collaborators"  class="index" fxLayoutGap="10px">
 
    <button  matTooltip="{{person.email}}" (click)="openCollaborator(data);closePopUp()"
-   class="basic" color="basic"  mat-mini-fab >
+   class="basic"  mat-mini-fab >
       {{person.firstName | uppercase | slice : 0 : 1 }}
    </button>
 
@@ -96,6 +97,7 @@ ngStyle.xs="width:100%" class="flex"
         </mat-chip-list>
       </div>
     </div>
+  </div>
                             <!--------matcard actions---------- -->
 
     <div fxLayoutAlign="space-between">

@@ -1,4 +1,5 @@
 <app-notes></app-notes>
+<div *ngIf="showLoader">
 <div *ngIf="arrayData.length!=0">
     <div class="array"></div>
 <app-notescard   [myData]="arrayData" (remindEvent)="archive($event)"   ></app-notescard>
@@ -7,4 +8,7 @@
         <div class="array"></div>
     <span class="span"> Reminders Empty</span>
  </div>
- 
+ </div>
+ <div>
+        <app-loader *ngIf="!showLoader"></app-loader>
+      </div>

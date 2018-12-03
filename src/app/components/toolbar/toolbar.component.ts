@@ -235,7 +235,7 @@ private idOfNote;
         }
       });
   }
-  public image = {};
+  public image = {};                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 
   listView() {
     this.value = 1;
@@ -247,11 +247,15 @@ private idOfNote;
     this.dataService.changeAppearance(true);
 
   }
+  shoppingCart(){
+    this.router.navigate(['home/cart']);
+
+  }
   ngOnDestroy() {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:
     this.destroy$.unsubscribe();
   }
 
-
+  
 }

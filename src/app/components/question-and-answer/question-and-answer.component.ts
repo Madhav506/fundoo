@@ -15,9 +15,10 @@ import { environment } from '../../../environments/environment';
 })
 export class QuestionAndAnswerComponent implements OnInit {
   destroy$: Subject<boolean> = new Subject<boolean>();
-  
+
   @ViewChild("questionEntered") public questionText: ElementRef;
   @ViewChild("replyEntered") public replyText: ElementRef;
+  content: { "message": string; };
 
   constructor(private route: ActivatedRoute, private notesService: NotesService,
     public router: Router, public quesService: AddquestionService) { }
@@ -35,8 +36,8 @@ export class QuestionAndAnswerComponent implements OnInit {
   private img1;
   private questionAnswerArray;
   private hide = false;
-  private open=true;
-  private close=true;
+  private open = true;
+  private close = true;
   private starRating;
   private averageRate;
   replyQuestion;
@@ -56,11 +57,11 @@ export class QuestionAndAnswerComponent implements OnInit {
       .subscribe(data => {
         LoggerService.log('getNoteDetail', data);
         this.userDetails = data['data']['data'][0].user;
-        this.img = environment.profileUrl ;
+        this.img = environment.profileUrl;
         this.noteDetails = data['data'].data[0];
         this.noteTitle = this.noteDetails.title;
         this.noteDescription = this.noteDetails.description;
-        this.noteColor=this.noteDetails.color;
+        this.noteColor = this.noteDetails.color;
 
         for (var i = 0; i < data['data']['data'][0].noteCheckLists.length; i++) {
           if (data['data']['data'][0].noteCheckLists[i].isDeleted == false) {
@@ -71,7 +72,7 @@ export class QuestionAndAnswerComponent implements OnInit {
         if (this.noteDetails.questionAndAnswerNotes[0] != undefined) {
           this.message = this.noteDetails.questionAndAnswerNotes[0].message;
           this.questionAnswerArray = this.noteDetails.questionAndAnswerNotes;
-          this.img1=environment.profileUrl+this.noteDetails.questionAndAnswerNotes[0].user.imageUrl
+          this.img1 = environment.profileUrl + this.noteDetails.questionAndAnswerNotes[0].user.imageUrl
 
         }
         if (this.noteDetails.questionAndAnswerNotes != undefined) {
@@ -84,15 +85,12 @@ export class QuestionAndAnswerComponent implements OnInit {
   closeQuestion() {
     this.router.navigate(['home/notes']);
   }
-  ngOnDestroy() {
-    this.destroy$.next(true);
-    // Now let's also unsubscribe from the subject itself:
-    this.destroy$.unsubscribe();
-  }
+ 
+  /******************************Asking a question ********************************************* */
 
   askQuestion() {
     console.log(this.questionText.nativeElement.innerHTML);
-    
+
     var content = {
       'message': this.questionText.nativeElement.innerHTML,
       'notesId': this.noteId
@@ -103,6 +101,8 @@ export class QuestionAndAnswerComponent implements OnInit {
       this.message = data['data']['details'].message;
     })
   }
+  /******************************Give the likes to question or reply********************************************* */
+
   like(value) {
     LoggerService.log(value);
     var content = {
@@ -116,6 +116,8 @@ export class QuestionAndAnswerComponent implements OnInit {
         LoggerService.log('success in like', data);
       });
   }
+  /******************************Give the Rating  to question or reply********************************************* */
+
   ratingAnswer(value, event) {
 
     var content = {
@@ -128,23 +130,26 @@ export class QuestionAndAnswerComponent implements OnInit {
         LoggerService.log('success in rating', data);
       })
   }
- 
-  ratingAverage(ratingGiven){
-    this.starRating=0;
-    if(ratingGiven.length!=0){
-    for(let i=0; i<ratingGiven.length; i++){
-    this.starRating+=ratingGiven[i].rate
+  /******************************Give the Rating Average to question or reply********************************************* */
+
+  ratingAverage(ratingGiven) {
+    this.starRating = 0;
+    if (ratingGiven.length != 0) {
+      for (let i = 0; i < ratingGiven.length; i++) {
+        this.starRating += ratingGiven[i].rate
+      }
+      this.averageRate = this.starRating / ratingGiven.length;
+      let avg = this.averageRate.toFixed(1);
+      return avg;
     }
-    this.averageRate=this.starRating/ratingGiven.length;
-   let avg= this.averageRate.toFixed(1);
-    return avg;
-    }
-    
+
   }
+  /******************************Give the Replies to question or reply********************************************* */
+
   leaveReply(replyId) {
-    let replySend=this.replyText.nativeElement.innerHTML;
-    LoggerService.log('msgggg',replySend);
-  let  content = {
+    let replySend = this.replyText.nativeElement.innerHTML;
+    LoggerService.log('msgggg', replySend);
+    let content = {
       'message': replySend
     }
     LoggerService.log(replyId);
@@ -155,16 +160,21 @@ export class QuestionAndAnswerComponent implements OnInit {
         LoggerService.log('success in replying', data);
 
       })
-      // this.replyText='';
+    // this.replyText='';
   }
-  numberOfReplies(array){
-this.noOfReply=0;
-for(let i=0;i<this.questionAnswerArray.length;i++){
-  if(array.id == this.questionAnswerArray[0].id ){
-  this.noOfReply++;
-}
-}
-return this.noOfReply;
+  /******************************Count the number of Replies to display********************************************* */
+  numberOfReplies(array) {
+    this.noOfReply = 0;
+    for (let i = 0; i < this.questionAnswerArray.length; i++) {
+      if (array.id == this.questionAnswerArray[i].parentId) {
+        this.noOfReply++;
+      }
+    }
+    return this.noOfReply;
   }
-
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 }

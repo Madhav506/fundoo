@@ -21,6 +21,7 @@ export class ArchiveComponent implements OnInit,OnDestroy {
     this.getAllNotes();
   }
   private  arrayData :Note[]=[]
+  private showLoader=false;
 
   getAllNotes() {
 
@@ -34,7 +35,8 @@ export class ArchiveComponent implements OnInit,OnDestroy {
           this.arrayData.push(response[i]);
         } 
       }
-            // this.arrayData =response.reverse();
+      this.showLoader=true;
+      // this.arrayData =response.reverse();
     })
   }
   ngOnDestroy() { 

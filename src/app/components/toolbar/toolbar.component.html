@@ -27,6 +27,7 @@
 
   <button mat-icon-button> <mat-icon matTooltip="Refresh" (click)="refresh()" fxFlex="40px" >refresh</mat-icon>
   </button>
+
                       <!---------------------View-List or Grid------------- -->
 
   <mat-icon fx.show="true" fxShow.xs="false" fxFlex="40px" *ngIf="value==0" (click)="listView()" 
@@ -36,8 +37,8 @@
   <mat-icon fx.show="true" fxShow.xs="false" fxFlex="40px" *ngIf="value==1" (click)="gridView()"
             matTooltip="View" >
             view_module </mat-icon>
-                     <!---------------------notifications------------------------->
-  <!-- <mat-icon fxFlex="40px" matTooltip="Notifications" >notifications_none</mat-icon> -->
+                     <!---------------------cart------------------------->
+  <mat-icon fxFlex="40px" class="cart" matTooltip="cart" (click)="shoppingCart()" >add_shopping_cart</mat-icon>
 
                      <!---------------------profile Image-------------------------> 
 

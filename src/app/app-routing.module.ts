@@ -16,6 +16,7 @@ import { NotesParentComponent } from './components/notes-parent/notes-parent.com
 import { SearchComponent } from './components/search/search.component';
 import { LabelsComponent } from './components/labels/labels.component';
 import { QuestionAndAnswerComponent } from './components/question-and-answer/question-and-answer.component';
+import { CartComponent } from './components/cart/cart.component';
 
 
 const appRoutes: Routes = [
@@ -35,6 +36,7 @@ const appRoutes: Routes = [
       { path: 'trash', component: TrashComponent },
       { path: 'notes/search', component: SearchComponent },
       { path: 'notes/:noteid/questionAnswers', component:  QuestionAndAnswerComponent},
+      { path: 'cart', component: CartComponent },
 
     ]
   },

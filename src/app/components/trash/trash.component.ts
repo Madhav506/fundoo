@@ -16,6 +16,7 @@ export class TrashComponent implements OnInit,OnDestroy {
 
   constructor(public service: HttpService,public notesService:NotesService) { }
   private myData = []
+  private showLoader=false;
 
   name = 'trash';
   token = localStorage.getItem('token')
@@ -34,6 +35,8 @@ export class TrashComponent implements OnInit,OnDestroy {
           
         }
       }
+      this.showLoader=true;
+
     })
   }
   ngOnDestroy() { 

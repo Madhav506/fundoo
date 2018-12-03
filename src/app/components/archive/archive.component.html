@@ -1,2 +1,5 @@
-<app-notescard [myData]="arrayData" (unarchive)="archive($event)" 
-></app-notescard>
+<div *ngIf="showLoader"><app-notescard [myData]="arrayData" (unarchive)="archive($event)" 
+></app-notescard></div>
+<div>
+        <app-loader *ngIf="!showLoader"></app-loader>
+      </div>
