@@ -53,7 +53,10 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   croppedImage: string;
   image2: string;
   imageProfile: string;
-
+/**The Constructor is a default method of the class that is executed 
+ * when the class is instantiated and
+ *  ensures proper initialization of fields in the class and its subclasses. 
+ * */
   constructor(private cdRef: ChangeDetectorRef, private breakpointObserver: BreakpointObserver,
     public dataService: DataService, public service: HttpService, public notesService: NotesService,
     public dialog: MatDialog, public snackBar: MatSnackBar, private router: Router,
@@ -225,6 +228,9 @@ private idOfNote;
 
     dialogRef1.afterClosed()
       .pipe(takeUntil(this.destroy$))
+   //It is a method which is subscribed to an observable.
+   // Whenever the subscribe method is called, an independent 
+   //execution of the observable happens.  
       .subscribe(result => {
         this.dataService.currentImage
           .pipe(takeUntil(this.destroy$))
