@@ -81,7 +81,8 @@ width:800px;
     content:attr(data-text)
 }
 .sendMessage{
-    margin-top:25px;
+  float:right;
+  background-color: #fb0
 }
 .replies{
     font-size:10px;
@@ -95,3 +96,6 @@ width:800px;
         overflow-x: hidden !important;
         overflow-y: auto;
     }
+.editor{
+    width:100%;
+}

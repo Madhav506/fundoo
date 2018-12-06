@@ -17,7 +17,7 @@ export class QuestionAndAnswerComponent implements OnInit {
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   @ViewChild("questionEntered") public questionText: ElementRef;
-  @ViewChild("replyEntered") public replyText: ElementRef;
+  // @ViewChild("replyEntered") public replyText: ElementRef;
   content: { "message": string; };
 
   constructor(private route: ActivatedRoute, private notesService: NotesService,
@@ -42,6 +42,8 @@ export class QuestionAndAnswerComponent implements OnInit {
   private averageRate;
   replyQuestion;
   private noOfReply;
+  private editorContent:String;
+  private questionContent:String;
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -89,10 +91,10 @@ export class QuestionAndAnswerComponent implements OnInit {
   /******************************Asking a question ********************************************* */
 
   askQuestion() {
-    console.log(this.questionText.nativeElement.innerHTML);
+    // console.log(this.questionText.nativeElement.innerHTML);
 
     var content = {
-      'message': this.questionText.nativeElement.innerHTML,
+      'message': this.questionContent,
       'notesId': this.noteId
     }
     this.quesService.addQuestion(content).subscribe(data => {
@@ -100,6 +102,8 @@ export class QuestionAndAnswerComponent implements OnInit {
       LoggerService.log('success in adding', data);
       this.message = data['data']['details'].message;
     })
+    this.questionContent='';
+
   }
   /******************************Give the likes to question or reply********************************************* */
 
@@ -147,10 +151,10 @@ export class QuestionAndAnswerComponent implements OnInit {
   /******************************Give the Replies to question or reply********************************************* */
 
   leaveReply(replyId) {
-    let replySend = this.replyText.nativeElement.innerHTML;
-    LoggerService.log('msgggg', replySend);
+    // let replySend = this.replyText.nativeElement.innerHTML;
+    LoggerService.log('msgggg', this.editorContent);
     let content = {
-      'message': replySend
+      'message': this.editorContent
     }
     LoggerService.log(replyId);
     this.quesService.leaveReplyAdd(replyId, content)
@@ -158,9 +162,9 @@ export class QuestionAndAnswerComponent implements OnInit {
       .subscribe(data => {
         this.getNoteDetailsInQuestion();
         LoggerService.log('success in replying', data);
-
+this.hide=false;
       })
-    // this.replyText='';
+      this.editorContent='';
   }
   /******************************Count the number of Replies to display********************************************* */
   numberOfReplies(array) {
@@ -172,6 +176,22 @@ export class QuestionAndAnswerComponent implements OnInit {
     }
     return this.noOfReply;
   }
+  public options: Object = {
+    charCounterCount: false,
+    toolbarButtons: ['bold', 'italic', 'underline', 'paragraphFormat', 'fullscreen', 'strikeThrough', 'subscript', 
+      'superscript', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'lineHeight', 'align', 'formatOL',
+      'formatUL', 'outdent', 'indent', 'quote', 'specialCharacters',"fullscreen", 'ClearFormatting', 'help', 'undo', 'redo'],
+    toolbarButtonsXS:  ['bold', 'italic', 'underline', 'paragraphFormat', 'fullscreen', 'strikeThrough', 'subscript', 
+    'superscript', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'lineHeight', 'align', 'formatOL',
+    'formatUL', 'outdent', 'indent', 'quote', 'specialCharacters', 'ClearFormatting', 'help', 'undo', 'redo'],
+    toolbarButtonsSM:  ['bold', 'italic', 'underline', 'paragraphFormat', 'fullscreen', 'strikeThrough', 'subscript', 
+    'superscript', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'lineHeight', 'align', 'formatOL',
+    'formatUL', 'outdent', 'indent', 'quote', 'specialCharacters', 'ClearFormatting', 'help', 'undo', 'redo'],
+    toolbarButtonsMD:  ['bold', 'italic', 'underline', 'paragraphFormat', 'fullscreen', 'strikeThrough', 'subscript', 
+    'superscript', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'lineHeight', 'align', 'formatOL',
+    'formatUL', 'outdent', 'indent', 'quote', 'specialCharacters', 'ClearFormatting', 'help', 'undo', 'redo'],
+    
+  };
   ngOnDestroy() {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:

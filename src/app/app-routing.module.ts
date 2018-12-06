@@ -21,7 +21,7 @@ import { CartComponent } from './components/cart/cart.component';
 
 const appRoutes: Routes = [
   // { path: '**', redirectTo: '' },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/home/notes', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'forgotpassword', component: ForgotpasswordComponent },

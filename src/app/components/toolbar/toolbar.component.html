@@ -50,7 +50,8 @@
   </button>
 
 
-  <button  *ngIf="imageNew == '' "  (click) = "$event.stopPropagation()"  matTooltip="fundoo Account"
+  <button  *ngIf="imageNew == '' "  (click) = "$event.stopPropagation()"  
+            matTooltip="fundoo Account"
             mat-mini-fab 
             [matMenuTriggerFor]="appMenu" 
           class="imagetext">
@@ -86,7 +87,7 @@
 
 <div fxLayoutAlign="row wrap"  class="add" fxLayoutGap=85px>
 <!-- <button fxFlex class="addaccount" routerLink="/signup">Add account</button> -->
-<button fxFlex  mat-raised-button class="logout" (click)="logout()">Log out </button></div>
+<button fxFlex  mat-button class="logout" (click)="logout()">Log out </button></div>
 <!-- <button  class="cancel" (click)=cancel()> cancel </button> -->
 
 </mat-menu>

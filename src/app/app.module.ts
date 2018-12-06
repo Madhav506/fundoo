@@ -86,7 +86,8 @@ import { InterceptService} from './core/services/interceptor/interceptor.service
 import { ErrorsHandler } from './core/services/errorhandler/errors-handler';
 import { LoaderComponent } from './components/loader/loader.component';
 // import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { EditorComponent } from './components/editor/editor.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -121,6 +122,7 @@ import { LoaderComponent } from './components/loader/loader.component';
     QuestionAndAnswerComponent,
     LoaderComponent,
     CartComponent,
+    EditorComponent,
  
 
   ],
@@ -156,7 +158,9 @@ import { LoaderComponent } from './components/loader/loader.component';
     ImageCropperModule,
     MatSelectModule,
     HttpClientModule,
-    BarRatingModule
+    BarRatingModule,
+    FroalaEditorModule.forRoot(),
+     FroalaViewModule.forRoot() 
     // MomentDateAdapter,
     
 

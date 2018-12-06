@@ -1,4 +1,4 @@
-<div fxlayout="row">
+<div fxLayout="row">
 
   <div fxFlex.xs=0 fx.show="true" fxShow.xs="false" fxShow.sm="false" class="shrink" fxFlex>
   </div>
@@ -243,7 +243,8 @@ like an array or an object and create a template for each item.  -->
 
                 <div (click)="askQuestion(data.id)" class="valueNew value ">Question Asked</div>
 
-           <div (click)="askQuestion(data.id)" [innerHTML]="data.questionAndAnswerNotes[0].message" 
+           <div (click)="askQuestion(data.id)" 
+           [innerHTML]="data.questionAndAnswerNotes[0].message" 
                 class="value ellipsis " >
            </div>
        

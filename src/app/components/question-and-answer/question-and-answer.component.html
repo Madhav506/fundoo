@@ -32,13 +32,18 @@
   </div>
   <!--  ----------If there are no questions asked input divison to ask a question------------------- -->
 
-  <div *ngIf="message==null">
-    <div fxLayout="row">
-      <div contenteditable="true" class="textNew user border scrolling " data-text="Ask a Question"
+  <div *ngIf="message==null ">
+    <div fxLayout="row" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayout.md="column">
+      <!-- <div contenteditable="true" class="textNew user border scrolling " data-text="Ask a Question"
            #questionEntered>
+      </div> -->
+      <div [froalaEditor]="options" class="editor" [(froalaModel)]="questionContent">
+        
       </div>
-      <div fxFlex=20 class="sendMessage"><button (click)="askQuestion()" mat-button><mat-icon>
-           send</mat-icon></button></div>
+
+      <div fxFlex=20 class="sendMessage"><button (click)="askQuestion()" 
+           style="background-color: #fb0" mat-button>
+           Reply</button></div>
     </div>
 
   </div>
@@ -128,16 +133,20 @@
     </div>
     <!-- -------------------------reply input Division----------------------------------------- -->
     <div *ngIf="replyQuestion == questionAnswerArray[0].id && hide==true">
-      <div fxLayout="row">
-        <div contenteditable="true" class="textNew user " data-text="Leave a reply " #replyEntered>
-        </div>
-        <div fxFlex=15 class="sendMessage"><button (click)="leaveReply(questionAnswerArray[0].id)" 
-             mat-button><mat-icon>send</mat-icon></button></div>
+      <div fxLayout="column" fxLayout.sm="column" fxLayout.xs="column" 
+  fxLayoutGap="10px"    fxLayout.md="column">
+        <!-- <div contenteditable="true" class="textNew user " data-text="Leave a reply " #replyEntered>
+        </div> -->
+        <div [froalaEditor]="options" class="editor" [(froalaModel)]="editorContent"></div>
+
+        <div><button class="sendMessage" (click)="leaveReply(questionAnswerArray[0].id)" 
+             mat-button >Reply</button></div>
       </div>
     </div>
     <!-- ------------------------2nd division for entering the reply--------------------------------- -->
     <div *ngFor=" let value of questionAnswerArray" class="secondDiv">
-      <div *ngIf="value.parentId == questionAnswerArray[0].id && open == false">
+      <div *ngIf="value.parentId == questionAnswerArray[0].id && open == false 
+                  && value.isApproved == true">
         <div ngStyle.xs="width:100%" class="fabBtn ">
 
 
@@ -145,7 +154,8 @@
             <div fxLayout=row>
               <div>
                 <button *ngIf="img!=''" mat-mini-fab 
-                        [ngStyle]="{'background-image':'url(' +img+value.user.imageUrl+ ')','background-size':'cover'}">
+                        [ngStyle]="{'background-image':'url(' +img+value.user.imageUrl+ ')',
+                        'background-size':'cover'}">
                 </button>
                 <button *ngIf="img==''" mat-mini-fab>
                   {{value.user.firstName | titlecase | slice : 0 : 1 }}
@@ -208,17 +218,22 @@
         <!-- ------------------------Second reply input Division----------------------------------------- -->
 
         <div *ngIf="replyQuestion == value.id && hide == true">
-          <div fxLayout="row">
-            <div contenteditable="true" class="textNew user border " data-text="Leave a reply "
+          <div fxLayoutGap="10px" fxLayout="column" fxLayout.sm="column" fxLayout.xs="column"
+           fxLayout.md="column">
+            <!-- <div contenteditable="true" class="textNew user border " data-text="Leave a reply "
                   #replyEntered>
-            </div>
-            <div fxFlex=15 class="sendMessage"><button (click)="leaveReply(value.id)" mat-button>
-              <mat-icon>send</mat-icon></button></div>
+            </div> -->
+            <div fxFlex class="editor" [froalaEditor]="options" [(froalaModel)]="editorContent" ></div>
+
+            <div >
+              <button class="sendMessage" (click)="leaveReply(value.id)" mat-button>
+             Reply</button></div>
           </div>
         </div>
         <!-- -----------------------------------------3rd division---------------------------------------->
         <div *ngFor=" let value2 of questionAnswerArray" class="secondDiv">
-          <div *ngIf="value2.parentId == value.id && close == false && replyQuestion == value.id ">
+          <div *ngIf="value2.parentId == value.id && close == false && 
+                      replyQuestion == value.id && value2.isApproved == true">
             <div ngStyle.xs="width:100%" class="fabBtn ">
               <div fxLayout="column" fxLayout.xs="column" fxlayout.md="column" fxLayout.sm="column">
                 <div fxLayout=row>
