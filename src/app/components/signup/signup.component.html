@@ -1,42 +1,54 @@
-<div flexLayout="row" fxLayoutAlign="center ">
-    <mat-card fxLayoutAlign="start start" fxFlex.md="100" fxFlex.lg="34" fxFlex.xs="100"
-              fxFlex.sm="100" class="class2">
-        <form>
-            <div class="class3">fundooNotes</div>
-            <div class="class4">Sign up </div>
+<div class="sign" fxLayout="row">
+<div  fxShow.xl=true fxShow.md=true fxShow.xs=true fxShow.sm=true fxFlex=40></div>
+<div fxFlex>
+    <mat-card 
+    ngStyle.xs="width:80%"
+ngStyle.sm="width:100%"
 
-            <div id="id1">
-                <mat-form-field>
-                    <input matInput placeholder="Firstname" class="form-control"
+
+fxLayoutAlign="start start" 
+              class="class2">
+        <form>
+            <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column"  >
+            <div fxFlex=80 class="class3">fundooNotes</div>
+            <div fxFlex class="class3"><button class="cart" (click)="goToCart()" mat-button>Go to Cart</button></div>
+            </div>
+            <div class="class4">Create Your fundoo Account </div>
+
+            <div id="id1" fxLayoutGap="7px" fxLayout.sm="column"
+            fxLayout.md="column"  fxLayout.xs="column" fxLayout="row">
+                <mat-form-field class="wid">
+                    <input matInput placeholder="Firstname" class="form-control "
                            [formControl]="firstname" [(ngModel)]="detailsObject.Firstname"
                            required>
 
                     <mat-error *ngIf="firstname.invalid">{{ errorFirstname()}}</mat-error>
                 </mat-form-field>
 
-                <mat-form-field>
+                <mat-form-field class="wid">
                     <input matInput placeholder="Lastname" [formControl]="lastname" [(ngModel)]="detailsObject.Lastname" required>
                     <mat-error *ngIf="lastname.invalid">{{ errorLastname()}}</mat-error>
 
                 </mat-form-field>
             </div>
-            <div>
-                <mat-form-field hintLabel="You can use letters,numbers and periods" id="id2">
+            <div fxLayout="row" >
+                <mat-form-field  fxFlex=80 style="width:328px" hintLabel="You can use letters,numbers and periods" id="id2">
 
                     <input matInput placeholder="Email" [formControl]="email" [(ngModel)]="detailsObject.Email" required>
                     <mat-error *ngIf="email.invalid">{{ erroremail()}}</mat-error>
 
-                </mat-form-field>
+                </mat-form-field><span fxFlex fxShow.sm="false" fxShow.md="false" fxShow.xs="false" style="font-size: 15px;margin-top: 36px">@gmail.com</span>
             </div>
-            <div>
-                <mat-form-field clas="field">
+            <div fxLayoutGap="7px" fxLayout.sm="column"
+            fxLayout.md="column"  fxLayout.xs="column" fxLayout="row">
+                <mat-form-field class="wid" >
                     <input matInput placeholder="Password" [formControl]="password" type="password" [type]="hide ? 'password' : 'text'" [(ngModel)]="detailsObject.password"
                            required>
                     <mat-error *ngIf="password.invalid">{{ errorpassword()}}</mat-error>
 
 
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field class="wid">
                     <input matInput placeholder="Confirm password" [formControl]="cpassword" type="password" [type]="hide ? 'password' : 'text'"
                            [(ngModel)]="detailsObject.cpassword">
                     <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -45,7 +57,7 @@
                 </mat-form-field>
 
             </div>
-            <div flexLayout="row wrap" fxFlexLayout="center" fxLayoutGap="5px" class="cards">
+            <!-- <div flexLayout="row wrap" fxFlexLayout="center" fxLayoutGap="5px" class="cards">
                 <div fxFlex.lg="50" *ngFor="let data of card">
 
                     <mat-card mat-button (click)="  changeCardColor(data)" class="data"
@@ -58,16 +70,49 @@
                 </div>
 
 
+            </div> -->
+<div class="cardNew" fxLayout="row " fxLayout.xs="column " fxLayoutGap="3px"   >
+            <div    *ngFor="let item of card">
+                <mat-card   
+                [ngClass]="item.id == productId? 'check': 'uncheck'"
+                            class="card1">
+                  <div>
+            
+                  <mat-card    fxLayout="row wrap"  
+                  fxLayoutAlign="start start" class="innercard">
+                    <div fxLayout="column" class="font">
+                    <div>$ {{item.price}} per  Month</div>
+                    <!-- <div></div> -->
+                    <div class="name">{{item.name | titlecase}}</div>
+                    </div>
+                    
+                    <div>
+                      <li class="list">Unlimited wall space</li>
+                      <li class="list">Nice Interface</li>
+                      <li class="list">$ {{item.price}}/month</li>
+                      <li class="list">{{item.description}}</li>
+                    </div>
+                  </mat-card>
+                </div>
+                <div fxLayout="row wrap" fxLayoutAlign="start start" >
+                <div class="cartbutton"  *ngIf="productId==item.id">
+                  SELECTED</div>
+                  <div class="cartbutton" *ngIf="productId!=item.id" >
+                        ADD TO CART</div>
+                </div>
+                </mat-card>
+                </div>
             </div>
+            <div fxLayout="row" fxLayout.xs="column" class="btn">
+                <button fxFlex=10 routerLink="/login" id="create" mat-button>Sign in instead</button>
+<div fxFlex=60>
 
+</div>
 
-
-            <div><button routerLink="/login" id="create" mat-button>Sign in instead</button>
-
-
-                <button id="signup" (click)="sendData()" mat-raised-button>SignUp</button></div>
-
+                <div  fxFlex><button  id="signup" (click)="sendData()" mat-raised-button>SignUp</button></div>
+            </div>
         </form>
     </mat-card>
-    <!-- </div> -->
+</div>
+<div fxShow.md=true fxShow.xl=true fxShow.xs=true fxShow.sm=true fxFlex=40></div>
 </div>

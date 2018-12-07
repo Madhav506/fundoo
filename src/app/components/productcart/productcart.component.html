@@ -1,0 +1,57 @@
+<div fxLayout="column">
+  <div class="section" >
+  <div  class="fundoo" fxFlex=10 >fundooNotes</div>
+  </div>
+<div  class="section1" >
+  <div class="text"  >Which fundooNotes Service Package do you want ? </div>
+</div>
+<div fxLayout="row" class="section2"  >
+<div  fxFlex=30></div>
+
+<div fxFlex  fxLayout="row"  fxLayout.xs="column"  fxLayout.sm="column" 
+fxLayoutGap="50px"  class="cardDiv" >
+<!-- ----------------------------------- Cards-------------------------------------------- -->
+<div *ngFor="let item of cards">
+    <mat-card   (click)=" changeCardColor(item)"  [ngClass]="item.check? 'check': 'uncheck'"
+                class="card1">
+      <div >
+
+      <mat-card (click)=" openDialogCart(item)"  fxLayout="row wrap"  
+      fxLayoutAlign="start start" class="innercard">
+        <div fxLayout="row" class="font">
+        <div>$ {{item.price}} per Month</div>
+        
+        </div>
+        <div class="name">{{item.name | titlecase}}</div>
+
+        <div>
+          <li class="list">Unlimited wall space</li>
+          <li class="list">Nice Interface</li>
+          <li class="list">$ {{item.price}}/month</li>
+          <li class="list">{{item.description}}</li>
+        </div>
+      </mat-card>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="start start" >
+    <div class="cartbutton"  >
+      ADD TO CART</div>
+    </div>
+    </mat-card>
+    </div>
+   
+
+<!-- ------------------------------------------------------------------------------- -->
+
+
+
+
+
+
+</div>
+
+<div fxFlex=30></div>
+</div>
+
+
+<div class="section3" ></div>
+</div>

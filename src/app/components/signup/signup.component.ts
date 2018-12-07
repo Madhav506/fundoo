@@ -7,6 +7,8 @@ import { MatSnackBar } from '@angular/material';
 import { LoggerService } from '../../core/services/logger/logger.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { CartserviceService } from '../../core/services/cartService/cartservice.service';
 
 @Component({
     selector: 'app-signup',
@@ -16,7 +18,7 @@ import { takeUntil } from 'rxjs/operators';
 
 export class SignupComponent implements OnInit,OnDestroy {
     destroy$: Subject<boolean> = new Subject<boolean>();
-
+private productId;
     firstname = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]*'), Validators.minLength(3)]);
   regform: any;
     errorFirstname() {
@@ -56,27 +58,35 @@ export class SignupComponent implements OnInit,OnDestroy {
     hide = true;
 
 
-    constructor(public user: UserService, public display: MatSnackBar, public validate: FormBuilder) { }
+    constructor(public router:Router,public user: UserService,
+         public display: MatSnackBar, public validate: FormBuilder,public cartservice:CartserviceService) { }
 
     // Initialize the directive/component after Angular first displays the data-bound properties and sets the directive/component's input properties.
+    public product=localStorage.getItem('productId');
 
     ngOnInit() {
 
-        this.user.getDataServiceBasicAdvance()
-
-            //whenever response from server arrives the callback passed to subscribe()
-            .pipe(takeUntil(this.destroy$))
-            .subscribe((response) => {
-                let data = response["data"];
-                for (let i = 0; i < data.data.length; i++) {
-                    this.card.push(data.data[i]);
-                }
-            })
+       this.getserviceData();
+       this.getCartDetails();
 
     }
+
+    getserviceData(){
+        this.user.getDataServiceBasicAdvance()
+
+        //whenever response from server arrives the callback passed to subscribe()
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((response) => {
+            let data = response["data"];
+            for (let i = 0; i < data.data.length; i++) {
+                this.card.push(data.data[i]);
+            }
+        })
+    }
     changeCardColor(card) {
+        
         this.service = card.name;
-        card.check = true;
+        card.check = !card.check;
         for (let i = 0; i < this.card.length; i++) {
             if (card.name == this.card[i].name) {
                 continue;
@@ -122,12 +132,6 @@ export class SignupComponent implements OnInit,OnDestroy {
                     )
             }
 
-        
-       
-
-
-
-
 
         this.user.getAddService()
         .pipe(takeUntil(this.destroy$))
@@ -137,12 +141,26 @@ export class SignupComponent implements OnInit,OnDestroy {
 
                 })
 
-
-
-
-
-
     }
+    goToCart(){
+        this.router.navigate(['/productcart'])
+    }
+//cart Details
+public content;
+getCartDetails(){
+this.cartservice.cartDetails(this.product).subscribe(response=>{
+console.log('cartDetails',response);
+this.productId=response['data']['product']['id']
+console.log(this.productId);
+
+// localStorage.removeItem('productId');
+// console.log('cartDetailssdssd',response['data']['id']);
+// console.log(this.productId);
+
+
+});
+
+}
     ngOnDestroy() {
         this.destroy$.next(true);
         // Now let's also unsubscribe from the subject itself:

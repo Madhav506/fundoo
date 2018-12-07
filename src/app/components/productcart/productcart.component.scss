@@ -1,0 +1,66 @@
+.section{
+    height:60px;
+    background-color: #fb0;
+}
+.section1{
+    height:150px;
+}
+.section2{
+    height:310px;
+}
+.section3{
+    height:150px;
+}
+.fundoo{
+    margin:10px 0px 5px 50px;
+    padding:6px 0px 5px 10px;
+    font-size: 25px;
+}
+.text{
+    margin-top:40px;
+    font-size: 28px;
+    opacity: 0.54;
+text-align: center;
+}
+.check{
+    background-color: #fb0;
+    // width:180px;
+    // height:270px;
+  }
+  .uncheck{
+    background-color: grey;
+    // height:250px;
+    // width:180px;
+  }
+
+.card1{
+    height:250px;
+    width:180px;
+    margin-left:30px;
+}
+.innercard{
+    margin-left:-35px;
+    margin-top:-35px;
+    height:265px;
+    width:210px;
+}
+.cartbutton{
+    margin-top: 10px;
+    border:none;
+    outline:none;
+    color:white;
+    font-size: 17px;
+}
+.font{
+    font-size: 22px;
+}
+.name{
+    color:rgb(81, 104, 209);
+    font-size:15px;
+    margin-top: 10px;
+}
+.list{
+    font-size:14px;
+    margin-top:14px;
+    // text-align: justify
+}

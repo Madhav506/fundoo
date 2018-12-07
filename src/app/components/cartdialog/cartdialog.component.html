@@ -1,0 +1,42 @@
+<div class="popUpCard" 
+ngStyle.xs="width:100%"
+ngStyle.sm="width:100%"
+ngStyle.md="width:100%"
+fxLayout="column">
+<div fxLayout="row"   class="cardHeader" >
+<div fxFlex>{{data.name | titlecase}} Pack Details</div>
+<div fxFlex=24>${{data.price}}/month</div>
+</div>
+<div fxLayout="row" class="cardContent">
+    <div fxFlex=4></div>
+
+  <mat-tab-group fxFlex >
+    <mat-tab class="content" label="First">Run Advanced Search reports on the criteria
+       you care about to see how work is ... They will have full access 
+       to Asana Premium features during your trial period.
+    </mat-tab>
+    <mat-tab class="content" label="Second"> Run Advanced Search reports on the criteria
+        you care about to see how work is ... They will have full access 
+        to Asana Premium features during your trial period </mat-tab>
+    <mat-tab class="content" label="Third"> Run Advanced Search reports on the criteria
+        you care about to see how work is ... They will have full access 
+        to Asana Premium features during your trial period </mat-tab>
+  
+  </mat-tab-group>
+  <div fxFlex=4></div>
+  </div>
+  <div fxLayout="row" class="cardFooter">
+      <div fxFlex=4></div>
+
+  <div  fxFlex=70>
+    <button class="btn" mat-raised-button>Remove</button>
+  </div>
+
+  <div fxFlex >
+      <button class="btn" mat-raised-button (click)="checkOut()" >Proceed to Checkout</button>
+  </div>
+  <div fxFlex=4></div>
+
+    </div>
+  
+      </div>

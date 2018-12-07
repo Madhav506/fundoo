@@ -17,6 +17,7 @@ import { SearchComponent } from './components/search/search.component';
 import { LabelsComponent } from './components/labels/labels.component';
 import { QuestionAndAnswerComponent } from './components/question-and-answer/question-and-answer.component';
 import { CartComponent } from './components/cart/cart.component';
+import { ProductcartComponent } from './components/productcart/productcart.component';
 
 
 const appRoutes: Routes = [
@@ -26,6 +27,7 @@ const appRoutes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'forgotpassword', component: ForgotpasswordComponent },
   { path: 'resetpassword/:id', component: ResetpasswordComponent },
+  { path: 'productcart', component: ProductcartComponent },
   {
     path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
       { path: '', redirectTo: 'notes', pathMatch: 'full' },

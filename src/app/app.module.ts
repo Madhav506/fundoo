@@ -32,7 +32,7 @@ import {
   MatChipsModule,
   MatNativeDateModule,
   MatSelectModule,
-  
+  MatTabsModule,
   MatMenu,
   MatSnackBar
 
@@ -66,6 +66,10 @@ import { DeletedialogComponent } from './components/deletedialog/deletedialog.co
 import { DialogCollaboratorComponent } from './components/dialog-collaborator/dialog-collaborator.component';
 import { QuestionAndAnswerComponent } from './components/question-and-answer/question-and-answer.component';
 import { CartComponent } from './components/cart/cart.component';
+import { EditorComponent } from './components/editor/editor.component';
+import { ProductcartComponent } from './components/productcart/productcart.component';
+import { CartdialogComponent } from './components/cartdialog/cartdialog.component';
+
 
 import { BarRatingModule } from "ngx-bar-rating";
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -87,7 +91,7 @@ import { ErrorsHandler } from './core/services/errorhandler/errors-handler';
 import { LoaderComponent } from './components/loader/loader.component';
 // import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
-import { EditorComponent } from './components/editor/editor.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -123,6 +127,8 @@ import { EditorComponent } from './components/editor/editor.component';
     LoaderComponent,
     CartComponent,
     EditorComponent,
+    ProductcartComponent,
+    CartdialogComponent,
  
 
   ],
@@ -159,6 +165,7 @@ import { EditorComponent } from './components/editor/editor.component';
     MatSelectModule,
     HttpClientModule,
     BarRatingModule,
+    MatTabsModule,
     FroalaEditorModule.forRoot(),
      FroalaViewModule.forRoot() 
     // MomentDateAdapter,
@@ -166,7 +173,7 @@ import { EditorComponent } from './components/editor/editor.component';
 
   ],
   entryComponents: [DialogComponent, AddlabelComponent, DeletedialogComponent,
-    ImagecropComponent,ToolbarComponent,DialogCollaboratorComponent],
+    ImagecropComponent,ToolbarComponent,DialogCollaboratorComponent,CartdialogComponent],
     
   providers: [HttpService,AuthguardGuard, DataService, UserService,NotesService,
     LoggerService,MessagingService,InterceptService,{
