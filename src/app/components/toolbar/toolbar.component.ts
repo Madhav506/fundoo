@@ -254,7 +254,7 @@ private idOfNote;
 
   }
   shoppingCart(){
-    this.router.navigate(['home/cart']);
+    this.router.navigate(['/cart']);
 
   }
   ngOnDestroy() {

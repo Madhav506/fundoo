@@ -60,9 +60,9 @@ private productId;
 
     constructor(public router:Router,public user: UserService,
          public display: MatSnackBar, public validate: FormBuilder,public cartservice:CartserviceService) { }
+         public product=localStorage.getItem('productId');
 
     // Initialize the directive/component after Angular first displays the data-bound properties and sets the directive/component's input properties.
-    public product=localStorage.getItem('productId');
 
     ngOnInit() {
 
@@ -83,18 +83,18 @@ private productId;
             }
         })
     }
-    changeCardColor(card) {
+    // changeCardColor(card) {
         
-        this.service = card.name;
-        card.check = !card.check;
-        for (let i = 0; i < this.card.length; i++) {
-            if (card.name == this.card[i].name) {
-                continue;
-            }
-            this.card[i].check = false;
-        }
+    //     this.service = card.name;
+    //     card.check = !card.check;
+    //     for (let i = 0; i < this.card.length; i++) {
+    //         if (card.name == this.card[i].name) {
+    //             continue;
+    //         }
+    //         this.card[i].check = false;
+    //     }
 
-    }
+    // }
 
     detailsObject: any = {};
 
@@ -152,10 +152,6 @@ this.cartservice.cartDetails(this.product).subscribe(response=>{
 console.log('cartDetails',response);
 this.productId=response['data']['product']['id']
 console.log(this.productId);
-
-// localStorage.removeItem('productId');
-// console.log('cartDetailssdssd',response['data']['id']);
-// console.log(this.productId);
 
 
 });

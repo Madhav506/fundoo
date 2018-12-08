@@ -28,6 +28,7 @@ const appRoutes: Routes = [
   { path: 'forgotpassword', component: ForgotpasswordComponent },
   { path: 'resetpassword/:id', component: ResetpasswordComponent },
   { path: 'productcart', component: ProductcartComponent },
+  { path: 'cart', component: CartComponent },
   {
     path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
       { path: '', redirectTo: 'notes', pathMatch: 'full' },
@@ -38,7 +39,7 @@ const appRoutes: Routes = [
       { path: 'trash', component: TrashComponent },
       { path: 'notes/search', component: SearchComponent },
       { path: 'notes/:noteid/questionAnswers', component:  QuestionAndAnswerComponent},
-      { path: 'cart', component: CartComponent },
+    
 
     ]
   },

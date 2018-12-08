@@ -91,8 +91,8 @@ import { ErrorsHandler } from './core/services/errorhandler/errors-handler';
 import { LoaderComponent } from './components/loader/loader.component';
 // import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
-
-@NgModule({
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MatStepperModule} from '@angular/material/stepper';@NgModule({
   declarations: [
     AppComponent,
     SignupComponent,
@@ -167,9 +167,9 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
     BarRatingModule,
     MatTabsModule,
     FroalaEditorModule.forRoot(),
-     FroalaViewModule.forRoot() 
+     FroalaViewModule.forRoot() ,
     // MomentDateAdapter,
-    
+    MatStepperModule
 
   ],
   entryComponents: [DialogComponent, AddlabelComponent, DeletedialogComponent,
@@ -184,7 +184,9 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
     {
       provide: ErrorHandler,
       useClass: ErrorsHandler,
-    }],
+    },
+  
+  ],
   bootstrap: [AppComponent]//2
 })
 export class AppModule { }

@@ -12,11 +12,11 @@
 fxLayoutGap="50px"  class="cardDiv" >
 <!-- ----------------------------------- Cards-------------------------------------------- -->
 <div *ngFor="let item of cards">
-    <mat-card   (click)=" changeCardColor(item)"  [ngClass]="item.check? 'check': 'uncheck'"
+    <mat-card   (click)=" changeCardColor(item)" (dblclick)=" openDialogCart(item)"  [ngClass]="item.check? 'check': 'uncheck'"
                 class="card1">
       <div >
 
-      <mat-card (click)=" openDialogCart(item)"  fxLayout="row wrap"  
+      <mat-card (dblclick)=" openDialogCart(item)" (click)=" changeCardColor(item)" fxLayout="row wrap"  
       fxLayoutAlign="start start" class="innercard">
         <div fxLayout="row" class="font">
         <div>$ {{item.price}} per Month</div>

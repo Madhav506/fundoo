@@ -29,3 +29,24 @@ overflow-x:hidden !important;
 @mixin topmargin(){
     margin-top:10px;
 }
+@mixin fundoo(){
+    border-radius:30px 30px 30px 30px;
+    margin-top:25px;
+    padding:10px 0px 0px 10px;
+    background-color: #fb0;
+    color:white;
+    height:35px;
+    width:110px;
+    font-size:18px;
+}
+@mixin go(){
+    width:240px;
+    background-color: $lightblue;
+    color:$white;
+}
+@mixin toolbar(){
+    position: sticky;
+    background: $yellow;
+    color: black;
+    top: 0;
+}

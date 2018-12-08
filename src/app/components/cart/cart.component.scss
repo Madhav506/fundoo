@@ -1,13 +1,36 @@
-.fundoo{
+@import '../../../scss/_mixins.scss';
+@import '../../../scss/_variables.scss';
+.mat-toolbar.mat-primary {
+   @include toolbar();
+  }
+  .proceed{
+    @include go();
+ }
+ .fundoo{
+    @include fundoo();
+    }
+  .shop {
+      font-size:25px;
+      margin-bottom:-10px;
+  }
+  .sub{
+      margin-top: 49px;
+      width:240px;
+      background-color: whitesmoke
+  }
   
-    border-radius:30px 30px 30px 30px;
-    width:120px;
-    margin-top:25px;
-    padding:10px 0px 0px 22px;
-    background-color: #fb0;
-    color:white;
-    height:30px;
-    font-size:18px;
+.first2{
+    margin-top: 10px;
+@include word();
+}
+.color{
+    color:$red;
+}
+
+.list{
+    margin-top: 6px;
+    @include word();
+    font-size:16px
 }
 .first{
     height:100px;
@@ -17,12 +40,56 @@
     height:100px;
     width:100px;
 }
+
+.smallCard{
+    width:70px;
+    height:60px;
+    border-radius: 20px 20px 20px 20px;
+    background-color: $grey;
+}
 .one{
     height:400px;
 }
-.two{
-   height:800px;
+
+
+.advance{
+    color:rgb(81, 104, 209);
+    font-weight: bold
 }
-.three{
-    height:400px;
+.price{
+   
+    font-size:20px;
+    margin-left:10px;
 }
+.col3{
+    margin-left:13px;
+
+}
+@media only screen and (min-width: 250px) and (max-width: 450px) {
+
+ @media only screen and (min-width: 250px) and (max-width: 950px) {
+    .sub { 
+        margin-top:-25px;
+        width:150px;
+        background-color: whitesmoke
+       }
+       .proceed{
+       width:140px;
+       font-size: 12px;
+     }
+  }
+  .list { 
+    font-size: 12px;    }
+      }
+      .three{
+        height:400px;
+    }
+    .first1{
+        margin-top: 20px;
+    }
+    .two{
+        height:800px;
+     }
+     .left{
+         margin-left: 19px;
+     }
