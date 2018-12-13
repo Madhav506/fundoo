@@ -24,7 +24,7 @@ export class ArchiveiconComponent implements OnInit,OnDestroy {
   ngOnInit() {
 
   }
-
+/**archivenotes() to archive the notes when archive icon is clicked */
   archiveNotes() {
 
      this.model = {
@@ -42,6 +42,9 @@ export class ArchiveiconComponent implements OnInit,OnDestroy {
 
     })
   }
+  /**Unarchiving the notes when they are unarchived
+   * 
+   */
   unarchiveNotes() {
     let model = {
       "isArchived": false,
@@ -57,6 +60,10 @@ export class ArchiveiconComponent implements OnInit,OnDestroy {
       });
     })
   }
+  /**A callback method that performs custom clean-up,
+   *  invoked immediately after a directive, 
+   * pipe, or service instance is destroyed.
+   */
   ngOnDestroy() { 
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:

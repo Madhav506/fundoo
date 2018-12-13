@@ -259,7 +259,7 @@ export class DialogComponent implements OnInit,OnDestroy {
   closePopUp(){
 this.dialogRef.close();
   }
-
+/**after clicking a collaborator icon in dialog opening collaborator dialog */
   openCollaborator(noteData){
     LoggerService.log(noteData)
      this.dialog.open(DialogCollaboratorComponent, {
@@ -272,7 +272,10 @@ this.dialogRef.close();
 
     // dialogRef.afterClosed();
   }
-
+ /**A callback method that performs custom clean-up,
+   *  invoked immediately after a directive, 
+   * pipe, or service instance is destroyed.
+   */
   ngOnDestroy() { 
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:

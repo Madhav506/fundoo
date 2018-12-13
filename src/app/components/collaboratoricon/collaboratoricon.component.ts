@@ -13,7 +13,7 @@ export class CollaboratoriconComponent implements OnInit {
 @Input() noteId;
   ngOnInit() {
   }
-
+/**to open a dialog collaborator where collaborators adding and removing can be done */
   addCollaborator(){
     const dialogRef = this.dialog.open(DialogCollaboratorComponent, {
       maxWidth: 'auto',

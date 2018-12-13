@@ -65,6 +65,10 @@ console.log(this.myNewColor);
     })
 
   }
+   /**A callback method that performs custom clean-up,
+   *  invoked immediately after a directive, 
+   * pipe, or service instance is destroyed.
+   */
   ngOnDestroy() { 
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:

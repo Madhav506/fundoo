@@ -52,6 +52,7 @@ export class ImagecropComponent implements OnInit,OnDestroy {
   cancel() {
     this.dialogRef.close();
   }
+  /**if you would like to change a profile picture then image upload method is invoked */
   imageUpload() {
     const uploadData = new FormData();
     uploadData.append('file', this.ImageFileCropped);
@@ -61,10 +62,15 @@ export class ImagecropComponent implements OnInit,OnDestroy {
       LoggerService.log("response of Image", response);
       localStorage.setItem('imageUrl', response['status'].imageUrl);
       this.dialogRef.close();
+      /**calling method in data service */
       this.service.changeImage(true);
     })
 
   }
+  /**A callback method that performs custom clean-up,
+   *  invoked immediately after a directive, 
+   * pipe, or service instance is destroyed.
+   */
   ngOnDestroy() { 
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:

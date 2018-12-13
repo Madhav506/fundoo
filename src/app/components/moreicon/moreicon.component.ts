@@ -44,8 +44,8 @@ export class MoreiconComponent implements OnInit,OnDestroy {
   }
   private token = localStorage.getItem('token')
   public temp;
+  /**to delete the notes deleteNotes method invoked */
   deleteNotes(arrayOfNotes) {
-
     LoggerService.log('noteid ',this.arrayOfNotes);
     let model = {
       "isDeleted": true,
@@ -63,8 +63,8 @@ export class MoreiconComponent implements OnInit,OnDestroy {
 
     })
   }
+  /**to display the list of labels  */
   getLabel() {
-
     this.notesService.getLabels()
     .pipe(takeUntil(this.destroy$))
     .subscribe(result => {
@@ -81,8 +81,8 @@ export class MoreiconComponent implements OnInit,OnDestroy {
 
     })
   }
+  /**to add the labels to a note */
   addLabelList(label) {
-
     LoggerService.log(label.id);
     LoggerService.log("noteid", this.arrayOfNotes);
     this.notesService.postAddLabelnotes(label.id, this.arrayOfNotes)
@@ -95,8 +95,8 @@ export class MoreiconComponent implements OnInit,OnDestroy {
     })
    
   }
+  /***if the labels are already selected then those labels are checked */
   selectCheck(labelOption){
-    
     if (this.arrayOfMynotes.noteLabels.some((data) => data.label == labelOption.label)) {
     return true;
     }
@@ -105,14 +105,8 @@ export class MoreiconComponent implements OnInit,OnDestroy {
      return false;
   }
   }
-
+/**if label is clicked that would added to note when it is psushed to array */
   clickFunc(label) {
-    LoggerService.log(label);
-
-    LoggerService.log(label.id, "yess");
-    LoggerService.log(label.label, "yes...");
-
-
     if (!this.array2.some((data) => data == label.label)) {
       this.array1.push(label.id);
       this.array2.push(label.label);
@@ -127,6 +121,7 @@ export class MoreiconComponent implements OnInit,OnDestroy {
     }
 
   }
+  /***to delete the note forever   */
   deleteforever() {
     const dialogRef = this.dialog.open(DeletedialogComponent, {
       width: '500px',
@@ -151,6 +146,7 @@ export class MoreiconComponent implements OnInit,OnDestroy {
       }
     });
   }
+  /**to restore the notes if they are in trash they would be gone to notes state */
   restore(arrayOfNotes) {
     let model = {
       "isDeleted": false,
@@ -167,10 +163,15 @@ export class MoreiconComponent implements OnInit,OnDestroy {
 
     })
   }
+  /**to navigate to question and answer state */
   questionState(){
     this.router.navigate(['/home/notes/'+this.arrayOfNotes+'/questionAnswers']);
    
   }
+  /**A callback method that performs custom clean-up,
+   *  invoked immediately after a directive, 
+   * pipe, or service instance is destroyed.
+   */
   ngOnDestroy() { 
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:

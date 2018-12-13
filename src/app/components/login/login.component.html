@@ -1,5 +1,6 @@
-<div fxLayout='row' fxLayoutAlign="center center" class="container">
-    <mat-card fxFlex="30" fxFlex.xs="100">
+<div   fxLayoutGap="5px" fxLayout='row' fxLayout.xs='column'  fxLayout.sm='column' fxLayoutAlign="center center" class="container">
+<div  >
+    <mat-card  style="margin-left:270px;" fxFlex=60 >
         <my-slide-panel [activePane]="isLeftVisible ? 'right' : 'left'">
             <div leftPane>
                 <form>
@@ -22,7 +23,7 @@
                         </div>
                         <a mat-button class="logIn" routerLink="/signup">
                             Create account</a>
-                        <button class="nextNew" (click)="next()" mat-raised-button>
+                        <button class="nextNew"  style="margin-left:100px;"    (click)="next()" mat-raised-button>
                             Next
                         </button>
                     </div>
@@ -53,4 +54,39 @@
             </div>
         </my-slide-panel>
     </mat-card>
+</div>
+<div >Services
+        <div  style="margin-right:250px;"   class="cardNew" fxLayout="row " fxLayout.xs="column " fxLayoutGap="3px"   >
+                <div    *ngFor="let item of card">
+                    <mat-card  
+                    [ngClass]="item.id == productId? 'check': 'uncheck'"
+                                class="card1">
+                      <div>
+                
+                      <mat-card    fxLayout="row wrap"  
+                      fxLayoutAlign="start start" class="innercard">
+                        <div fxLayout="column" class="font">
+                        <div>$ {{item.price}} per  Month</div>
+                        <!-- <div></div> -->
+                        <div class="name">{{item.name | titlecase}}</div>
+                        </div>
+                        
+                        <div>
+                          <li class="list">Unlimited wall space</li>
+                          <li class="list">Nice Interface</li>
+                          <li class="list">$ {{item.price}}/month</li>
+                          <li class="list">{{item.description}}</li>
+                        </div>
+                      </mat-card>
+                    </div>
+                    <div fxLayout="row wrap" fxLayoutAlign="start start" >
+                    <div class="cartbutton"  *ngIf="productId==item.id">
+                      SELECTED</div>
+                      <div class="cartbutton" *ngIf="productId!=item.id" >
+                            ADD TO CART</div>
+                    </div>
+                    </mat-card>
+                    </div>
+                </div>
+</div>
 </div>

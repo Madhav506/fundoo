@@ -70,7 +70,7 @@ import { EditorComponent } from './components/editor/editor.component';
 import { ProductcartComponent } from './components/productcart/productcart.component';
 import { CartdialogComponent } from './components/cartdialog/cartdialog.component';
 
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { BarRatingModule } from "ngx-bar-rating";
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -169,7 +169,8 @@ import {MatStepperModule} from '@angular/material/stepper';@NgModule({
     FroalaEditorModule.forRoot(),
      FroalaViewModule.forRoot() ,
     // MomentDateAdapter,
-    MatStepperModule
+    MatStepperModule,
+    MatProgressBarModule
 
   ],
   entryComponents: [DialogComponent, AddlabelComponent, DeletedialogComponent,

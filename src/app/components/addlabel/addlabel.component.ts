@@ -15,7 +15,8 @@ export interface DialogData {
   "notesIdList": String,
   "color": String
 }
-
+/**Components are the most basic UI building block of an Angular app.
+ *  An Angular app contains a tree of Angular components. */
 @Component({
   selector: 'app-addlabel',
   templateUrl: './addlabel.component.html',
@@ -51,6 +52,7 @@ export class AddlabelComponent implements OnInit,OnDestroy {
 
   }
   private label;
+  /**usage of model named Label  */
   private ArrayOfLabel:Label[]=[];
   private newLabel;
   //clear the label after clicking enter 
@@ -170,6 +172,10 @@ export class AddlabelComponent implements OnInit,OnDestroy {
         this.getLabel();
       })
   }
+  /**A callback method that performs custom clean-up,
+   *  invoked immediately after a directive, 
+   * pipe, or service instance is destroyed.
+   */
   ngOnDestroy() { 
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:

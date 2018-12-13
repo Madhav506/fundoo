@@ -47,52 +47,40 @@
   <div fxFlex  fxLayout="column" class="second" >
   <div class="one">
 
-<div class="first1" fxLayout="row"  fxLayout.xs="column"  >
+<div class="first1" fxLayout="row" fxLayoutGap="20px" fxLayout.xs="column"   fxLayout.sm="column"  >
   <div class="fundoo">fundooNotes</div>
-  <div fxFlex>
-    <mat-horizontal-stepper labelPosition="bottom" #stepper>
-      <mat-step >
-              <ng-template matStepLabel>SIGN IN</ng-template>
-              <!-- <mat-form-field>
-                  <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-              </mat-form-field>
-              <div>
-                  <button mat-button matStepperNext>Next</button>
-              </div> -->
-      </mat-step>
-      <mat-step  >
-          
-              <ng-template matStepLabel>PLACE ORDER</ng-template>
-              <!-- <mat-form-field>
-                  <input matInput placeholder="Address" formControlName="secondCtrl" required>
-              </mat-form-field>
-              <div>
-                  <button mat-button matStepperPrevious>Back</button>
-                  <button mat-button matStepperNext>Next</button>
-              </div> -->
-          
-      </mat-step>
-      <mat-step>
-          <ng-template matStepLabel>COMPLETE PAYMENT</ng-template>
-          <!-- You are now done.
-          <div>
-              <button mat-button matStepperPrevious>Back</button>
-              <button mat-button (click)="stepper.reset()">Reset</button>
+  <div style="width:800px;" >
+      <!-- <div class="example-section"> -->
+        <div><mat-icon
+           [ngClass]="signin ? 'cartNew' : cssSign ? 'review':'done'">
+           shopping_cart</mat-icon></div>
+          <mat-progress-bar   
+              [color]="color"
+              [mode]="mode"
+              [value]="value"
+              [bufferValue]="bufferValue">
+          </mat-progress-bar>
+          <!-- <div fxLayout="row">
+          <div >Signin</div>
+          <div >PlaceOrder</div>
+          <div >CompletePayment</div>
           </div> -->
-      </mat-step>
-  </mat-horizontal-stepper>
+          
+        <!-- </div> -->
   
   </div>
 </div>
 
   </div>
+<!-- -----------------------------------First Division------------------------------------------------ -->
 
-  <div   class="two">
+  <div 
+   *ngIf="open==false && show== false"   class="two">
     <div  fxLayout="row" fxLayout.xs="column" fxLayout.md="column" 
     fxLayout.sm="column" >
     <div  fxFlex=75  fxLayout="column">
       
-      <div  class="shop" fxFlex=20>Shopping Cart</div>
+      <div  class="shop first1" fxFlex=20>Shopping Cart</div>
 
       <div  fxLayoutGap="15px"   fxLayout="row" >
      <div fxFlex=12   ></div>
@@ -161,15 +149,155 @@ Per Month
             <div fxLayout="column">
               <div  class="left" fxFlex>Subtotal (item): <span  class="color">$ {{price}}</span></div>
               <div style="height:25px"></div>
-            <div>  <button class="proceed" mat-raised-button>Proceed To Checkout</button></div>
+            <div>  
+              <button class="proceed" (click)="proceedToCheckOut()" mat-raised-button>Proceed To Checkout</button></div>
             </div>
           </mat-card>
         </div>
 
   </div>
   </div>
+<!-- ---------------------------------------Hidden Div-------------------------------------------- -->
+<div *ngIf="open==true && show== false" class="hiddenDiv1">
+<div  class="first1" fxLayout="column">
+  <div class="review">Review your order</div>
+  <div class="first1">By Clicking on the 'Place Your Order and Pay Button',you agree to the fundooNotes 
+    <span class="clr" >privacy notice </span>and <span class="clr">condition of use</span></div>
+<div  class="first1" fxLayoutGap="40px" fxLayout="row" fxLayout.xs="column" 
+fxLayout.md="column" fxLayout.sm="column">
+  <mat-card fxLayout="column"  fxFlex=80 class="left">
+      <div class="card"> 
+          <div  fxFlex=100>
+           <div fxLayoutGap="18px" fxLayout="row" fxLayout.lg="row" 
+            fxLayout.xl="row" fxLayout.xs="column"
+            fxLayout.sm="column" fxLayout.md="row">
+             <!-- <div fxLayoutGap="15px" style="border:solid 1px"  fxLayout="row" fxLayout.xs="column" > -->
+   <div fxFlex=12 class="col1">
+   <mat-card class="smallCard">
+   <div>$ {{price}} per Month</div>
+   <div>{{name  | titlecase}}</div>
+   </mat-card>
+   </div>
+   <div fxFlex=85 class="col2">
+      <div   fxLayout="column"> 
+        <div class="advance">{{name | titlecase}} Pack Details</div>
+       <div fxLayout="row" class="first2" >
+   <div >
+       <li class="list">Unlimited wall space</li>
+       <li class="list">Nice Interface</li>
+      
+   </div>
+   <div >
+       <li class="list">$ {{price}}/month</li>
+       <li class="list">{{desc}}</li>
+   </div>
+   
+       </div>
+     </div>
+     </div>
+           <!-- </div> -->
+     <div fxLayout="column" fxFlex=12 class="col3">
+      
+        <div class="price color">$ {{price}} </div>
+   <div>Per Month</div>
+       </div>
+   
+           </div>
+   
+         </div>
+        </div>
+        <mat-divider style="margin-top:130px;border:solid 1px;opacity:0.14" ></mat-divider>
 
-  <div  class="three">
+        <div fxLayoutGap="60px" class="first3">
+
+          <textarea rows="5" [(ngModel)]="address" fxFlex=75 placeholder="Delivery address"></textarea>
+          <div fxLayout="column">
+            <div class="pay">Payment Method</div>
+            <div class="del">Cash on Delivery </div>
+
+          </div>
+        </div>
+      </mat-card>
+  <div class="right">
+ 
+          <mat-card  class="subNew">
+            <div fxLayout="column">
+                <div>  <button class="proceed " (click)="placeOrder(address)"
+                   mat-raised-button>Place a Order</button></div>
+
+              <div  class="left first2" fxFlex>Subtotal (item): <span  class="color">$ {{price}}</span></div>
+              <div style="height:25px"></div>
+            </div>
+          </mat-card>
+</div>
+</div>
+</div>
+</div>
+<!-- ---------------------------------------Hidden Div-------------------------------------------- -->
+
+<!-- ---------------------------------------Hidden Div2-------------------------------------------- -->
+<div *ngIf="show==true" >
+  <!-- <div>OrderList</div> -->
+  <div fxLayout="column">
+  <div style="font-size:20px;margin-top:20px" >OrderList</div>
+  <div  class="first1" fxLayoutGap="40px" fxLayout="row" fxLayout.xs="column" 
+    fxLayout.md="column" fxLayout.sm="column">
+      <mat-card fxLayout="column"  class="left">
+          <div class="card"> 
+              <div  fxFlex=100>
+               <div fxLayoutGap="18px" fxLayout="row" fxLayout.lg="row" 
+                fxLayout.xl="row" fxLayout.xs="column"
+                fxLayout.sm="column" fxLayout.md="row">
+                 <!-- <div fxLayoutGap="15px" style="border:solid 1px"  fxLayout="row" fxLayout.xs="column" > -->
+       <div fxFlex=25 class="col1">
+       <mat-card class="smallCard">
+       <div>$ {{price}} per Month</div>
+       <div>{{name  | titlecase}}</div>
+       </mat-card>
+       </div>
+       <div fxFlex=85 class="col2">
+          <div   fxLayout="column"> 
+            <div class="advance">{{name | titlecase}} Pack Details</div>
+           <div fxLayout="row" class="first2" >
+       <div >
+           <li class="list">Unlimited wall space</li>
+           <li class="list">Nice Interface</li>
+          
+       </div>
+       <div >
+           <li class="list">$ {{price}}/month</li>
+           <li class="list">{{desc}}</li>
+       </div>
+       
+           </div>
+         </div>
+         </div>
+               <!-- </div> -->
+         <div fxLayout="column" fxFlex=12 class="col3">
+          
+            <div class="price color">$ {{price}} </div>
+       <div>Per Month</div>
+       <!-- <div class="first3 clr">Pending</div> -->
+
+       <div class="first3 clr">Completed</div>
+           </div>
+       
+               </div>
+       
+             </div>
+            </div>  
+          </mat-card>
+    </div>
+    </div>
+    
+
+</div>
+
+
+<!-- ---------------------------------------Hidden Div2-------------------------------------------- -->
+
+
+<div  class="three">
     </div>
   </div>
   <div fxFlex=5 class="first"></div>

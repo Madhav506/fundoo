@@ -33,7 +33,8 @@ export class LabelsComponent implements OnInit,OnDestroy {
  private  arrayData = [];
   private arrayNewData:Note[]=[];
   /**
-   * this getAllNotes method used to display the notes with selected labels in label state particularly
+   * this getAllNotes method used to display the notes with selected labels in 
+   * label state particularly
    */
   getAllNotes() {
     this.notesService.getNotesList()
@@ -62,6 +63,10 @@ export class LabelsComponent implements OnInit,OnDestroy {
     })
      
   }
+  /**A callback method that performs custom clean-up,
+   *  invoked immediately after a directive, 
+   * pipe, or service instance is destroyed.
+   */
   ngOnDestroy() {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:

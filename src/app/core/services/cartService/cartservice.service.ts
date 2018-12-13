@@ -19,4 +19,8 @@ export class CartserviceService {
     let url = this.url + "/productcarts/getCartDetails/"+cartId;
     return this.service.httpget(url);
   }
+  placeOrder(body) {
+    let url = this.url +"productcarts/placeOrder"    ;
+    return this.service.httpPost(url, body);
+  }
 }

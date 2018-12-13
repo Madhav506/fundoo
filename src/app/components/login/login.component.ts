@@ -10,6 +10,7 @@ import { NotesService } from '../../core/services/notes/notes.service';
 import { LoggerService } from '../../core/services/logger/logger.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { CartserviceService } from '../../core/services/cartService/cartservice.service';
 
 // import{user} from ''
 /** @title Form field with error messages */
@@ -21,15 +22,17 @@ import { takeUntil } from 'rxjs/operators';
 export class LoginComponent implements OnInit,OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
   public hide = true;
+  public product=localStorage.getItem('productId');
 
-  constructor(public httpService: HttpService,
+  constructor(public httpService: HttpService,public cartservice:CartserviceService,
     public notesService:NotesService, public user:UserService,public snackBar: MatSnackBar, public router: Router) { }
   /**OnInit is a lifecycle hook that is called after Angular has initialized all data-bound properties of a directive. */
   ngOnInit() {
     //   var token;
     //   if (localStorage.getItem('token')) {
     // this.router.navigate(['/home']);    }
-
+    this.getserviceData();
+    this.getCartDetails();
   }
   model: any = {
     "email": "",
@@ -97,6 +100,36 @@ export class LoginComponent implements OnInit,OnDestroy {
       
 
   }
+  //cart Details
+public content;
+public productId;
+public card=[];
+getCartDetails(){
+this.cartservice.cartDetails(this.product).subscribe(response=>{
+console.log('cartDetails',response);
+this.productId=response['data']['product']['id']
+console.log(this.productId);
+
+});
+
+}
+/**to print the cards with services */
+getserviceData(){
+  this.user.getDataServiceBasicAdvance()
+
+  //whenever response from server arrives the callback passed to subscribe()
+  .pipe(takeUntil(this.destroy$))
+  .subscribe((response) => {
+      let data = response["data"];
+      for (let i = 0; i < data.data.length; i++) {
+          this.card.push(data.data[i]);
+      }
+  })
+}
+/**A callback method that performs custom clean-up,
+   *  invoked immediately after a directive, 
+   * pipe, or service instance is destroyed.
+   */
   ngOnDestroy() { 
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:

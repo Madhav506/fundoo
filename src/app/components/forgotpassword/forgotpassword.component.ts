@@ -23,15 +23,17 @@ export class ForgotpasswordComponent implements OnInit,OnDestroy {
 
   ngOnInit() {
   }
+  /**form validators  */
   email = new FormControl('', [Validators.required, Validators.email]);
   // errorMessage() {
   //   return this.email.hasError('required') ? 'Enter a valid email' :
   //     this.email.hasError('email') ? 'Not a valid email' :
   //       '';
   // }
+  /**if password is forgotten this method will be invoked after clicking forgot password button  */
   forgotPassword() {
     LoggerService.log(this.body.email);
-
+/**if email lenth is null  */
     if (this.body.email.length == 0) {
       LoggerService.log("Email is required");
       this.snackBar.open("Email is required ", "Enter your mailid", {
@@ -40,6 +42,7 @@ export class ForgotpasswordComponent implements OnInit,OnDestroy {
       });
 
     }
+  /**to reset  */
     else {
       this.user.postReset( this.body)
       .pipe(takeUntil(this.destroy$))
@@ -56,6 +59,10 @@ export class ForgotpasswordComponent implements OnInit,OnDestroy {
 
     }
   }
+  /**A callback method that performs custom clean-up,
+   *  invoked immediately after a directive, 
+   * pipe, or service instance is destroyed.
+   */
   ngOnDestroy() { 
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:

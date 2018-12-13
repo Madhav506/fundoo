@@ -67,7 +67,7 @@ export class DialogCollaboratorComponent implements OnInit, OnDestroy {
 
 LoggerService.log('nnn',this.FriendsList[0].email);
 LoggerService.log('ndddnn',searchFriend);
-
+/**to avoid entering the same email */
 for(let j=0;j<this.friendsNewList.length;j++){
   if(this.searchEmail==this.friendsNewList[j].email){
     this.messageDisplay="This email already exists";
@@ -81,11 +81,11 @@ for(let j=0;j<this.friendsNewList.length;j++){
       }
      
     }
-   
+   /**making the search Email array empty */
     this.searchEmail = [];
   }
 
-
+/**adding the collaborator if you like to send note to them */
   addingCollaborator(receiver) {
     LoggerService.log('receiver', receiver);
     var body = {
@@ -104,7 +104,7 @@ for(let j=0;j<this.friendsNewList.length;j++){
       })
 
   }
-  
+  /**removing the collaborator if user need to remove */
   removeCollaborator(user_Id) {
     LoggerService.log('remove', user_Id);
     this.noteService.removeCollab(user_Id, this.data['id'])
@@ -124,6 +124,7 @@ for(let j=0;j<this.friendsNewList.length;j++){
       })
 
   }
+  /*cancel method**/
   cancel() {
     this.dialogRef.close();
    const dialogRef= this.dialog.open(DialogComponent, {
@@ -141,7 +142,10 @@ for(let j=0;j<this.friendsNewList.length;j++){
     this.searchEmail = userMail;
   }
 
-
+/**A callback method that performs custom clean-up,
+   *  invoked immediately after a directive, 
+   * pipe, or service instance is destroyed.
+   */
   ngOnDestroy() {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:

@@ -22,15 +22,15 @@ export class ArchiveComponent implements OnInit,OnDestroy {
   }
   private  arrayData :Note[]=[]
   private showLoader=false;
-
+/**Get all the archived notes in archived state */
   getAllNotes() {
-
     this.noteService.getArchiveNotes()
     .pipe(takeUntil(this.destroy$))
     .subscribe(data => {
       this.arrayData=[];
       let response:Note[]=[]= data['data'].data;
       for(let i=response.length-1;i>=0;i--){
+        /**if the notes are archived and not deleted then push to archive array */
         if(response[i].isArchived==true && response[i].isDeleted==false){
           this.arrayData.push(response[i]);
         } 
@@ -39,12 +39,17 @@ export class ArchiveComponent implements OnInit,OnDestroy {
       // this.arrayData =response.reverse();
     })
   }
+  
+  archive(event) {
+    this.getAllNotes();
+  }
+  /**A callback method that performs custom clean-up,
+   *  invoked immediately after a directive, 
+   * pipe, or service instance is destroyed.
+   */
   ngOnDestroy() { 
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:
     this.destroy$.unsubscribe();
-  }
-  archive(event) {
-    this.getAllNotes();
   }
 }
