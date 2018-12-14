@@ -19,6 +19,8 @@ import { CartserviceService } from '../../core/services/cartService/cartservice.
 export class SignupComponent implements OnInit,OnDestroy {
     destroy$: Subject<boolean> = new Subject<boolean>();
 private productId;
+private showLoader=false;
+
     firstname = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]*'), Validators.minLength(3)]);
   regform: any;
     errorFirstname() {
@@ -67,7 +69,6 @@ private productId;
     ngOnInit() {
 
        this.getserviceData();
-       this.getCartDetails();
 
     }
 
@@ -80,8 +81,14 @@ private productId;
             let data = response["data"];
             for (let i = 0; i < data.data.length; i++) {
                 this.card.push(data.data[i]);
+            // this.service=data.data[i].name;
+
             }
         })
+        // this.showLoader=true;
+
+        this.getCartDetails();
+
     }
     // changeCardColor(card) {
         
@@ -109,6 +116,7 @@ private productId;
                 return false;
             }
             else {
+                
                 this.user
                     .postSignUp( {
                         "firstName": this.detailsObject.Firstname,
@@ -150,7 +158,8 @@ public content;
 getCartDetails(){
 this.cartservice.cartDetails(this.product).subscribe(response=>{
 console.log('cartDetails',response);
-this.productId=response['data']['product']['id']
+this.productId=response['data']['product']['id'];
+this.service=response['data']['product']['name'];
 console.log(this.productId);
 
 

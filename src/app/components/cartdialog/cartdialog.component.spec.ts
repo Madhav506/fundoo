@@ -22,4 +22,19 @@ describe('CartdialogComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('proceeding to checkOut ', () => {
+  
+    let content={
+      "productId": "123abcd456ughtefg5678"
+    }
+        expect(component.checkOut()).toBeTruthy();
+       
+    this.content={
+      "productId":''
+    }
+        expect(component.checkOut()).toBeFalsy();
+    
+      });
+      
+
 });

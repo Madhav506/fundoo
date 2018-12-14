@@ -22,4 +22,11 @@ describe('DialogComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('note to be Updated', () => {
+  
+    expect(component.update()).toBeTruthy(true);
+   
+    expect(component.update()).toBeFalsy(false);
+
+  });
 });

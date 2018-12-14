@@ -22,5 +22,11 @@ describe('ColoriconComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('color to be applied', () => {
   
+    expect(component.changeColor('#ffffff')).toBeTruthy();
+   
+    expect(component.changeColor(null)).toBeFalsy();
+
+  });
 });

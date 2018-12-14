@@ -22,4 +22,35 @@ describe('DialogCollaboratorComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('Collaborator to be added', () => {
+  
+    let content={
+     
+      "userId": "123abcd456ughtefg5678"
+    }
+        expect(component.addingCollaborator(content)).toBeTruthy();
+       
+        content = {
+        "userId": ""
+      }
+        expect(component.addingCollaborator(content)).toBeFalsy();
+    
+      });
+      
+  it('Collaborator to be removed', () => {
+  
+    let content={
+     
+      "userId": "123abcd456ughtefg5678"
+    }
+        expect(component.removeCollaborator(content)).toBeTruthy();
+       
+        content = {
+        "userId": ""
+      }
+        expect(component.removeCollaborator(content)).toBeFalsy();
+    
+      });
+      
+
 });

@@ -14,7 +14,6 @@ export class CartdialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: CartdialogComponent,public router:Router,public cartService:CartserviceService) { }
 
   ngOnInit() {
-    console.log(this.data);
     
   }
   // localStorage.setItem('productId')
@@ -22,18 +21,24 @@ export class CartdialogComponent implements OnInit {
   public content;
   closeDialog() {
     this.cartDialog.close();
+
   }
+  
   checkOut(){
-    this.closeDialog();
- 
+    this.cartDialog.close();
+    this.router.navigate(['/signup']);
+
     this.content={
       "productId":this.data['id']
     }
     this.cartService.addToCart(this.content).subscribe(response=>{
-console.log(response);
 localStorage.setItem('productId',response['data']['details']['id']);
 
     });
-    this.router.navigate(['/signup']);
+
+   
   }
+  ;
+
+
 }

@@ -48,6 +48,7 @@ changeCardColor(card) {
   // this.openDialogCart();
 
 }
+
 openDialogCart(itemData){
   const cartDialog = this.dialog.open(CartdialogComponent, {
     maxWidth: 'auto',
@@ -56,8 +57,11 @@ openDialogCart(itemData){
     panelClass: 'myapp-no-padding-dialog'
 
   });
-  
+  cartDialog.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+  });
 }
+
 // clicked(card){
 //   if(card.select==true){
 //   this.selectedBefore=true;

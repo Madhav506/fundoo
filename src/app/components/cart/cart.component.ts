@@ -34,6 +34,9 @@ export class CartComponent implements OnInit {
   public price;
   public desc;
   public product=localStorage.getItem('productId');
+  /**
+   * getCartDetails method to get all the cart details
+   */
 public productId;
 getCartDetails(){
 this.cartservice.cartDetails(this.product)
@@ -46,16 +49,28 @@ this.desc=response['data']['product']['description']
 });
 
 }
+/**
+   * Proceeding to checkout from the cart section
+   */
 proceedToCheckOut(){
   this.open=true;
-  this.value=50;
+  this.value=54;
   this.cssSign=true;
   this.signin=false;
 }
+refresh(){
+  location.reload();
+}
+/**
+ * Placing the order for a product 
+ *    */
 placeOrder(address){
   if(address!=undefined){
-  this.body={"cartId":this.product,
-              "address":address}
+  this.body=
+  {
+    "cartId":this.product,
+    "address":address
+  }
               this.cartservice.placeOrder(this.body)
               .pipe(takeUntil(this.destroy$))
               .subscribe(response=>{
@@ -65,9 +80,13 @@ placeOrder(address){
                 this.value=100;
                 
                 });
+                this.snackBar.open("Order Placed Successfully ", "Address", {
+                  duration: 10000,
+              });
                 
 }
 else{
+  /**SnackBar to display the error message */
   this.snackBar.open("Enter Delivery Address ", "Address", {
     duration: 10000,
 });

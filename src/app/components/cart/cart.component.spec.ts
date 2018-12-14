@@ -22,4 +22,22 @@ describe('CartComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('Order to be placed', () => {
+  
+    let content={
+      "address": "what is angular",
+      "cartId": "123abcd456ughtefg5678"
+    }
+        expect(component.placeOrder(content)).toBeTruthy();
+       
+        content = {
+        "address": "",
+        "cartId": ""
+      }
+        expect(component.placeOrder('')).toBeFalsy();
+    
+      });
+      
+
+    
 });

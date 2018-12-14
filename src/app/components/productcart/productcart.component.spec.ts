@@ -22,4 +22,13 @@ describe('ProductcartComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('card to be highlighted', () => {
+  
+
+        expect(component.changeCardColor(event)).toBeTruthy();
+      
+        expect(component.changeCardColor('')).toBeFalsy();
+    
+      });
+  
 });

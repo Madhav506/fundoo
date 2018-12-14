@@ -12,7 +12,7 @@
 fxLayoutGap="50px"  class="cardDiv" >
 <!-- ----------------------------------- Cards-------------------------------------------- -->
 <div *ngFor="let item of cards">
-    <mat-card   (click)=" changeCardColor(item)" (dblclick)=" openDialogCart(item)"  [ngClass]="item.check? 'check': 'uncheck'"
+    <mat-card   (click)=" changeCardColor(item)" [ngClass]="item.check? 'check': 'uncheck'"
                 class="card1">
       <div >
 

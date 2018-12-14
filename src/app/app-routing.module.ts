@@ -22,7 +22,7 @@ import { ProductcartComponent } from './components/productcart/productcart.compo
 
 const appRoutes: Routes = [
   // { path: '**', redirectTo: '' },
-  { path: '', redirectTo: '/home/notes', pathMatch: 'full' },
+  { path: '', redirectTo: '/productcart', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'forgotpassword', component: ForgotpasswordComponent },

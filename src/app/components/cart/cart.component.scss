@@ -14,7 +14,7 @@
       margin-bottom:-10px;
   }
   .sub{
-      margin-top: 49px;
+      margin-top: 77px;
       width:240px;
       background-color: whitesmoke
   }
@@ -106,9 +106,7 @@
          font-family: bold;
      }
      .del{
-         font-size: 20px;
-         font-weight: lighter;
-         font-family: cursive
+        @include newFont()
      }
      .first3{
          margin-top: 50px;
@@ -117,11 +115,11 @@
 
       .cartNew{
         margin-top: 10px;
-    margin-left: 182px;
+    margin-left: 112px;
 }
-.review{
+.reviewNew{
      margin-top:10px;
-    margin-left: 380px;
+    margin-left: 252px;
     position: relative;
 .fontNew{
     font-size:20px;
@@ -131,7 +129,7 @@
 }
 .done{
      margin-top: 10px;
-    margin-left: 780px;
+    margin-left: 505px;
     position: relative;
 
 }
@@ -145,3 +143,4 @@
 .example-margin {
     margin: 0 10px;
   }
+  

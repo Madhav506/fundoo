@@ -22,4 +22,5 @@ describe('ImagecropComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
 });
