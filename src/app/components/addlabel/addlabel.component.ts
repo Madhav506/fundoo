@@ -36,7 +36,7 @@ export class AddlabelComponent implements OnInit,OnDestroy {
   private editLabel;
   private messageDisplay;
   private message;
-
+labels;
  public model;
  
   constructor(public service: HttpService,public notesService:NotesService, public dataService: DataService, public dialog: MatDialog,
@@ -106,7 +106,12 @@ export class AddlabelComponent implements OnInit,OnDestroy {
     .subscribe(result => {
       LoggerService.log(result['data'].details);
       this.ArrayOfLabel = [];
-      let response:Label[]=[]=result['data'].details;
+      // let response:Label[]=[]=result['data'].details;
+
+let response=result['data'].details.map((labels: Label) => new Label().deserialize(labels));
+
+console.log("desgsbvawmkxdhs",response);
+
 
       for (let index = 0; index < response.length; index++) {
         if (response[index].isDeleted == false) {
